@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ESE2015-Team9 | Index</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="schatten">
+
+<div class="header">
+	<img src="layout/header2.jpg" alt="headerImg"/>
+        	<div id="nav">
+            	<ul>
+                	<li class="main"><a href="index.html">Home</a></li>
+                    <li class="main"><a href="info.html">Infos</a></li>
+                    <li class="main"><a href="ssearch.html">Suchen</a>
+                    	<ul>
+                        	<li class="sub"><a href="ssearch.html">Einfache Suche</a></li>
+                            <li class="sub"><a href="asearch.html">Erweiterte Suche</a></li>
+                        </ul>
+                    </li>
+                    <li class="main"><a href="register.html">Anmelden</a></li>
+                   	<li class="main"><a href="faq.html">FAQs</a></li>
+                </ul>
+            </div>       
+</div>
+
+
+<div class="container">
+	<div class="text">
+    	<h1>Anmelden</h1>
+        <br />
+        <form action="profil.html" method="post">
+        <table class="forms">
+        <tr><td colspan="2"><div class="radiobutton"><input type="radio" name="student" id="radio1" class="radio"/><label for="radio1">Student</label></div></td>
+        	<td colspan="2"><div class="radiobutton"><input type="radio" name="tutor" id="radio2" class="radio"/><label for="radio2">Tutor</label></div></td>
+        </tr>
+        <tr><td>Vorname:</td>
+        	<td><input onclick="this.value=''" type="text" name="vorname" value="Vorname"></td>
+            <td>Fach:</td>
+            <td><select name="Fach">
+                    <option>auswählen</option>
+                    	<optgroup label="Biologie">	
+                    	<option>Mikrobiologie</option>
+                    </optgroup>
+                    <optgroup label="Deutsch">
+                        <option>Rechtschreibung</option>
+                        <option>Grammatik</option>
+                    </optgroup>
+                    <optgroup label="Mathematik">
+                        <option>Analysis I</option>
+                        <option>Analysis II</option>
+                        <option>LinAlg I</option>
+                        <option>LinAlg II</option>
+                    </optgroup>
+                    </select>
+        	</td>
+        </tr>
+        <tr><td>Nachname:</td>
+        	<td><input onclick="this.value=''" type="text" name="nachname" value="Nachname"></td>
+            <td>Note:</td>
+            <td><select name="Note">
+                    <option>auswählen</option>
+                    <option>4</option>
+                    <option>4-5</option>
+                    <option>5</option>
+                    <option>5-6</option>
+                    <option>6</option>
+                	</select>
+        </td>
+        </tr>
+        <tr><td>Nickname:</td><td><input onclick="this.value=''" type="text" name="nickname" value="Nickname"></td>
+        <td colspan="2"><small>Dies müssen Sie nur ausfüllen, wenn Sie sich als Tutor registrieren möchten.</small></td></tr>
+        <tr><td>E-mail:</td><td><input onclick="this.value=''" type="text" name="email" value="E-mail"></td></tr>
+        <tr><td>Strasse, Nr.:</td><td><input onclick="this.value=''" type="text" name="strasse" value="Musterstrasse 3"></td></tr>
+        <tr><td>PLZ, Ort:</td><td><input onclick="this.value=''" type="text" name="plz" value="1234 Testdorf"></td></tr>
+        <tr><td>Passwort:</td><td><input onclick="this.value=''" type="password" name="pw" value="Passwort"></td></tr>
+        <tr><td>Passwort bestätigen:</td><td><input onclick="this.value=''" type="password" name="Passwort2" value="Passwort2"></td></tr>
+        </table><br />
+        <input type="checkbox" name="agb" style="width:50px;"/> Ich habe die <a href="agb.html">AGB's</a> gelesen und bin damit einverstanden.<br />
+        <input class="submitbutton" type="submit" value="Anmelden"  style="margin-left:400px;"/><br />
+        </form>
+        
+            
+    </div>
+    <div class="sidebar">
+        <form action="profil.html" method="post">
+        	Nickname:<br />
+   			<input onclick="this.value=''" type="text" name="login" value="Nickname"><br />
+            Password:<br />
+            <input onclick="this.value=''" type="password" name="password" value="Password"/><br />
+            <input class="submitbutton" type="submit" value="Login" /><br />	
+        </form>
+        <div class="small"><a href="forgot.html" style="float:right;margin-right:33px;">Passwort vergessen?</a></div>
+    </div>
+</div>
+
+<div class="footer">
+	2015 &copy; All rights reserved | <a href="agb.html">AGB</a>
+</div>
+
+</div>
+</body>
+</html>

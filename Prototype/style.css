@@ -1,0 +1,316 @@
+@charset "utf-8";
+/* CSS Document */
+
+/** * Reset CSS */ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {	margin: 0;	padding: 0;	border: 0;	font-size: 100%;	font: inherit;	vertical-align: baseline;}/* HTML5 display-role reset for older browsers */article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {	display: block;}body {	line-height: 1;}ol, ul {	list-style: none;}blockquote, q {	quotes: none;}blockquote:before, blockquote:after,q:before, q:after {	content: '';	content: none;}table {	border-collapse: collapse;	border-spacing: 0;}
+
+/*------------------------*\
+	STRUCTURE
+\*------------------------*/
+
+html, body {
+background-color: #EAEAEA;
+height: 100%;
+font-family:Verdana, Geneva, sans-serif;
+}
+
+body {
+width:80%;
+margin-left:auto;
+margin-right:auto;
+-moz-box-shadow:1px 1px 6px #292929; /* Firefox */
+-webkit-box-shadow:1px 1px 6px #292929; /* Chrome, Safari */
+-khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
+box-shadow:1px 1px 6px #292929; /* CSS3 */
+background-color:#FFF;
+line-height:150%;
+}
+
+h1 {
+font-size:30px;
+}
+
+h2 {
+font-size:20px;	
+}
+
+.header img {
+max-width: 1920px;
+max-height:250px;
+width: 100%;
+height: auto;
+}
+
+small {
+font-size:10px;
+}
+
+.container {
+text-decoration: none;
+color: #000;
+width: 95%;
+margin: 100px 0px 0px 5%;
+float:left;
+}
+
+.container .text {
+width: 75%;
+float: left;
+}
+
+.container .sidebar {
+width: 20%;
+float: right;
+}
+
+.container .sidebar a {
+color:#000;
+}
+
+strong {
+font-weight:bold;
+}
+
+.container .text table.forms td {
+min-width: 50px;
+border:none;
+vertical-align:top;
+}
+
+.container .text table.forms td.profil {
+min-width:250px;
+}
+
+.container .text a {
+text-decoration:none;
+}
+
+.container .text tr.title {
+background-color:#CCC;
+font-weight:bold;
+}
+
+.container .text table {
+max-width:95%;
+}
+
+.container .text td {
+min-width: 150px;
+border: solid 1px;
+padding-left:10px;
+}
+
+input {
+color: #000000; 
+font-size: 12px; 
+border: 1px solid #EED5FF; 
+background-color: #FFF0FF; 
+height: 22px; 
+width: 250px; 
+padding: 3px;
+margin-bottom: 10px;
+}
+
+select {
+color: #000000; 
+font-size: 12px; 
+border: 1px solid #EED5FF; 
+background-color: #FFF0FF; 
+height: 22px; 
+width: 250px; 
+padding: 3px;
+margin-bottom: 10px;
+}
+
+.submitbutton {
+cursor: pointer; 
+font: 12px Verdana,sans-serif; 
+color: #FFFFFF; 
+background-color: #A1B9C5; 
+width: 120px; 
+padding: 3px; 
+line-height: 130%;
+}
+
+.small a{
+font-size:12px;
+}
+
+.footer {
+background-color:#555;
+height: 40px;
+width: 80%;
+bottom:0px;
+position: fixed;
+text-align:center;
+color: #FFF;
+line-height:250%;
+}
+
+.footer a {
+color:#FFF;
+text-decoration:none;
+}
+
+
+
+/*------------------------*\
+	NAVIGATION
+\*------------------------*/
+
+
+#nav
+{
+width: 80%;
+position:absolute;
+height: 50px;
+background-color:#555;
+-moz-box-shadow:1px 1px 6px #292929; /* Firefox */
+-webkit-box-shadow:1px 1px 6px #292929; /* Chrome, Safari */
+-khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
+box-shadow:1px 1px 6px #292929; /* CSS3 */
+}
+
+#nav ul
+{
+	list-style:none;
+	position:relative;
+	float:left;
+	margin:0;
+	padding:0
+}
+
+#nav ul a
+{
+	display:block;
+	color:#FFF;
+	text-decoration:none;
+	font-size:17px;
+	padding:0 0 0 20px;
+	line-height:50px;
+	width:200px;
+}
+
+#nav ul li
+{
+	position:relative;
+	float:left;
+	margin:0;
+	padding:0;
+	border-right:solid 1px;
+}
+
+#nav ul li.current-menu-item
+{
+	background:#777;
+}
+
+#nav ul li:hover {
+-moz-box-shadow:1px 1px 1px 1px #292929; /* Firefox */
+-webkit-box-shadow:1px 1px 1px 1px #292929; /* Chrome, Safari */
+-khtml-box-shadow:1px 1px 1px 1px #292929; /* Konqueror */
+box-shadow:1px 1px 1px 1px #292929; /* CSS3 */
+background:#777
+}
+
+#nav ul ul
+{
+	display:none;
+	position:absolute;
+	top:100%;
+	left:0;
+	background:#555;
+	padding:0
+}
+
+#nav ul ul li
+{
+	float:none;
+	width:220px
+}
+
+#nav ul ul a
+{
+	line-height:120%;
+	padding:10px 15px
+}
+
+#nav ul ul ul
+{
+	top:0;
+	left:100%
+}
+
+#nav ul li:hover > ul
+{
+	display:block
+}
+
+label {
+  width: 200px;
+  border-radius: 3px;
+  border: 1px solid #D1D3D4
+}
+
+/* hide input */
+input.radio:empty {
+	margin-left: -9999px;
+}
+
+div.radiobutton {
+clear:both;
+}
+
+/* style label */
+input.radio:empty ~ label {
+	position: relative;
+	float: left;
+	line-height: 2.5em;
+	text-indent: 3.25em;
+	margin-bottom: 20px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+input.radio:empty ~ label:before {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	content: '';
+	width: 2.5em;
+	background: #D1D3D4;
+	border-radius: 3px 0 0 3px;
+}
+
+/* toggle hover */
+input.radio:hover:not(:checked) ~ label:before {
+	content:'\2714';
+	text-indent: .9em;
+	color: #C2C2C2;
+}
+
+input.radio:hover:not(:checked) ~ label {
+	color: #888;
+}
+
+/* toggle on */
+input.radio:checked ~ label:before {
+	content:'\2714';
+	text-indent: .9em;
+	color: #9CE2AE;
+	background-color: #4DCB6D;
+}
+
+input.radio:checked ~ label {
+	color: #777;
+}
+
+/* radio focus */
+input.radio:focus ~ label:before {
+	box-shadow: 0 0 0 3px #999;
+}
+

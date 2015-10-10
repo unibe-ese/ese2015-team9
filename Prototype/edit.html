@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ESE2015-Team9 | Index</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="schatten">
+
+<div class="header">
+	<img src="layout/header2.jpg" alt="headerImg"/>
+        	<div id="nav">
+            	<ul>
+                	<li class="main"><a href="index.html">Home</a></li>
+                    <li class="main"><a href="info.html">Infos</a></li>
+                    <li class="main"><a href="ssearch.html">Suchen</a>
+                    	<ul>
+                        	<li class="sub"><a href="ssearch.html">Einfache Suche</a></li>
+                            <li class="sub"><a href="asearch.html">Erweiterte Suche</a></li>
+                        </ul>
+                    </li>
+                    <li class="main"><a href="register.html">Anmelden</a></li>
+                   	<li class="main"><a href="faq.html">FAQs</a></li>
+                </ul>
+            </div>       
+</div>
+
+
+<div class="container">
+	<div class="text">
+    	<h1>Mein Profil</h1>
+        <br />
+        <br />
+        <table class="forms">
+        <tr><td class="profil"><img src="layout/profil.png" />
+        	<br /><form action="profil.html" method="post"><input type="file" name="profilbild" /><input class="submitbutton" type="submit" value="Ändern!" /></form></td><td>
+        
+        <table class="forms">
+        <tr><td><strong>Vorname:</strong></td><td>Max</td></tr>
+        <tr><td><strong>Nachname:</strong></td><td>Muster</td></tr>
+        <tr><td><strong>Nickname:</strong></td><td>M4x</td></tr>
+        <tr><td><strong>Strasse, Nr.:</strong></td><td><form action="profil.html" method="post"><input name="strasse" value="Dorfstrasse 4" /></td></tr>
+        <tr><td><strong>PLZ, Ort.:</strong></td><td><input name="plz" value="3100 Bern" /></td></tr>
+        <tr><td><strong>e-Mail:</strong></td><td><input name="email" value="max.muster@mustermail.ch" /></td></tr>
+        <tr><td><strong>Passwort:</strong></td><td><input type="password" name="password" value="password" /><input class="submitbutton" type="submit" value="Ändern!" /></form></td></tr>
+        <tr><td><strong>Fach:</strong></td><td>Mathematik</td></tr>
+        <tr><td><strong>Note:</strong></td><td>5.5</td></tr>
+        <tr><td style="padding-top:30px;"><strong>Fach hinzufügen:</strong></td><td style="padding-top:30px;"> <form action="profil.html" method="post"><select name="Fach">                   
+                    <option>auswählen</option>
+                    	<optgroup label="Biologie">	
+                    	<option>Mikrobiologie</option>
+                    </optgroup>
+                    <optgroup label="Deutsch">
+                        <option>Rechtschreibung</option>
+                        <option>Grammatik</option>
+                    </optgroup>
+                    <optgroup label="Mathematik">
+                        <option>Analysis I</option>
+                        <option>Analysis II</option>
+                        <option>LinAlg I</option>
+                        <option>LinAlg II</option>
+                    </optgroup>
+                    </select></td>
+                    <td style="padding-top:30px;">Note:</td><td style="padding-top:30px;"><select name="Note">
+                    <option>auswählen</option>
+                    <option>4</option>
+                    <option>4-5</option>
+                    <option>5</option>
+                    <option>5-6</option>
+                    <option>6</option>
+                	</select><input class="submitbutton" type="submit" value="Hinzufügen!" /></form></td></tr>
+        </table>
+        </td></tr></table>
+    </div>
+    
+    
+    <div class="sidebar">
+        <h2>Hallo Peter</h2>
+        <br />
+        <br /><a href="profil.html">Profil ansehen</a>
+        <br /><a href="edit.html">Profil bearbeiten</a>
+        <br /><a href="logout.html">Logout</a>
+        <br />
+        <br />
+        <br /><a href="delete.html">Profil löschen</a>
+    </div>
+</div>
+
+<div class="footer">
+	2015 &copy; All rights reserved | <a href="agb.html">AGB</a>
+</div>
+
+</div>
+</body>
+</html>
