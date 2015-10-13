@@ -21,7 +21,7 @@
                             <li class="sub"><a href="asearch.html">Erweiterte Suche</a></li>
                         </ul>
                     </li>
-                    <li class="main"><a href="register.html">Anmelden</a></li>
+                    <li class="main"><a href="register.html">Registrieren</a></li>
                    	<li class="main"><a href="faq.html">FAQs</a></li>
                 </ul>
             </div>       
@@ -29,62 +29,30 @@
 
 
 <div class="container">
-	<div class="text">
     	<h1>Anmelden</h1>
+        <br />Alle mit einem <sup>*</sup> gekennzeichneten Felder müssen ausgefüllt werden.
+        <br />
         <br />
         <form action="profil.html" method="post">
         <table class="forms">
-        <tr><td colspan="2"><div class="radiobutton"><input type="radio" name="student" id="radio1" class="radio"/><label for="radio1">Student</label></div></td>
-        	<td colspan="2"><div class="radiobutton"><input type="radio" name="tutor" id="radio2" class="radio"/><label for="radio2">Tutor</label></div></td>
-        </tr>
-        <tr><td>Vorname:</td>
+          <tr><td>Vorname:<sup>*</sup></td>
         	<td><input onclick="this.value=''" type="text" name="vorname" value="Vorname"></td>
-            <td>Fach:</td>
-            <td><select name="Fach">
-                    <option>auswählen</option>
-                    	<optgroup label="Biologie">	
-                    	<option>Mikrobiologie</option>
-                    </optgroup>
-                    <optgroup label="Deutsch">
-                        <option>Rechtschreibung</option>
-                        <option>Grammatik</option>
-                    </optgroup>
-                    <optgroup label="Mathematik">
-                        <option>Analysis I</option>
-                        <option>Analysis II</option>
-                        <option>LinAlg I</option>
-                        <option>LinAlg II</option>
-                    </optgroup>
-                    </select>
-        	</td>
         </tr>
-        <tr><td>Nachname:</td>
+        <tr><td>Nachname:<sup>*</sup></td>
         	<td><input onclick="this.value=''" type="text" name="nachname" value="Nachname"></td>
-            <td>Note:</td>
-            <td><select name="Note">
-                    <option>auswählen</option>
-                    <option>4</option>
-                    <option>4-5</option>
-                    <option>5</option>
-                    <option>5-6</option>
-                    <option>6</option>
-                	</select>
-        </td>
         </tr>
-        <tr><td>Nickname:</td><td><input onclick="this.value=''" type="text" name="nickname" value="Nickname"></td>
-        <td colspan="2"><small>Dies müssen Sie nur ausfüllen, wenn Sie sich als Tutor registrieren möchten.</small></td></tr>
-        <tr><td>E-mail:</td><td><input onclick="this.value=''" type="text" name="email" value="E-mail"></td></tr>
-        <tr><td>Strasse, Nr.:</td><td><input onclick="this.value=''" type="text" name="strasse" value="Musterstrasse 3"></td></tr>
-        <tr><td>PLZ, Ort:</td><td><input onclick="this.value=''" type="text" name="plz" value="1234 Testdorf"></td></tr>
-        <tr><td>Passwort:</td><td><input onclick="this.value=''" type="password" name="pw" value="Passwort"></td></tr>
-        <tr><td>Passwort bestätigen:</td><td><input onclick="this.value=''" type="password" name="Passwort2" value="Passwort2"></td></tr>
-        </table><br />
+        <tr><td>Nickname:<sup>*</sup></td><td><input onclick="this.value=''" type="text" name="nickname" value="Nickname"></td>
+        <tr><td>E-mail:<sup>*</sup></td><td><input onclick="this.value=''" type="text" name="email" value="E-mail"></td></tr>
+        <tr><td>Passwort:<sup>*</sup></td><td><input onclick="this.value=''" type="password" name="pw" value="Passwort"></td></tr>
+        <tr><td>Passwort bestätigen:<sup>*</sup></td><td><input onclick="this.value=''" type="password" name="Passwort2" value="Passwort2"></td></tr>
+        </table>
         <input type="checkbox" name="agb" style="width:50px;"/> Ich habe die <a href="agb.html">AGB's</a> gelesen und bin damit einverstanden.<br />
         <input class="submitbutton" type="submit" value="Anmelden"  style="margin-left:400px;"/><br />
         </form>
+        <br />
+        <br />
         
-            
-    </div>
+    <div class="stripe"></div>        
     <div class="sidebar">
         <form action="profil.html" method="post">
         	Nickname:<br />
@@ -95,11 +63,12 @@
         </form>
         <div class="small"><a href="forgot.html" style="float:right;margin-right:33px;">Passwort vergessen?</a></div>
     </div>
-</div>
-
-<div class="footer">
+    <div class="footer">
 	2015 &copy; All rights reserved | <a href="agb.html">AGB</a>
 </div>
+</div>
+
+
 
 </div>
 </body>

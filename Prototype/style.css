@@ -17,12 +17,9 @@ body {
 width:80%;
 margin-left:auto;
 margin-right:auto;
--moz-box-shadow:1px 1px 6px #292929; /* Firefox */
--webkit-box-shadow:1px 1px 6px #292929; /* Chrome, Safari */
--khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
-box-shadow:1px 1px 6px #292929; /* CSS3 */
 background-color:#FFF;
 line-height:150%;
+position:relative;
 }
 
 h1 {
@@ -38,28 +35,50 @@ max-width: 1920px;
 max-height:250px;
 width: 100%;
 height: auto;
+position: absolute;
+top: 0;
+-moz-box-shadow:1px 1px 6px #292929; /* Firefox */
+-webkit-box-shadow:1px 1px 6px #292929; /* Chrome, Safari */
+-khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
+box-shadow:1px 1px 6px #292929; /* CSS3 */
 }
 
 small {
 font-size:10px;
 }
 
-.container {
+.container  {
+width: 70%;
+min-height: calc(100% - 390px);
+position:absolute;
+left:0;
+-moz-box-shadow:1px 1px 6px #292929; /* Firefox */
+-webkit-box-shadow:1px 1px 6px #292929; /* Chrome, Safari */
+-khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
+box-shadow:1px 1px 6px #292929; /* CSS3 */
+background-color:#FFF;
+padding: 50px 25% 0px 5%;
 text-decoration: none;
 color: #000;
-width: 95%;
-margin: 100px 0px 0px 5%;
-float:left;
-}
-
-.container .text {
-width: 75%;
-float: left;
+top:300px;
 }
 
 .container .sidebar {
 width: 20%;
 float: right;
+position:absolute;
+right:0px;
+top:50px;
+}
+
+.container .stripe {
+width: 1px;
+float:right;
+right:22%;
+box-shadow: 1px 1px 20px #03F;
+min-height:100%;
+position:absolute;
+top: 0px;
 }
 
 .container .sidebar a {
@@ -70,33 +89,38 @@ strong {
 font-weight:bold;
 }
 
-.container .text table.forms td {
+.container  table.forms td {
 min-width: 50px;
 border:none;
 vertical-align:top;
 }
 
-.container .text table.forms td.profil {
+.container  table.forms td.profil {
 min-width:250px;
 }
 
-.container .text a {
+.container  a {
 text-decoration:none;
 }
 
-.container .text tr.title {
+.container  tr.title {
 background-color:#CCC;
 font-weight:bold;
 }
 
-.container .text table {
+.container  table {
 max-width:95%;
 }
 
-.container .text td {
-min-width: 150px;
+.container  td {
 border: solid 1px;
 padding-left:10px;
+padding-right: 30px;
+}
+
+sup{
+font-size:.8em;
+line-height: 2em;
 }
 
 input {
@@ -105,7 +129,7 @@ font-size: 12px;
 border: 1px solid #EED5FF; 
 background-color: #FFF0FF; 
 height: 22px; 
-width: 250px; 
+width: 90%;
 padding: 3px;
 margin-bottom: 10px;
 }
@@ -135,15 +159,20 @@ line-height: 130%;
 font-size:12px;
 }
 
-.footer {
+.container .footer {
 background-color:#555;
 height: 40px;
-width: 80%;
-bottom:0px;
-position: fixed;
 text-align:center;
 color: #FFF;
 line-height:250%;
+position:absolute;
+bottom:-40px;
+width:100%;
+-moz-box-shadow:1px 1px 6px #292929; /* Firefox */
+-webkit-box-shadow:1px 1px 6px #292929; /* Chrome, Safari */
+-khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
+box-shadow:1px 1px 6px #292929; /* CSS3 */
+left: 0;
 }
 
 .footer a {
@@ -160,7 +189,7 @@ text-decoration:none;
 
 #nav
 {
-width: 80%;
+width: 100%;
 position:absolute;
 height: 50px;
 background-color:#555;
@@ -168,6 +197,8 @@ background-color:#555;
 -webkit-box-shadow:1px 1px 6px #292929; /* Chrome, Safari */
 -khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
 box-shadow:1px 1px 6px #292929; /* CSS3 */
+top:250px;
+width:100%;
 }
 
 #nav ul
@@ -244,73 +275,3 @@ background:#777
 {
 	display:block
 }
-
-label {
-  width: 200px;
-  border-radius: 3px;
-  border: 1px solid #D1D3D4
-}
-
-/* hide input */
-input.radio:empty {
-	margin-left: -9999px;
-}
-
-div.radiobutton {
-clear:both;
-}
-
-/* style label */
-input.radio:empty ~ label {
-	position: relative;
-	float: left;
-	line-height: 2.5em;
-	text-indent: 3.25em;
-	margin-bottom: 20px;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-input.radio:empty ~ label:before {
-	position: absolute;
-	display: block;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	content: '';
-	width: 2.5em;
-	background: #D1D3D4;
-	border-radius: 3px 0 0 3px;
-}
-
-/* toggle hover */
-input.radio:hover:not(:checked) ~ label:before {
-	content:'\2714';
-	text-indent: .9em;
-	color: #C2C2C2;
-}
-
-input.radio:hover:not(:checked) ~ label {
-	color: #888;
-}
-
-/* toggle on */
-input.radio:checked ~ label:before {
-	content:'\2714';
-	text-indent: .9em;
-	color: #9CE2AE;
-	background-color: #4DCB6D;
-}
-
-input.radio:checked ~ label {
-	color: #777;
-}
-
-/* radio focus */
-input.radio:focus ~ label:before {
-	box-shadow: 0 0 0 3px #999;
-}
-

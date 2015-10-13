@@ -29,26 +29,44 @@
 
 
 <div class="container">
-    	<h1>Mein Profil</h1>
+    	<h1>Tutor</h1>
         <br />
-        <br />
+        <br />Tutor werden und Geld verdienen indem Sie anderen beim lernen helfen.
+        <br /><br />
         <table class="forms">
-        <tr><td class="profil"><img src="layout/profil.png" /></td><td>
-        <table class="forms">
-        <tr><td style="width:150px"><strong>Vorname:</strong></td><td>Max</td></tr>
-        <tr><td><strong>Nachname:</strong></td><td>Muster</td></tr>
-        <tr><td><strong>Nickname:</strong></td><td>M4x</td></tr>
-        <tr><td><strong>e-Mail:</strong></td><td>max.muster@mustermail.ch</td></tr>
+        <tr><td style="padding-top:30px;"><strong>Fach hinzufügen:</strong></td><td style="padding-top:30px;"> <form action="profil.html" method="post"><select name="Fach">                   
+                    <option>auswählen</option>
+                    	<optgroup label="Biologie">	
+                    	<option>Mikrobiologie</option>
+                    </optgroup>
+                    <optgroup label="Deutsch">
+                        <option>Rechtschreibung</option>
+                        <option>Grammatik</option>
+                    </optgroup>
+                    <optgroup label="Mathematik">
+                        <option>Analysis I</option>
+                        <option>Analysis II</option>
+                        <option>LinAlg I</option>
+                        <option>LinAlg II</option>
+                    </optgroup>
+                    </select></td>
+                    <td style="padding-top:30px;">Note:</td><td style="padding-top:30px;"><select name="Note">
+                    <option>auswählen</option>
+                    <option>4</option>
+                    <option>4-5</option>
+                    <option>5</option>
+                    <option>5-6</option>
+                    <option>6</option>
+                	</select><input class="submitbutton" type="submit" value="Hinzufügen!" /></form></td></tr>
         </table>
         </td></tr></table>
-   
+    
     <div class="stripe"></div>
     <div class="sidebar">
         <h2>Hallo Peter</h2>
         <br />
         <br /><a href="profil.html">Profil ansehen</a>
         <br /><a href="edit.html">Profil bearbeiten</a>
-        <br /><a href="tutor.html">Tutor werden</a>
         <br /><a href="logout.html">Logout</a>
         <br />
         <br />

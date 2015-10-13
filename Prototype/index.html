@@ -21,7 +21,7 @@
                             <li class="sub"><a href="asearch.html">Erweiterte Suche</a></li>
                         </ul>
                     </li>
-                    <li class="main"><a href="register.html">Anmelden</a></li>
+                    <li class="main"><a href="register.html">Registrieren</a></li>
                    	<li class="main"><a href="faq.html">FAQs</a></li>
                 </ul>
             </div>       
@@ -29,11 +29,48 @@
 
 
 <div class="container">
-	<div class="text">
     	<h1>Schnell, kompetent und zuverlässig Nachhilfe bekommen!</h1>
         <br />
         Jetzt anmelden, Unterrichtsfach suchen und Nachhilfelehrer auswählen.
-    </div>
+        <br />
+        <br />
+        <br />
+        <form action="results.html" method="post">
+        	<table class="forms">
+            <tr><td>Fach:</td>
+            <td><select name="Fach">
+            	<option>auswählen</option>
+                <option>Biologie</option>
+                <option>Chemie</option>
+                <option>Deutsch</option>
+                <option>Englisch</option>
+                <option>Geografie</option>
+                <option>Informatik</option>
+            </select></td>
+            </tr><tr><td>Region:</td>
+            <td>
+            <select name="Region">
+            	<option>egal</option>
+                <option>Bern</option>
+                <option>Freiburg</option>
+                <option>Genf</option>
+                <option>Solothurn</option>
+                <option>Zürich</option>
+            </select>
+            </td></tr><tr><td>Note:</td><td>
+            <select name="Note">
+            	<option>egal</option>
+                <option>4</option>
+                <option>4-5</option>
+                <option>5</option>
+                <option>5-6</option>
+                <option>6</option>
+            </select>
+            </td></tr><tr><td>
+            <input class="submitbutton" type="submit" value="Find!" /></td></tr></table>
+
+<div class="stripe"></div>
+
     <div class="sidebar">
         <form action="welcome.html" method="post">
         	Nickname:<br />
@@ -44,11 +81,12 @@
         </form>
         <div class="small"><a href="forgot.html" style="float:right;margin-right:33px;">Passwort vergessen?</a></div>
     </div>
-</div>
-
-<div class="footer">
+    <div class="footer">
 	2015 &copy; All rights reserved | <a href="agb.html">AGB</a>
 </div>
+</div>
+
+
 
 </div>
 </body>
