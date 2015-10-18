@@ -1,7 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<spring:url value="/resources/style.css" var="css" />
 
 <!DOCTYPE HTML>
 <html>
@@ -10,14 +12,14 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
-		<link rel="stylesheet" href="resources/style.css" />
+		<link type="text/css" rel="stylesheet" href="${css}" />
 	</head>
 
 <body>
 <div class="schatten">
 
 <div class="header">
-	<img src="resources/header.jpg" alt="headerImg"/>
+    <img src="<c:url value="/resources/header.jpg"/>">
        	<div id="nav">
            	<ul>
                	<li class="main"><a href="index.html">Home</a></li>

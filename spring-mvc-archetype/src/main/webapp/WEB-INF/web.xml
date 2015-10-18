@@ -24,7 +24,7 @@
 		</init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>co.ntier.spring_mvc_archetype</param-value>
+			<param-value>co.ntier.spring_mvc_archetype</param-value> <!-- co.ntier.spring_mvc_archetype -->
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
