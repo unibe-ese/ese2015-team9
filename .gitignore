@@ -10,4 +10,4 @@ spring-mvc-archetype/.settings/
 spring-mvc-archetype/.classpath
 spring-mvc-archetype/.nb-configuration.xml
 spring-mvc-archetype/.project
-spring-mvc-archetype/src/main/webapp/WEB-INF/glasfish-web.xml
+spring-mvc-archetype/src/main/webapp/WEB-INF/glassfish-web.xml
