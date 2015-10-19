@@ -4,6 +4,7 @@ package ese.tutoragency.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,21 +15,43 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-@Entity
+@Entity(name = "MEMBERS")
 public class Member implements Serializable {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "MEMBER_ID", nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
+    @Column(name = "FIRST_NAME")
     private String firstName;
+    @Column(name = "LAST_NAME")
     private String lastName;
+    @Column(name = "EMAIL")
     private String email;
+    @Column(name = "IS_TUTOR")
     private boolean isTutor;
+    @Column(name = "FEE")
     private Double fee;             // Use of Wrapper class because this variable is not always set.
+    @Column(name = "IS_ACTIVATED")
     private boolean isActivated;
     
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "MEMBER_COURSE",
+            joinColumns
+            = @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID"),
+            inverseJoinColumns
+            = @JoinColumn(name = "COURSE_ID", referencedColumnName = "COURSE_ID")
+    )
     private List<Course> courseList;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "MEMBER_UNIVERSITY",
+            joinColumns
+            = @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID"),
+            inverseJoinColumns
+            = @JoinColumn(name = "UNIVERSITY_ID", referencedColumnName = "UNIVERSITY_ID")
+    )
     private List<University> universityList;
     
     protected Member() {}
