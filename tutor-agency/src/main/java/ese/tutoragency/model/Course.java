@@ -15,4 +15,32 @@ public class Course implements Serializable {
     @GeneratedValue
     private Long id;
     
+    private String name;
+    
+    private University university;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public University getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(University university) {
+        this.university = university;
+    }
+    
 }
