@@ -6,8 +6,8 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
-spring-mvc-archetype/.settings/
-spring-mvc-archetype/.classpath
-spring-mvc-archetype/nb-configuration.xml
-spring-mvc-archetype/.project
-spring-mvc-archetype/src/main/webapp/WEB-INF/glassfish-web.xml
+tutor-agency/.settings/
+tutor-agency/.classpath
+tutor-agency/nb-configuration.xml
+tutor-agency/.project
+tutor-agency/src/main/webapp/WEB-INF/glassfish-web.xml
