@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ese.tutoragency.controller.pojos.SignupForm;
 import ese.tutoragency.model.Member;
-import ese.tutoragency.model.dao.MemberDao;
 
 @Service
 public class SampleServiceImpl implements SampleService {

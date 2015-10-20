@@ -2,7 +2,7 @@ package ese.tutoragency.controller.pojos;
 
 import javax.validation.constraints.Pattern;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 public class SignupForm {
 
