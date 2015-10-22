@@ -1,52 +1,51 @@
 package team9.tutoragency.controller.service;
 
-import team9.tutoragency.controller.exceptions.InvalidUserException;
-import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.model.Address;
-import team9.tutoragency.model.User;
-import team9.tutoragency.model.dao.AddressDao;
-import team9.tutoragency.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import team9.tutoragency.controller.exceptions.InvalidUserException;
+import team9.tutoragency.controller.pojos.SignupForm;
+import team9.tutoragency.model.Address;
+import team9.tutoragency.model.Member;
+import team9.tutoragency.model.dao.AddressDao;
+import team9.tutoragency.model.dao.MemberDao;
 
 @Service
 public class SampleServiceImpl implements SampleService {
 
-    @Autowired    UserDao userDao;
-    @Autowired    AddressDao addDao;
-    
-    @Transactional
-    public SignupForm saveFrom(SignupForm signupForm) throws InvalidUserException{
+	@Autowired
+	MemberDao memberDao;
+	@Autowired
+	AddressDao addDao;
 
-        String firstName = signupForm.getFirstName();
+	@Transactional
+	public SignupForm saveFrom(SignupForm signupForm) throws InvalidUserException {
 
-        if(!StringUtils.isEmpty(firstName) && "ESE".equalsIgnoreCase(firstName)) {
-            throw new InvalidUserException("Sorry, ESE is not a valid name");   // throw exception
-        }
+		
+		/*
+		 * if(!StringUtils.isEmpty(firstName) &&
+		 * "ESE".equalsIgnoreCase(firstName)) { throw new InvalidUserException(
+		 * "Sorry, ESE is not a valid name"); // throw exception }
+		 */
+		
+		String firstName = signupForm.getFirstName();
+		String lastName = signupForm.getLastName();
+		String nickname = signupForm.getNickname();
+		String email = signupForm.getEmail();
+		String password = signupForm.getPassword();
+
+		Address address = new Address();
+		address.setStreet("TestStreet-foo");
+		Member member = new Member(firstName,lastName,email,nickname,password);
+
+		memberDao.save(member); // save object to DB
 
 
-        Address address = new Address();
-        address.setStreet("TestStreet-foo");
-        
-        User user = new User();
-        user.setFirstName(signupForm.getFirstName());
-        user.setEmail(signupForm.getEmail());
-        user.setLastName(signupForm.getLastName());
-        user.setAddress(address);
-        
-        user = userDao.save(user);   // save object to DB
-        
-        
-        // Iterable<Address> addresses = addDao.findAll();  // find all 
-        // Address anAddress = addDao.findOne((long)3); // find by ID
-        
-        
-        signupForm.setId(user.getId());
+		signupForm.setId(member.getId());
 
-        return signupForm;
+		return signupForm;
 
-    }
+	}
 }

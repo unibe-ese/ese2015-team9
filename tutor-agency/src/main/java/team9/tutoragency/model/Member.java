@@ -15,146 +15,148 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 public class Member implements UserDetails {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String username;
-    private String password;
-    private boolean isTutor;
-    private Double fee;             // Use of Wrapper class because this variable is not always set.
-    private boolean isActivated;
-    
-    @ManyToMany
-    private List<Course> courseList;
-    
-    @ManyToMany
-    private List<University> universityList;
-    
-    protected Member() {}
-    
-    public Member(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.isTutor = false;
-        this.isActivated = false;
-        this.fee = null;
-        
-    }
 
-    public String getPassword() {
-        return password;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String username;
+	private String password;
+	private boolean isTutor;
+	private Double fee; // Use of Wrapper class because this variable is not
+						// always set.
+	private boolean isActivated;
 
-    public Long getId() {
-        return id;
-    }
+	@ManyToMany
+	private List<Course> courseList;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@ManyToMany
+	private List<University> universityList;
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public Member(String firstName, String lastName, String email, String nickname, String password) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.username = nickname;
+		this.isTutor = false;
+		this.isActivated = false;
+		this.fee = null;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public boolean isIsTutor() {
-        return isTutor;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setIsTutor(boolean isTutor) {
-        this.isTutor = isTutor;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public boolean isIsActivated() {
-        return isActivated;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setIsActivated(boolean isActivated) {
-        this.isActivated = isActivated;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public List<Course> getCourseList() {
-        return courseList;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public Double getFee() {
-        return fee;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setFee(Double fee) {
-        this.fee = fee;
-    }
-    
-    public void setCourseList(List<Course> courseList) {
-        this.courseList = courseList;
-    }
+	public boolean isIsTutor() {
+		return isTutor;
+	}
 
-    public List<University> getUniversityList() {
-        return universityList;
-    }
+	public void setIsTutor(boolean isTutor) {
+		this.isTutor = isTutor;
+	}
 
-    public void setUniversityList(List<University> universityList) {
-        this.universityList = universityList;
-    }
+	public boolean isIsActivated() {
+		return isActivated;
+	}
 
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-        list.add(new SimpleGrantedAuthority("USER"));
-        return list;
-        
-    }
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	public void setIsActivated(boolean isActivated) {
+		this.isActivated = isActivated;
+	}
 
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	public List<Course> getCourseList() {
+		return courseList;
+	}
 
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	public Double getFee() {
+		return fee;
+	}
 
-    public boolean isEnabled() {
-        return true;
-    }
+	public void setFee(Double fee) {
+		this.fee = fee;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setCourseList(List<Course> courseList) {
+		this.courseList = courseList;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
- 
+	public List<University> getUniversityList() {
+		return universityList;
+	}
+
+	public void setUniversityList(List<University> universityList) {
+		this.universityList = universityList;
+	}
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Collection<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+		list.add(new SimpleGrantedAuthority("USER"));
+		return list;
+
+	}
+
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	public boolean isEnabled() {
+		return true;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 }

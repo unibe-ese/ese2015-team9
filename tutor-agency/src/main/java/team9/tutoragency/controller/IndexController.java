@@ -2,9 +2,6 @@ package team9.tutoragency.controller;
 
 import javax.validation.Valid;
 
-import team9.tutoragency.controller.exceptions.InvalidUserException;
-import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import team9.tutoragency.controller.exceptions.InvalidUserException;
+import team9.tutoragency.controller.pojos.SignupForm;
+import team9.tutoragency.controller.service.SampleService;
 
 @Controller
 public class IndexController {
@@ -27,6 +28,7 @@ public class IndexController {
         return model;
     }
 
+    /*
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ModelAndView create(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
     	ModelAndView model;    	
@@ -42,7 +44,7 @@ public class IndexController {
         	model = new ModelAndView("index");
         }   	
     	return model;
-    }
+    }*/
     
     @RequestMapping(value = "/common", method = RequestMethod.GET)
     public String getCommonPage() {

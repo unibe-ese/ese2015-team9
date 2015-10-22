@@ -10,27 +10,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginLogoutController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String getLoginPage(@RequestParam(value="error", required=false) boolean error, ModelMap model){
+	public String getLoginPage(@RequestParam(value = "error", required = false) boolean error, ModelMap model) {
 		if (error == true) {
-			   model.put("error", "You have entered an invalid username or password!");
-			   
-			} else {
-			   model.put("error", "");
-			   
-	
-			  }
+			model.put("error", "You have entered an invalid username or password!");
+
+		} else {
+			model.put("error", "");
+		}
 		return "loginpage";
 	}
-	
+
 	/**
-	  * Handles and retrieves the denied JSP page. This is shown whenever a regular user
-	  * tries to access an admin only page.
-	  * 
-	  * @return the name of the JSP page
-	  */
-	 @RequestMapping(value = "/denied", method = RequestMethod.GET)
-	  public String getDeniedPage() {
-		 
-	  return "deniedpage";
-	 }
+	 * Handles and retrieves the denied JSP page. This is shown whenever a
+	 * regular user tries to access an admin only page.
+	 * 
+	 * @return the name of the JSP page
+	 */
+	@RequestMapping(value = "/denied", method = RequestMethod.GET)
+	public String getDeniedPage() {
+
+		return "deniedpage";
+	}
 }
