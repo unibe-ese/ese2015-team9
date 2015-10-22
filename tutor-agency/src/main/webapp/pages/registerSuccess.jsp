@@ -28,7 +28,9 @@
 			</div>
 		</div>
 
-		Signup Success!
+		<div class="container">
+		<h2>Signup Success!</h2>
+		</div>
 
 		<br /> <br />
 

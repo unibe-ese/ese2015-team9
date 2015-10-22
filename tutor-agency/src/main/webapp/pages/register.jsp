@@ -57,9 +57,9 @@
 
 					<tr>
 						<td>Nickname:<sup>*</sup></td>
-						<td><form:input path="nickname" onclick="this.value=''"
+						<td><form:input path="username" onclick="this.value=''"
 								type="text" name="nickname" value="Nickname" /> <form:errors
-								path="nickname" cssClass="help-inline" element="span" /></td>
+								path="username" cssClass="help-inline" element="span" /></td>
 					</tr>
 					<tr>
 						<td>E-mail:<sup>*</sup></td>

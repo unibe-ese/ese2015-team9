@@ -36,16 +36,19 @@ public class Member implements UserDetails {
 	@ManyToMany
 	private List<University> universityList;
 
-	public Member(String firstName, String lastName, String email, String nickname, String password) {
+	public Member(String firstName, String lastName, String email, String username, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.username = nickname;
+		this.username = username;
 		this.isTutor = false;
 		this.isActivated = false;
 		this.fee = null;
 
+	}
+	public Member(){
+		
 	}
 
 	public String getPassword() {

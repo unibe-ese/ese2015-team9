@@ -23,6 +23,9 @@ public class RegisterController {
 	@Autowired
 	SampleService sampleService;
 
+	@Autowired
+	SignupFormValidator validator;
+	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register(HttpServletResponse response) throws IOException {
 		ModelAndView register = new ModelAndView("register");
@@ -34,18 +37,17 @@ public class RegisterController {
 	public ModelAndView createUser(@Valid SignupForm signupForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
 		ModelAndView model;
+		validator.validate(signupForm, result);
 		if (!result.hasErrors()) {
 			try {
-				if (!signupForm.getPassword().equals(signupForm.getPasswordConfirm())) {
-					throw new InvalidUserException(
-							"Eingegebene Passwörter stimmen nicht überein. Bitte erneut eingeben.");
-				}
+				
 				sampleService.saveFrom(signupForm);
 				model = new ModelAndView("registerSuccess");
 			} catch (InvalidUserException e) {
 				model = new ModelAndView("register");
 			}
 		} else {
+			
 			model = new ModelAndView("register","signupForm",signupForm);
 		}
 		return model;

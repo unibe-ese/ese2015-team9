@@ -17,22 +17,14 @@ public class SampleServiceImpl implements SampleService {
 
 	@Autowired
 	MemberDao memberDao;
-	@Autowired
-	AddressDao addDao;
 
+	
 	@Transactional
 	public SignupForm saveFrom(SignupForm signupForm) throws InvalidUserException {
 
-		
-		/*
-		 * if(!StringUtils.isEmpty(firstName) &&
-		 * "ESE".equalsIgnoreCase(firstName)) { throw new InvalidUserException(
-		 * "Sorry, ESE is not a valid name"); // throw exception }
-		 */
-		
 		String firstName = signupForm.getFirstName();
 		String lastName = signupForm.getLastName();
-		String nickname = signupForm.getNickname();
+		String nickname = signupForm.getUsername();
 		String email = signupForm.getEmail();
 		String password = signupForm.getPassword();
 
@@ -43,7 +35,7 @@ public class SampleServiceImpl implements SampleService {
 		memberDao.save(member); // save object to DB
 
 
-		signupForm.setId(member.getId());
+		//signupForm.setId(member.getId());
 
 		return signupForm;
 
