@@ -44,41 +44,42 @@
 				<table class="forms">
 					<tr>
 						<td>Vorname:<sup>*</sup></td>
+						 <form:errors
+								path="firstName" cssStyle="color: #ff0000;" element="span" />
 						<td><form:input path="firstName" onclick="this.value=''"
-								type="text" name="vorname" value="Vorname" /> <form:errors
-								path="firstName" cssClass="help-inline" element="span" /></td>
+								type="text" name="vorname" value="Vorname" /></td>
 					</tr>
 					<tr>
 						<td>Nachname:<sup>*</sup></td>
-						<td><form:input path="lastName" onclick="this.value=''"
-								type="text" name="nachname" value="Nachname" /> <form:errors
-								path="lastName" cssClass="help-inline" element="span" /></td>
+						<td><form:errors
+								path="lastName" cssStyle="color: #ff0000;" element="span" /><form:input path="lastName" onclick="this.value=''"
+								type="text" name="nachname" value="Nachname" /> </td>
 					</tr>
 
 					<tr>
 						<td>Nickname:<sup>*</sup></td>
-						<td><form:input path="username" onclick="this.value=''"
-								type="text" name="nickname" value="Nickname" /> <form:errors
-								path="username" cssClass="help-inline" element="span" /></td>
+						<td><form:errors
+								path="username" cssStyle="color: #ff0000;" element="span" /><form:input path="username" onclick="this.value=''"
+								type="text" name="nickname" value="Nickname" /> </td>
 					</tr>
 					<tr>
 						<td>E-mail:<sup>*</sup></td>
-						<td><form:input path="email" onclick="this.value=''"
-								type="text" name="email" value="E-mail" /> <form:errors
-								path="email" cssClass="help-inline" element="span" /></td>
+						<td><form:errors
+								path="email" cssStyle="color: #ff0000;" element="span" /><form:input path="email" onclick="this.value=''"
+								type="text" name="email" value="E-mail" /> </td>
 					</tr>
 					<tr>
 						<td>Passwort:<sup>*</sup></td>
-						<td><form:input path="password" onclick="this.value=''"
-								type="password" name="pw" value="Passwort" /> <form:errors
-								path="password" cssClass="help-inline" element="span" /></td>
+						<td><form:errors
+								path="password" cssStyle="color: #ff0000;" element="span" /><form:input path="password" onclick="this.value=''"
+								type="password" name="pw" value="Passwort" /> </td>
 					</tr>
 					<tr>
 						<td>Passwort bestätigen:<sup>*</sup></td>
-						<td><form:input path="passwordConfirm"
+						<td><form:errors path="passwordConfirm"
+								cssStyle="color: #ff0000;" element="span" /><form:input path="passwordConfirm"
 								onclick="this.value=''" type="password" name="Passwort2"
-								value="Passwort2" /> <form:errors path="passwordConfirm"
-								cssClass="help-inline" element="span" /></td>
+								value="Passwort2" /> </td>
 					</tr>
 				</table>
 				<input type="checkbox" name="agb" style="width: 50px;" /> Ich habe

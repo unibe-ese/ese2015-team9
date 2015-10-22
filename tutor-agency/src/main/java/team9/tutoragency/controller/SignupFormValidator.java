@@ -26,10 +26,15 @@ import team9.tutoragency.model.dao.MemberDao;
 		if(!form.getPassword().equals(form.getPasswordConfirm())){
 			errors.rejectValue("passwordConfirm", "password.mismatch","Passwörter stimmen nicht überein");
 		}
-		System.out.println(memberDao);
+
 		List<Member> registeredMembers  = memberDao.findByUsername(form.getUsername());
 		if(registeredMembers.size() != 0){
 			errors.rejectValue("username", "username.alreadyRegistered", "Username is already in use");
+		}
+		
+		registeredMembers  = memberDao.findByEmail(form.getEmail());
+		if(registeredMembers.size() != 0){
+			errors.rejectValue("email", "email.alreadyRegistered", "Email is already in use");
 		}
 	}
 	

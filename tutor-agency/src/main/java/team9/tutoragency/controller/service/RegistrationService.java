@@ -13,7 +13,7 @@ import team9.tutoragency.model.dao.AddressDao;
 import team9.tutoragency.model.dao.MemberDao;
 
 @Service
-public class SampleServiceImpl implements SampleService {
+public class RegistrationService implements SampleService {
 
 	@Autowired
 	MemberDao memberDao;
@@ -28,14 +28,9 @@ public class SampleServiceImpl implements SampleService {
 		String email = signupForm.getEmail();
 		String password = signupForm.getPassword();
 
-		Address address = new Address();
-		address.setStreet("TestStreet-foo");
 		Member member = new Member(firstName,lastName,email,nickname,password);
 
-		memberDao.save(member); // save object to DB
-
-
-		//signupForm.setId(member.getId());
+		memberDao.save(member);
 
 		return signupForm;
 

@@ -9,4 +9,5 @@ import team9.tutoragency.model.Member;
 public interface MemberDao extends CrudRepository<Member,Long> {
 
 	public List<Member> findByUsername(String username);
+	public List<Member> findByEmail(String email);
 }
