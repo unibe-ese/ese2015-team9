@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>Team9</groupId>
-	<artifactId>TutorAgency</artifactId>
+	<groupId>team9</groupId>
+	<artifactId>tutoragnecy</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 
@@ -37,24 +37,24 @@
 		</repository>
 	</repositories>
 
-	<!-- <build> -->
-	<!-- <resources> -->
-	<!-- <resource> -->
-	<!-- <directory>src/main/resources</directory> -->
-	<!-- <excludes> -->
-	<!-- <exclude>*.xml</exclude> -->
-	<!-- </excludes> -->
-	<!-- <filtering>true</filtering> -->
-	<!-- </resource> -->
-	<!-- <resource> -->
-	<!-- <directory>src/main/resources</directory> -->
-	<!-- <includes> -->
-	<!-- <include>*.xml</include> -->
-	<!-- </includes> -->
-	<!-- <filtering>false</filtering> -->
-	<!-- </resource> -->
-	<!-- </resources> -->
-	<!-- </build> -->
+<!-- 	<build> -->
+<!-- 		<resources> -->
+<!-- 			<resource> -->
+<!-- 				<directory>src/main/resources</directory> -->
+<!-- 				<excludes> -->
+<!-- 					<exclude>*.xml</exclude> -->
+<!-- 				</excludes> -->
+<!-- 				<filtering>true</filtering> -->
+<!-- 			</resource> -->
+<!-- 			<resource> -->
+<!-- 				<directory>src/main/resources</directory> -->
+<!-- 				<includes> -->
+<!-- 					<include>*.xml</include> -->
+<!-- 				</includes> -->
+<!-- 				<filtering>false</filtering> -->
+<!-- 			</resource> -->
+<!-- 		</resources> -->
+<!-- 	</build> -->
 
 	<dependencies>
 
@@ -216,7 +216,7 @@
 						<version>6.1.26</version>
 						<configuration>
 							<useTestClasspath>true</useTestClasspath>
-							<contextPath>/</contextPath>
+							<contextPath>/tutor-agency</contextPath>
 							<stopKey>1</stopKey>
 							<stopPort>9999</stopPort>
 						</configuration>
@@ -244,4 +244,5 @@
 			</build>
 		</profile>
 	</profiles>
+    <name>tutor-agency</name>
 </project>
