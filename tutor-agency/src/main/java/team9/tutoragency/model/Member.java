@@ -1,16 +1,20 @@
 
 package team9.tutoragency.model;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Member implements Serializable {
+public class Member implements UserDetails {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -19,6 +23,8 @@ public class Member implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    private String username;
+    private String password;
     private boolean isTutor;
     private Double fee;             // Use of Wrapper class because this variable is not always set.
     private boolean isActivated;
@@ -38,6 +44,15 @@ public class Member implements Serializable {
         this.isTutor = false;
         this.isActivated = false;
         this.fee = null;
+        
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId() {
@@ -111,7 +126,35 @@ public class Member implements Serializable {
     public void setUniversityList(List<University> universityList) {
         this.universityList = universityList;
     }
-    
-    
-    
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Collection<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+        list.add(new SimpleGrantedAuthority("USER"));
+        return list;
+        
+    }
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+ 
 }
