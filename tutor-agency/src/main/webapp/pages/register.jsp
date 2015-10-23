@@ -47,26 +47,26 @@
 						 <form:errors
 								path="firstName" cssStyle="color: #ff0000;" element="span" />
 						<td><form:input path="firstName" onclick="this.value=''"
-								type="text" name="vorname" value="Vorname" /></td>
+								type="text" name="vorname" value="${signupForm.firstName}" /></td>
 					</tr>
 					<tr>
 						<td>Nachname:<sup>*</sup></td>
 						<td><form:errors
 								path="lastName" cssStyle="color: #ff0000;" element="span" /><form:input path="lastName" onclick="this.value=''"
-								type="text" name="nachname" value="Nachname" /> </td>
+								type="text" name="nachname" value="${signupForm.lastName}" /> </td>
 					</tr>
 
 					<tr>
 						<td>Nickname:<sup>*</sup></td>
 						<td><form:errors
 								path="username" cssStyle="color: #ff0000;" element="span" /><form:input path="username" onclick="this.value=''"
-								type="text" name="nickname" value="Nickname" /> </td>
+								type="text" name="nickname" value="${signupForm.username}" /> </td>
 					</tr>
 					<tr>
 						<td>E-mail:<sup>*</sup></td>
 						<td><form:errors
 								path="email" cssStyle="color: #ff0000;" element="span" /><form:input path="email" onclick="this.value=''"
-								type="text" name="email" value="E-mail" /> </td>
+								type="text" name="email" value="${signupForm.email}" /> </td>
 					</tr>
 					<tr>
 						<td>Passwort:<sup>*</sup></td>

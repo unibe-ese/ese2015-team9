@@ -21,6 +21,12 @@ public class SignupForm {
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
 	private String email;
 
+	public SignupForm(){
+		firstName = "Vorname";
+		lastName = "Nachname";
+		username = "Nickname";
+		email = "E-mail";
+	}
 	public String getFirstName() {
 		return firstName;
 	}
