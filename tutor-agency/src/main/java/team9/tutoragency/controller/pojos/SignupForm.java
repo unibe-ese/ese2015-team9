@@ -7,15 +7,15 @@ import javax.validation.constraints.Pattern;
 public class SignupForm {
 
 	private Long id;
-	@NotNull
+	@NotNull(message="Please enter your first name.")
 	private String firstName;
-	@NotNull
+	@NotNull(message="Please enter your last name.")
 	private String lastName;
-	@NotNull
+	@NotNull(message="Please enter a username.")
 	private String username;
-	@NotNull
+	@NotNull(message="Please enter a password.")
 	private String password;
-	@NotNull
+	@NotNull(message="Please enter a matching password.")
 	private String passwordConfirm;
 	@NotNull
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
