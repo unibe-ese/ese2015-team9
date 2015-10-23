@@ -59,7 +59,10 @@ public class SignupFormValidator implements Validator {
 		if (!form.getPassword().equals(form.getPasswordConfirm())) {
 			errors.rejectValue("passwordConfirm", "password.mismatch", "Passwörter stimmen nicht überein");
 		}
-
+		
+		if(!form.isReadAGB()){
+			errors.rejectValue("readAGB", "readAGB.notRead","Bitte lies die AGB und bestätige dies mit einem Klick.");
+		}
 		checkUsernameAlreadyInUse(errors, form);
 
 		checkEmailAlreadyInUse(errors, form);

@@ -21,6 +21,8 @@ public class SignupForm {
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
 	private String email;
 
+	private boolean readAGB;
+	
 	public SignupForm(){
 		firstName = "Vorname";
 		lastName = "Nachname";
@@ -81,6 +83,12 @@ public class SignupForm {
 
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+	}
+	public boolean isReadAGB() {
+		return readAGB;
+	}
+	public void setReadAGB(boolean readAGB) {
+		this.readAGB = readAGB;
 	}
 
 }
