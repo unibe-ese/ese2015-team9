@@ -17,18 +17,33 @@
 
 <body>
 
+<div class="header">
+    <img src="<c:url value="/img/header.jpg"/>">
+       	<div id="nav">
+           	<ul>
+               	<li class="main"><a href="index.html">Home</a></li>
+                <li class="main"><a href="info.html">Infos</a></li>
+                <li class="main"><a href="ssearch.html">Suchen</a>
+                   	<ul>
+                   		<li class="sub"><a href="ssearch.html">Einfache Suche</a></li>
+                    	<li class="sub"><a href="asearch.html">Erweiterte Suche</a></li>
+                    </ul>
+                   	</li>
+                <li class="main"><a href="register">Registrieren</a></li>
+                <li class="main"><a href="faq.html">FAQs</a></li>
+            </ul>
+        </div>       
+</div>
 
 <div class="schatten">
 
-<h1>
- 
-User Page</h1><div id="login-error">
-<p>
-You are logged in!
+
 
 <div class="container">
-    	<h1></h1>
-
+    	<h1>Member Page</h1>
+	<p>You are logged in!</p>
+	
+  	
   	<div class="stripe"></div>
 
     <div class="sidebar"></div>
