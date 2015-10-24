@@ -1,5 +1,6 @@
 package team9.tutoragency.controller.service;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,7 @@ public class RegistrationService implements SampleService {
 		String lastName = signupForm.getLastName();
 		String nickname = signupForm.getUsername();
 		String email = signupForm.getEmail();
-		String password = signupForm.getPassword();
+		String password = DigestUtils.md5Hex(signupForm.getPassword());
 
 		Member member = new Member(firstName,lastName,email,nickname,password);
 
