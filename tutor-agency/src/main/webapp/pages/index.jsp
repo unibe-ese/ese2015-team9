@@ -23,7 +23,12 @@
        	<div id="nav">
            	<ul>
                	<li class="main"><a href="index.html">Home</a></li>
-                <li class="main"><a href="info.html">Infos</a></li>
+                <li class="main"><a href="info.html">Infos</a>
+                	<ul>
+                		<li class="main"><a href="faq.html">FAQs</a></li>
+                	</ul>
+                </li>
+                
                 <li class="main"><a href="ssearch.html">Suchen</a>
                    	<ul>
                    		<li class="sub"><a href="ssearch.html">Einfache Suche</a></li>
@@ -31,7 +36,8 @@
                     </ul>
                    	</li>
                 <li class="main"><a href="register">Registrieren</a></li>
-                <li class="main"><a href="faq.html">FAQs</a></li>
+                <li class="main"><a href="login">Login</a></li>
+                
             </ul>
         </div>       
 </div>

@@ -13,7 +13,6 @@ public class LoginLogoutController {
 	public String getLoginPage(@RequestParam(value = "error", required = false) boolean error, ModelMap model) {
 		if (error == true) {
 			model.put("error", "You have entered an invalid username or password!");
-
 		} else {
 			model.put("error", "");
 		}
@@ -26,9 +25,8 @@ public class LoginLogoutController {
 	 * 
 	 * @return the name of the JSP page
 	 */
-	@RequestMapping(value = "/denied", method = RequestMethod.GET)
+	@RequestMapping(value = "/access-denied", method = RequestMethod.GET)
 	public String getDeniedPage() {
-
 		return "deniedpage";
 	}
 }
