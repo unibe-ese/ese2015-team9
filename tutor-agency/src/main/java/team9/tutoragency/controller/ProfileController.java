@@ -64,6 +64,7 @@ public class ProfileController {
 		}
 		Member member = members.get(0);
 		member.setIsTutor(true);
+		memberDao.save(member);
 		profile.addObject("member", members.get(0));
 		return profile;
 	}
