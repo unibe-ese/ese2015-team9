@@ -28,7 +28,8 @@
 							<li class="sub"><a href="ssearch.html">Einfache Suche</a></li>
 							<li class="sub"><a href="asearch.html">Erweiterte Suche</a></li>
 						</ul></li>
-					<li class="main"><a href="register.html">Registrieren</a></li>
+						<li class="main">
+					<a href="<c:url value="/j_spring_security_logout"></c:url>" > Logout</a></li>
 					<li class="main"><a href="faq.html">FAQs</a></li>
 				</ul>
 			</div>
