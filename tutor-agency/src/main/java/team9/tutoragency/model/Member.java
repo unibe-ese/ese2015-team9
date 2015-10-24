@@ -30,6 +30,7 @@ public class Member implements UserDetails {
 						// always set.
 	private boolean isActivated;
 
+	
 	@ManyToMany
 	private List<Course> courseList;
 
@@ -133,7 +134,7 @@ public class Member implements UserDetails {
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-		list.add(new SimpleGrantedAuthority("USER"));
+		list.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return list;
 
 	}
