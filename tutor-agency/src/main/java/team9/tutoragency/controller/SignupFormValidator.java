@@ -35,7 +35,6 @@ public class SignupFormValidator implements Validator {
 
 	public void validate(Object arg0, Errors errors) {
 		SignupForm form = (SignupForm) arg0;
-		matcher = validCharacterPattern.matcher(form.getFirstName());
 		matcher = validCharacterPattern.matcher(form.getUsername());
 		if (!matcher.matches()) {
 			errors.rejectValue("username", "username.invalidName", "Der Name sollte 3-15 Zeichen enthalten.");

@@ -40,7 +40,6 @@ public class RegisterController {
 		validator.validate(signupForm, result);
 		if (!result.hasErrors()) {
 			try {
-				
 				sampleService.saveFrom(signupForm);
 				model = new ModelAndView("registerSuccess");
 			} catch (InvalidUserException e) {

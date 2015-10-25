@@ -103,7 +103,7 @@
 
 			<div class="stripe"></div>
 			<div class="sidebar">
-				<form action="profil.html" method="post">
+				<form action="profile" method="post">
 					Nickname:<br /> <input onclick="this.value=''" type="text"
 						name="login" value="Nickname"><br /> Password:<br /> <input
 						onclick="this.value=''" type="password" name="password"

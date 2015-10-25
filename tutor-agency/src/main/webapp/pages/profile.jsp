@@ -28,18 +28,21 @@
 							<li class="sub"><a href="ssearch.html">Einfache Suche</a></li>
 							<li class="sub"><a href="asearch.html">Erweiterte Suche</a></li>
 						</ul></li>
-					<li class="main">
-						<a href="<c:url value="/j_spring_security_logout"></c:url>" > Logout</a></li>
+					<li class="main"><a
+						href="<c:url value="/j_spring_security_logout"></c:url>">
+							Logout</a></li>
 					<li class="main"><a href="faq.html">FAQs</a></li>
 				</ul>
 			</div>
 		</div>
 
-
 		<div class="container">
+
 			<h1>Mein Profil</h1>
 			<br /> <br />
+
 			<table class="forms">
+
 				<tr>
 					<td class="profil"><img src="img/profil.png" /></td>
 					<td>
@@ -57,29 +60,36 @@
 								<td>${member.username}</td>
 							</tr>
 							<tr>
-								<td><strong>e-Mail:</strong></td>
+								<td><strong>E-Mail:</strong></td>
 								<td>${member.email}</td>
 							</tr>
 							<tr>
 								<td><strong>Ist Tutor:</strong></td>
 								<td>${member.isTutor}</td>
 							</tr>
-						</table>
+							<tr>
+							</tr>
+						</table> <form:form action="edit">
+							<input class="submitbutton" type="submit" value="editProfile"
+								style="margin-left: 400px;" />
+						</form:form>
 					</td>
+
 				</tr>
 			</table>
+
 
 			<div class="stripe"></div>
 			<div class="sidebar">
 				<h2>Hallo ${member.username}</h2>
-				<br /> <br />
-				<a href="profile">Profil ansehen</a> <br />
-				<a href="edit.html">Profil bearbeiten</a>
-				<form:form>
-				<input type="submit" value="werde Tutor" name="werde Tutor"/></form:form>
-				<br />
-				<a href="logout.html">Logout</a> <br /> <br /> <br />
-				<a href="delete.html">Profil löschen</a>
+				<br /> <br /> <a href="profile">Profil ansehen</a> <br /> <a
+					href="edit.html">Profil bearbeiten</a>
+				<form:form action="becomeTutor">
+					<input class="submitbutton" type="submit" value="werde Tutor"
+						name="werde Tutor" />
+				</form:form>
+				<br /> <a href="logout.html">Logout</a> <br /> <br /> <br /> <a
+					href="delete.html">Profil löschen</a>
 			</div>
 			<div class="footer">
 				2015 &copy; All rights reserved | <a href="agb.html">AGB</a>
