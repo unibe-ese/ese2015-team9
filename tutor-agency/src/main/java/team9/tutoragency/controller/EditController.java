@@ -26,22 +26,26 @@ public class EditController {
 	MemberDao memberDao;
 	@Autowired
 	EditFormValidator validator;
-	
+
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveChange(@Valid EditForm editForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
 		ModelAndView model;
 		validator.validate(editForm, result);
-		
+
 		if (!result.hasErrors()) {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			Member member = (Member) authentication.getPrincipal();
-			
+
 			member.setEmail(editForm.getEmail());
-			member.setPassword(DigestUtils.md5Hex(editForm.getPassword()));
+
+			if (editForm.getPassword().length() > 0) {
+				member.setPassword(DigestUtils.md5Hex(editForm.getPassword()));
+			}
 			member.setFirstName(editForm.getFirstName());
 			member.setLastName(editForm.getLastName());
 			member.setUsername(editForm.getUsername());
+			
 			memberDao.save(member);
 			model = new ModelAndView("profile");
 			model.addObject("member", member);

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 import team9.tutoragency.controller.pojos.EditForm;
-import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
@@ -41,7 +40,8 @@ public class EditFormValidator {
 
 		EditForm form = (EditForm) arg0;
 
-		// If there is already a member with given username/email reject the value
+		// If there is already a member with given username/email reject the
+		// value
 		List<Member> members = memberDao.findByUsername(form.getUsername());
 		if (members.size() != 0 && members.get(0).equals(member)) {
 			errors.rejectValue("username", "username.invalidName", "Dieser Username wird bereits verwendet");
@@ -57,14 +57,10 @@ public class EditFormValidator {
 			errors.rejectValue("username", "username.invalidName", "Der Name sollte 3-15 Zeichen enthalten.");
 		}
 
-		System.out.println("Form" + form.getOldPassword() + "member " + member.getPassword());
-		System.out.println("Form has" + DigestUtils.md5Hex(form.getOldPassword()));
-
 		if (!DigestUtils.md5Hex(form.getOldPassword()).equals(member.getPassword())) {
 			errors.rejectValue("oldPassword", "oldPassword.invalidValue", "Altes Passwort ist nicht korrekt");
 		}
-		
-		if (!form.getPassword().equals(form.getPasswordConfirm())) {
+		if (form.getPassword().length() != 0 && !form.getPassword().equals(form.getPasswordConfirm())) {
 			errors.rejectValue("passwordConfirm", "password.mismatch", "Passwörter stimmen nicht überein");
 		}
 

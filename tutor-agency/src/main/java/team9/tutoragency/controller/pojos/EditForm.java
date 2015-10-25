@@ -2,7 +2,6 @@ package team9.tutoragency.controller.pojos;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 public class EditForm {
 
@@ -12,11 +11,13 @@ public class EditForm {
 	private String lastName;
 	@NotNull(message = "Please enter a username.")
 	private String username;
-	@NotNull(message = "Please enter a password.")
-	@Size(min = 6, max = 18, message = "Passwort sollte aus 6-18 Zeichen bestehen")
+
+	@NotNull(message = "Please enter your old Password")
+	private String oldPassword;
+
 	private String password;
-	@NotNull(message = "Please enter a matching password.")
 	private String passwordConfirm;
+
 	public String getPasswordConfirm() {
 		return passwordConfirm;
 	}
@@ -24,9 +25,6 @@ public class EditForm {
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
 	}
-
-	@NotNull(message = "Please enter your old Password")
-	private String oldPassword;
 
 	@NotNull
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
