@@ -76,7 +76,7 @@
 				<a href="profile">Profil ansehen</a> <br />
 				<a href="edit.html">Profil bearbeiten</a>
 				<form:form>
-				<input type="submit" value="becomeTutor" name="werde Tutor"/></form:form>
+				<input type="submit" value="werde Tutor" name="werde Tutor"/></form:form>
 				<br />
 				<a href="logout.html">Logout</a> <br /> <br /> <br />
 				<a href="delete.html">Profil löschen</a>

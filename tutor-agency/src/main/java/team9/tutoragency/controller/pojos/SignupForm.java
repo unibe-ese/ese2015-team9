@@ -2,8 +2,7 @@ package team9.tutoragency.controller.pojos;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
-import org.apache.commons.codec.digest.DigestUtils;
+import javax.validation.constraints.Size;
 
 
 public class SignupForm {
@@ -16,6 +15,7 @@ public class SignupForm {
 	@NotNull(message="Please enter a username.")
 	private String username;
 	@NotNull(message="Please enter a password.")
+	@Size(min=6 , max=18, message="Passwort sollte aus 6-18 Zeichen bestehen")
 	private String password;
 	@NotNull(message="Please enter a matching password.")
 	private String passwordConfirm;
