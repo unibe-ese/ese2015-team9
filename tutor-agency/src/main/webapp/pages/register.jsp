@@ -4,35 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<spring:url value="/css/style.css" var="css" />
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>ESE2015-Team9 | Index</title>
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-</head>
-
-<body>
-	<div class="schatten">
-
-		<div class="header">
-			<img src="img/header2.jpg" alt="headerImg" />
-			<div id="nav">
-				<ul>
-					<li class="main"><a href="index.html">Home</a></li>
-					<li class="main"><a href="info.html">Infos</a></li>
-					<li class="main"><a href="ssearch.html">Suchen</a>
-						<ul>
-							<li class="sub"><a href="ssearch.html">Einfache Suche</a></li>
-							<li class="sub"><a href="asearch.html">Erweiterte Suche</a></li>
-						</ul></li>
-					<li class="main"><a href="register.html">Registrieren</a></li>
-					<li class="main"><a href="faq.html">FAQs</a></li>
-				</ul>
-			</div>
-		</div>
+<c:import url="template/header.jsp" />
 
 
 		<div class="container">
@@ -93,7 +65,7 @@
 				<br />
 				<form:checkbox path="readAGB" name="agb" style="width: 50px;" />
 					Ich habe die
-					<a href="agb.html">AGB's</a> gelesen und bin damit einverstanden.
+					<a href="agb">AGB's</a> gelesen und bin damit einverstanden.
 				<br />
 				<input class="submitbutton" type="submit" value="Anmelden"
 					style="margin-left: 400px;" />
@@ -103,21 +75,11 @@
 
 			<div class="stripe"></div>
 			<div class="sidebar">
-				<form action="profile" method="post">
-					Nickname:<br /> <input onclick="this.value=''" type="text"
-						name="login" value="Nickname"><br /> Password:<br /> <input
-						onclick="this.value=''" type="password" name="password"
-						value="Password" /><br /> <input class="submitbutton"
-						type="submit" value="Login" /><br />
-				</form>
-				<div class="small">
-					<a href="forgot.html" style="float: right; margin-right: 33px;">Passwort
-						vergessen?</a>
-				</div>
+				<c:import url="template/sidebar.jsp" /></div>
+				<c:import url="template/footer.jsp" />
 			</div>
-			<div class="footer">
-				2015 &copy; All rights reserved | <a href="agb.html">AGB</a>
-			</div>
+			
+
 		</div>
 
 

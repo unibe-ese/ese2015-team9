@@ -6,35 +6,8 @@
 
 <spring:url value="/css/style.css" var="css" />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>ESE2015-Team9 | Index</title>
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-</head>
+<c:import url="template/header.jsp" />
 
-<body>
-	<div class="schatten">
-
-		<div class="header">
-			<img src="img/header2.jpg" alt="headerImg" />
-			<div id="nav">
-				<ul>
-					<li class="main"><a href="index.html">Home</a></li>
-					<li class="main"><a href="info.html">Infos</a></li>
-					<li class="main"><a href="ssearch.html">Suchen</a>
-						<ul>
-							<li class="sub"><a href="ssearch.html">Einfache Suche</a></li>
-							<li class="sub"><a href="asearch.html">Erweiterte Suche</a></li>
-						</ul></li>
-					<li class="main"><a
-						href="<c:url value="/j_spring_security_logout"></c:url>">
-							Logout</a></li>
-					<li class="main"><a href="faq.html">FAQs</a></li>
-				</ul>
-			</div>
-		</div>
 
 		<div class="container">
 
@@ -91,9 +64,8 @@
 				<br /> <a href="logout.html">Logout</a> <br /> <br /> <br /> <a
 					href="delete.html">Profil löschen</a>
 			</div>
-			<div class="footer">
-				2015 &copy; All rights reserved | <a href="agb.html">AGB</a>
-			</div>
+			<c:import url="template/footer.jsp" />
+
 		</div>
 
 
