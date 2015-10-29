@@ -1,2 +1,0 @@
-INSERT INTO `University`(`id`, `name`) VALUES (1,"Bern"),(2,"Freiburg");
-INSERT INTO `Course`(`name`, `university_id`) VALUES ("Datenbanken",1),("ESE",1),("GTI",1),("GTI",2),("Cerebrale Psychologie",2)

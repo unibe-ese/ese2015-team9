@@ -14,6 +14,12 @@
 		<input class="submitbutton" type="submit" value="addCourse"
 			style="margin-left: 400px;" />
 	</form:form>
+
+	<form:form action="show" method="get">
+		<input class="submitbutton" type="submit" value="showCourses"
+			style="margin-left: 400px;" />
+	</form:form>
+
 	<h1>Mein Profil</h1>
 	<br /> <br />
 
@@ -44,16 +50,16 @@
 						<td>${member.isTutor}</td>
 					</tr>
 					<tr>
-						<form:form action="edit">
-							<input class="submitbutton" type="submit" value="editProfile"
-								style="margin-left: 400px;" />
-						</form:form>
+
 					</tr>
 				</table>
 			</td>
-
 		</tr>
 	</table>
+	<form:form action="edit">
+		<input class="submitbutton" type="submit" value="editProfile"
+			style="margin-left: 400px;" />
+	</form:form>
 
 
 	<div class="stripe"></div>

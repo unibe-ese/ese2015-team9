@@ -74,6 +74,17 @@ public class CourseController {
 			courseList.add(course);
 			memberDao.save(member);
 		}
+		model.addObject("member", member);
+		return model;
+	}
+	
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView showCourses(HttpServletResponse response) throws IOException {
+		ModelAndView model = new ModelAndView("showCourses");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Member member = (Member) authentication.getPrincipal();
+		List<Course> courseList = member.getCourseList();
+		model.addObject("courses", courseList);
 		return model;
 	}
 }
