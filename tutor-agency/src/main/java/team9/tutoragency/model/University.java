@@ -15,7 +15,6 @@ public class University implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    @Basic(fetch=FetchType.LAZY)
     private String name;
 
     public Long getId() {

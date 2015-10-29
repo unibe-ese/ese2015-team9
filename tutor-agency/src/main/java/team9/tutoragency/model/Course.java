@@ -16,10 +16,9 @@ public class Course implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    @Basic(fetch=FetchType.LAZY)
     private String name;
     
-    @ManyToOne(optional=false)
+    @ManyToOne
     private University university;
 
     public Long getId() {
