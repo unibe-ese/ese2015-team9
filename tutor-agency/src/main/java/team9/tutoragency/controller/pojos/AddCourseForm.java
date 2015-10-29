@@ -2,19 +2,27 @@ package team9.tutoragency.controller.pojos;
 
 import javax.validation.constraints.NotNull;
 
-import team9.tutoragency.model.Course;
-
 public class AddCourseForm {
 
 	@NotNull
-	private Course chosenCourse;
-
-	public Course getChosenCourse() {
-		return chosenCourse;
+	private String selectedCourse;
+	@NotNull
+	private String selectedUniversity;
+	
+	public String getSelectedUniversity() {
+		return selectedUniversity;
 	}
 
-	public void setChosenCourse(Course chosenCourse) {
-		this.chosenCourse = chosenCourse;
+	public void setSelectedUniversity(String chosenUniversity) {
+		this.selectedUniversity = chosenUniversity;
+	}
+
+	public String getSelectedCourse() {
+		return selectedCourse;
+	}
+
+	public void setSelectedCourse(String chosenCourse) {
+		this.selectedCourse = chosenCourse;
 	}
 	
 	

@@ -7,45 +7,42 @@
 <spring:url value="/css/style.css" var="css" />
 
 <c:import url="template/header.jsp" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
-	$("#universityList").change(function() {
-		if ($(this).data('options') == undefined) {
-			/*Taking an array of all options-2 and kind of embedding it on the select1*/
-			$(this).data('options', $('#courseList option').clone());
-		}
-		var id = $(this).val();
-		var options = $(this).data('options').filter('[value=' + id + ']');
-		$('#courseList').html(options);
-	});
+<head>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.10.1.min.js">
+	function test() {
+		$("#universities").change(function() {
+			if ($(this).data('options') == undefined) {
+				/*Taking an array of all options-2 and kind of embedding it on the select1*/
+				$(this).data('options', $('#courses option').clone());
+			}
+			var id = $(this).val();
+			var options = $(this).data('options').filter('[value=' + id + ']');
+			$('#courses').html(options);
+		});
+	};
 </script>
+</head>
 
 <div class="container">
-
-	<table class="forms">
-		<tr>
-			<td>
-				<form:form modelAttribute="addCourseForm" action="updateDropdown" method="post">
+	<form:form modelAttribute="addCourseForm" action="create"
+		id="addCourseForm" method="post">
+		<table class="forms">
+			<tr>
+				<td>
 					<table class="forms">
-
 						<tr>
 							<td style="width: 150px"><strong>Universität:</strong></td>
-							<td><form:select path="selectedUniversity" name="universityList" id="universityList" onchange="this.form.submit()">
+							<td><select id="universities" name="universities">
 									<c:forEach items="${universities}" var="universities">
-										<option value="${universities.name}"><c:out
+										<option value="${universities.name}" onClick="console.log('TEST');test();"><c:out
 												value="${universities.name}" /></option>
 									</c:forEach>
-							</form:select></td>
+							</select></td>
 						</tr>
-
-					</table>
-				</form:form> <form:form modelAttribute="addCourseForm" action="create"
-					id="addCourseForm" method="post">
-					<table class="forms">
 						<tr>
 							<td style="width: 150px"><strong>Kurs:</strong></td>
-							<td><select name="courseList" id="courseList">
+							<td><select path="courses" id="courses" name="courses">
 									<c:forEach items="${courses}" var="courses">
 										<option value="${courses.university.name}"><c:out
 												value="${courses.name}" /></option>
@@ -59,12 +56,11 @@
 						</tr>
 
 					</table>
-				</form:form>
-			</td>
+				</td>
 
-		</tr>
-	</table>
-
+			</tr>
+		</table>
+	</form:form>
 
 
 	<div class="stripe"></div>
