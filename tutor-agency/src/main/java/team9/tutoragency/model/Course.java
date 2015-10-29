@@ -3,7 +3,9 @@ package team9.tutoragency.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -14,7 +16,7 @@ public class Course implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    
+    @Basic(fetch=FetchType.LAZY)
     private String name;
     
     @ManyToOne(optional=false)

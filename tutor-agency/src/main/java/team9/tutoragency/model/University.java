@@ -3,7 +3,9 @@ package team9.tutoragency.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -13,7 +15,7 @@ public class University implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    
+    @Basic(fetch=FetchType.LAZY)
     private String name;
 
     public Long getId() {

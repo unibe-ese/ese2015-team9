@@ -25,42 +25,41 @@
 
 	<table class="forms">
 		<tr>
-			<td>
-				<form:form modelAttribute="addCourseForm" action="updateDropdown" method="post">
+			<td><form:form modelAttribute="addCourseForm"
+					action="updateDropdown" method="post">
 					<table class="forms">
 
 						<tr>
 							<td style="width: 150px"><strong>Universität:</strong></td>
-							<td><form:select path="selectedUniversity" name="universityList" id="universityList" onchange="this.form.submit()">
+							<td><form:select path="selectedUniversity"
+									name="universityList" id="universityList"
+									onchange="this.form.submit()">
 									<c:forEach items="${universities}" var="universities">
 										<option value="${universities.name}"><c:out
 												value="${universities.name}" /></option>
+									</c:forEach>
+								</form:select></td>
+						</tr>
+
+					</table>
+				</form:form> <form:form modelAttribute="addCourseForm" action="addCourse"
+					id="addCourseForm" method="post">
+					<table class="forms">
+						<tr>
+							<td style="width: 150px"><strong>Kurs:</strong></td>
+							<td><form:select path="selectedCourse" name="courseList" id="courseList">
+									<c:forEach items="${courses}" var="courses">
+										<option value="${courses.name}"><c:out
+												value="${courses.name}" /></option>
 									</c:forEach>
 							</form:select></td>
 						</tr>
 
 					</table>
-				</form:form> <form:form modelAttribute="addCourseForm" action="create"
-					id="addCourseForm" method="post">
-					<table class="forms">
-						<tr>
-							<td style="width: 150px"><strong>Kurs:</strong></td>
-							<td><select name="courseList" id="courseList">
-									<c:forEach items="${courses}" var="courses">
-										<option value="${courses.university.name}"><c:out
-												value="${courses.name}" /></option>
-									</c:forEach>
-							</select></td>
-						</tr>
-						<tr>
-							<form:button>
-
-							</form:button>
-						</tr>
-
-					</table>
-				</form:form>
-			</td>
+					<br />
+					<input class="submitbutton" type="submit" value="Hinzufügen"
+						style="margin-left: 400px;" />
+				</form:form></td>
 
 		</tr>
 	</table>

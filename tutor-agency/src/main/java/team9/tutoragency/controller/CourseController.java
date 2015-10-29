@@ -19,9 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.common.collect.Lists;
 
 import team9.tutoragency.controller.pojos.AddCourseForm;
+import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
+import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.UniversityDao;
 
 @Controller
@@ -31,7 +33,8 @@ public class CourseController {
 	UniversityDao uniDao;
 	@Autowired
 	CourseDao courseDao;
-
+	@Autowired
+	MemberDao memberDao;
 	@RequestMapping(value = "/addCourse", method = RequestMethod.GET)
 	public ModelAndView addCourse(HttpServletResponse response) throws IOException {
 		ModelAndView addCourse = new ModelAndView("addCourse");
@@ -65,6 +68,12 @@ public class CourseController {
 		ModelAndView model = new ModelAndView("profile");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
+		List<Course> courseList = member.getCourseList();
+		if(courseList != null){
+			Course course = courseDao.findByName(addCourseForm.getSelectedCourse()).get(0);
+			courseList.add(course);
+			memberDao.save(member);
+		}
 		return model;
 	}
 }
