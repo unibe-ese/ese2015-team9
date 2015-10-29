@@ -82,6 +82,7 @@
 				<input class="submitbutton" type="submit" value="Save"
 					style="margin-left: 400px;" />
 			</form:form>
+			
 			<div class="stripe"></div>
 			<div class="sidebar">
 				<h2>Hallo ${member.username}</h2>
@@ -93,7 +94,6 @@
 				<br /> <a href="logout.html">Logout</a> <br /> <br /> <br /> <a
 					href="delete.html">Profil löschen</a>
 			</div>
-<c:import url="template/header.jsp" />
 
 		</div>
 
