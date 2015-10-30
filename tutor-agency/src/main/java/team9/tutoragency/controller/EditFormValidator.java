@@ -66,7 +66,7 @@ public class EditFormValidator {
 		try {
 			Double.parseDouble(form.getFee());
 		} catch (Exception e) {
-			errors.rejectValue("fee", "Bitte eine gültige Zahl eingeben");
+			errors.rejectValue("fee", "fee.invalidValue","Bitte eine gültige Zahl eingeben");
 		}
 
 	}

@@ -23,7 +23,7 @@ public class ProfileController {
 	MemberDao memberDao;
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public ModelAndView register(HttpServletResponse response) throws IOException {
+	public ModelAndView show(HttpServletResponse response) throws IOException {
 		ModelAndView profile = new ModelAndView("profile");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
@@ -33,19 +33,17 @@ public class ProfileController {
 	
 	@RequestMapping(value = "/becomeTutor", method = RequestMethod.POST)
 	public ModelAndView becomeTutor(HttpServletResponse response) throws IOException {
-		ModelAndView profile = new ModelAndView("profile");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
 		member.setIsTutor(true);
 		memberDao.save(member);
-		profile.addObject("member", member);
-		return profile;
+		return show(response);
 	}
 	
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletResponse response) throws IOException {
-		ModelAndView profile = new ModelAndView("edit");
+		ModelAndView edit = new ModelAndView("edit");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
 		EditForm editForm = new EditForm();
@@ -54,7 +52,8 @@ public class ProfileController {
 		editForm.setUsername(member.getUsername());
 		editForm.setEmail(member.getEmail());
 		editForm.setUsername(member.getUsername());
-		profile.addObject("editForm", editForm);
-		return profile;
+		editForm.setFee(member.getFee().toString());
+		edit.addObject("editForm", editForm);
+		return edit;
 	}
 }
