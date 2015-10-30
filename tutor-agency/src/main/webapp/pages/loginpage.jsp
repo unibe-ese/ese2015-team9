@@ -9,7 +9,7 @@
 
 <div class="container">
     	<h1>Login</h1>
-    	<br \>
+    	<br/>
 	<div id="login-error">
 	${error}</div>
 	<form action="<c:url value="/j_spring_security_check"></c:url>" method="post" >

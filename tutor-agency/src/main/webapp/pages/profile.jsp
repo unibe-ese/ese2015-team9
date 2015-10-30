@@ -11,12 +11,12 @@
 
 <div class="container">
 	<form:form action="addCourse" method="get">
-		<input class="submitbutton" type="submit" value="addCourse"
+		<input class="submitbutton" type="submit" value="Kurs hinzufügen"
 			style="margin-left: 400px;" />
 	</form:form>
 
 	<form:form action="show" method="get">
-		<input class="submitbutton" type="submit" value="showCourses"
+		<input class="submitbutton" type="submit" value="Zeige Kurse an"
 			style="margin-left: 400px;" />
 	</form:form>
 
@@ -50,14 +50,15 @@
 						<td>${member.isTutor}</td>
 					</tr>
 					<tr>
-
+						<td><strong>Preis für Nachhilfe:</strong>
+						<td>${member.fee}</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
 	<form:form action="edit">
-		<input class="submitbutton" type="submit" value="editProfile"
+		<input class="submitbutton" type="submit" value="Bearbeite Profil"
 			style="margin-left: 400px;" />
 	</form:form>
 
@@ -71,14 +72,10 @@
 			<input class="submitbutton" type="submit" value="werde Tutor"
 				name="werde Tutor" />
 		</form:form>
-		<br /> <a href="logout.html">Logout</a> <br /> <br /> <br /> <a
+		<br /> <a href="logout.html">Abmelden</a> <br /> <br /> <br /> <a
 			href="delete.html">Profil löschen</a>
 	</div>
 	<c:import url="template/footer.jsp" />
-
-</div>
-
-
 
 </div>
 </body>

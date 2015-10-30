@@ -17,6 +17,8 @@ public class EditForm {
 
 	private String password;
 	private String passwordConfirm;
+	
+	private String fee;
 
 	public String getPasswordConfirm() {
 		return passwordConfirm;
@@ -101,5 +103,13 @@ public class EditForm {
 
 	public void setOldPassword(String oldPassword) {
 		this.oldPassword = oldPassword;
+	}
+
+	public String getFee() {
+		return fee;
+	}
+
+	public void setFee(String fee) {
+		this.fee = fee;
 	}
 }

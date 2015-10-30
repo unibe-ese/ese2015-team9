@@ -13,12 +13,23 @@
 
 <div class="container">
 
-	<table >
+	<table class="forms">
+		<tr>
+			<td>Kurs</td>
+			<td>Universität</td>
+			<td>Entfernen</td>
+		</tr>
 		<c:forEach items="${courses}" var="courses">
 			<tr>
-			<td><c:out value="${courses.name}"></c:out></td>
-			<td><c:out value="${courses.university.name}"></c:out></td>
-			<td></td>
+				<td><c:out value="${courses.name}"></c:out></td>
+				<td><c:out value="${courses.university.name}"></c:out></td>
+				<td align="center"><form
+						onsubmit="return confirm('Willst du den Kurs: ${courses.name} wirklich entfernen?');"
+						action="delete_${courses.id}" method="post">
+						<input class="none" id="deleteIcon" type="image"
+							src="img/delete-icon.png" name="delete-icon"
+							style="height: 10px; width: 10px;" onClick="alert(test);">
+					</form></td>
 			</tr>
 		</c:forEach>
 

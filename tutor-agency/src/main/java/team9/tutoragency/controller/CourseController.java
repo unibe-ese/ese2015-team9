@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,6 +36,7 @@ public class CourseController {
 	CourseDao courseDao;
 	@Autowired
 	MemberDao memberDao;
+
 	@RequestMapping(value = "/addCourse", method = RequestMethod.GET)
 	public ModelAndView addCourse(HttpServletResponse response) throws IOException {
 		ModelAndView addCourse = new ModelAndView("addCourse");
@@ -55,13 +57,14 @@ public class CourseController {
 		List<University> universities = Lists.newArrayList(uniDao.findAll());
 		University selectedUni = uniDao.findByName(addCourseForm.getSelectedUniversity()).get(0);
 		universities.remove(selectedUni);
-		universities.add(0, selectedUni); // set chosen university at beginning of list
+		universities.add(0, selectedUni); // set chosen university at beginning
+											// of list
 		addCourse.addObject("universities", universities);
 		addCourse.addObject("courses", courseDao.findByUniversity(selectedUni));
 
 		return addCourse;
 	}
-	
+
 	@RequestMapping(value = "/addCourse", method = RequestMethod.POST)
 	public ModelAndView addCourse(@Valid AddCourseForm addCourseForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
@@ -69,7 +72,7 @@ public class CourseController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
 		List<Course> courseList = member.getCourseList();
-		if(courseList != null){
+		if (courseList != null) {
 			Course course = courseDao.findByName(addCourseForm.getSelectedCourse()).get(0);
 			courseList.add(course);
 			memberDao.save(member);
@@ -77,7 +80,7 @@ public class CourseController {
 		model.addObject("member", member);
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView showCourses(HttpServletResponse response) throws IOException {
 		ModelAndView model = new ModelAndView("showCourses");
@@ -86,5 +89,18 @@ public class CourseController {
 		List<Course> courseList = member.getCourseList();
 		model.addObject("courses", courseList);
 		return model;
+	}
+
+	@RequestMapping(value = "/delete_{id}", method = RequestMethod.POST)
+	public ModelAndView deleteCourse(HttpServletResponse response, @PathVariable("id") Long id) throws IOException {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Member member = (Member) authentication.getPrincipal();
+		List<Course> courseList = member.getCourseList();
+		for (int i = 0; i < courseList.size(); i++) {
+			if (courseList.get(i).getId() == id) {
+				courseList.remove(courseList.get(i));
+			}
+		}
+		return showCourses(response);
 	}
 }

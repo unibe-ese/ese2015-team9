@@ -54,7 +54,6 @@ public class ProfileController {
 		editForm.setUsername(member.getUsername());
 		editForm.setEmail(member.getEmail());
 		editForm.setUsername(member.getUsername());
-		
 		profile.addObject("editForm", editForm);
 		return profile;
 	}

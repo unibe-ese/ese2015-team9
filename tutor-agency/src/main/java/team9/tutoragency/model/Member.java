@@ -49,7 +49,7 @@ public class Member implements UserDetails {
 		this.isTutor = false;
 		this.isActivated = false;
 		this.fee = null;
-
+		
 	}
 	public Member(){
 		

@@ -46,6 +46,9 @@ public class EditController {
 			member.setLastName(editForm.getLastName());
 			member.setUsername(editForm.getUsername());
 			
+			double fee = Double.parseDouble(editForm.getFee());
+			member.setFee(fee);
+			
 			memberDao.save(member);
 			model = new ModelAndView("profile");
 			model.addObject("member", member);
