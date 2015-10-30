@@ -41,7 +41,7 @@ public class ProfileController {
 	}
 	
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(HttpServletResponse response) throws IOException {
 		ModelAndView edit = new ModelAndView("edit");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -86,20 +86,11 @@
 			style="margin-left: 400px;" />
 	</form:form>
 
-	<div class="stripe"></div>
-	<div class="sidebar">
-		<h2>Hallo ${member.username}</h2>
-		<br /> <br /> <a href="profile">Profil ansehen</a> <br /> <a
-			href="edit.html">Profil bearbeiten</a>
-		<form:form action="becomeTutor">
-			<input type="submit" value="werde Tutor" name="werde Tutor" />
-		</form:form>
-		<br /> <a href="logout.html">Logout</a> <br /> <br /> <br /> <a
-			href="delete.html">Profil löschen</a>
-	</div>
+
+<div class="stripe"></div>
+<c:import url="template/sidebar_profile.jsp" />
 
 </div>
-
 </body>
 </html>
 
