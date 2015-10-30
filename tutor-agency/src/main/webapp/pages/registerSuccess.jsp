@@ -10,13 +10,15 @@
 
 <div class="container">
 	<h2>Signup Success!</h2>
-</div>
+
 
 <br />
 <br />
 
 
-</div>
+<div class="stripe"></div>
+<c:import url="template/sidebar_profile.jsp" />
 <c:import url="template/footer.jsp" />
+</div>
 </body>
 </html>

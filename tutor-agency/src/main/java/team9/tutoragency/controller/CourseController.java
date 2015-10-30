@@ -61,7 +61,6 @@ public class CourseController {
 											// of list
 		addCourse.addObject("universities", universities);
 		addCourse.addObject("courses", courseDao.findByUniversity(selectedUni));
-
 		return addCourse;
 	}
 
