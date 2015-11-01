@@ -3,12 +3,13 @@ package team9.tutoragency.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class Course implements Serializable {
@@ -18,7 +19,7 @@ public class Course implements Serializable {
     private Long id;
     private String name;
     
-    @ManyToOne
+    @ManyToOne()
     private University university;
 
     public Long getId() {

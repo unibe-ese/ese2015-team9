@@ -61,12 +61,11 @@ public class CourseController {
 											// of list
 		addCourse.addObject("universities", universities);
 		addCourse.addObject("courses", courseDao.findByUniversity(selectedUni));
-
 		return addCourse;
 	}
 
 	@RequestMapping(value = "/addCourse", method = RequestMethod.POST)
-	public ModelAndView addCourse(@Valid AddCourseForm addCourseForm, BindingResult result,
+	public ModelAndView save(@Valid AddCourseForm addCourseForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
 		ModelAndView model = new ModelAndView("profile");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

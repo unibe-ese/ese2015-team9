@@ -1,5 +1,8 @@
 package team9.tutoragency.controller.pojos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -11,6 +14,8 @@ public class EditForm {
 	private String lastName;
 	@NotNull(message = "Please enter a username.")
 	private String username;
+	
+	private List<String> universities;
 
 	@NotNull(message = "Please enter your old Password")
 	private String oldPassword;
@@ -38,6 +43,7 @@ public class EditForm {
 		oldPassword = "";
 		password = "";
 		passwordConfirm = "";
+		universities = new ArrayList<String>();
 
 	}
 
@@ -111,5 +117,14 @@ public class EditForm {
 
 	public void setFee(String fee) {
 		this.fee = fee;
+	}
+
+	public List<String> getUniversities() {
+		if(universities == null) universities = new ArrayList<String>();
+		return universities;
+	}
+	
+	public void setUniversities(List<String> universities) {
+		this.universities = universities;
 	}
 }

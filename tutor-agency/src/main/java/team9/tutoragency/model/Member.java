@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,11 +35,11 @@ public class Member implements UserDetails {
 						// always set.
 	private boolean isActivated;
 
-	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Course> courseList;
 
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<University> universityList;
 
 	public Member(String firstName, String lastName, String email, String username, String password) {
@@ -112,6 +114,7 @@ public class Member implements UserDetails {
 	}
 
 	public List<Course> getCourseList() {
+		if(courseList == null) courseList = new ArrayList<Course>();
 		return courseList;
 	}
 

@@ -10,15 +10,6 @@
 
 
 <div class="container">
-	<form:form action="addCourse" method="get">
-		<input class="submitbutton" type="submit" value="Kurs hinzufügen"
-			style="margin-left: 400px;" />
-	</form:form>
-
-	<form:form action="show" method="get">
-		<input class="submitbutton" type="submit" value="Zeige Kurse an"
-			style="margin-left: 400px;" />
-	</form:form>
 
 	<h1>Mein Profil</h1>
 	<br /> <br />
@@ -53,28 +44,26 @@
 						<td><strong>Preis für Nachhilfe:</strong>
 						<td>${member.fee}</td>
 					</tr>
+					<tr>
+						<td><strong>Alle Standorte:</strong></td>
+						<td><select><c:forEach items="${unis}" var="unis">
+								<option value="${unis.name}"><c:out
+										value="${unis.name}" /></option>
+							</c:forEach></select></td>
+
+					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
-	<form:form action="edit">
+	<form:form action="edit" method="get">
 		<input class="submitbutton" type="submit" value="Bearbeite Profil"
 			style="margin-left: 400px;" />
 	</form:form>
 
 
 	<div class="stripe"></div>
-	<div class="sidebar">
-		<h2>Hallo ${member.username}</h2>
-		<br /> <br /> <a href="profile">Profil ansehen</a> <br /> <a
-			href="edit.html">Profil bearbeiten</a>
-		<form:form action="becomeTutor">
-			<input class="submitbutton" type="submit" value="werde Tutor"
-				name="werde Tutor" />
-		</form:form>
-		<br /> <a href="logout.html">Abmelden</a> <br /> <br /> <br /> <a
-			href="delete.html">Profil löschen</a>
-	</div>
+	<c:import url="template/sidebar_profile.jsp" />
 	<c:import url="template/footer.jsp" />
 
 </div>
