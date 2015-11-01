@@ -11,6 +11,18 @@
 
 <div class="container">
 
+	<script type="text/javascript">
+		function changeVisibility() {
+			var el = document.getElementById("universitySelection");
+
+			if (el.style.visibility == "hidden") {
+				el.style.visibility = "visible";
+			} else {
+				el.style.visibility = "hidden";
+			}
+		}
+	</script>
+
 	<form:form action="save" id="editForm" modelAttribute="editForm"
 		method="post">
 		<h1>Mein Profil</h1>
@@ -58,6 +70,17 @@
 									value="${editForm.fee}" /></td>
 						</tr>
 						<tr>
+							<td><form:button type="button"
+									 onclick="changeVisibility();">Bearbeite Universitäten</form:button>
+							</td>
+							<td>
+								<div id="universitySelection" style="visibility: hidden">
+									<form:checkboxes items="${universityChoices}" path="universities"/>
+								</div>
+							</td>
+						</tr>
+						
+						<tr>
 							<td>Altes Passwort:<sup>*</sup></td>
 							<td><form:errors path="oldPassword"
 									cssStyle="color: #ff0000;" element="span" /> <form:input
@@ -87,8 +110,8 @@
 	</form:form>
 
 
-<div class="stripe"></div>
-<c:import url="template/sidebar_profile.jsp" />
+	<div class="stripe"></div>
+	<c:import url="template/sidebar_profile.jsp" />
 
 </div>
 </body>

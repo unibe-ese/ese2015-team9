@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
@@ -40,20 +39,4 @@ public class ProfileController {
 		return show(response);
 	}
 	
-
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(HttpServletResponse response) throws IOException {
-		ModelAndView edit = new ModelAndView("edit");
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Member member = (Member) authentication.getPrincipal();
-		EditForm editForm = new EditForm();
-		editForm.setFirstName(member.getFirstName());
-		editForm.setLastName(member.getLastName());
-		editForm.setUsername(member.getUsername());
-		editForm.setEmail(member.getEmail());
-		editForm.setUsername(member.getUsername());
-		editForm.setFee(member.getFee().toString());
-		edit.addObject("editForm", editForm);
-		return edit;
-	}
 }
