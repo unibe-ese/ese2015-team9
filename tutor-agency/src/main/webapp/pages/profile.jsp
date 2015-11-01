@@ -44,6 +44,14 @@
 						<td><strong>Preis für Nachhilfe:</strong>
 						<td>${member.fee}</td>
 					</tr>
+					<tr>
+						<td><strong>Alle Standorte:</strong></td>
+						<td><select><c:forEach items="${unis}" var="unis">
+								<option value="${unis.name}"><c:out
+										value="${unis.name}" /></option>
+							</c:forEach></select></td>
+
+					</tr>
 				</table>
 			</td>
 		</tr>

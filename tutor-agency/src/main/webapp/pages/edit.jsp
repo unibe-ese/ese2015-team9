@@ -71,7 +71,7 @@
 						</tr>
 						<tr>
 							<td><form:button type="button"
-									 onclick="changeVisibility();">Bearbeite Universitäten</form:button>
+									 onclick="changeVisibility();">Wähle Standorte</form:button>
 							</td>
 							<td>
 								<div id="universitySelection" style="visibility: hidden">

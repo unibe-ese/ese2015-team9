@@ -20,6 +20,7 @@ public class ProfileController {
 
 	@Autowired
 	MemberDao memberDao;
+	
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView show(HttpServletResponse response) throws IOException {
@@ -27,9 +28,10 @@ public class ProfileController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
 		profile.addObject("member", member);
+		profile.addObject("unis", member.getUniversityList());
 		return profile;
 	}
-	
+
 	@RequestMapping(value = "/becomeTutor", method = RequestMethod.POST)
 	public ModelAndView becomeTutor(HttpServletResponse response) throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -38,5 +40,5 @@ public class ProfileController {
 		memberDao.save(member);
 		return show(response);
 	}
-	
+
 }
