@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -85,13 +84,17 @@ public class EditController {
 
 			double fee = Double.parseDouble(editForm.getFee());
 			member.setFee(fee);
-			for(int i = 0; i < editForm.getUniversities().size(); i++){
+			List<University> tmpList = new ArrayList<University>();
+			for (int i = 0; i < editForm.getUniversities().size(); i++) {
 				List<University> selectedUni = uniDao.findByName(editForm.getUniversities().get(i));
-				member.getUniversityList().add(selectedUni.get(0));
+				tmpList.add(selectedUni.get(0));
 			}
+
+			member.setUniversityList(tmpList);
 			memberDao.save(member);
 			model = new ModelAndView("profile");
 			model.addObject("member", member);
+
 		} else {
 			model = new ModelAndView("edit", "editForm", editForm);
 			List<University> universities = Lists.newArrayList(uniDao.findAll());
@@ -101,6 +104,7 @@ public class EditController {
 			}
 
 			model.addObject("universityChoices", universityNames);
+
 		}
 		return model;
 	}
