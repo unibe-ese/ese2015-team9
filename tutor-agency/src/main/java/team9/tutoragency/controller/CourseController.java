@@ -65,7 +65,7 @@ public class CourseController {
 	}
 
 	@RequestMapping(value = "/addCourse", method = RequestMethod.POST)
-	public ModelAndView addCourse(@Valid AddCourseForm addCourseForm, BindingResult result,
+	public ModelAndView save(@Valid AddCourseForm addCourseForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
 		ModelAndView model = new ModelAndView("profile");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
