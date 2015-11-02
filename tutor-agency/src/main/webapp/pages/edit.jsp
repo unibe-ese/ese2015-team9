@@ -15,10 +15,10 @@
 		function changeVisibility() {
 			var el = document.getElementById("universitySelection");
 
-			if (el.style.visibility == "hidden") {
-				el.style.visibility = "visible";
+			if (el.style.display == "block") {
+				el.style.display = "none";
 			} else {
-				el.style.visibility = "hidden";
+				el.style.display = "block";
 			}
 		}
 	</script>
@@ -74,7 +74,7 @@
 									 onclick="changeVisibility();">Wähle Standorte</form:button>
 							</td>
 							<td>
-								<div id="universitySelection" style="visibility: hidden">
+								<div id="universitySelection" style="display: none">
 									<form:checkboxes items="${universityChoices}" path="universities"/>
 								</div>
 							</td>
