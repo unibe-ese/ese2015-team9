@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,6 +61,7 @@ public class EditController {
 		}
 
 		edit.addObject("universityChoices", universityNames);
+		edit.addObject("member", member);
 		return edit;
 	}
 
@@ -68,10 +70,9 @@ public class EditController {
 			RedirectAttributes redirectAttributes) throws IOException {
 		ModelAndView model;
 		validator.validate(editForm, result);
-
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Member member = (Member) authentication.getPrincipal();
 		if (!result.hasErrors()) {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			Member member = (Member) authentication.getPrincipal();
 
 			member.setEmail(editForm.getEmail());
 
@@ -82,6 +83,7 @@ public class EditController {
 			member.setLastName(editForm.getLastName());
 			member.setUsername(editForm.getUsername());
 
+			if(member.isIsTutor()){
 			double fee = Double.parseDouble(editForm.getFee());
 			member.setFee(fee);
 			List<University> tmpList = new ArrayList<University>();
@@ -91,12 +93,20 @@ public class EditController {
 			}
 
 			member.setUniversityList(tmpList);
+			}
 			memberDao.save(member);
 			model = new ModelAndView("profile");
 			model.addObject("member", member);
+			model.addObject("unis", member.getUniversityList());
 
 		} else {
-			model = new ModelAndView("edit", "editForm", editForm);
+
+			for (ObjectError ob : result.getAllErrors()) {
+				System.out.println(ob);
+			}
+			model = new ModelAndView("edit");
+			model.addObject("editForm", editForm);
+
 			List<University> universities = Lists.newArrayList(uniDao.findAll());
 			List<String> universityNames = new ArrayList<String>();
 			for (University uni : universities) {
@@ -104,6 +114,7 @@ public class EditController {
 			}
 
 			model.addObject("universityChoices", universityNames);
+			model.addObject("member", member);
 
 		}
 		return model;
