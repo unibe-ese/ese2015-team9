@@ -23,6 +23,14 @@ SET time_zone = "+00:00";
 --
 -- Dumping data for table `Course`
 --
+--
+-- Dumping data for table `University`
+--
+
+INSERT INTO `University` (`id`, `name`) VALUES
+(1, 'Bern'),
+(2, 'Basel'),
+(3, 'Zürich');
 
 INSERT INTO `Course` (`id`, `name`, `university_id`) VALUES
 (1, 'Datenbanken', 1),
@@ -36,14 +44,7 @@ INSERT INTO `Course` (`id`, `name`, `university_id`) VALUES
 (9, 'Einführung in die Geschichte der Kunstgeschichte', 3),
 (10, 'Zoologie', 3);
 
---
--- Dumping data for table `University`
---
 
-INSERT INTO `University` (`id`, `name`) VALUES
-(1, 'Bern'),
-(2, 'Basel'),
-(3, 'Zürich');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

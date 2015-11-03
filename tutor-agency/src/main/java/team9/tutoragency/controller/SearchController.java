@@ -19,7 +19,7 @@ public class SearchController {
 
     @RequestMapping(value = "/ssearch")
     public ModelAndView ssearch() {
-    	ModelAndView model = new ModelAndView("ssearch");
+    	ModelAndView model = new ModelAndView("simpleSearch");
         return model;
     }
     
