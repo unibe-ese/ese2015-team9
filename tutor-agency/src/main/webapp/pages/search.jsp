@@ -19,13 +19,13 @@
 			<input class="submitbutton" type="submit" value="Suchen"
 				style="margin-left: 400px;" />
 		</form:form>
-
+		<tr>
+			<td>Kurse</td>
+			<td>Angeboten durch</td>
+			<td>Kontaktieren</td>
+		</tr>
 		<c:forEach items="${searchResult}" var="searchResult">
-			<tr>
-				<td>Kurse</td>
-				<td>Angeboten durch</td>
-				<td>Kontaktieren</td>
-			</tr>
+
 			<tr>
 				<td><c:out value="${searchResult.course.name}"></c:out></td>
 				<td><c:out value="${searchResult.member.username}"></c:out></td>
