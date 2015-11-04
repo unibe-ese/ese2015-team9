@@ -63,10 +63,13 @@ public class EditFormValidator {
 		if (form.getPassword().length() != 0 && !form.getPassword().equals(form.getPasswordConfirm())) {
 			errors.rejectValue("passwordConfirm", "password.mismatch", "Passwörter stimmen nicht überein");
 		}
-		try {
-			Double.parseDouble(form.getFee());
-		} catch (Exception e) {
-			errors.rejectValue("fee", "fee.invalidValue","Bitte eine gültige Zahl eingeben");
+
+		if (member.isIsTutor()) {
+			try {
+				Double.parseDouble(form.getFee());
+			} catch (Exception e) {
+				errors.rejectValue("fee", "fee.invalidValue", "Bitte eine gültige Zahl eingeben");
+			}
 		}
 
 	}

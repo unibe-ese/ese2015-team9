@@ -45,5 +45,4 @@ public class Course implements Serializable {
     public void setUniversity(University university) {
         this.university = university;
     }
-    
 }

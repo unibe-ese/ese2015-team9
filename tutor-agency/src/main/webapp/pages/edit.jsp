@@ -15,10 +15,10 @@
 		function changeVisibility() {
 			var el = document.getElementById("universitySelection");
 
-			if (el.style.visibility == "hidden") {
-				el.style.visibility = "visible";
+			if (el.style.display == "block") {
+				el.style.display = "none";
 			} else {
-				el.style.visibility = "hidden";
+				el.style.display = "block";
 			}
 		}
 	</script>
@@ -62,24 +62,25 @@
 									onclick="this.value=''" type="text" name="email"
 									value="${editForm.email}" /></td>
 						</tr>
-						<tr>
-							<td>Gebühr pro Kurs:<sup>*</sup></td>
-							<td><form:errors path="fee" cssStyle="color: #ff0000;"
-									element="span" /> <form:input path="fee"
-									onclick="this.value=''" type="text" name="fee"
-									value="${editForm.fee}" /></td>
-						</tr>
-						<tr>
-							<td><form:button type="button"
-									 onclick="changeVisibility();">Wähle Standorte</form:button>
-							</td>
-							<td>
-								<div id="universitySelection" style="visibility: hidden">
-									<form:checkboxes items="${universityChoices}" path="universities"/>
-								</div>
-							</td>
-						</tr>
-						
+						<c:if test="${member.isTutor}">
+							<tr>
+								<td>Gebühr pro Kurs:<sup>*</sup></td>
+								<td><form:errors path="fee" cssStyle="color: #ff0000;"
+										element="span" /> <form:input path="fee"
+										onclick="this.value=''" type="text" name="fee"
+										value="${editForm.fee}" /></td>
+							</tr>
+							<tr>
+								<td><form:button type="button"
+										onclick="changeVisibility();">Wähle Standorte</form:button></td>
+								<td>
+									<div id="universitySelection" style="display: none">
+										<form:checkboxes items="${universityChoices}"
+											path="universities" />
+									</div>
+								</td>
+							</tr>
+						</c:if>
 						<tr>
 							<td>Altes Passwort:<sup>*</sup></td>
 							<td><form:errors path="oldPassword"

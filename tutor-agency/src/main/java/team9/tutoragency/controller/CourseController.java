@@ -45,7 +45,10 @@ public class CourseController {
 
 		addCourse.addObject("universities", universities);
 		addCourse.addObject("courses", courseDao.findByUniversity(universities.get(0)));
-
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Member member = (Member) authentication.getPrincipal();
+		addCourse.addObject("member", member);
+		addCourse.addObject("unis",member.getUniversityList());
 		return addCourse;
 	}
 
@@ -61,13 +64,16 @@ public class CourseController {
 											// of list
 		addCourse.addObject("universities", universities);
 		addCourse.addObject("courses", courseDao.findByUniversity(selectedUni));
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Member member = (Member) authentication.getPrincipal();
+		addCourse.addObject("member", member);
+		addCourse.addObject("unis",member.getUniversityList());
 		return addCourse;
 	}
 
 	@RequestMapping(value = "/addCourse", method = RequestMethod.POST)
-	public ModelAndView save(@Valid AddCourseForm addCourseForm, BindingResult result,
+	public String save(@Valid AddCourseForm addCourseForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
-		ModelAndView model = new ModelAndView("profile");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
 		List<Course> courseList = member.getCourseList();
@@ -76,9 +82,9 @@ public class CourseController {
 			courseList.add(course);
 			memberDao.save(member);
 		}
-		model.addObject("member", member);
-		return model;
+		return "redirect:/profile";
 	}
+	
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView showCourses(HttpServletResponse response) throws IOException {
@@ -87,6 +93,8 @@ public class CourseController {
 		Member member = (Member) authentication.getPrincipal();
 		List<Course> courseList = member.getCourseList();
 		model.addObject("courses", courseList);
+		model.addObject("unis", member.getUniversityList());
+		model.addObject("member", member);
 		return model;
 	}
 
