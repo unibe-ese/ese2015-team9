@@ -10,16 +10,28 @@
 <div class="container">
     	<h1>Login</h1>
     	<br/>
+    	<br>
 	<div id="login-error">
 	${error}</div>
 	<form action="<c:url value="/j_spring_security_check"></c:url>" method="post" >
 	<p>
+	<table class="forms">
+	<tr>
+	<td>
 	<label for="j_username">Username</label>
+	</td><td>
 	<input id="j_username" name="j_username" onclick="this.value=''" value="Nickname" type="text" style="max-width:200px;"/>
-	</p><p>	 
+	</td></tr>
+	</p><p>	<tr>
+	<td> 
 	<label for="j_password">Password</label>
+	</td>
+	<td>
 	<input id="j_password" name="j_password" onclick="this.value=''" type="password" value="password" style="max-width:200px;"/>
-	</p><input  class="submitbutton" type="submit" value="Login"/>        
+	</td>
+	</p>
+	</tr>
+	</table><input  class="submitbutton" type="submit" value="Login"/>        
 	 
 	</form>
 	

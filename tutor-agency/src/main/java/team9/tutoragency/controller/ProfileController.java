@@ -40,5 +40,5 @@ public class ProfileController {
 		memberDao.save(member);
 		return show(response);
 	}
-
+	
 }

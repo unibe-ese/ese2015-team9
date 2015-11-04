@@ -41,7 +41,7 @@
 							</ul></li>
 						<li class="main"><a href="">Suchen</a>
 							<ul>
-								<li class="sub"><a href="ssearch">Einfache Suche</a></li>
+								<li class="sub"><a href="simpleSearch">Einfache Suche</a></li>
 								<li class="sub"><a href="asearch">Erweiterte Suche</a></li>
 							</ul></li>
 						<li class="main"><a href="profile">Profile</a></li>
@@ -62,7 +62,7 @@
 
 						<li class="main"><a href="">Suchen</a>
 							<ul>
-								<li class="sub"><a href="ssearch">Einfache Suche</a></li>
+								<li class="sub"><a href="simpleSearch">Einfache Suche</a></li>
 								<li class="sub"><a href="asearch">Erweiterte Suche</a></li>
 							</ul></li>
 						<li class="main"><a href="register">Registrieren</a></li>

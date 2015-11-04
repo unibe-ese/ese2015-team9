@@ -84,6 +84,7 @@ public class CourseController {
 		}
 		return "redirect:/profile";
 	}
+	
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView showCourses(HttpServletResponse response) throws IOException {

@@ -7,10 +7,12 @@
 
 
 <div class="container">
-    	
+    <h1>Info</h1>
+    <br>
+    <br>Wie funktioniert's? Wie werde ich Tutor? Was du zu beachten hast und wie das funktioniert, wird Dir in diesem Abschnitt erklärt.	
 	
 <div class="stripe"></div>
-<div class="sidebar"><c:import url="template/sidebar.jsp" /></div>
+<c:import url="template/sidebar_profile.jsp" />
     
 <c:import url="template/footer.jsp" />
     

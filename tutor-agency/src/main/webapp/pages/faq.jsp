@@ -8,12 +8,12 @@
 
 
 <div class="container">
-
+<h1>FAQ</h1>
+<br>
+<br>Hier werden oft gestellte Fragen aufgelistet und diese auch beantwortet.
 
 	<div class="stripe"></div>
-	<div class="sidebar">
-		<c:import url="template/sidebar.jsp" />
-	</div>
+		<c:import url="template/sidebar_profile.jsp" />
 
 	<c:import url="template/footer.jsp" />
 
