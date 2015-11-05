@@ -12,26 +12,12 @@
 	<!-- context configuration: how to instantiate beans to bind to DispatcherServlet  -->
 
 	<!-- search for controllers (@Controller)  -->
-    <mvc:annotation-driven />
     <context:component-scan base-package="team9.tutoragency"/>
     
     <!-- Mock Object -->
 	<!--<bean id="dao" name="mockDao" class="org.mockito.Mockito" factory-method="mock"  >
 		<constructor-arg value="team9.tutoragency.model.dao.MemberDao" />
 	</bean>-->
-	
-    <!-- handler  -->
-    <mvc:default-servlet-handler/>     
-	
-  	<!-- view resolver  -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/pages/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
-     
-    
-    <!-- resources  -->
-    <mvc:resources mapping="/resources/**" location="/" />
 		
 	
 </beans>
