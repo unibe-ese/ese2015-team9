@@ -26,6 +26,5 @@ Only users have access to this page!</p>
 
 <c:import url="template/footer.jsp" />
 
-</div>
 </body>
 </html>
