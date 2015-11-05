@@ -14,6 +14,9 @@
 <div class="container">
 
 	<table class="forms">
+	
+	
+	
 		<form:form modelAttribute="searchForm" method="post">
 			<form:input path="searchText" type="text"></form:input>
 			<input class="submitbutton" type="submit" value="Suchen"

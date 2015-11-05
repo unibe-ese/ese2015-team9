@@ -4,7 +4,9 @@ package team9.tutoragency.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -27,7 +29,15 @@ public class Course implements Serializable {
     @ManyToMany(mappedBy="courseList")
     private List<Member> members;
 
-    public Long getId() {
+    public List<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -49,5 +59,17 @@ public class Course implements Serializable {
 
     public void setUniversity(University university) {
         this.university = university;
+    }
+    public boolean equals(Object o){
+    	if( o.getClass().equals(this.getClass())){
+    		Course course = (Course) o;
+    		if(this.id == course.id)
+    			return true;
+    		else
+    			return false;
+    	} else 
+    		return false;
+    		
+    	
     }
 }
