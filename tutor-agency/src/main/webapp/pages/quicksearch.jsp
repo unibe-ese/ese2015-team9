@@ -10,17 +10,16 @@
 
 
 	<h1>QuickSearch</h1>
-	<br /> <br>
+	<br>
 	<div>
 		<form:form modelAttribute="searchForm" action="quickResults"
-			method="post" id="searchForm" >
+			method="post" id="searchForm">
 			<form:input path="searchText" type="text"></form:input>
 			<input class="submitbutton" type="submit" value="Search"
 				style="margin-left: 400px;" />
 		</form:form>
 
 	</div>
-
 
 	<table class="forms">
 		<tr class="title">
@@ -59,8 +58,8 @@
 
 
 
-	</div>
-</body>
-</html>
+</div>
+<body></body>
+<html></html>
 
 

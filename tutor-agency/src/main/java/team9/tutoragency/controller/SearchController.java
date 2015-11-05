@@ -32,7 +32,6 @@ import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.UniversityDao;
 
 @Controller
-@RequestMapping(value = "/search")
 public class SearchController {
 
 	@Autowired
