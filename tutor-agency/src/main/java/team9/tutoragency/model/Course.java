@@ -2,10 +2,12 @@
 package team9.tutoragency.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.LazyCollection;
@@ -21,6 +23,9 @@ public class Course implements Serializable {
     
     @ManyToOne()
     private University university;
+    
+    @ManyToMany(mappedBy="courseList")
+    private List<Member> members;
 
     public Long getId() {
         return id;
