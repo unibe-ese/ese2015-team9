@@ -1,6 +1,8 @@
 
 package team9.tutoragency.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.After;
@@ -12,6 +14,7 @@ import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ImportResource;
@@ -41,6 +44,18 @@ public class SignupFormValidatorTest {
     @InjectMocks
     private final SignupFormValidator validator = new SignupFormValidator();
     
+    @Before
+    public void setUp() {
+        Member member = new Member("firstName", "lastName", "member@email.com", "username", "password");
+        List<Member> members = new ArrayList<Member>();
+        members.add(member);
+        Mockito.when(
+                memberDao.findByUsername("username"))
+                .thenReturn(members);
+        Mockito.when(
+                memberDao.findByEmail("member@email.com"))
+                .thenReturn(members);
+    }
     
     @Test
     public void passwordMismatch() {
@@ -70,6 +85,22 @@ public class SignupFormValidatorTest {
     public void invalidUsername() {
         SignupForm form = createForm();
         form.setUsername("hi");
+        Errors error = new DirectFieldBindingResult(form, "signupform");
+        validator.validate(form, error);
+        assertTrue(error.hasErrors());
+    }
+    @Test
+    public void usernameAlreadyInUse() {
+        SignupForm form = createForm();
+        form.setUsername("username");
+        Errors error = new DirectFieldBindingResult(form, "signupform");
+        validator.validate(form, error);
+        assertTrue(error.hasErrors());
+    }
+    @Test
+    public void emailAlreadyInUse() {
+        SignupForm form = createForm();
+        form.setEmail("member@email.com");
         Errors error = new DirectFieldBindingResult(form, "signupform");
         validator.validate(form, error);
         assertTrue(error.hasErrors());
