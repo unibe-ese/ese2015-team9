@@ -37,6 +37,24 @@ public class SearchController {
 	@Autowired
 	SearchService searchService;
 	
+	
+	@RequestMapping(value = "/quickResults", method = RequestMethod.POST)
+	public ModelAndView showQuickSearchResults(QuickSearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes){
+		ModelAndView model = new ModelAndView("quicksearch");
+		
+		model.addObject("searchResults", searchService.findCoursesByNameContaining(searchForm.getSearchText()));
+
+		
+		model.addObject("searchForm", new QuickSearchForm());
+		return model;
+	}
+	@RequestMapping(value = "/quicksearch", method = RequestMethod.GET)
+	public ModelAndView showQuickSearch(){
+		ModelAndView model = new ModelAndView("quicksearch");
+		model.addObject("searchForm", new QuickSearchForm());
+		return model;
+	}
+	
 	/*UniversityDao uniDao;
 	@Autowired
 	CourseDao courseDao;
@@ -124,20 +142,5 @@ public class SearchController {
 		return model;
 	}
 */
-	@RequestMapping(value = "/quickResults", method = RequestMethod.POST)
-	public ModelAndView showQuickSearchResults(QuickSearchForm searchForm, BindingResult result, RedirectAttributes redirectAttributes){
-		ModelAndView model = new ModelAndView("quicksearch");
-		
-		model.addObject("searchResults", searchService.findCoursesByNameContaining(searchForm.getSearchText()));
-
-		
-		model.addObject("searchForm", new QuickSearchForm());
-		return model;
-	}
-	@RequestMapping(value = "/quick", method = RequestMethod.GET)
-	public ModelAndView showQuickSearch(){
-		ModelAndView model = new ModelAndView("quicksearch");
-		model.addObject("searchForm", new QuickSearchForm());
-		return model;
-	}
+	
 }

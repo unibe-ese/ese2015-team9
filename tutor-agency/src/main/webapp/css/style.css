@@ -8,7 +8,7 @@
 \*------------------------*/
 
 html, body {
-background-color: #EAEAEA;
+background-color: #d2d2d2;
 height: 100%;
 font-family:Verdana, Geneva, sans-serif;
 }
@@ -17,7 +17,7 @@ body {
 width:80%;
 margin-left:auto;
 margin-right:auto;
-background-color:#FFF;
+background-color:#c2c2c2;
 line-height:150%;
 position:relative;
 }
@@ -56,7 +56,7 @@ left:0;
 -webkit-box-shadow:1px 1px 6px #292929; /* Chrome, Safari */
 -khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
 box-shadow:1px 1px 6px #292929; /* CSS3 */
-background-color:#FFF;
+background-color:#c2c2c2;
 padding: 50px 25% 0px 5%;
 text-decoration: none;
 color: #000;
@@ -126,7 +126,7 @@ line-height: 2em;
 input {
 color: #000000; 
 font-size: 12px; 
-border: 1px solid #EED5FF; 
+border: 2px solid #EED5FF; 
 background-color: #FFF0FF; 
 height: 22px; 
 width: 90%;
@@ -148,8 +148,8 @@ margin-bottom: 10px;
 .submitbutton {
 cursor: pointer; 
 font: 12px Verdana,sans-serif; 
-color: #FFFFFF; 
-background-color: #A1B9C5; 
+color: #d2d2d2; 
+background-color: #595a5b; 
 width: 120px; 
 padding: 3px; 
 line-height: 130%;
