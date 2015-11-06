@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import team9.tutoragency.controller.SearchResult;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.SearchResult;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.MemberDao;
 
@@ -55,7 +55,6 @@ public class SearchService {
 	 * @return a list of {@link SearchResult} wrapping the courses and their
 	 *         members.
 	 */
-	@Transactional
 	private List<SearchResult> buildResult(List<Course> courses) {
 		List<SearchResult> results = new ArrayList<SearchResult>();
 		for (Course course : courses) {

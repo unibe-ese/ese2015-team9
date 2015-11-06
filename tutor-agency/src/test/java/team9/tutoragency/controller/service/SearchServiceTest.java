@@ -7,16 +7,20 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import team9.tutoragency.controller.SearchResult;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.SearchResult;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.MemberDao;
 
@@ -24,19 +28,23 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/config/test-context.xml" })
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/config/test-context.xml" })
+@RunWith(MockitoJUnitRunner.class)
 public class SearchServiceTest {
 
-	@Autowired
-	@Qualifier("memberDaoMock")
+//	@Autowired
+//	@Qualifier("memberDaoMock")
+	@Mock
 	MemberDao memberDao;
 
-	@Autowired
-	@Qualifier("courseDaoMock")
+//	@Autowired
+//	@Qualifier("courseDaoMock")
+	@Mock
 	CourseDao courseDao;
 
-	@Autowired
+	//@Autowired
+	@InjectMocks
 	private SearchService searchService;
 
 	private Course course1;
@@ -50,8 +58,8 @@ public class SearchServiceTest {
 
 	@Before
 	public void doSetup() {
-		memberDao = mock(MemberDao.class);
-		courseDao = mock(CourseDao.class);
+//		memberDao = mock(MemberDao.class);
+//		courseDao = mock(CourseDao.class);
 
 		course1 = new Course();
 		course2 = new Course();
@@ -75,10 +83,10 @@ public class SearchServiceTest {
 		
 		memberList = Arrays.asList(new Member[]{member1,member2});
 		
-		when(courseDao.findByNameContaining("Data")).thenReturn(courseList2);
+		Mockito.when(courseDao.findByNameContaining("Data")).thenReturn(courseList2);
 		
 		 
-		when(memberDao.findAll()).thenReturn(memberList);
+		Mockito.when(memberDao.findAll()).thenReturn(memberList);
 	}
 
 	@Test
