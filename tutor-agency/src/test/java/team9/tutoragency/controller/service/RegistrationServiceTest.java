@@ -41,7 +41,7 @@ public class RegistrationServiceTest {
 //                return (Member) args[0];
 //            }
 //        });
-        
+        // Capture the Member that is going to be saved. The return value doesn't matter in this context.
         Mockito.when(memberDao.save(captor.capture())).thenReturn(any(Member.class));
     }
     
