@@ -28,7 +28,9 @@
 -->
 
 	<div class="header">
-		<img src="<c:url value="/pages/template/header.jpg"/>">
+		<!-- 
+			<img src="<c:url value="/pages/template/header.jpg"/>">
+		 -->
 		<sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
 		<c:choose>
 			<c:when test="${loggedIn}">
@@ -39,12 +41,11 @@
 								<li class="sub"><a href="<c:url value="/info" />">Informations</a></li>
 								<li class="sub"><a href="<c:url value="/faq" />">FAQ's</a></li>
 							</ul></li>
-						<li class="main"><a href="">Suchen</a>
-							<ul>
-								<li class="sub"><a href="<c:url value="/simpleSearch" />">Einfache Suche</a></li>
-								<li class="sub"><a href="<c:url value="/advancedSearch" />">Erweiterte Suche</a></li>
-							</ul></li>
-						<li class="main"><a href="<c:url value="/profile" />">Profile</a></li>
+
+						<li class="main"><a href="<c:url value="quicksearch" />">Suche</a>
+							
+						<li class="main"><a href="<c:url value="profile" />">Profile</a></li>
+
 						<li class="main"><a
 							href="<c:url value="/j_spring_security_logout"></c:url>">
 								Logout</a></li>
@@ -54,19 +55,17 @@
 			<c:otherwise>
 				<div id="nav">
 					<ul>
-                        <li class="main"><a href="<c:url value="/index" />" >Home</a></li>
-						<li class="main"><a href="<c:url value="/info" />">Infos</a>
+
+                        <li class="main"><a href="<c:url value="index" />">Home</a>
 							<ul>
-								<li class="main"><a href="<c:url value="/faq" />">FAQs</a></li>
+								<li class="sub"><a href="<c:url value="info" />">Informations</a></li>
+								<li class="sub"><a href="<c:url value="faq" />">FAQ's</a></li>
 							</ul></li>
 
-						<li class="main"><a href="">Suchen</a>
-							<ul>
-								<li class="sub"><a href="<c:url value="/simpleSearch" />">Einfache Suche</a></li>
-								<li class="sub"><a href="<c:url value="/advancedSearch" />">Erweiterte Suche</a></li>
-							</ul></li>
-						<li class="main"><a href="<c:url value="/register" />">Registrieren</a></li>
-						<li class="main"><a href="<c:url value="/login" />">Login</a></li>
+						<li class="main"><a href="<c:url value="quicksearch" />">Suche</a>
+						<li class="main"><a href="<c:url value="register" />">Registrieren</a></li>
+						<li class="main"><a href="<c:url value="login" />">Login</a></li>
+
 					</ul>
 				</div>
 			</c:otherwise>
