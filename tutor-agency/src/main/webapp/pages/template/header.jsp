@@ -28,7 +28,9 @@
 -->
 
 	<div class="header">
-		<img src="<c:url value="/pages/template/header.jpg"/>">
+		<!-- 
+			<img src="<c:url value="/pages/template/header.jpg"/>">
+		 -->
 		<sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
 		<c:choose>
 			<c:when test="${loggedIn}">

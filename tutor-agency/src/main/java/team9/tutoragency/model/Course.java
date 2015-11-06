@@ -26,17 +26,6 @@ public class Course implements Serializable {
     @ManyToOne()
     private University university;
     
-    @ManyToMany(mappedBy="courseList")
-    private List<Member> members;
-
-    public List<Member> getMembers() {
-		return members;
-	}
-
-	public void setMembers(List<Member> members) {
-		this.members = members;
-	}
-
 	public Long getId() {
         return id;
     }
@@ -66,7 +55,6 @@ public class Course implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((members == null) ? 0 : members.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((university == null) ? 0 : university.hashCode());
 		return result;
@@ -86,11 +74,6 @@ public class Course implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (members == null) {
-			if (other.members != null)
-				return false;
-		} else if (!members.equals(other.members))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -106,7 +89,7 @@ public class Course implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Course [id=" + id + ", name=" + name + ", university=" + university + ", members=" + members + "]";
+		return "Course [id=" + id + ", name=" + name + ", university=" + university + "]";
 	}
     
     

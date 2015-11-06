@@ -1,4 +1,4 @@
-package team9.tutoragency.model;
+package team9.tutoragency.controller.pojos;
 
 /**
  * This wrapper class contains a {@link course} and a list of all
@@ -8,6 +8,9 @@ package team9.tutoragency.model;
  */
 import java.util.ArrayList;
 import java.util.List;
+
+import team9.tutoragency.model.Course;
+import team9.tutoragency.model.Member;
 
 public class SearchResult {
 

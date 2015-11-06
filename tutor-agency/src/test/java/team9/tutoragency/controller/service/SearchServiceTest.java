@@ -18,9 +18,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import team9.tutoragency.controller.pojos.SearchResult;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.model.SearchResult;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.MemberDao;
 

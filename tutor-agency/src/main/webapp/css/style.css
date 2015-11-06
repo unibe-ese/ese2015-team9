@@ -60,7 +60,7 @@ background-color:#c2c2c2;
 padding: 50px 25% 0px 5%;
 text-decoration: none;
 color: #000;
-top:300px;
+top:100px;
 }
 
 .container .sidebar {
@@ -75,7 +75,7 @@ top:50px;
 width: 1px;
 float:right;
 right:22%;
-box-shadow: 1px 1px 20px #03F;
+box-shadow: 1px 1px 20px #000000;
 min-height:100%;
 position:absolute;
 top: 0px;
@@ -126,7 +126,7 @@ line-height: 2em;
 input {
 color: #000000; 
 font-size: 12px; 
-border: 2px solid #EED5FF; 
+border: 2px solid #808080; 
 background-color: #FFF0FF; 
 height: 22px; 
 width: 90%;
@@ -137,7 +137,7 @@ margin-bottom: 10px;
 select {
 color: #000000; 
 font-size: 12px; 
-border: 1px solid #EED5FF; 
+border: 1px solid #c0c0c0; 
 background-color: #FFF0FF; 
 height: 22px; 
 width: 250px; 
@@ -151,7 +151,7 @@ font: 12px Verdana,sans-serif;
 color: #d2d2d2; 
 background-color: #595a5b; 
 width: 120px; 
-padding: 3px; 
+padding: 5px; 
 line-height: 130%;
 }
 
@@ -197,7 +197,7 @@ background-color:#555;
 -webkit-box-shadow:1px 1px 6px #292929; /* Chrome, Safari */
 -khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
 box-shadow:1px 1px 6px #292929; /* CSS3 */
-top:250px;
+top:50px;
 width:100%;
 z-index:500;
 }
