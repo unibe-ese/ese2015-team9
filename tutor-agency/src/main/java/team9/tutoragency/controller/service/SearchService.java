@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import team9.tutoragency.controller.SearchResult;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.CourseDao;
@@ -23,6 +24,23 @@ public class SearchService {
 	CourseDao courseDao;
 	@Autowired
 	MemberDao memberDao;
+
+	public CourseDao getCourseDao() {
+		return courseDao;
+	}
+
+	public void setCourseDao(CourseDao courseDao) {
+		this.courseDao = courseDao;
+	}
+
+	public MemberDao getMemberDao() {
+		return memberDao;
+	}
+
+	public void setMemberDao(MemberDao memberDao) {
+		this.memberDao = memberDao;
+	}
+	
 
 	@Transactional
 	public List<SearchResult> findCoursesByNameContaining(String substring) {
@@ -71,35 +89,35 @@ public class SearchService {
 	 * be obsolete if we were able to make the course-member relation
 	 * bidirectional, then we could return the course directly.
 	 */
-	public class SearchResult {
-		private Course course;
-		private List<Member> members;
-
-		public SearchResult() {
-			course = new Course();
-			members = new ArrayList<Member>();
-		}
-
-		public SearchResult(Course course, List<Member> members) {
-			this.course = course;
-			this.members = members;
-		}
-
-		public List<Member> getMembers() {
-			return members;
-		}
-
-		public Course getCourse() {
-			return course;
-		}
-
-		public void setCourse(Course course) {
-			this.course = course;
-		}
-
-		public void setMembers(List<Member> members) {
-			this.members = members;
-		}
-
-	}
+//	public class SearchResult {
+//		private Course course;
+//		private List<Member> members;
+//
+//		public SearchResult() {
+//			course = new Course();
+//			members = new ArrayList<Member>();
+//		}
+//
+//		public SearchResult(Course course, List<Member> members) {
+//			this.course = course;
+//			this.members = members;
+//		}
+//
+//		public List<Member> getMembers() {
+//			return members;
+//		}
+//
+//		public Course getCourse() {
+//			return course;
+//		}
+//
+//		public void setCourse(Course course) {
+//			this.course = course;
+//		}
+//
+//		public void setMembers(List<Member> members) {
+//			this.members = members;
+//		}
+//
+//	}
 }

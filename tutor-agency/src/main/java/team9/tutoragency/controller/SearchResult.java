@@ -1,24 +1,28 @@
 package team9.tutoragency.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 
 public class SearchResult {
 
-	private Member member;
 	private Course course;
+	private List<Member> members;
 
-	public SearchResult(Course c, Member m) {
-		this.course = c;
-		this.member = m;
+	public SearchResult() {
+		course = new Course();
+		members = new ArrayList<Member>();
 	}
 
-	public Member getMember() {
-		return member;
+	public SearchResult(Course course, List<Member> members) {
+		this.course = course;
+		this.members = members;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public List<Member> getMembers() {
+		return members;
 	}
 
 	public Course getCourse() {
@@ -27,6 +31,10 @@ public class SearchResult {
 
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
 	}
 
 }
