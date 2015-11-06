@@ -1,5 +1,11 @@
 package team9.tutoragency.controller;
 
+/**
+ * This wrapper class contains a {@link course} and a list of all
+ * {@link Member}'s who are related to this course in the database. It would
+ * be obsolete if we were able to make the course-member relation
+ * bidirectional, then we could return the course directly.
+ */
 import java.util.ArrayList;
 import java.util.List;
 

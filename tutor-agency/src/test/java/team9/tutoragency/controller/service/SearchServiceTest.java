@@ -74,15 +74,17 @@ public class SearchServiceTest {
 		member2.setCourseList(courseList2);
 		
 		memberList = Arrays.asList(new Member[]{member1,member2});
+		
+		when(courseDao.findByNameContaining("Data")).thenReturn(courseList2);
+		
+		 
+		when(memberDao.findAll()).thenReturn(memberList);
 	}
 
 	@Test
 	public void testFindCoursesByNameContaining() {
 
-		when(courseDao.findByNameContaining("Data")).thenReturn(courseList2);
 		
-		 
-		when(memberDao.findAll()).thenReturn(memberList);
 
 		List<SearchResult> results = searchService.findCoursesByNameContaining("Data");
 

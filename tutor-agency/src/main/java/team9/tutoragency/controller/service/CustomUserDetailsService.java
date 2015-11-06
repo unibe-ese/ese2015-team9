@@ -22,7 +22,6 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username)
 			   throws UsernameNotFoundException, DataAccessException, UsernameDuplicateException {
 			   
-			  // Declare a null Spring User
 			  Member member;
 			   
 			  List<Member> matchingMembers = memberDao.findByUsername(username);
@@ -34,9 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 					   throw new UsernameNotFoundException("No Member with this name found!"); 
 				  else
 					   member = matchingMembers.get(0);
-			   
+		   
 			  return member;
 	}
-
-
 }

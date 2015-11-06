@@ -9,11 +9,7 @@
 
 
 <div class="container">
-
 	<table class="forms">
-	
-	
-	
 		<form:form modelAttribute="searchForm" method="post">
 			<form:input path="searchText" type="text"></form:input>
 			<input class="submitbutton" type="submit" value="Suchen"
@@ -25,7 +21,6 @@
 			<td>Kontaktieren</td>
 		</tr>
 		<c:forEach items="${searchResult}" var="searchResult">
-
 			<tr>
 				<td><c:out value="${searchResult.course.name}"></c:out></td>
 				<td><c:out value="${searchResult.member.username}"></c:out></td>
