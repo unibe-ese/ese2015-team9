@@ -11,3 +11,4 @@ tutor-agency/.classpath
 tutor-agency/nb-configuration.xml
 tutor-agency/.project
 tutor-agency/src/main/webapp/WEB-INF/glassfish-web.xml
+tutor-agency/src/main/java/team9/tutoragency/controller/pojos/searchForm.java
