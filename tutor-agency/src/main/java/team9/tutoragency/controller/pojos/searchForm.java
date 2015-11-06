@@ -3,7 +3,6 @@ package team9.tutoragency.controller.pojos;
 public class SearchForm {
 import javax.validation.constraints.NotNull;
 
-public class searchForm {
 
 	
 	private String selectedCourse;
