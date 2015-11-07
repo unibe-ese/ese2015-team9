@@ -11,7 +11,7 @@ import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
 @Service
-public class RegistrationService implements SampleService{
+public class RegistrationService implements SignupFromSaveService{
 
 	@Autowired
 	MemberDao memberDao;
