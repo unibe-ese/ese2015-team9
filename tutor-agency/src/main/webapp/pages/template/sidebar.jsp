@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<div class="table">
+<%-- <div class="table">
 <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
 <c:choose>
 	<c:when test="${loggedIn}">
@@ -17,6 +17,6 @@
 		
 	</c:otherwise>
 </c:choose>
-</div>
+</div> --%>
 
 
