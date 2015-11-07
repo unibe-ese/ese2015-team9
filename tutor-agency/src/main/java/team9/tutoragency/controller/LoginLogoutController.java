@@ -5,16 +5,23 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginLogoutController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String getLoginPage(@RequestParam(value = "error", required = false) boolean error, ModelMap model) {
-		if (error == true) {
+	public String getLoginPage(@RequestParam(value = "error", required = false) boolean error,
+			@RequestParam(value = "denied", required = false) boolean denied, ModelMap model) {
+		if (error) {
 			model.put("error", "You have entered an invalid username or password!");
 		} else {
-			model.put("error", "");
+			model.put("error", " ");
+		}
+		if (denied) {
+			model.put("denied", "Access-Denied! Log in to see this page.");
+		} else {
+			model.put("denied", " ");
 		}
 		return "loginpage";
 	}
@@ -25,8 +32,11 @@ public class LoginLogoutController {
 	 * 
 	 * @return the name of the JSP page
 	 */
-	@RequestMapping(value = "/access-denied", method = RequestMethod.GET)
-	public String getDeniedPage() {
-		return "deniedpage";
+	@RequestMapping(value = "/denied", method = RequestMethod.GET)
+	public ModelAndView getDeniedPage() {
+		ModelAndView model = new ModelAndView("access-denied");
+//		model.addObject("denied", "Access-Denied! Log in to see this page.");
+
+		return model;
 	}
 }

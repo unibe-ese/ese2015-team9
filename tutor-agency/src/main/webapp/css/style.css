@@ -49,7 +49,7 @@ font-size:10px;
 
 .container  {
 width: 70%;
-min-height: calc(100% - 390px);
+min-height: calc(100% - 100px);
 position:absolute;
 left:0;
 -moz-box-shadow:1px 1px 6px #292929; /* Firefox */
@@ -182,6 +182,12 @@ text-decoration:none;
 
 
 
+.error{
+	color: red;
+	font-size: 12px; 
+border: 2px solid #808080; 
+background-color: #FFF0FF; 
+}
 /*------------------------*\
 	NAVIGATION
 \*------------------------*/
@@ -219,7 +225,7 @@ z-index:500;
 	font-size:17px;
 	padding:0 0 0 20px;
 	line-height:50px;
-	width:200px;
+	width:150px;
 }
 
 #nav ul li
