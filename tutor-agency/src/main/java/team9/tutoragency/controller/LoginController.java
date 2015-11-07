@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class LoginLogoutController {
+public class LoginController {
 
 	public static final String loginErrorMessage = "You have entered an invalid username or password!";
 	public static final String accessErrorMessage = "Access-Denied! Log in to see this page.";
