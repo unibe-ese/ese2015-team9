@@ -10,33 +10,36 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginLogoutController {
 
+	public static final String loginErrorMessage = "You have entered an invalid username or password!";
+	public static final String accessErrorMessage = "Access-Denied! Log in to see this page.";
+	
+	/**
+	 * This method handels the request for the loginpage with or without a login-error.
+	 * For configuration of the login-fail, see the springSecurity.xml file.
+	 * @param error if true, the error-message for the login page is set to {@value #loginErrorMessage}, else to an empty String.
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String getLoginPage(@RequestParam(value = "error", required = false) boolean error,
-			@RequestParam(value = "denied", required = false) boolean denied, ModelMap model) {
+	public ModelAndView getLoginPage(@RequestParam(value = "error", required = false) boolean error) {
+		ModelAndView model = new ModelAndView("loginpage");
 		if (error) {
-			model.put("error", "You have entered an invalid username or password!");
+			model.addObject("message", loginErrorMessage );
 		} else {
-			model.put("error", " ");
+			model.addObject("message", " ");
 		}
-		if (denied) {
-			model.put("denied", "Access-Denied! Log in to see this page.");
-		} else {
-			model.put("denied", " ");
-		}
-		return "loginpage";
+		return model;
 	}
 
 	/**
-	 * Handles and retrieves the denied JSP page. This is shown whenever a
-	 * regular user tries to access an admin only page.
-	 * 
-	 * @return the name of the JSP page
+	 * This method is called whenever a visiter attempts to access an user only page.
+	 * This is definened in the springSecurity.xml file.
+	 * @return ModelAndView with loginpage.jsp as view, and "access denied"-message added as object.
 	 */
 	@RequestMapping(value = "/denied", method = RequestMethod.GET)
 	public ModelAndView getDeniedPage() {
-		ModelAndView model = new ModelAndView("access-denied");
-//		model.addObject("denied", "Access-Denied! Log in to see this page.");
-
+		ModelAndView model = new ModelAndView("loginpage");
+		model.addObject("message", accessErrorMessage);
 		return model;
 	}
 }
