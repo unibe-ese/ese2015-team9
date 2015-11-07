@@ -42,9 +42,9 @@
 								<li class="sub"><a href="<c:url value="/faq" />">FAQ's</a></li>
 							</ul></li>
 
-						<li class="main"><a href="<c:url value="quicksearch" />">Suche</a>
+						<li class="main"><a href="<c:url value="/quicksearch" />">Suche</a>
 							
-						<li class="main"><a href="<c:url value="profile" />">Profile</a></li>
+						<li class="main"><a href="<c:url value="/profile" />">Profile</a></li>
 
 						<li class="main"><a
 							href="<c:url value="/j_spring_security_logout"></c:url>">
@@ -56,15 +56,15 @@
 				<div id="nav">
 					<ul>
 
-                        <li class="main"><a href="<c:url value="index" />">Home</a>
+                        <li class="main"><a href="<c:url value="/index" />">Home</a>
 							<ul>
-								<li class="sub"><a href="<c:url value="info" />">Informations</a></li>
-								<li class="sub"><a href="<c:url value="faq" />">FAQ's</a></li>
+								<li class="sub"><a href="<c:url value="/info" />">Informations</a></li>
+								<li class="sub"><a href="<c:url value="/faq" />">FAQ's</a></li>
 							</ul></li>
 
-						<li class="main"><a href="<c:url value="quicksearch" />">Suche</a>
-						<li class="main"><a href="<c:url value="register" />">Registrieren</a></li>
-						<li class="main"><a href="<c:url value="login" />">Login</a></li>
+						<li class="main"><a href="<c:url value="/quicksearch" />">Suche</a>
+						<li class="main"><a href="<c:url value="/register" />">Registrieren</a></li>
+						<li class="main"><a href="<c:url value="/login" />">Login</a></li>
 
 					</ul>
 				</div>
