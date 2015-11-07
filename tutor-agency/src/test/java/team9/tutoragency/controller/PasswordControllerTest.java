@@ -19,22 +19,22 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration(locations = {
-    "file:src/main/webapp/WEB-INF/config/springMVC.xml",
-    "file:src/main/webapp/WEB-INF/config/springData.xml"})
-@Transactional
-@Rollback
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@WebAppConfiguration
+//@ContextConfiguration(locations = {
+//    "file:src/main/webapp/WEB-INF/config/springMVC.xml",
+//    "file:src/main/webapp/WEB-INF/config/springData.xml"})
+//@Transactional
+//@Rollback
 public class PasswordControllerTest {
     
-    @Autowired private WebApplicationContext wac;
+//    @Autowired private WebApplicationContext wac;
     private MockMvc mockMvc;
     
     
     @Before
     public void setUp() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(new PasswordController()).build();
     }
     
 
