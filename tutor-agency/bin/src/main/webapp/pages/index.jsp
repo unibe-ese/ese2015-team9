@@ -8,10 +8,14 @@
 
 <div class="container">
     	
+    	<h1>Willkommen bei der Tutor-Agency</h1>
+    	<br>
+    	<br>Suchst Du einen Nachhilfelehrer oder möchtest Du selbst Nachhilfe unterrichten? Dann bist Du hier genau richtig!
+    	<br>Melde Dich an leg gleich los.
 	
   	<div class="stripe"></div>
 
-    <div class="sidebar"><c:import url="template/sidebar.jsp" /></div>
+    <c:import url="template/sidebar_profile.jsp" />
     
     <c:import url="template/footer.jsp" />
     

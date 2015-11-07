@@ -4,33 +4,44 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import team9.tutoragency.controller.service.SignupFormValidationService;
+import team9.tutoragency.model.Member;
 
-public class SignupForm {
+/**
+ * A SignupForm contains all values which need to be set in order to allow a
+ * user to register as a {@link Member} in the register view. The SignupForm
+ * will be validated by the {@link SignupFormValidationService}.
+ * 
+ * @author laeri
+ *
+ */
+public class SignupForm implements Form {
 
 	private Long id;
-	@NotNull(message="Please enter your first name.")
+	@NotNull(message = "Please enter your first name.")
 	private String firstName;
-	@NotNull(message="Please enter your last name.")
+	@NotNull(message = "Please enter your last name.")
 	private String lastName;
-	@NotNull(message="Please enter a username.")
+	@NotNull(message = "Please enter a username.")
 	private String username;
-	@NotNull(message="Please enter a password.")
-	@Size(min=6 , max=18, message="Passwort sollte aus 6-18 Zeichen bestehen")
+	@NotNull(message = "Please enter a password.")
+	@Size(min = 6, max = 18, message = "Passwort sollte aus 6-18 Zeichen bestehen")
 	private String password;
-	@NotNull(message="Please enter a matching password.")
+	@NotNull(message = "Please enter a matching password.")
 	private String passwordConfirm;
 	@NotNull
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
 	private String email;
 
 	private boolean readAGB;
-	
-	public SignupForm(){
+
+	public SignupForm() {
 		firstName = "Vorname";
 		lastName = "Nachname";
 		username = "Nickname";
 		email = "E-mail";
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -86,9 +97,11 @@ public class SignupForm {
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
 	}
+
 	public boolean isReadAGB() {
 		return readAGB;
 	}
+
 	public void setReadAGB(boolean readAGB) {
 		this.readAGB = readAGB;
 	}

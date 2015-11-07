@@ -7,35 +7,32 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.common.collect.Lists;
-
 import team9.tutoragency.controller.pojos.EditForm;
+import team9.tutoragency.controller.service.EditFormValidationService;
+import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.UniversityAccessService;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
-import team9.tutoragency.model.dao.MemberDao;
-import team9.tutoragency.model.dao.UniversityDao;
 
 @Controller
 public class EditController {
 
 	@Autowired
-	MemberDao memberDao;
+	EditFormValidationService validator;
 	@Autowired
-	EditFormValidator validator;
+	MemberService memberService;
 	@Autowired
-	UniversityDao uniDao;
+	UniversityAccessService uniService;
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(HttpServletResponse response) throws IOException {
@@ -54,7 +51,7 @@ public class EditController {
 			editForm.setFee("0");
 		}
 		edit.addObject("editForm", editForm);
-		List<University> universities = Lists.newArrayList(uniDao.findAll());
+		List<University> universities = uniService.findAll();
 		List<String> universityNames = new ArrayList<String>();
 		for (University uni : universities) {
 			universityNames.add(uni.getName());
@@ -74,40 +71,16 @@ public class EditController {
 		Member member = (Member) authentication.getPrincipal();
 		if (!result.hasErrors()) {
 
-			member.setEmail(editForm.getEmail());
-
-			if (editForm.getPassword().length() > 0) {
-				member.setPassword(DigestUtils.md5Hex(editForm.getPassword()));
-			}
-			member.setFirstName(editForm.getFirstName());
-			member.setLastName(editForm.getLastName());
-			member.setUsername(editForm.getUsername());
-
-			if(member.isIsTutor()){
-			double fee = Double.parseDouble(editForm.getFee());
-			member.setFee(fee);
-			List<University> tmpList = new ArrayList<University>();
-			for (int i = 0; i < editForm.getUniversities().size(); i++) {
-				List<University> selectedUni = uniDao.findByName(editForm.getUniversities().get(i));
-				tmpList.add(selectedUni.get(0));
-			}
-
-			member.setUniversityList(tmpList);
-			}
-			memberDao.save(member);
+			memberService.saveEditChange(member, editForm);
 			model = new ModelAndView("profile");
 			model.addObject("member", member);
 			model.addObject("unis", member.getUniversityList());
 
 		} else {
 
-			for (ObjectError ob : result.getAllErrors()) {
-				System.out.println(ob);
-			}
 			model = new ModelAndView("edit");
 			model.addObject("editForm", editForm);
-
-			List<University> universities = Lists.newArrayList(uniDao.findAll());
+			List<University> universities = uniService.findAll();
 			List<String> universityNames = new ArrayList<String>();
 			for (University uni : universities) {
 				universityNames.add(uni.getName());

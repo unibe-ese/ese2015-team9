@@ -7,20 +7,6 @@
 <spring:url value="/css/style.css" var="css" />
 
 <c:import url="template/header.jsp" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
-	$("#universityList").change(function() {
-		if ($(this).data('options') == undefined) {
-			/*Taking an array of all options-2 and kind of embedding it on the select1*/
-			$(this).data('options', $('#courseList option').clone());
-		}
-		var id = $(this).val();
-		var options = $(this).data('options').filter('[value=' + id + ']');
-		$('#courseList').html(options);
-	});
-</script>
-
 <div class="container">
 
 	<table class="forms">
