@@ -1,34 +1,16 @@
 package team9.tutoragency.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.common.collect.Lists;
-
 import team9.tutoragency.controller.pojos.QuickSearchForm;
 import team9.tutoragency.controller.service.SearchService;
-import team9.tutoragency.model.Course;
-import team9.tutoragency.model.Member;
-import team9.tutoragency.model.University;
-import team9.tutoragency.model.dao.CourseDao;
-import team9.tutoragency.model.dao.MemberDao;
-import team9.tutoragency.model.dao.UniversityDao;
 
 /**
  * This Controller handels page request related to search mechanisms.

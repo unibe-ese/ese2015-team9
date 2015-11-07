@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.model.dao.MemberDao;
 
 @Controller
 public class ProfileController {
 
 	@Autowired
-	MemberDao memberDao;
+	MemberService memberService;
 	
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
@@ -36,8 +36,7 @@ public class ProfileController {
 	public ModelAndView becomeTutor(HttpServletResponse response) throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
-		member.setIsTutor(true);
-		memberDao.save(member);
+		memberService.upgradeToTutor(member);
 		return show(response);
 	}
 	

@@ -6,7 +6,18 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class EditForm {
+import team9.tutoragency.controller.service.EditFormValidationService;
+import team9.tutoragency.model.Member;
+
+/**
+ * The EditForm stores all values to be displayed in the edit view to edit a
+ * profile of a {@link Member}. The EditForm will be validated by the
+ * {@link EditFormValidationService}.
+ * 
+ * @author laeri
+ *
+ */
+public class EditForm implements Form {
 
 	private Long id;
 	private String firstName;
@@ -14,7 +25,7 @@ public class EditForm {
 	private String lastName;
 	@NotNull(message = "Please enter a username.")
 	private String username;
-	
+
 	private List<String> universities;
 
 	@NotNull(message = "Please enter your old Password")
@@ -22,16 +33,8 @@ public class EditForm {
 
 	private String password;
 	private String passwordConfirm;
-	
+
 	private String fee;
-
-	public String getPasswordConfirm() {
-		return passwordConfirm;
-	}
-
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
-	}
 
 	@NotNull
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
@@ -119,11 +122,20 @@ public class EditForm {
 		this.fee = fee;
 	}
 
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
+
 	public List<String> getUniversities() {
-		if(universities == null) universities = new ArrayList<String>();
+		if (universities == null)
+			universities = new ArrayList<String>();
 		return universities;
 	}
-	
+
 	public void setUniversities(List<String> universities) {
 		this.universities = universities;
 	}

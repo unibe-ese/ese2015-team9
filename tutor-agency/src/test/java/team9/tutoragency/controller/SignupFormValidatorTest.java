@@ -26,6 +26,7 @@ import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.context.WebApplicationContext;
 import team9.tutoragency.controller.pojos.SignupForm;
+import team9.tutoragency.controller.service.SignupFormValidationService;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
@@ -42,7 +43,7 @@ public class SignupFormValidatorTest {
     @Mock
     private MemberDao memberDao;
     @InjectMocks
-    private final SignupFormValidator validator = new SignupFormValidator();
+    private final SignupFormValidationService validator = new SignupFormValidationService();
     
     @Before
     public void setUp() {
