@@ -1,5 +1,5 @@
 
-package team9.tutoragency.controller;
+package team9.tutoragency.controller.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import team9.tutoragency.model.dao.MemberDao;
 //@RunWith(SpringJUnit4ClassRunner.class)
 @RunWith(MockitoJUnitRunner.class)
 //@ContextConfiguration(locations = {"classpath:/test-springMVC.xml", "classpath:/test-springData.xml", "classpath:/test-springSecurity.xml"})
-public class SignupFormValidatorTest {
+public class SignupFormValidationServiceTest {
     
 //    @Autowired
 //    private SignupFormValidator validator;   

@@ -1,6 +1,5 @@
 package team9.tutoragency.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,13 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.SampleService;
 
 @Controller
 public class IndexController {
 
-	@Autowired
-	SampleService sampleService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
