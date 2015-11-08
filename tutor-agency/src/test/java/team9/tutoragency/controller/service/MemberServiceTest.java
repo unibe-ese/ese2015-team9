@@ -1,0 +1,83 @@
+
+package team9.tutoragency.controller.service;
+
+import org.apache.commons.codec.digest.DigestUtils;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
+import static org.mockito.Mockito.*;
+import team9.tutoragency.controller.pojos.EditForm;
+import team9.tutoragency.model.Member;
+import team9.tutoragency.model.dao.MemberDao;
+import team9.tutoragency.model.dao.UniversityDao;
+
+@RunWith(MockitoJUnitRunner.class)
+public class MemberServiceTest {
+    
+    @Mock
+    private MemberDao memberDao;
+    @Mock
+    private UniversityDao uniDao;
+    @InjectMocks
+    private final MemberService service = new MemberService();
+    @Captor
+    private ArgumentCaptor<Member> captor;
+    
+    @Before
+    public void setUp() {
+        Mockito.when(memberDao.save(captor.capture())).thenReturn(any(Member.class));
+    }
+
+    /**
+     * Test of upgradeToTutor method, of class MemberService.
+     */
+    @Test
+    public void testUpgradeToTutor() {
+        Member member = new Member("firstName", "lastName", "member@email.com", "username", "password");
+        service.upgradeToTutor(member);
+        member.setIsTutor(true);
+        assertEquals(member, captor.getValue());
+    }
+
+    /**
+     * Test of saveEditChange method, of class MemberService.
+     */
+    @Test
+    public void testSaveEditChange() {
+        Member expMember = new Member("fName", "lName", "newemail@email.com", "uname", "password");
+        Member memberBefore = new Member("firstName", "lastName", "member@email.com", "username", "password");
+        
+        EditForm form = new EditForm();
+        form.setEmail(expMember.getEmail());
+        form.setFirstName(expMember.getFirstName());
+        form.setLastName(expMember.getLastName());
+        form.setUsername(expMember.getUsername());
+        
+        service.saveEditChange(memberBefore, form);
+        assertEquals(expMember, captor.getValue());
+        
+        expMember.setPassword(DigestUtils.md5Hex("newpassword"));
+        form.setPassword("newpassword");
+        service.saveEditChange(memberBefore, form);
+        assertEquals(expMember, captor.getValue());
+        
+        form.setFee("20.0");
+        service.saveEditChange(memberBefore, form);
+        assertEquals(expMember, captor.getValue());
+        
+        expMember.setIsTutor(true);
+        expMember.setFee(20.0);
+        memberBefore.setIsTutor(true);
+        service.saveEditChange(memberBefore, form);
+        assertEquals(expMember, captor.getValue());
+    }
+    
+    
+}

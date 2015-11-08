@@ -46,8 +46,7 @@ public class MemberService {
 				List<University> selectedUni = uniDao.findByName(editForm.getUniversities().get(i));
 				tmpList.add(selectedUni.get(0));
 			}
-
-			member.setUniversityList(tmpList);
+            if (!tmpList.isEmpty()) member.setUniversityList(tmpList);
 		}
 		memberDao.save(member);
 	}
