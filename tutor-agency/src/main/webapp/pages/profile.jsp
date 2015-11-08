@@ -8,14 +8,10 @@
 
 <c:import url="template/header.jsp" />
 
-
 <div class="container">
-
-	<h1>Mein Profil</h1>
+	<h1><c:out value="${member.username}"></c:out></h1>
 	<br /> <br />
-
 	<table class="forms">
-
 		<tr>
 			<td class="profil"><img src="img/profil.png" /></td>
 			<td>
@@ -46,14 +42,14 @@
 							<td>${member.fee}</td>
 						</tr>
 
-						<tr>
+						<%-- <tr>
 							<td><strong>Alle Standorte:</strong></td>
 							<td><select><c:forEach items="${unis}" var="unis">
 										<option value="${unis.name}"><c:out
 												value="${unis.name}" /></option>
 									</c:forEach></select></td>
 
-						</tr>
+						</tr> --%>
 					</c:if>
 				</table>
 			</td>

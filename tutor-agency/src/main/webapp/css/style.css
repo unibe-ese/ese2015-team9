@@ -61,6 +61,7 @@ padding: 50px 25% 0px 5%;
 text-decoration: none;
 color: #000;
 top:100px;
+
 }
 
 .container .sidebar {
@@ -152,7 +153,7 @@ color: #d2d2d2;
 background-color: #595a5b; 
 width: 120px; 
 padding: 5px; 
-line-height: 130%;
+line-height: 150%;
 }
 
 .small a{
@@ -203,9 +204,7 @@ background-color:#555;
 -khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
 box-shadow:1px 1px 6px #292929; /* CSS3 */
 top:50px;
-width:100%;
 z-index:500;
-
 }
 
 #nav ul

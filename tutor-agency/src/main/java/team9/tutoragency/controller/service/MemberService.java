@@ -25,8 +25,10 @@ public class MemberService {
 		member.setIsTutor(true);
 		memberDao.save(member);
 	}
-
-	
+	@Transactional
+	public Member findById(Long id){
+		return memberDao.findOne(id);
+	}
 	@Transactional
 	public void saveEditChange(Member member, EditForm editForm){
 		member.setEmail(editForm.getEmail());

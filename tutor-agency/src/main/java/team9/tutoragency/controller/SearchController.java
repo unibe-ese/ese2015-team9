@@ -32,7 +32,7 @@ public class SearchController {
 	 * @param redirectAttributes
 	 * @return
 	 */
-	@RequestMapping(value = "/quickResults", method = RequestMethod.POST)
+	@RequestMapping(value = "/showResults", method = RequestMethod.POST)
 	public ModelAndView showQuickSearchResults(QuickSearchForm searchForm, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		ModelAndView model = new ModelAndView("quicksearch");
@@ -51,6 +51,7 @@ public class SearchController {
 	public ModelAndView showQuickSearch() {
 		ModelAndView model = new ModelAndView("quicksearch");
 		model.addObject("searchForm", new QuickSearchForm());
+		
 		return model;
 	}
 
