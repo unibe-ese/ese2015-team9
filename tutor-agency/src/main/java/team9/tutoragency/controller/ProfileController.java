@@ -32,7 +32,7 @@ public class ProfileController {
 	
 	private boolean isLoggedIn(Member member) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		 if(member.equals(authentication.getPrincipal()))
+		 if(member.getUsername().equals(authentication.getName()))
 			 return true;
 		 else
 			 return false;

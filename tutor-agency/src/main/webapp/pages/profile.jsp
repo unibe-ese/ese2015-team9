@@ -9,7 +9,9 @@
 <c:import url="template/header.jsp" />
 
 <div class="container">
-	<h1><c:out value="${member.username}"></c:out></h1>
+	<h1>
+		<c:out value="${member.username}"></c:out>
+	</h1>
 	<br /> <br />
 	<table class="forms">
 		<tr>
@@ -60,9 +62,38 @@
 			style="margin-left: 400px;" />
 	</form:form>
 
-
-	<div class="stripe"></div>
-	<c:import url="template/sidebar_profile.jsp" />
+	<div class="sidebar">
+		<c:choose>
+			<c:when test="${memberAtHome}">
+				<c:choose>
+					<c:when test="${member.isTutor}">
+						<a href="edit">Edit Profile</a>
+						<a href="/show">Courses</a>
+						<a href="delete">Delete Profile</a>
+						<br />
+						<form:form action="show" method="get">
+							<input class="submitbutton" type="submit" value="show Courses" />
+						</form:form>
+						<form:form action="addCourse" method="get">
+						<input class="submitbutton" type="submit" value="add a Course" />
+					</form:form>
+					</c:when>
+					<c:otherwise>
+						<form:form action="becomeTutor">
+							<input class="submitbutton" type="submit" value="become tutor"
+								name="become tutor" />
+						</form:form>
+					</c:otherwise>
+				</c:choose>
+				
+				<a href="<c:url value="/j_spring_security_logout"></c:url>">Abmelden</a>
+					
+			</c:when>
+			<c:otherwise>
+				<a>Contact</a>
+			</c:otherwise>
+		</c:choose>
+	</div>
 	<c:import url="template/footer.jsp" />
 
 </div>
