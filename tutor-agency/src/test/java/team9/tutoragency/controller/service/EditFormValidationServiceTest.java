@@ -21,6 +21,9 @@ import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
+/**
+ * Tests of the class {@link EditFormValidationService}.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class EditFormValidationServiceTest {
     
@@ -51,7 +54,6 @@ public class EditFormValidationServiceTest {
         SecurityContextHolder.setContext(securityContext);
         Mockito.when(authentication.getPrincipal()).thenReturn(activeMember);
     }
-
 
     @Test
     public void usernameAlreadyInUse() {
@@ -107,7 +109,9 @@ public class EditFormValidationServiceTest {
         service.validate(form, error);
         assertTrue(error.hasErrors());
     }
-    
+    /**
+     * Tests if a valid form passes the validation without error.
+     */    
     @Test
     public void positiveControllTest() {
         EditForm form = createEditForm();
@@ -116,7 +120,10 @@ public class EditFormValidationServiceTest {
         
         assertFalse(error.hasErrors());
     }
-    
+    /**
+     * Creates a valid form, i.e. a form that passes the validation without error.
+     * @return EditForm form
+     */    
     private EditForm createEditForm() {
         EditForm form = new EditForm();
         form.setUsername("uname");

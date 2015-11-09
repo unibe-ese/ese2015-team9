@@ -26,17 +26,18 @@ public class MemberServiceTest {
     @Mock
     private UniversityDao uniDao;
     @InjectMocks
-    private final MemberService service = new MemberService();
+    private MemberService service;
     @Captor
     private ArgumentCaptor<Member> captor;
     
     @Before
     public void setUp() {
+        // Capture the Member that is given to the Dao. The return value doesn't matter in this context.
         Mockito.when(memberDao.save(captor.capture())).thenReturn(any(Member.class));
     }
 
     /**
-     * Test of upgradeToTutor method, of class MemberService.
+     * Test of upgradeToTutor method, of class {@link MemberService}.
      */
     @Test
     public void testUpgradeToTutor() {
@@ -47,7 +48,7 @@ public class MemberServiceTest {
     }
 
     /**
-     * Test of saveEditChange method, of class MemberService.
+     * Test of saveEditChange method, of class {@link MemberService}.
      */
     @Test
     public void testSaveEditChange() {

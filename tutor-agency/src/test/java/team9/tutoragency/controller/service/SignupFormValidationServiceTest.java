@@ -3,12 +3,7 @@ package team9.tutoragency.controller.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Resource;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -16,29 +11,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.context.WebApplicationContext;
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.SignupFormValidationService;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
+/**
+ * Tests the class {@link SignupFormValidationService}
+ */
 @RunWith(MockitoJUnitRunner.class)
-//@ContextConfiguration(locations = {"classpath:/test-springMVC.xml", "classpath:/test-springData.xml", "classpath:/test-springSecurity.xml"})
 public class SignupFormValidationServiceTest {
-    
-//    @Autowired
-//    private SignupFormValidator validator;   
-//    @Resource
-//    MemberDao dao;
     
     @Mock
     private MemberDao memberDao;
@@ -50,12 +33,8 @@ public class SignupFormValidationServiceTest {
         Member member = new Member("firstName", "lastName", "member@email.com", "username", "password");
         List<Member> members = new ArrayList<Member>();
         members.add(member);
-        Mockito.when(
-                memberDao.findByUsername("username"))
-                .thenReturn(members);
-        Mockito.when(
-                memberDao.findByEmail("member@email.com"))
-                .thenReturn(members);
+        Mockito.when(memberDao.findByUsername("username")).thenReturn(members);
+        Mockito.when(memberDao.findByEmail("member@email.com")).thenReturn(members);
     }
     
     @Test
@@ -106,7 +85,20 @@ public class SignupFormValidationServiceTest {
         validator.validate(form, error);
         assertTrue(error.hasErrors());
     }
-    
+    /**
+     * Tests if a valid form passes the validation without error.
+     */
+    @Test
+    public void positiveControllTest() {
+        SignupForm form = createForm();
+        Errors error = new DirectFieldBindingResult(form, "signupform");
+        validator.validate(form, error);
+        assertFalse(error.hasErrors());
+    }
+    /**
+     * Creates a valid form, i.e. a form that passes the validation without error.
+     * @return SignupForm form
+     */
     private SignupForm createForm() {
         SignupForm form = new SignupForm();
         form.setReadAGB(true);
