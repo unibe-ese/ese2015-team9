@@ -96,6 +96,39 @@
 	</div>
 	<c:import url="template/footer.jsp" />
 
+
+
+	<hr>
+	<table id="courses" >
+		<tr class="title">
+			<td>Course</td>
+			<td>University</td>
+			<c:if test="${!memberAtHome}">
+				<td>Contact</td>
+			</c:if>
+		</tr>
+	
+		<c:forEach items="${member.courseList}" var="course">
+				<tr>
+					<td><c:out value="${course.name}"></c:out></td>
+					<td><c:out value="${course.university.name}"></c:out></td>
+					<c:if test="${!memberAtHome}">
+						<td align="center" ><input class="none" id="emailIcon" type="image"
+								src="img/email-icon.png" name="email-icon"
+								style="height: 20px; width: 20px;" >
+						</td>
+					</c:if>
+					<%-- <td align="center"><form
+							onsubmit="return confirm('Do you want to contact the tutor: ${member.username} ?');"
+							action='mailto:<c:out value="${member.email}"></c:out>'
+							method="post">
+							<input class="none" id="emailIcon" type="image"
+								src="img/email-icon.png" name="email-icon"
+								style="height: 20px; width: 20px;" onClick="alert(test);">
+						</form></td> --%>
+				</tr>
+			</c:forEach>
+	</table>
 </div>
 </body>
 </html>
