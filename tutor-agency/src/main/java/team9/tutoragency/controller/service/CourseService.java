@@ -38,6 +38,8 @@ public class CourseService {
 				courseList.remove(courseList.get(i));
 			}
 		}
+        member.setCourseList(courseList);
+        memberDao.save(member);
 	}
 
 	@Transactional

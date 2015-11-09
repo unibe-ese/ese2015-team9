@@ -39,8 +39,10 @@ public class PasswordControllerTest {
     
 
     @Test
-    public void positive() {
-        assertTrue(true);
+    public void testForgot() {
+        PasswordController controller = new PasswordController();
+		ModelAndView model = controller.forgot();
+        assertEquals("forgottenpassword", model.getViewName());
     }
     
 }
