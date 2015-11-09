@@ -29,8 +29,12 @@ public class ProfileController {
 		  model.addObject("memberAtHome", isLoggedIn(member));
 		  return model;
 	  }
-	
-	private boolean isLoggedIn(Member member) {
+	/**
+	 * This method returns true iff {@link Member#getUsername()} is equal to the current authentications principal (name).
+	 * @param member
+	 * @return
+	 */
+	public boolean isLoggedIn(Member member) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		 if(member.getUsername().equals(authentication.getName()))
 			 return true;
@@ -42,6 +46,7 @@ public class ProfileController {
 	public ModelAndView show(HttpServletResponse response) throws IOException {
 		ModelAndView profile = new ModelAndView("profile");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	
 		Member member = (Member) authentication.getPrincipal();
 		profile.addObject("member", member);
 		profile.addObject("unis", member.getUniversityList());
