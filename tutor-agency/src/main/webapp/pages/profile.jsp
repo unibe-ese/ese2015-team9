@@ -29,7 +29,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><strong>Username:</strong></td>
+						<td style="min-width=35px"><strong>Username:</strong></td>
 						<td>${member.username}</td>
 					</tr>
 					<tr>

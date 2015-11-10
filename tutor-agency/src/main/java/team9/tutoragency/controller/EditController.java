@@ -47,31 +47,18 @@ public class EditController {
 	 * values of a {@link Member} to be edited.
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(HttpServletResponse response) throws IOException {
+	public ModelAndView edit() throws IOException {
 		ModelAndView edit = new ModelAndView("edit");
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
-
-		EditForm editForm = new EditForm();
-		editForm.setFirstName(member.getFirstName());
-		editForm.setLastName(member.getLastName());
-		editForm.setUsername(member.getUsername());
-		editForm.setEmail(member.getEmail());
-		editForm.setUsername(member.getUsername());
-		if (member.getFee() != null) {
-			editForm.setFee(member.getFee().toString());
-		} else {
-			editForm.setFee("0");
-		}
-		edit.addObject("editForm", editForm);
+		EditForm editForm = new EditForm(member);
+			
 		List<University> universities = uniService.findAll();
-		List<String> universityNames = new ArrayList<String>();
-		for (University uni : universities) {
-			universityNames.add(uni.getName());
-		}
+		List<String> universityNames = extractNames(universities);
 
 		edit.addObject("universityChoices", universityNames);
+		edit.addObject("editForm", editForm);
 		edit.addObject("member", member);
 		return edit;
 	}
@@ -108,15 +95,20 @@ public class EditController {
 			model = new ModelAndView("edit");
 			model.addObject("editForm", editForm);
 			List<University> universities = uniService.findAll();
-			List<String> universityNames = new ArrayList<String>();
-			for (University uni : universities) {
-				universityNames.add(uni.getName());
-			}
+			List<String> universityNames = extractNames(universities);
 
 			model.addObject("universityChoices", universityNames);
 			model.addObject("member", member);
 
 		}
 		return model;
+	}
+
+	public List<String> extractNames(List<University> universities) {
+		List<String> names = new ArrayList<String>();
+		for (University uni : universities) {
+			names.add(uni.getName());
+		}
+		return names;
 	}
 }
