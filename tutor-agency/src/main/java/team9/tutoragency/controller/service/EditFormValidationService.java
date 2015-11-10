@@ -38,9 +38,10 @@ import team9.tutoragency.model.dao.MemberDao;
  * <li>If the member is tutor, the fee of the tutoring session has to be filled
  * out {@link EditForm#getFee()}</li>
  * </ol>
- * 
- * If a form is not valid, an error message will be displayed in the view in
- * order to allow the member to change the input values. Simple null checks are
+ * In every case the old password has to be supplied for security reasons.
+ *  If a
+ * form is not valid, an error message will be displayed in the view in order to
+ * allow the member to change the input values. Simple null checks are
  * implemented with {@link AnnotationsAttribute} in the {@link EditForm}.
  * 
  * @author laeri

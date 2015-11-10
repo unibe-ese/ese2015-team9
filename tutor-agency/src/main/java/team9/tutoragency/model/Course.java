@@ -15,40 +15,51 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+/**
+ * <p>
+ * A {@link Course} is an instance in the Tutor-Agency domain model which
+ * describes a specific course on a given {@link University}. The {@link Course}
+ * has a specific {@link name} and belongs to a {@link #University}. Courses can
+ * be offered by tutors to students.
+ * </p>
+ * 
+ * @author laeri
+ *
+ */
 @Entity
 public class Course implements Serializable {
-    
-    @Id
-    @GeneratedValue
-    private Long id;
-    private String name;
-    
-    @ManyToOne()
-    private University university;
-    
+
+	@Id
+	@GeneratedValue
+	private Long id;
+	private String name;
+
+	@ManyToOne()
+	private University university;
+
 	public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public University getUniversity() {
-        return university;
-    }
+	public University getUniversity() {
+		return university;
+	}
 
-    public void setUniversity(University university) {
-        this.university = university;
-    }
+	public void setUniversity(University university) {
+		this.university = university;
+	}
 
 	@Override
 	public int hashCode() {
@@ -91,6 +102,5 @@ public class Course implements Serializable {
 	public String toString() {
 		return "Course [id=" + id + ", name=" + name + ", university=" + university + "]";
 	}
-    
-    
+
 }

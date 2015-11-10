@@ -24,6 +24,13 @@ import team9.tutoragency.controller.service.UniversityAccessService;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
 
+/**
+ * Handles all interactions of a {@link Member} in order to edit the profile
+ * information.
+ * 
+ * @author laeri
+ *
+ */
 @Controller
 public class EditController {
 
@@ -34,11 +41,18 @@ public class EditController {
 	@Autowired
 	UniversityAccessService uniService;
 
+	/**
+	 * Prepares the model for the edit view when a {@link Member} would like to
+	 * edit his profile informations. The {@link EditForm} will contain all
+	 * values of a {@link Member} to be edited.
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(HttpServletResponse response) throws IOException {
 		ModelAndView edit = new ModelAndView("edit");
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
+
 		EditForm editForm = new EditForm();
 		editForm.setFirstName(member.getFirstName());
 		editForm.setLastName(member.getLastName());
@@ -62,6 +76,19 @@ public class EditController {
 		return edit;
 	}
 
+	/**
+	 * Handles saving an {@link EditForm} with the help of the
+	 * {@link MemberService} to the database. The {@link EditForm} is validated
+	 * by the {@link EditFormValidationService}. If the validation passes the
+	 * {@link MemberService} saves the change persistently, if not the edit view
+	 * is again displayed containing any errors.
+	 * 
+	 * @param editForm
+	 *            Form which holds member informations which can be altered by a
+	 *            {@link Member}
+	 * @return The profile model for the profile view otherwise the edit page
+	 *         will be shown again
+	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveChange(@Valid EditForm editForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
