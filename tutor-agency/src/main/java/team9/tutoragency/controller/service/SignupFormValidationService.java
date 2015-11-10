@@ -13,6 +13,12 @@ import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
+/**
+ * The {@link SignupFormValidationService} validates a {@link SignupForm}.
+ * 
+ * @author laeri
+ *
+ */
 @Service
 public class SignupFormValidationService implements ValidationService {
 
@@ -24,11 +30,9 @@ public class SignupFormValidationService implements ValidationService {
 	private Matcher matcher;
 	private final String namePattern = "^[a-zA-Z0-9_-]{3,15}$";
 
-
 	public SignupFormValidationService() {
 		validCharacterPattern = Pattern.compile(namePattern);
 	}
-
 
 	private void checkUsernameAlreadyInUse(Errors errors, SignupForm form) {
 		List<Member> registeredMembers = memberDao.findByUsername(form.getUsername());
@@ -62,7 +66,7 @@ public class SignupFormValidationService implements ValidationService {
 		checkUsernameAlreadyInUse(errors, form);
 
 		checkEmailAlreadyInUse(errors, form);
-		
+
 	}
 
 }
