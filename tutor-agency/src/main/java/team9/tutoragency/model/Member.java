@@ -32,9 +32,8 @@ public class Member implements UserDetails {
 	private String email;
 	private String username;
 	private String password;
+	private Double fee; 
 	private boolean isTutor;
-	private Double fee; // Use of Wrapper class because this variable is not
-						// always set.
 	private boolean isActivated;
 
 	@ManyToMany
@@ -58,6 +57,24 @@ public class Member implements UserDetails {
 		
 	}
 
+	/**
+	 * We know that the name is ugly, but it makes more sense in the jsp file ;-) .
+	 */
+	public boolean isIsTutor() {
+		return isTutor;
+	}
+	public void setIsTutor(boolean tutor) {
+		this.isTutor = tutor;
+	}
+	/**
+	 * We know that the name is ugly, but it makes more sense in the jsp file ;-) .
+	 */
+	public boolean isIsActivated() {
+		return isActivated;
+	}
+	public void setIsActivated(boolean activated) {
+		this.isActivated = activated;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -98,21 +115,7 @@ public class Member implements UserDetails {
 		this.email = email;
 	}
 
-	public boolean isIsTutor() {
-		return isTutor;
-	}
-
-	public void setIsTutor(boolean isTutor) {
-		this.isTutor = isTutor;
-	}
-
-	public boolean isIsActivated() {
-		return isActivated;
-	}
-
-	public void setIsActivated(boolean isActivated) {
-		this.isActivated = isActivated;
-	}
+	
 
 	public List<Course> getCourseList() {
 		if(courseList == null) courseList = new ArrayList<Course>();

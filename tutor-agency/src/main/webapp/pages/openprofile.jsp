@@ -29,13 +29,16 @@
 							<td>${member.fee}</td>
 							
 						<tr>
-							<td><strong>Alle Standorte:</strong></td>
-							<td><select><c:forEach items="${unis}" var="unis">
-										<option value="${unis.name}"><c:out
-												value="${unis.name}" /></option>
-									</c:forEach></select></td>
+						
+						<td><strong>Locations:</strong></td>
+								<td>
+									<ol>
+										<c:forEach items="${member.universityList}" var="unis">
+											<li>${unis.name}</li>
+										</c:forEach>
+									</ol>
 
-						</tr>
+						
 						
 						</tr>
 
