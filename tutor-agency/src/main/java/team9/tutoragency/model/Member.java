@@ -18,6 +18,36 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import team9.tutoragency.controller.RegisterController;
+
+/**
+ * <p>
+ * A {@link Member} is a user in the domain model of the Tutoring-Agency which
+ * tries to put tutors in contact with students. Both students and tutors are
+ * members but a tutor has a true {@link #isTutor} entry which can be attained
+ * by "upgrading" the account on the profile page of the Tutor-Agency website.
+ * In order to become a {@link Member} a user can register
+ * {@link RegisterController} in the register view.
+ * </p>
+ * <p>
+ * A {@link Member} has to supply
+ * <ul>
+ * <li>a first name {@link #firstName}</li>
+ * <li>a last name {@link #lastName}</li>
+ * <li>a username {@link #username} which has to be unique for every member</li>
+ * <li>an email address {@link #email} which should also be unique</li>
+ * <li>a password {@link #password}</li>
+ * </ul>
+ * The fee {@link #fee} only has to be specified if the {@link Member} has
+ * upgraded his account to a tutor. The {@link #courseList} contains a list of
+ * courses a tutor can offer to a student.
+ * 
+ * </p>
+ * 
+ * 
+ * @author laeri
+ *
+ */
 @Entity
 public class Member implements UserDetails {
 
@@ -41,7 +71,7 @@ public class Member implements UserDetails {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Course> courseList;
 
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<University> universityList;
 
 	public Member(String firstName, String lastName, String email, String username, String password) {
@@ -52,10 +82,11 @@ public class Member implements UserDetails {
 		this.username = username;
 		this.isTutor = false;
 		this.isActivated = false;
-		this.fee = null;		
+		this.fee = null;
 	}
-	public Member(){
-		
+
+	public Member() {
+
 	}
 
 	public String getPassword() {
@@ -115,7 +146,8 @@ public class Member implements UserDetails {
 	}
 
 	public List<Course> getCourseList() {
-		if(courseList == null) courseList = new ArrayList<Course>();
+		if (courseList == null)
+			courseList = new ArrayList<Course>();
 		return courseList;
 	}
 
@@ -169,8 +201,8 @@ public class Member implements UserDetails {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-    
-    @Override
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -187,6 +219,7 @@ public class Member implements UserDetails {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -247,10 +280,13 @@ public class Member implements UserDetails {
 			return false;
 		return true;
 	}
-    
-    @Override
-    public String toString() {
-        return "Member{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", username=" + username + ", password=" + password + ", isTutor=" + isTutor + ", fee=" + fee + ", isActivated=" + isActivated + ", courseList=" + courseList + ", universityList=" + universityList + '}';
-    }
+
+	@Override
+	public String toString() {
+		return "Member{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", username=" + username + ", password=" + password + ", isTutor=" + isTutor + ", fee=" + fee
+				+ ", isActivated=" + isActivated + ", courseList=" + courseList + ", universityList=" + universityList
+				+ '}';
+	}
 
 }

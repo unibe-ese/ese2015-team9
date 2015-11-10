@@ -20,6 +20,8 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/profile"
 			access="hasRole('ROLE_USER')" />
+			<security:intercept-url pattern="/showCourses"
+			access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/editProfile"
 			access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/addCourse"

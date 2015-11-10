@@ -38,20 +38,37 @@ public class CourseService {
 				courseList.remove(courseList.get(i));
 			}
 		}
-        member.setCourseList(courseList);
-        memberDao.save(member);
+		member.setCourseList(courseList);
+		memberDao.save(member);
 	}
 
+	/**
+	 * Adds a course to a {@link Member} only if the member doesn't have already an offered {@link Course}.
+	 * @param member The member which wants to offer a new course
+	 * @param courseName name of the course to be added
+	 */
 	@Transactional
-	public void addCourseToMember(Member member, String courseName) {
+	public void addCourseToMember(Member member, long courseName) {
+		
 		List<Course> courseList = member.getCourseList();
-		if (courseList != null) {
-			Course course = courseDao.findByName(courseName).get(0);
-			courseList.add(course);
-			memberDao.save(member);
-		}
+			Course course = courseDao.findById(courseName).get(0);
+			if (!member.getCourseList().contains(course)) {
+				courseList.add(course);
+				memberDao.save(member);
+			}
+
 	}
 
+	/**
+	 * Updates the model for the addCourse view in a workaround fashion. The selected {@link University}
+	 * from the {@link AddCourseForm} is removed from the the list and added to
+	 * the top in order that the selection in the addCourse view displays the
+	 * selected university at the top. The "courses" in the model contain only
+	 * the ones belonging to the specified {@link University}.
+	 * 
+	 * @param model which should be displayed after the update
+	 * @param addCourseForm the form which has the selected university
+	 */
 	@Transactional
 	public void updateDropdown(ModelAndView model, AddCourseForm addCourseForm) {
 		model.addObject("addCourseForm", addCourseForm);
@@ -78,4 +95,5 @@ public class CourseService {
 		addCourse.addObject("member", member);
 		addCourse.addObject("unis", member.getUniversityList());
 	}
+	
 }

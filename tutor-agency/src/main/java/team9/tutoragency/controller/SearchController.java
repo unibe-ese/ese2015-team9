@@ -13,7 +13,7 @@ import team9.tutoragency.controller.pojos.QuickSearchForm;
 import team9.tutoragency.controller.service.SearchService;
 
 /**
- * This Controller handels page request related to search mechanisms.
+ * This Controller handles page request related to search mechanisms.
  */
 @Controller
 public class SearchController {
@@ -32,7 +32,7 @@ public class SearchController {
 	 * @param redirectAttributes
 	 * @return
 	 */
-	@RequestMapping(value = "/quickResults", method = RequestMethod.POST)
+	@RequestMapping(value = "/showResults", method = RequestMethod.POST)
 	public ModelAndView showQuickSearchResults(QuickSearchForm searchForm, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		ModelAndView model = new ModelAndView("quicksearch");
@@ -51,6 +51,7 @@ public class SearchController {
 	public ModelAndView showQuickSearch() {
 		ModelAndView model = new ModelAndView("quicksearch");
 		model.addObject("searchForm", new QuickSearchForm());
+		
 		return model;
 	}
 

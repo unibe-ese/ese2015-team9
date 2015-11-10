@@ -15,14 +15,12 @@ public class IndexController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("index");
-		model.addObject("signupForm", new SignupForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView index1() {
 		ModelAndView model = new ModelAndView("index");
-		model.addObject("signupForm", new SignupForm());
 		return model;
 	}
 
