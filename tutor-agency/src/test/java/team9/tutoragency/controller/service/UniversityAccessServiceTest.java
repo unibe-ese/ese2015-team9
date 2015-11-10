@@ -37,13 +37,17 @@ public class UniversityAccessServiceTest {
         Mockito.when(uniDao.findByName("uni1")).thenReturn(expReslistSingle);
         Mockito.when(uniDao.findAll()).thenReturn(expReslistAll);
     }
-
+    /**
+     * Test of findAll method, of class {@link UniversityAccessService}.
+     */
     @Test
     public void testFindAll() {
         List<University> result = service.findAll();
         assertEquals(expReslistAll, result);
     }
-
+    /**
+     * Test of findByName method, of class {@link UniversityAccessService}.
+     */
     @Test
     public void testFindByName() {
         System.out.println("findByName");

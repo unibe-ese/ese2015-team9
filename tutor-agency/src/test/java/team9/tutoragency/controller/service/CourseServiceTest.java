@@ -91,7 +91,7 @@ public class CourseServiceTest {
     }
 
     /**
-     * Test of deleteProvidedCourse method, of class CourseService.
+     * Test of deleteProvidedCourse method, of class {@link CourseService}.
      */
     @Test
     public void testDeleteProvidedCourse() {
@@ -104,7 +104,7 @@ public class CourseServiceTest {
     }
 
     /**
-     * Test of addCourseToMember method, of class CourseService.
+     * Test of addCourseToMember method, of class {@link CourseService}.
      */
     @Test
     public void testAddCourseToMember() {
@@ -117,7 +117,7 @@ public class CourseServiceTest {
     }
 
     /**
-     * Test of updateDropdown method, of class CourseService.
+     * Test of updateDropdown method, of class {@link CourseService}.
      */
     @Test
     public void testUpdateDropdown() {
@@ -138,7 +138,7 @@ public class CourseServiceTest {
     }
 
     /**
-     * Test of generateAddCourseModel method, of class CourseService.
+     * Test of generateAddCourseModel method, of class {@link CourseService}.
      */
     @Test
     public void testGenerateAddCourseModel() {
