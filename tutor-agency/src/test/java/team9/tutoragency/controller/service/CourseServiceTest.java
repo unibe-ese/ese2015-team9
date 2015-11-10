@@ -108,11 +108,12 @@ public class CourseServiceTest {
      */
     @Test
     public void testAddCourseToMember() {
-        String courseName = "course2";      
+    	long idCourse2 = 2;
+        Mockito.when(courseDao.findById(idCourse2)).thenReturn(course2List);
         
         member.setCourseList(coursesSingle);
         
-        service.addCourseToMember(member, courseName);
+        service.addCourseToMember(member, idCourse2);
         assertEquals(coursesMuliple, captor.getValue().getCourseList());
     }
 

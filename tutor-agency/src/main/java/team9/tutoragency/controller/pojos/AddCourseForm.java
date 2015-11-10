@@ -17,7 +17,7 @@ import team9.tutoragency.model.Member;
 public class AddCourseForm {
 
 	@NotNull
-	private String selectedCourse;
+	private long selectedCourse;
 	@NotNull
 	private String selectedUniversity;
 
@@ -29,11 +29,11 @@ public class AddCourseForm {
 		this.selectedUniversity = chosenUniversity;
 	}
 
-	public String getSelectedCourse() {
+	public long getSelectedCourse() {
 		return selectedCourse;
 	}
 
-	public void setSelectedCourse(String chosenCourse) {
+	public void setSelectedCourse(long chosenCourse) {
 		this.selectedCourse = chosenCourse;
 	}
 
