@@ -23,7 +23,7 @@ public class ProfileController {
 	
 	@RequestMapping(value = "/profileId={id}", method = RequestMethod.GET)
 	  public ModelAndView showProfile(@PathVariable("id") Long id) {
-		  ModelAndView model = new ModelAndView("profile");
+		  ModelAndView model = new ModelAndView("openprofile");
 		  Member member = memberService.findById(id);
 		  model.addObject("member", member);
 		  model.addObject("memberAtHome", isLoggedIn(member));
