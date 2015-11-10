@@ -1,7 +1,7 @@
 package team9.tutoragency.controller;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.junit.Assert.assertEquals;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
@@ -24,6 +24,11 @@ public class LoginControllerTest {
 	 */
 	@Test
 	public void testReturnedModels() {
+		try {
+			mockMvc.perform(get("/login")).andExpect(status().isOk()).andExpect(model().attributeExists("message")).andExpect(forwardedUrl("loginpage"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		LoginController controller = new LoginController();
 		ModelAndView model;
 

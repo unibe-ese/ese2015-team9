@@ -36,19 +36,7 @@ public class ProfileController {
 		// model.addObject("memberAtHome", isLoggedIn(member));
 		return model;
 	}
-	// /**
-	// * This method returns true iff {@link Member#getUsername()} is equal to
-	// the current authentications principal (name).
-	// * @param member
-	// * @return
-	// */
-	// public boolean isLoggedIn(Member member) {
-	// Authentication authentication =
-	// SecurityContextHolder.getContext().getAuthentication();
-	// if(member.getUsername().equals(authentication.getName()))
-	// return true;
-	// else
-	// return false;
+	
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView show() {

@@ -16,9 +16,10 @@ font-family:Verdana, Geneva, sans-serif;
 
 body {
 width:80%;
+min-width:850px;
 margin-left:auto;
 margin-right:auto;
-background-color:#c2c2c2;
+background-color:springgreen;
 /*background-color: #FFF;*/
 line-height:150%;
 position:relative;

@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import team9.tutoragency.controller.service.EditFormValidationService;
+import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 
 /**
@@ -49,6 +50,27 @@ public class EditForm implements Form {
 		universities = new ArrayList<String>();
 
 	}
+
+	
+	public EditForm(Member member){
+		id = member.getId();
+		firstName = member.getFirstName();
+		lastName = member.getLastName();
+		username = member.getUsername();
+		if (member.getFee() != null) 
+			fee = member.getFee().toString();
+		else 
+			fee = "0";
+		oldPassword = "";
+		password = "";
+		passwordConfirm = "";
+		universities = new ArrayList<String>();
+			
+		
+	}
+	
+
+	
 
 	public String getFirstName() {
 		return firstName;

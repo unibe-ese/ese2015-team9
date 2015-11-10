@@ -10,61 +10,81 @@
 
 
 <div class="container">
-
-	<h1>Mein Profil</h1>
-	<br /> <br />
-
-	<table class="forms">
-
+	<h1>Profile</h1>
+	<br>
+	<table class="forms" >
 		<tr>
-			<td class="profil"><img src="img/profil.png" /></td>
+			<th style="text-align: left">Account Informations</th>
+			<c:if test="${member.isTutor}">
+				<th style="text-align: left">Tutoring</th>
+			</c:if>
+		</tr>
+		<tr>
+			<!-- <td class="profil"><img src="img/profil.png" /></td> -->
 			<td>
 				<table class="forms">
 					<tr>
-						<td style="width: 150px"><strong>Vorname:</strong></td>
+						<td colspan="2">
+							<hr>
+						</td>
+					</tr>
+					<tr>
+						<td style="min-width=35px"><strong>Username:</strong></td>
+						<td>${member.username}</td>
+					</tr>
+					<tr>
+						<td><strong>First Name:</strong></td>
+						<!-- style="width: 150px" -->
 						<td>${member.firstName}</td>
 					</tr>
 					<tr>
-						<td><strong>Nachname:</strong></td>
+						<td><strong>Last Name:</strong></td>
 						<td>${member.lastName}</td>
 					</tr>
-					<tr>
-						<td><strong>Nickname:</strong></td>
-						<td>${member.username}</td>
-					</tr>
+
 					<tr>
 						<td><strong>E-Mail:</strong></td>
 						<td>${member.email}</td>
 					</tr>
-					<tr>
-						<td><strong>Ist Tutor:</strong></td>
-						<td>${member.isTutor}</td>
-					</tr>
-					<c:if test="${member.isTutor}">
-						<tr>
-							<td><strong>Preis für Nachhilfe:</strong>
-							<td>${member.fee}</td>
-						</tr>
 
-						<tr>
-							<td><strong>Alle Standorte:</strong></td>
-							<td><select><c:forEach items="${member.universityList}" var="unis">
-										<option value="${unis.name}"><c:out
-												value="${unis.name}" /></option>
-									</c:forEach></select></td>
-
-						</tr>
-					</c:if>
 				</table>
 			</td>
+
+			<!-- Settings for Tutoring Informations-->
+			<c:if test="${member.isTutor}">
+				<td>
+					<table class="forms">
+						<tr>
+							<td colspan="2">
+								<hr>
+							</td>
+						</tr>
+						<tr>
+							<td><strong>Activated</strong>
+							<td>${member.isActivated}</td>
+						</tr>
+						<c:if test="${member.isTutor}">
+							<tr>
+								<td><strong>Fee:</strong>
+								<td>${member.fee}</td>
+							</tr>
+
+							<tr>
+								<td><strong>Locations:</strong></td>
+								<td>
+									<ol>
+										<c:forEach items="${member.universityList}" var="unis">
+											<li>${unis.name}</li>
+										</c:forEach>
+									</ol>
+							</tr>
+						</c:if>
+					</table>
+
+				</td>
+			</c:if>
 		</tr>
 	</table>
-	<form:form action="edit" method="get">
-		<input class="submitbutton" type="submit" value="Bearbeite Profil"
-			style="margin-left: 400px;" />
-	</form:form>
-
-
 	<div class="stripe"></div>
 	<c:import url="template/sidebar_profile.jsp" />
 	<c:import url="template/footer.jsp" />
