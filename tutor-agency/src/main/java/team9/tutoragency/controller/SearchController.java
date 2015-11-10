@@ -13,7 +13,7 @@ import team9.tutoragency.controller.pojos.QuickSearchForm;
 import team9.tutoragency.controller.service.SearchService;
 
 /**
- * This Controller handels page request related to search mechanisms.
+ * This Controller handles page request related to search mechanisms.
  */
 @Controller
 public class SearchController {

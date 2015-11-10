@@ -16,8 +16,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import team9.tutoragency.controller.exceptions.InvalidUserException;
 import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.controller.service.SignupFromSaveService;
+import team9.tutoragency.model.Member;
 import team9.tutoragency.controller.service.SignupFormValidationService;
 
+/**
+ * The {@link RegisterController} is responsible for all interactions when a
+ * user wants to register as a {@link Member} of the Tutoring Agency.
+ * 
+ * @author laeri
+ *
+ */
 @Controller
 public class RegisterController {
 
@@ -27,6 +35,13 @@ public class RegisterController {
 	@Autowired
 	SignupFormValidationService validator;
 
+	/**
+	 * Creates the model for the register view. A {@link SignupForm} will
+	 * contain all informations a user needs to edit in order to register
+	 * successfully.
+	 * 
+	 * @return model for the register view
+	 */
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register(HttpServletResponse response) throws IOException {
 		ModelAndView register = new ModelAndView("register");
@@ -34,6 +49,18 @@ public class RegisterController {
 		return register;
 	}
 
+	/**
+	 * Tries to create a {@link Member} based on the information provided in the
+	 * {@link SignupForm}. If the result doesn't have any errors the
+	 * {@link SignupFromSaveService} tries to save the member persistently to
+	 * the database. If there are any errors, the user isn't redirected but a
+	 * number of errors are displayed.
+	 * 
+	 * @param signupForm
+	 *            model of the form which was edited in the register view
+	 * @return model registerSuccess if successful otherwise the register form
+	 *         again to edit changes
+	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView createUser(@Valid SignupForm signupForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
