@@ -35,7 +35,7 @@
 							<td style="width: 150px"><strong>Kurs:</strong></td>
 							<td><form:select path="selectedCourse" name="courseList" id="courseList">
 									<c:forEach items="${courses}" var="courses">
-										<option value="${courses.name}"><c:out
+										<option value="${courses.id}"><c:out
 												value="${courses.name}" /></option>
 									</c:forEach>
 							</form:select></td>

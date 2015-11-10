@@ -44,20 +44,19 @@ public class CourseService {
 
 	/**
 	 * Adds a course to a {@link Member} only if the member doesn't have already an offered {@link Course}.
-	 * @param member
-	 * @param courseName
+	 * @param member The member which wants to offer a new course
+	 * @param courseName name of the course to be added
 	 */
 	@Transactional
-	public void addCourseToMember(Member member, String courseName) {
+	public void addCourseToMember(Member member, long courseName) {
+		
 		List<Course> courseList = member.getCourseList();
-		if (courseList != null) {
-			Course course = courseDao.findByName(courseName).get(0);
+			Course course = courseDao.findById(courseName).get(0);
 			if (!member.getCourseList().contains(course)) {
 				courseList.add(course);
 				memberDao.save(member);
 			}
 
-		}
 	}
 
 	/**
