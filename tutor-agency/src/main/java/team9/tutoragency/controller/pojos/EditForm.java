@@ -57,6 +57,7 @@ public class EditForm implements Form {
 		firstName = member.getFirstName();
 		lastName = member.getLastName();
 		username = member.getUsername();
+		email = member.getEmail();
 		if (member.getFee() != null) 
 			fee = member.getFee().toString();
 		else 
