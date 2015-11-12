@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import team9.tutoragency.controller.pojos.SearchFilter;
 import team9.tutoragency.controller.pojos.SearchResult;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.MemberDao;
 
@@ -43,13 +45,38 @@ public class SearchService {
 	
 
 	@Transactional
-	public List<SearchResult> findCoursesByNameContaining(String substring) {
-		List<Course> courses = courseDao.findByNameContaining(substring);
-		System.out.println(courses.toString());
-		for(Course course: courses){
-			System.err.println(course.getMembers().toString());
+	public List<SearchResult> findCoursesByNameContaining(String substring, SearchFilter filter){
+		List<Course> courseMatches;
+		if(filter.getUniversities() == null || filter.getUniversities().isEmpty()){
+			courseMatches = courseDao.findByNameContainingIgnoreCase(substring);
+		} else {
+			courseMatches = new ArrayList<Course>();
+			for(University university : filter.getUniversities()){
+				courseMatches.addAll(courseDao.findByNameContainingAndUniversity(substring, university));
+			}
 		}
-		return buildResult(courseDao.findByNameContaining(substring));
+		
+		List<Member> memberMatches = memberDao.findByIsTutorTrueAndFeeBetween(filter.getMinFee(), filter.getMaxFee());
+		
+		List<SearchResult> result = new ArrayList<SearchResult>();
+		
+		for(Course course: courseMatches){
+			List<Member> members = new ArrayList<Member>();
+			for(Member member : course.getMembers()){
+				if(memberMatches.contains(member));
+				members.add(member);
+			}
+			if(!members.isEmpty())
+				result.add(new SearchResult(course, members));
+		}
+		
+		return result;
+			
+	}
+	@Transactional
+	public List<SearchResult> findCoursesByNameContaining(String substring) {
+		
+		return buildResult(courseDao.findByNameContainingIgnoreCase(substring));
 	}
 
 	/**
