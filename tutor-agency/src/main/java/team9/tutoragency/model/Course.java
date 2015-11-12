@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -37,10 +39,25 @@ public class Course implements Serializable {
 	@ManyToOne()
 	private University university;
 
+	@ManyToMany(mappedBy="courseList", fetch=FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Member> members;
+	
+	public List<Member> getMembers() {
+		return members;
+	}
+
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
 
+	
 	public void setId(Long id) {
 		this.id = id;
 	}

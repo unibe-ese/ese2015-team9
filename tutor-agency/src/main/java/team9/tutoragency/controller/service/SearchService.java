@@ -44,6 +44,11 @@ public class SearchService {
 
 	@Transactional
 	public List<SearchResult> findCoursesByNameContaining(String substring) {
+		List<Course> courses = courseDao.findByNameContaining(substring);
+		System.out.println(courses.toString());
+		for(Course course: courses){
+			System.err.println(course.getMembers().toString());
+		}
 		return buildResult(courseDao.findByNameContaining(substring));
 	}
 
