@@ -14,8 +14,10 @@ import com.google.common.collect.Lists;
 import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.MemberCourse;
 import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
+import team9.tutoragency.model.dao.MemberCourseDao;
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.UniversityDao;
 
@@ -29,6 +31,8 @@ public class CourseService {
 	@Autowired
 	MemberDao memberDao;
 
+	@Autowired
+	MemberCourseDao memberCourseDao;
 	@Transactional
 	public void deleteProvidedCourse(Member member, Long courseId) {
 		List<Course> courseList = member.getCourseList();
@@ -38,37 +42,51 @@ public class CourseService {
 				courseList.remove(courseList.get(i));
 			}
 		}
-		
+
 		member.setCourseList(courseList);
 		memberDao.save(member);
 	}
 
 	/**
-	 * Adds a course to a {@link Member} only if the member doesn't have already an offered {@link Course}.
-	 * @param member The member which wants to offer a new course
-	 * @param courseName name of the course to be added
+	 * Adds a course to a {@link Member} only if the member doesn't have already
+	 * an offered {@link Course}.
+	 * 
+	 * @param member
+	 *            The member which wants to offer a new course
+	 * @param courseId
+	 *            of the course to be added
 	 */
 	@Transactional
-	public void addCourseToMember(Member member, long courseName) {
-		
+	public void addCourseToMember(Member member, long courseId) {
+
 		List<Course> courseList = member.getCourseList();
-			Course course = courseDao.findById(courseName).get(0);
-			if (!member.getCourseList().contains(course)) {
-				courseList.add(course);
-				memberDao.save(member);
-			}
+		Course course = courseDao.findById(courseId).get(0);
+		MemberCourse memberCourse = new MemberCourse();
+		memberCourse.setCourse(course);
+		memberCourse.setGrade(5);
+		memberCourse.setMember(member);
+		memberCourseDao.save(memberCourse);
+		System.out.println(member.getMemberCourseEntities().toString());
+		System.out.println(course.getMemberCourseEntities().toString());
+		if (!member.getCourseList().contains(course)) {
+			courseList.add(course);
+			memberDao.save(member);
+		}
 
 	}
 
 	/**
-	 * Updates the model for the addCourse view in a workaround fashion. The selected {@link University}
-	 * from the {@link AddCourseForm} is removed from the the list and added to
-	 * the top in order that the selection in the addCourse view displays the
-	 * selected university at the top. The "courses" in the model contain only
-	 * the ones belonging to the specified {@link University}.
+	 * Updates the model for the addCourse view in a workaround fashion. The
+	 * selected {@link University} from the {@link AddCourseForm} is removed
+	 * from the the list and added to the top in order that the selection in the
+	 * addCourse view displays the selected university at the top. The "courses"
+	 * in the model contain only the ones belonging to the specified
+	 * {@link University}.
 	 * 
-	 * @param model which should be displayed after the update
-	 * @param addCourseForm the form which has the selected university
+	 * @param model
+	 *            which should be displayed after the update
+	 * @param addCourseForm
+	 *            the form which has the selected university
 	 */
 	@Transactional
 	public void updateDropdown(ModelAndView model, AddCourseForm addCourseForm) {
@@ -96,5 +114,5 @@ public class CourseService {
 		addCourse.addObject("member", member);
 		addCourse.addObject("unis", member.getUniversityList());
 	}
-	
+
 }

@@ -3,7 +3,9 @@ package team9.tutoragency.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -75,8 +78,11 @@ public class Member implements UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<University> universityList;
 
+	@OneToMany(mappedBy = "member")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Set<MemberCourse> memberCourseEntities = new HashSet<MemberCourse>();
 	/**
-	 * To provide a cleaner construction in the test, when only selected values are important. 
+	 * To provide a cleaner construction, especially when in tests only selected values are important. 
 	 * @author brn
 	 */
 	public static class Builder{
@@ -145,6 +151,26 @@ public class Member implements UserDetails {
 			return this;
 		}
 	}
+	
+	
+
+
+
+
+	public Set<MemberCourse> getMemberCourseEntities() {
+		return memberCourseEntities;
+	}
+
+
+
+
+	public void setMemberCourseEntities(Set<MemberCourse> memberCourseEntities) {
+		this.memberCourseEntities = memberCourseEntities;
+	}
+
+
+
+
 	public Member(String firstName, String lastName, String email, String username, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;

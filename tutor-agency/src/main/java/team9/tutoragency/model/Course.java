@@ -2,7 +2,9 @@
 package team9.tutoragency.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -43,6 +46,9 @@ public class Course implements Serializable {
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Member> members;
 	
+	@OneToMany(mappedBy = "course")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Set<MemberCourse> memberCourseEntities = new HashSet<MemberCourse>();
 	
 	public Course() {
 		super();
@@ -55,6 +61,14 @@ public class Course implements Serializable {
 		this.members = members;
 	}
 
+
+	public Set<MemberCourse> getMemberCourseEntities() {
+		return memberCourseEntities;
+	}
+
+	public void setMemberCourseEntities(Set<MemberCourse> memberCourseEntities) {
+		this.memberCourseEntities = memberCourseEntities;
+	}
 
 	public List<Member> getMembers() {
 		return members;
