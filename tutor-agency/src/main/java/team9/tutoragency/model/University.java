@@ -30,6 +30,14 @@ public class University implements Serializable {
 	private Long id;
 	private String name;
 
+	public University(long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public University() {
+	}
+
 	public Long getId() {
 		return id;
 	}

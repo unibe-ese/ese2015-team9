@@ -75,6 +75,76 @@ public class Member implements UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<University> universityList;
 
+	/**
+	 * To provide a cleaner construction in the test, when only selected values are important. 
+	 * @author brn
+	 */
+	public static class Builder{
+		private Long id;
+		private String firstName;
+		private String lastName;
+		private String email;
+		private String username;
+		private String password;
+		private Double fee; 
+		private boolean isTutor;
+		private boolean isActivated;
+		private List<Course> courseList;
+		private List<University> universityList;
+		
+		public Builder(){}
+		public Member build(){
+			if(universityList==null)
+				universityList = new ArrayList<University>();
+			if(courseList==null)
+				courseList = new ArrayList<Course>();
+			return new Member(this);
+		}
+		public Builder id(Long id){
+			this.id=id;
+			return this;
+		}
+		public Builder firstName(String firstName){
+			this.firstName = firstName;
+			return this;
+		}
+		public Builder lastName(String lastName){
+			this.lastName = lastName;
+			return this;
+		}
+		public Builder email(String email){
+			this.email = email;
+			return this;
+		}
+		public Builder username(String username){
+			this.username = username;
+			return this;
+		}
+		public Builder password(String password){
+			this.password = password;
+			return this;
+		}
+		public Builder fee(Double fee){
+			this.fee = fee;
+			return this;
+		}
+		public Builder isTutor(boolean tutor){
+			isTutor = tutor;
+			return this;
+		}
+		public Builder isActivated(boolean activated){
+			isActivated = activated;
+			return this;
+		}
+		public Builder courseList(List<Course> courseList){
+			this.courseList = courseList;
+			return this;
+		}
+		public Builder universityList(List<University> universityList){
+			this.universityList = universityList;
+			return this;
+		}
+	}
 	public Member(String firstName, String lastName, String email, String username, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -85,10 +155,28 @@ public class Member implements UserDetails {
 		this.isActivated = false;
 		this.fee = null;
 	}
+	
+	
+	
 
 	public Member() {
 
 	}
+
+	public Member(Builder builder) {
+		this.id = builder.id;
+		this.firstName = builder.firstName;
+		this.lastName = builder.lastName;
+		this.username = builder.username;
+		this.email = builder.email;
+		this.password = builder.password;
+		this.fee = builder.fee;
+		this.isTutor = builder.isTutor;
+		this.isActivated = builder.isActivated;
+		this.courseList = builder.courseList;
+		this.universityList = builder.universityList;
+	}
+
 
 	/**
 	 * We know that the name is ugly, but it makes more sense in the jsp file ;-) .

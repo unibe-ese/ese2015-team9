@@ -43,6 +43,19 @@ public class Course implements Serializable {
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Member> members;
 	
+	
+	public Course() {
+		super();
+	}
+
+	public Course(Long id, String name, University university, List<Member> members) {
+		this.id = id;
+		this.name = name;
+		this.university = university;
+		this.members = members;
+	}
+
+
 	public List<Member> getMembers() {
 		return members;
 	}
