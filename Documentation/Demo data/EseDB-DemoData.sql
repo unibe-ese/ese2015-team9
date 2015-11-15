@@ -21,6 +21,24 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `University`
+--
+
+CREATE TABLE IF NOT EXISTS `University` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `University`
+--
+
+INSERT INTO `University` (`id`, `name`) VALUES
+(1, 'Bern'),
+(2, 'Basel'),
+(3, 'Zürich');
 
 --
 -- Table structure for table `Course`
@@ -86,17 +104,17 @@ INSERT INTO `Member` (`id`, `email`, `fee`, `firstName`, `isActivated`, `isTutor
 --
 
 CREATE TABLE IF NOT EXISTS `Member_Course` (
-  `Member_id` bigint(20) NOT NULL,
+  `members_id` bigint(20) NOT NULL,
   `courseList_id` bigint(20) NOT NULL,
   KEY `FK8B5A2D60CEF0A706` (`courseList_id`),
-  KEY `FK8B5A2D6026178A84` (`Member_id`)
+  KEY `FK8B5A2D6026178A84` (`members_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Member_Course`
 --
 
-INSERT INTO `Member_Course` (`Member_id`, `courseList_id`) VALUES
+INSERT INTO `Member_Course` (`members_id`, `courseList_id`) VALUES
 (3, 1),
 (3, 2),
 (3, 3),
@@ -133,24 +151,6 @@ INSERT INTO `Member_University` (`Member_id`, `universityList_id`) VALUES
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `University`
---
-
-CREATE TABLE IF NOT EXISTS `University` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `University`
---
-
-INSERT INTO `University` (`id`, `name`) VALUES
-(1, 'Bern'),
-(2, 'Basel'),
-(3, 'Zürich');
 
 --
 -- Constraints for dumped tables
@@ -166,7 +166,7 @@ ALTER TABLE `Course`
 -- Constraints for table `Member_Course`
 --
 ALTER TABLE `Member_Course`
-  ADD CONSTRAINT `FK8B5A2D6026178A84` FOREIGN KEY (`Member_id`) REFERENCES `Member` (`id`),
+  ADD CONSTRAINT `FK8B5A2D6026178A84` FOREIGN KEY (`members_id`) REFERENCES `Member` (`id`),
   ADD CONSTRAINT `FK8B5A2D60CEF0A706` FOREIGN KEY (`courseList_id`) REFERENCES `Course` (`id`);
 
 --

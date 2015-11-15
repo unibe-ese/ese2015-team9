@@ -18,6 +18,7 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <link type="text/css" rel="stylesheet" href="${css}" />
+<link type="text/css" rel="stylesheet" href="/tutor-agency/css/searchForm.css" />
 </head>
 
 <body>
@@ -28,6 +29,9 @@
 -->
 
 	<div class="header">
+	
+<form action="quicksearch" method = "GET" class="searchForm"><input type="search" name="text" />
+<input type="submit" value="Search" /></form>
 		<!-- 
 			<img src="<c:url value="/pages/template/header.jpg"/>">
 		 -->
@@ -42,7 +46,7 @@
 								<li class="sub"><a href="<c:url value="/faq" />">FAQ's</a></li>
 							</ul></li>
 
-						<li class="main"><a href="<c:url value="/quicksearch" />">Suche</a>
+						<li class="main"><a href="<c:url value="/search" />">Suche</a>
 							
 						<li class="main"><a href="<c:url value="/profile" />">Profile</a></li>
 
@@ -62,7 +66,7 @@
 								<li class="sub"><a href="<c:url value="/faq" />">FAQ's</a></li>
 							</ul></li>
 
-						<li class="main"><a href="<c:url value="/quicksearch" />">Suche</a>
+						<li class="main"><a href="<c:url value="/search" />">Suche</a>
 						<li class="main"><a href="<c:url value="/register" />">Registrieren</a></li>
 						<li class="main"><a href="<c:url value="/login" />">Login</a></li>
 

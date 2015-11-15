@@ -18,97 +18,140 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import team9.tutoragency.controller.SearchController;
+import team9.tutoragency.controller.pojos.SearchForm;
 import team9.tutoragency.controller.pojos.SearchResult;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.MemberDao;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchServiceTest {
 
 	@Mock
-	MemberDao memberDao;
+	CourseDao courseDao;
 
 	@Mock
-	CourseDao courseDao;
+	UniversityAccessService uniService;
 
 	@InjectMocks
 	private SearchService searchService;
 
-	private Course course1;
-	private Course course2;
-	private Course course3;
-	private Member member1;
-	private Member member2;
-	private ArrayList<Course> courseList1;
-	private ArrayList<Course> courseList2;
-	private ArrayList<Course> courseList3;
-	private List<Member> memberList;
-	private String searchText;
+	private List<Member> list(Member... params) {
+		List<Member> list = new ArrayList<Member>();
+		for (Member param : params) {
+			list.add(param);
+		}
+		return list;
+	}
+
+	private List<University> list(University... params) {
+		List<University> list = new ArrayList<University>();
+		for (University param : params) {
+			list.add(param);
+		}
+		return list;
+	}
+
+	private List<String> list(String... params) {
+		List<String> list = new ArrayList<String>();
+		for (String param : params) {
+			list.add(param);
+		}
+		return list;
+	}
+
+	private List<Course> list(Course... params) {
+		List<Course> list = new ArrayList<Course>();
+		for (Course param : params) {
+			list.add(param);
+		}
+		return list;
+	}
+
+	private List<SearchResult> list(SearchResult... params) {
+		List<SearchResult> list = new ArrayList<SearchResult>();
+		for (SearchResult param : params) {
+			list.add(param);
+		}
+		return list;
+	}
 
 	@Before
 	public void doSetup() {
 
-		course1 = new Course();
-		course2 = new Course();
-		course3 = new Course();
-		
-		course1.setId(1L);
-		course2.setId(2L);
-		course3.setId(3L);
-		
-		course1.setName("Introduction to Databases");
-		course2.setName("Datastructures and Algorithms");
-		course3.setName("Statistics");
-		
-		searchText = "Data";
+	}
 
-		courseList1 = new ArrayList<Course>();
-		courseList2 = new ArrayList<Course>();
+	@Test
+	public void testFindByCourseNameWithSearchFilter() {
+		University uni1 = new University(1L, "uni1");
+		University uni2 = new University(2L, "uni2");
+		Member member1 = new Member.Builder().fee(20D).build();
 		
-		courseList1.add(course1);
-		courseList1.add(course3);
-		
-		courseList2.add(course1);
-		courseList2.add(course2);
-		
-		member1 = new Member();
-		member2 = new Member();
-		
-		member1.setCourseList(courseList1);
-		member2.setCourseList(courseList2);
+		Member member2 = new Member.Builder().fee(30D).build();
+		Course course1 = new Course(1L, "course1", uni1, list(member1, member2));
+		Course course2 = new Course(2L, "course2", uni2, list(member2));
 
-		memberList = Arrays.asList(new Member[] { member1, member2 });
+		/*
+		 * search form with filtered==false should ignore all filter fields and
+		 * return just the answer from the courseDao wrapped as SearchResults
+		 */
+		SearchForm form = new SearchForm("course", 0, 20, list("uni1"));
+		when(courseDao.findByNameContainingIgnoreCase("course")).thenReturn(list(course1, course2));
+		List<SearchResult> expected = list(new SearchResult(course1, course1.getMembers()),
+				new SearchResult(course2, course2.getMembers()));
+		assertEquals(expected, searchService.findCoursesByNameContaining(form));
 
+		
+		form.setFiltered(true); 
+		//test fee maximum
+		when(uniService.findByNames(list("uni1"))).thenReturn(list(uni1));
+		when(courseDao.findByNameContainingAndUniversity("course", uni1)).thenReturn(list(course1));
+		expected = list(new SearchResult(course1, list(member1)));
+		assertEquals(expected, searchService.findCoursesByNameContaining(form));
+		
+		//Test fee minimum
+		form.setMinFee(21);
+		form.setMaxFee(30);
+		expected = list(new SearchResult(course1, list(member2)));
+		assertEquals(expected, searchService.findCoursesByNameContaining(form));
+		
+		//test university
+		form.setUniversityNames(list("uni1", "uni2"));
+		when(uniService.findByNames(list("uni1", "uni2"))).thenReturn(list(uni1, uni2));
+		when(courseDao.findByNameContainingAndUniversity("course", uni2)).thenReturn(list(course2));
+		expected = list(new SearchResult(course1, list(member2)), new SearchResult(course2, list(member2)));
+		assertEquals(expected, searchService.findCoursesByNameContaining(form));
+		
 	}
 
 	/**
 	 * This method tests if findCoursesByNameContaining returns the correct
-	 * {@link SearchResult}'s. That is, for each course, which contains the search
-	 * text in his name, a SearchResult, that contains exactly those Members,
-	 * which have this course in their courseList. Since the method returns only
-	 * the SearchResults obtained from processing of the search text in two
-	 * private methods, it's just a black box test for those methods.
+	 * {@link SearchResult}'s. That is, for each course, returned from {@link CourseDao#findByNameContainingIgnoreCase(String)}, 
+	 * a SearchResult which contains the course and all its members.
+	 * 
 	 */
 	@Test
 	public void testFindCoursesByNameContaining() {
 
-		Mockito.when(courseDao.findByNameContaining(searchText)).thenReturn(courseList2);
+		University uni1 = new University(1L, "uni1");
+		Member member1 = new Member.Builder().fee(20D).build();
+		Member member2 = new Member.Builder().fee(30D).build();
+		Course course1 = new Course(1L, "course1", uni1, list(member1, member2));
+		Mockito.when(courseDao.findByNameContainingIgnoreCase("text")).thenReturn(list(course1));
+		
+		List<SearchResult> results = searchService.findCoursesByNameContaining("text");
 
-		Mockito.when(memberDao.findAll()).thenReturn(memberList);
-
-		List<SearchResult> results = searchService.findCoursesByNameContaining("Data");
-
-		List<SearchResult> expectedResults = new ArrayList<SearchResult>();
-
-		expectedResults.add(new SearchResult(course1, Arrays.asList(new Member[] { member1, member2 })));
-		expectedResults.add(new SearchResult(course2, Arrays.asList(new Member[] { member2 })));
+		List<SearchResult> expectedResults = list(new SearchResult(course1, course1.getMembers()));
 
 		assertEquals(expectedResults, results);
 	}
+
 }
