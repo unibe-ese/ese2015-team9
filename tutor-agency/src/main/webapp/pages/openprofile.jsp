@@ -13,7 +13,6 @@
 	<h1>
 		<c:out value="${member.username}"></c:out>
 	</h1>
-	<br /> <br />
 	<table class="forms">
 		<tr>
 			<td class="profil"><img src="img/profil.png" /></td>
@@ -56,14 +55,6 @@
 		</tr>
 	</table>
 
-	<div class="sidebar">
-		
-		<sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
-		
-	<c:if test="${loggedIn}">
-			<p>Contact</p>
-	</c:if>
-</div>
 		<%-- <c:choose>
 			<c:when test="${memberAtHome}">
 				<c:choose>
@@ -94,12 +85,7 @@
 				<a>Contact</a>
 			</c:otherwise>
 		</c:choose> --%>
-	
-	<c:import url="template/footer.jsp" />
 
-
-
-	<hr>
 	<table id="courses" >
 		<tr class="title">
 			<td>Course</td>
@@ -131,6 +117,8 @@
 			</c:forEach>
 	</table>
 </div>
+</div>
+        	<c:import url="template/footer.jsp" />
 </body>
 </html>
 

@@ -11,15 +11,14 @@
 		<form:form modelAttribute="searchForm" action="showResults"
 			method="post" id="searchForm">
 			<form:input path="searchText" type="text"></form:input>
-			<input class="submitbutton" type="submit" value="Search"
-				style="margin-right: 50px;" />
+			<input class="submitbutton searchbutton" type="submit" value="Search"/>
 				<br>
 		</form:form>
 
 	</div>
-	<hr>
-	<table class="forms">
-		<tr class="title">
+
+	<table>
+        <tr class="title">
 			<td>Course</td>
 			<td>University</td>
 			<td>Tutor</td>
@@ -49,10 +48,11 @@
 	<div class="sidebar">
 		<c:import url="template/sidebar.jsp" />
 	</div> --%>
-	<c:import url="template/footer.jsp" />
-
+	
 </div>
-<body></body>
-<html></html>
+</div>
+    <c:import url="template/footer.jsp" />
+</body>
+</html>
 
 

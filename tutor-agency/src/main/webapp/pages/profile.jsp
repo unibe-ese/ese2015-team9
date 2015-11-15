@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <spring:url value="/css/style.css" var="css" />
 
@@ -11,7 +12,34 @@
 
 <div class="container">
 	<h1>Profile</h1>
-	<br>
+	
+    <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
+	<c:choose>
+		<c:when test="${loggedIn}">
+			<form:form action="edit" method="get">
+				<input class="submitbutton" type="submit" value="Profil bearbeiten" />
+			</form:form>
+			<c:if test="${not member.isTutor }">
+				<form:form action="becomeTutor">
+					<input class="submitbutton" type="submit" value="werde Tutor"
+						name="werde Tutor" />
+
+				</form:form>
+			</c:if>
+			<c:if test="${member.isTutor}">
+				<form:form action="addCourse" method="get">
+					<input class="submitbutton" type="submit" value="Kurs hinzufügen" />
+				</form:form>
+				<form:form action="showCourses" method="get">
+					<input class="submitbutton" type="submit" value="Zeige Kurse an" />
+				</form:form>
+			</c:if>
+		</c:when>
+		<c:otherwise>
+			<c:import url="template/loginform.jsp" />
+		</c:otherwise>
+	</c:choose>
+    
 	<table class="forms" >
 		<tr>
 			<th style="text-align: left">Account Informations</th>
@@ -23,11 +51,6 @@
 			<!-- <td class="profil"><img src="img/profil.png" /></td> -->
 			<td>
 				<table class="forms">
-					<tr>
-						<td colspan="2">
-							<hr>
-						</td>
-					</tr>
 					<tr>
 						<td style="min-width:35px"><strong>Username:</strong></td>
 						<td>${member.username}</td>
@@ -55,11 +78,6 @@
 				<td>
 					<table class="forms">
 						<tr>
-							<td colspan="2">
-								<hr>
-							</td>
-						</tr>
-						<tr>
 							<td><strong>Activated</strong>
 							<td>${member.isActivated}</td>
 						</tr>
@@ -85,11 +103,13 @@
 			</c:if>
 		</tr>
 	</table>
-	<div class="stripe"></div>
-	<c:import url="template/sidebar_profile.jsp" />
-	<c:import url="template/footer.jsp" />
-
+                    
+	<div>
+	
+    </div>
 </div>
+</div>
+    <c:import url="template/footer.jsp" />
 </body>
 </html>
 
