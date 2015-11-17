@@ -21,6 +21,7 @@ import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.controller.service.CourseService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.Offer;
 import team9.tutoragency.model.University;
 
 /**
@@ -85,17 +86,20 @@ public class CourseController {
 	 * Tries to save a course with help of the {@link CourseService} when the
 	 * user has chosen a course and submits the {@link AddCourseForm}.
 	 * 
-	 * @param addCourseForm course which should be added to a {@link Member}
+	 * @param addCourseForm
+	 *            course which should be added to a {@link Member}
 	 * @return redirects to the profile page
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/addCourse", method = RequestMethod.POST)
-	public String save(@Valid AddCourseForm addCourseForm, BindingResult result, RedirectAttributes redirectAttributes)
+	public ModelAndView saveCourse(@Valid AddCourseForm addCourseForm, BindingResult result, RedirectAttributes redirectAttributes)
 			throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
-		courseService.addCourseToMember(member, addCourseForm.getSelectedCourse());
-		return "redirect:/profile";
+		int grade = (int) (4 * Float.parseFloat(addCourseForm.getGrade()));
+		courseService.addCourseToMember(member, addCourseForm.getSelectedCourse(), grade);
+		ModelAndView profile = new ModelAndView("redirect:/profile");
+		return profile;
 	}
 
 	/**

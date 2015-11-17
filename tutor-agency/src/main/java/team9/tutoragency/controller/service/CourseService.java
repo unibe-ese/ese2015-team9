@@ -1,5 +1,6 @@
 package team9.tutoragency.controller.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,9 @@ import com.google.common.collect.Lists;
 import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
-
 import team9.tutoragency.model.Offer;
 import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
-
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.OfferDao;
 import team9.tutoragency.model.dao.UniversityDao;
@@ -35,17 +34,11 @@ public class CourseService {
 
 	@Autowired
 	OfferDao offerDao;
+
 	@Transactional
 	public void deleteProvidedCourse(Member member, Long courseId) {
 		List<Course> courseList = member.getCourseList();
-
-		for (int i = 0; i < courseList.size(); i++) {
-			if (courseList.get(i).getId() == courseId) {
-				courseList.remove(courseList.get(i));
-			}
-		}
-
-		member.setCourseList(courseList);
+		courseList.remove(courseDao.findById(courseId));
 		memberDao.save(member);
 	}
 
@@ -59,17 +52,13 @@ public class CourseService {
 	 *            of the course to be added
 	 */
 	@Transactional
-	public void addCourseToMember(Member member, long courseId) {
+	public void addCourseToMember(Member member, long courseId, int grade) {
 
 		List<Course> courseList = member.getCourseList();
 		Course course = courseDao.findById(courseId).get(0);
-		Offer offer = new Offer();
-		offer.setCourse(course);
-		offer.setGrade(24);
-		offer.setMember(member);
+
+		Offer offer = new Offer(member, course, grade);
 		offerDao.save(offer);
-		System.out.println(member.getOffer().toString());
-		System.out.println(course.getOffer().toString());
 		if (!member.getCourseList().contains(course)) {
 			courseList.add(course);
 			memberDao.save(member);
@@ -115,6 +104,11 @@ public class CourseService {
 		Member member = (Member) authentication.getPrincipal();
 		addCourse.addObject("member", member);
 		addCourse.addObject("unis", member.getUniversityList());
+		List<String> gradeChoices = new ArrayList<String>();
+		for(float i = 4; i <= 6; i+=0.25){
+			gradeChoices.add(Float.toString(i));
+		}
+		addCourse.addObject("gradeChoices", gradeChoices);
 	}
 
 }

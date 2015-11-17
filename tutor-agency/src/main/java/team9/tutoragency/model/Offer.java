@@ -1,40 +1,43 @@
 package team9.tutoragency.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import team9.tutoragency.controller.pojos.AddCourseForm;
+
 @Entity
-public class Offer implements Serializable{
-	
+public class Offer implements Serializable {
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="member_id")
+	@JoinColumn(name = "member_id")
 	private Member member;
 	@ManyToOne
-	@JoinColumn(name="course_id")
+	@JoinColumn(name = "course_id")
 	private Course course;
-	
+
 	@Min(16)
 	@Max(24)
 	private int grade;
 
-	
+	public Offer(Member member, Course course, int grade) {
+		this.member = member;
+		this.course = course;
+		this.grade = grade;
+	}
+	public Offer(){
+		
+	}
 
 	public Long getId() {
 		return id;
@@ -67,5 +70,5 @@ public class Offer implements Serializable{
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	
+
 }
