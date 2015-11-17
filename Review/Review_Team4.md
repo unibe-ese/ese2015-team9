@@ -98,7 +98,7 @@ helpful to understand the codebase a little bit faster. In all other cases docum
 ##Testing
 
 * Clear and distinct test cases  
-Test cases are both clear and distinct. Unit tests do not overlapp and it is clear what item is tested.
+Test cases are both clear and distinct. Unit tests do not overlapp and it is clear what item is tested. Differentiation between unit and integration tests.
 
 * Number/coverage of test cases  
 All controller and services are tested except LoginController (which doesn't need to be tested). The classes are tested extensively including Exceptions. Very good code coverage overall.
