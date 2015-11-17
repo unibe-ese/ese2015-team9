@@ -28,9 +28,8 @@
 								</form:select></td>
 						</tr>
 					</table>
-					</form:form>
-					<form:form modelAttribute="addCourseForm"
-					action="addCourse" method="post">
+				</form:form> <form:form modelAttribute="addCourseForm" action="addCourse"
+					method="post">
 					<tr>
 						<td>
 							<table class="forms">
@@ -45,7 +44,7 @@
 										</form:select></td>
 								</tr>
 								<tr>
-								<td style="width: 150px"><strong>Note:</strong></td>
+									<td style="width: 150px"><strong>Note:</strong></td>
 									<td><form:select path="grade" name="grade"
 											id="universityList">
 											<c:forEach items="${gradeChoices}" var="grades">

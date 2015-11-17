@@ -37,13 +37,11 @@ public class CourseService {
 
 	@Transactional
 	public void deleteProvidedCourse(Member member, Long courseId) {
-		List<Course> courseList = member.getCourseList();
-		courseList.remove(courseDao.findById(courseId));
-		for(Course course: courseList){
-			if(course.getId() == courseId){
-				courseList.remove(course);
-				member.getOffer().remove(course);
-				break;
+		List<Offer> offerList = Lists.newArrayList(member.getOffer());
+		for (int i = 0; i < offerList.size(); i++) {
+			Offer offer = offerList.get(i);
+			if (offer.getCourse().getId() == courseId) {
+				member.getOffer().remove(offerList.get(i));
 			}
 		}
 		memberDao.save(member);
@@ -61,15 +59,11 @@ public class CourseService {
 	@Transactional
 	public void addCourseToMember(Member member, long courseId, float grade) {
 
-		List<Course> courseList = member.getCourseList();
 		Course course = courseDao.findById(courseId).get(0);
 
-		if (!member.getCourseList().contains(course)) {
 			Offer offer = new Offer(member, course, grade);
-			offerDao.save(offer);
-			courseList.add(course);
+			member.getOffer().add(offer);
 			memberDao.save(member);
-		}
 
 	}
 
@@ -101,7 +95,7 @@ public class CourseService {
 		model.addObject("member", member);
 		model.addObject("unis", member.getUniversityList());
 		List<String> gradeChoices = new ArrayList<String>();
-		for(float i = 4; i <= 6; i+=0.25){
+		for (float i = 4; i <= 6; i += 0.25) {
 			gradeChoices.add(Float.toString(i));
 		}
 		model.addObject("gradeChoices", gradeChoices);
@@ -117,7 +111,7 @@ public class CourseService {
 		addCourse.addObject("member", member);
 		addCourse.addObject("unis", member.getUniversityList());
 		List<String> gradeChoices = new ArrayList<String>();
-		for(float i = 4; i <= 6; i+=0.25){
+		for (float i = 4; i <= 6; i += 0.25) {
 			gradeChoices.add(Float.toString(i));
 		}
 		addCourse.addObject("gradeChoices", gradeChoices);
