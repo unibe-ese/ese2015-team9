@@ -17,15 +17,17 @@
 		<tr>
 			<td>Kurs</td>
 			<td>Universität</td>
+			<td>Note</td>
 			<td>Entfernen</td>
 		</tr>
-		<c:forEach items="${courses}" var="courses">
+		<c:forEach items="${member.offer}" var="offer">
 			<tr>
-				<td><c:out value="${courses.name}"></c:out></td>
-				<td><c:out value="${courses.university.name}"></c:out></td>
+				<td><c:out value="${offer.course.name}"></c:out></td>
+				<td><c:out value="${offer.course.university.name}"></c:out></td>
+				<td><c:out value="${offer.grade}"></c:out></td>
 				<td align="center"><form
-						onsubmit="return confirm('Willst du den Kurs: ${courses.name} wirklich entfernen?');"
-						action="delete_${courses.id}" method="post">
+						onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');"
+						action="delete_${offer.course.id}" method="post">
 						<input class="none" id="deleteIcon" type="image"
 							src="img/delete-icon.png" name="delete-icon"
 							style="height: 10px; width: 10px;" onClick="alert(test);">

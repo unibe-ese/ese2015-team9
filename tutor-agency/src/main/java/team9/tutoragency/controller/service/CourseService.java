@@ -39,6 +39,13 @@ public class CourseService {
 	public void deleteProvidedCourse(Member member, Long courseId) {
 		List<Course> courseList = member.getCourseList();
 		courseList.remove(courseDao.findById(courseId));
+		for(Course course: courseList){
+			if(course.getId() == courseId){
+				courseList.remove(course);
+				member.getOffer().remove(course);
+				break;
+			}
+		}
 		memberDao.save(member);
 	}
 
@@ -52,14 +59,14 @@ public class CourseService {
 	 *            of the course to be added
 	 */
 	@Transactional
-	public void addCourseToMember(Member member, long courseId, int grade) {
+	public void addCourseToMember(Member member, long courseId, float grade) {
 
 		List<Course> courseList = member.getCourseList();
 		Course course = courseDao.findById(courseId).get(0);
 
-		Offer offer = new Offer(member, course, grade);
-		offerDao.save(offer);
 		if (!member.getCourseList().contains(course)) {
+			Offer offer = new Offer(member, course, grade);
+			offerDao.save(offer);
 			courseList.add(course);
 			memberDao.save(member);
 		}
@@ -93,6 +100,11 @@ public class CourseService {
 		Member member = (Member) authentication.getPrincipal();
 		model.addObject("member", member);
 		model.addObject("unis", member.getUniversityList());
+		List<String> gradeChoices = new ArrayList<String>();
+		for(float i = 4; i <= 6; i+=0.25){
+			gradeChoices.add(Float.toString(i));
+		}
+		model.addObject("gradeChoices", gradeChoices);
 	}
 
 	@Transactional

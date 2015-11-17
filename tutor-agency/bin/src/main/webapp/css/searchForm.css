@@ -1,0 +1,68 @@
+@CHARSET "utf-8";
+
+.searchForm input[type=search] {
+	width: 200px;
+}
+
+.searchForm {
+	padding: 1em;
+	font-size: 0.9em;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.searchForm label {
+	padding: 0;
+}
+
+.searchForm input {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 0.5em;
+}
+
+.searchForm input[type=submit] {
+	width: 70px;
+	padding: 0.7em;
+	border-radius: 3px;
+	background: #ddd;
+	border: none;
+	font-weight: bold;
+}
+
+.searchForm input[type=submit]:hover {
+	background: #ccc;
+	cursor: pointer;
+}
+
+.searchForm fieldset.filter {
+	height: 140px;
+	width: 100px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	
+}
+
+.searchForm fieldset {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	
+}
+
+.searchForm fieldset span {
+	/*this allows to display each checkbox,
+	 together with it's label,
+	 on a separate line*/
+	display: block;
+}
+
+.scrollList {
+	height: 100px;
+	width: 110px;
+	overflow-y: scroll;
+}
+
+.searchForm fieldset input[type=number] {
+	width: 50px;
+}

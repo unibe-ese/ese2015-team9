@@ -26,11 +26,9 @@ public class Offer implements Serializable {
 	@JoinColumn(name = "course_id")
 	private Course course;
 
-	@Min(16)
-	@Max(24)
-	private int grade;
+	private float grade;
 
-	public Offer(Member member, Course course, int grade) {
+	public Offer(Member member, Course course, float grade) {
 		this.member = member;
 		this.course = course;
 		this.grade = grade;
@@ -63,11 +61,11 @@ public class Offer implements Serializable {
 		this.course = course;
 	}
 
-	public int getGrade() {
+	public float getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(float grade) {
 		this.grade = grade;
 	}
 

@@ -96,7 +96,7 @@ public class CourseController {
 			throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
-		int grade = (int) (4 * Float.parseFloat(addCourseForm.getGrade()));
+		float grade = Float.parseFloat(addCourseForm.getGrade());
 		courseService.addCourseToMember(member, addCourseForm.getSelectedCourse(), grade);
 		ModelAndView profile = new ModelAndView("redirect:/profile");
 		return profile;
@@ -116,9 +116,6 @@ public class CourseController {
 		ModelAndView model = new ModelAndView("showCourses");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
-		List<Course> courseList = member.getCourseList();
-		model.addObject("courses", courseList);
-		model.addObject("unis", member.getUniversityList());
 		model.addObject("member", member);
 		return model;
 	}
