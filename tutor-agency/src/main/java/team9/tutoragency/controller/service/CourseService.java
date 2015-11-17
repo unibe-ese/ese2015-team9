@@ -14,11 +14,13 @@ import com.google.common.collect.Lists;
 import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.model.MemberCourse;
+
+import team9.tutoragency.model.Offer;
 import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
-import team9.tutoragency.model.dao.MemberCourseDao;
+
 import team9.tutoragency.model.dao.MemberDao;
+import team9.tutoragency.model.dao.OfferDao;
 import team9.tutoragency.model.dao.UniversityDao;
 
 @Service
@@ -32,7 +34,7 @@ public class CourseService {
 	MemberDao memberDao;
 
 	@Autowired
-	MemberCourseDao memberCourseDao;
+	OfferDao offerDao;
 	@Transactional
 	public void deleteProvidedCourse(Member member, Long courseId) {
 		List<Course> courseList = member.getCourseList();
@@ -61,13 +63,13 @@ public class CourseService {
 
 		List<Course> courseList = member.getCourseList();
 		Course course = courseDao.findById(courseId).get(0);
-		MemberCourse memberCourse = new MemberCourse();
-		memberCourse.setCourse(course);
-		memberCourse.setGrade(5);
-		memberCourse.setMember(member);
-		memberCourseDao.save(memberCourse);
-		System.out.println(member.getMemberCourseEntities().toString());
-		System.out.println(course.getMemberCourseEntities().toString());
+		Offer offer = new Offer();
+		offer.setCourse(course);
+		offer.setGrade(24);
+		offer.setMember(member);
+		offerDao.save(offer);
+		System.out.println(member.getOffer().toString());
+		System.out.println(course.getOffer().toString());
 		if (!member.getCourseList().contains(course)) {
 			courseList.add(course);
 			memberDao.save(member);

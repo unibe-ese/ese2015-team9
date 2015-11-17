@@ -80,7 +80,8 @@ public class Member implements UserDetails {
 
 	@OneToMany(mappedBy = "member")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private Set<MemberCourse> memberCourseEntities = new HashSet<MemberCourse>();
+	private Set<Offer> offer = new HashSet<Offer>();
+	
 	/**
 	 * To provide a cleaner construction, especially when in tests only selected values are important. 
 	 * @author brn
@@ -152,25 +153,6 @@ public class Member implements UserDetails {
 		}
 	}
 	
-	
-
-
-
-
-	public Set<MemberCourse> getMemberCourseEntities() {
-		return memberCourseEntities;
-	}
-
-
-
-
-	public void setMemberCourseEntities(Set<MemberCourse> memberCourseEntities) {
-		this.memberCourseEntities = memberCourseEntities;
-	}
-
-
-
-
 	public Member(String firstName, String lastName, String email, String username, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -262,8 +244,6 @@ public class Member implements UserDetails {
 		this.email = email;
 	}
 
-	
-
 	public List<Course> getCourseList() {
 		if (courseList == null)
 			courseList = new ArrayList<Course>();
@@ -320,6 +300,20 @@ public class Member implements UserDetails {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public Set<Offer> getOffer() {
+		return offer;
+	}
+
+
+
+
+	public void setOffer(Set<Offer> offer) {
+		this.offer = offer;
+	}
+
+
+
 
 	@Override
 	public int hashCode() {
@@ -404,7 +398,7 @@ public class Member implements UserDetails {
 	public String toString() {
 		return "Member{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", username=" + username + ", password=" + password + ", isTutor=" + isTutor + ", fee=" + fee
-				+ ", isActivated=" + isActivated + ", courseList=" + courseList + ", universityList=" + universityList
+				+ ", isActivated=" + isActivated 
 				+ '}';
 	}
 
