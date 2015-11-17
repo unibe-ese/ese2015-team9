@@ -3,32 +3,32 @@
 
 ##Design
 
-*Violation of the MVC pattern
+* Violation of the MVC pattern
 
 The project follows almost everywhere the MVC pattern, one thing that might be called a violation of this pattern is, 
 that the ProfilePictureViewController is Autowired to a Dao and addresses therefore the DB directly.   
 Another violation is the ExceptionServiceImpl. As I understand, it does the job of a controller (no DB access, adds an Object to a model)
 and the controller that passes a model to it could add the message by itself. Same thing with addProfilePictureInfoToModel in the ProfilePictureServiceImpl.
 
-*Usage of helper objects between view and model
+* Usage of helper objects between view and model
 
 It is quite nice that almost for every that "does something" a separate form (with well defiened constraints) is used.
 And that, with the various included jsps, the responsibility of the page restricts itself to handling those forms. 
 
-*Rich OO domain model
+* Rich OO domain model
 
 Not much to say here, the domain model seems to be just what is needed and to provide good access to all fields. 
 
-*Clear responsibilities
+* Clear responsibilities
 
 The responsibilities are very clear defined. For example it is nice, that the responsibilities concerning the profile 
 are split up into show and edit informations, and additionaly into the more complex show-image and edit-image responsibilities.
 
-*Sound invariants
+* Sound invariants
 
 No invariants spotted. But many checks and custom exception seem to garantee valid states.
 
-*Overall code organization & reuse, e.g. views
+* Overall code organization & reuse, e.g. views
 
 For each service, an interface is defined but none is implemented more than once. 
 This seems to be unnecessary, but follows the proposed style from the skeleton project. 
