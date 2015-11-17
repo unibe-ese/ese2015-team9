@@ -98,33 +98,35 @@ helpful to understand the codebase a little bit faster. In all other cases docum
 ##Testing
 
 * Clear and distinct test cases  
-
+Test cases are both clear and distinct. Unit tests do not overlapp and it is clear what item is tested. Differentiation between unit and integration tests.
 
 * Number/coverage of test cases  
 All controller and services are tested except LoginController (which doesn't need to be tested). The classes are tested extensively including Exceptions. Very good code coverage overall.
 
 * Easy to understand the case that is tested  
 The names of the test methods are well choosen and describtive. A nice addition (but not necessary) would be a link to the tested class. Something like this:
-```
-/*
-* Test of class {@link IndexController}
-*/
-```
+	```
+	/*
+	* Test of class {@link IndexController}
+	*/
+	```
 
-* Well crafted set of test data
+* Well crafted set of test data  
+Use of a data seeder is a good method for setting up the test data. The data set is comprehensive and you have some nice test users :)
 
 * Readability  
 The tests are well formatted with a few missteps in line length (e.g. ProfileEditControllerTest).
 However, I don't see why you didn't use the standard file structure:
-```
-main
-	java ...
-tests
-	java
-		ch
-			ututor
-				controller      <- controller tests; name the integration tests ControllerNameIT (or something like that)
-					service 	<- service tests
-```
+	```
+	main
+		java ...
+	tests
+		java
+			ch
+				ututor
+					controller      <- controller tests; name the integration tests ControllerNameIT (or something like that)
+						service 	<- service tests
+	```
 
-I think that would be a better structure than the one you have now. You could still use test suits if you want to.
+   I think that would be a better structure than the one you have now. You could still use test suits if you want to.
+   Use assertArrayEquals instead assertEquals when comparing arrays for equality (best practise).
