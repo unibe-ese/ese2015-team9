@@ -38,13 +38,20 @@ public class CourseService {
 	@Transactional
 	public void deleteProvidedCourse(Member member, Long courseId) {
 		List<Offer> offerList = Lists.newArrayList(member.getOffer());
+		Offer deleteOffer = null;
 		for (int i = 0; i < offerList.size(); i++) {
-			Offer offer = offerList.get(i);
-			if (offer.getCourse().getId() == courseId) {
+			deleteOffer = offerList.get(i);
+			if (deleteOffer.getCourse().getId() == courseId) {
 				member.getOffer().remove(offerList.get(i));
+				List<Course> courseList = member.getCourseList();
+				courseList.remove(offerList.get(i).getCourse());
+				member.setCourseList(courseList);
 			}
 		}
 		memberDao.save(member);
+		if (deleteOffer != null) {
+			offerDao.delete(deleteOffer);
+		}
 	}
 
 	/**
@@ -61,9 +68,11 @@ public class CourseService {
 
 		Course course = courseDao.findById(courseId).get(0);
 
-			Offer offer = new Offer(member, course, grade);
-			member.getOffer().add(offer);
-			memberDao.save(member);
+		Offer offer = new Offer(member, course, grade);
+		member.getOffer().add(offer);
+		member.getCourseList().add(course);
+		memberDao.save(member);
+		offerDao.save(offer);
 
 	}
 
@@ -94,11 +103,16 @@ public class CourseService {
 		Member member = (Member) authentication.getPrincipal();
 		model.addObject("member", member);
 		model.addObject("unis", member.getUniversityList());
+
+		model.addObject("gradeChoices", getPossibleGrades());
+	}
+
+	private List<String> getPossibleGrades() {
 		List<String> gradeChoices = new ArrayList<String>();
 		for (float i = 4; i <= 6; i += 0.25) {
 			gradeChoices.add(Float.toString(i));
 		}
-		model.addObject("gradeChoices", gradeChoices);
+		return gradeChoices;
 	}
 
 	@Transactional
@@ -110,11 +124,7 @@ public class CourseService {
 		Member member = (Member) authentication.getPrincipal();
 		addCourse.addObject("member", member);
 		addCourse.addObject("unis", member.getUniversityList());
-		List<String> gradeChoices = new ArrayList<String>();
-		for (float i = 4; i <= 6; i += 0.25) {
-			gradeChoices.add(Float.toString(i));
-		}
-		addCourse.addObject("gradeChoices", gradeChoices);
+		addCourse.addObject("gradeChoices", getPossibleGrades());
 	}
 
 }
