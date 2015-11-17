@@ -100,10 +100,10 @@ helpful to understand the codebase a little bit faster. In all other cases docum
 * Clear and distinct test cases  
 
 
-* Number/coverage of test cases
+* Number/coverage of test cases  
 All controller and services are tested except LoginController (which doesn't need to be tested). The classes are tested extensively including Exceptions. Very good code coverage overall.
 
-* Easy to understand the case that is tested
+* Easy to understand the case that is tested  
 The names of the test methods are well choosen and describtive. A nice addition (but not necessary) would be a link to the tested class. Something like this:
 ```
 /*
@@ -126,4 +126,5 @@ tests
 				controller      <- controller tests; name the integration tests ControllerNameIT (or something like that)
 					service 	<- service tests
 ```
-     I think that would be a better structure than the one you have now. You could still use test suits if you want to.
+
+I think that would be a better structure than the one you have now. You could still use test suits if you want to.
