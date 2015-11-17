@@ -98,7 +98,7 @@ helpful to understand the codebase a little bit faster. In all other cases docum
 ##Testing
 
 * Clear and distinct test cases  
-
+Yes
 
 * Number/coverage of test cases  
 All controller and services are tested except LoginController (which doesn't need to be tested). The classes are tested extensively including Exceptions. Very good code coverage overall.
@@ -111,7 +111,8 @@ The names of the test methods are well choosen and describtive. A nice addition 
 */
 ```
 
-* Well crafted set of test data
+* Well crafted set of test data  
+Use of a data seeder is a good method for setting up the test data. The data set is comprehensive and you have some nice test users :)
 
 * Readability  
 The tests are well formatted with a few missteps in line length (e.g. ProfileEditControllerTest).
@@ -128,3 +129,4 @@ tests
 ```
 
 I think that would be a better structure than the one you have now. You could still use test suits if you want to.
+Use assertArrayEquals instead assertEquals when comparing arrays for equality (best practise).
