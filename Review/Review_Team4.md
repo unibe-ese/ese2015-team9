@@ -128,5 +128,5 @@ However, I don't see why you didn't use the standard file structure:
 						service 	<- service tests
 	```
 
-I think that would be a better structure than the one you have now. You could still use test suits if you want to.
-Use assertArrayEquals instead assertEquals when comparing arrays for equality (best practise).
+   I think that would be a better structure than the one you have now. You could still use test suits if you want to.
+   Use assertArrayEquals instead assertEquals when comparing arrays for equality (best practise).
