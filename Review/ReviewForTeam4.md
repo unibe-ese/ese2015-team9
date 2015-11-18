@@ -54,9 +54,7 @@ Every service implements a unique interface. In this case I think that the inter
 might have been left out because every service has it's own interface, so for every 
 service class an extra interface is created which doesn't add any functionality.
 Regarding jsp pages includes were used to factor out common parts like the header and 
-footer which are the same for many pages. However while reading the codebase it is not 
-evident at the first moment why therere are two login.jsp/exception.jsp/signup.jsp 
-pages one of them an include and the other not.
+footer which are the same for many pages. 
 
 * Exceptions, testing null values  
 Team4 has extensively used Error classes with intention revealing names in appropriate 
@@ -81,7 +79,7 @@ Only utility class used was the MultipartFileMocker class which was created in t
 ch.ututor.utils package and is a helper class for mocking images for tests.
 
 ##Documentation
-*Understandable  
+* Understandable  
 Documentation is understandable for example considering following exerpts:
 <pre><code>
 /**
@@ -106,6 +104,7 @@ Documentation is understandable for example considering following exerpts:
 </code></pre>
 Existing documentation is concise and describes what what will be returned and in which case.
 * Intention-revealing
+The srs is well written and shows all major use cases.
 
 * Describes responsibilities  
 Class documentation is missing but responsibilities are described in the method documentation which exists 
