@@ -82,10 +82,7 @@ public class Member implements UserDetails {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<Offer> offer = new HashSet<Offer>();
 	
-	/**
-	 * To provide a cleaner construction, especially when in tests only selected values are important. 
-	 * @author brn
-	 */
+	
 	public static class Builder{
 		private Long id;
 		private String firstName;
@@ -274,7 +271,6 @@ public class Member implements UserDetails {
 		Collection<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 		list.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return list;
-
 	}
 
 	public boolean isAccountNonExpired() {
