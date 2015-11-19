@@ -13,7 +13,7 @@ import javax.validation.constraints.Min;
 import team9.tutoragency.controller.pojos.AddCourseForm;
 
 @Entity
-public class Offer implements Serializable {
+public class TutoringOffer implements Serializable {
 
 	@Id
 	@GeneratedValue
@@ -28,12 +28,12 @@ public class Offer implements Serializable {
 
 	private float grade;
 
-	public Offer(Member member, Course course, float grade) {
+	public TutoringOffer(Member member, Course course, float grade) {
 		this.member = member;
 		this.course = course;
 		this.grade = grade;
 	}
-	public Offer(){
+	public TutoringOffer(){
 		
 	}
 

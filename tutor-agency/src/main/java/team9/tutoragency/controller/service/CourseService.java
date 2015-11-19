@@ -15,7 +15,7 @@ import com.google.common.collect.Lists;
 import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.model.Offer;
+import team9.tutoragency.model.TutoringOffer;
 import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.MemberDao;
@@ -27,32 +27,29 @@ public class CourseService {
 
 	@Autowired
 	CourseDao courseDao;
+	
 	@Autowired
 	UniversityDao uniDao;
-	@Autowired
-	MemberDao memberDao;
+	
 
-	@Autowired
-	OfferDao offerDao;
-
-	@Transactional
-	public void deleteProvidedCourse(Member member, Long courseId) {
-		List<Offer> offerList = Lists.newArrayList(member.getOffer());
-		Offer deleteOffer = null;
-		for (int i = 0; i < offerList.size(); i++) {
-			deleteOffer = offerList.get(i);
-			if (deleteOffer.getCourse().getId() == courseId) {
-				member.getOffer().remove(offerList.get(i));
-				List<Course> courseList = member.getCourseList();
-				courseList.remove(offerList.get(i).getCourse());
-				member.setCourseList(courseList);
-			}
-		}
-		memberDao.save(member);
-		if (deleteOffer != null) {
-			offerDao.delete(deleteOffer);
-		}
-	}
+//	@Transactional
+//	public void deleteProvidedCourse(Member member, Long courseId) {
+//		List<TutoringOffer> offerList = Lists.newArrayList(member.getOffers());
+//		TutoringOffer deleteOffer = null;
+//		for (int i = 0; i < offerList.size(); i++) {
+//			deleteOffer = offerList.get(i);
+//			if (deleteOffer.getCourse().getId() == courseId) {
+//				member.getOffers().remove(offerList.get(i));
+//				List<Course> courseList = member.getCourseList();
+//				courseList.remove(offerList.get(i).getCourse());
+//				member.setCourseList(courseList);
+//			}
+//		}
+//		memberDao.save(member);
+//		if (deleteOffer != null) {
+//			offerDao.delete(deleteOffer);
+//		}
+//	}
 
 	/**
 	 * Adds a course to a {@link Member} only if the member doesn't have already
@@ -63,18 +60,18 @@ public class CourseService {
 	 * @param courseId
 	 *            of the course to be added
 	 */
-	@Transactional
-	public void addCourseToMember(Member member, long courseId, float grade) {
-
-		Course course = courseDao.findById(courseId).get(0);
-
-		Offer offer = new Offer(member, course, grade);
-		member.getOffer().add(offer);
-		member.getCourseList().add(course);
-		memberDao.save(member);
-		offerDao.save(offer);
-
-	}
+//	@Transactional
+//	public void addCourseToMember(Member member, long courseId, float grade) {
+//
+//		Course course = courseDao.findById(courseId).get(0);
+//
+//		TutoringOffer offer = new TutoringOffer(member, course, grade);
+//		member.getOffers().add(offer);
+//		member.getCourseList().add(course);
+//		memberDao.save(member);
+//		offerDao.save(offer);
+//
+//	}
 
 	/**
 	 * Updates the model for the addCourse view in a workaround fashion. The

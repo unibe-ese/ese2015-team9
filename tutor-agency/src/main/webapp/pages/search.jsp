@@ -47,9 +47,9 @@
 							<td style="border-style:none">
 							<fieldset class="filter">
 					<legend>Fee</legend>
-						<label>Min: <form:input path="minFee" type="number" value="${form.minFee }" label="Min:"></form:input></label>
+						<label>Min: <form:input path="minFee" type="number" value="${form.minFee }"></form:input></label>
 						<br>
-						<label>Max: <form:input path="maxFee" value="${form.maxFee }" type="number"></form:input></label>
+						<label>Max: <form:input path="maxFee" type="number" value="${form.maxFee }" ></form:input></label>
 						</fieldset>
 						</td>
 						</tr>

@@ -49,13 +49,13 @@ public class EditController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() throws IOException {
 		assert(isAccessAuthenticated());
-		
+
 		ModelAndView edit = new ModelAndView("edit");
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
 		EditForm editForm = new EditForm(member);
-			System.out.println(member.toString());
+		System.out.println(member.toString());
 		List<University> universities = uniService.findAll();
 		List<String> universityNames = extractNames(universities);
 
@@ -82,7 +82,7 @@ public class EditController {
 	public ModelAndView saveChange(@Valid EditForm editForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
 		assert(isAccessAuthenticated());
-		
+
 		ModelAndView model;
 		validator.validate(editForm, result);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -110,13 +110,16 @@ public class EditController {
 
 	/**
 	 * Invariant, that must be true whenever a request method is invoked.
-	 * @return false, iff the security context has no authentication available or the token isn't authenticated. 
+	 * 
+	 * @return false, iff the security context has no authentication available
+	 *         or the token isn't authenticated.
 	 */
-	public boolean isAccessAuthenticated(){
-		if(SecurityContextHolder.getContext().getAuthentication() == null)
+	public boolean isAccessAuthenticated() {
+		if (SecurityContextHolder.getContext().getAuthentication() == null)
 			return false;
 		return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
 	}
+
 	public List<String> extractNames(List<University> universities) {
 		List<String> names = new ArrayList<String>();
 		for (University uni : universities) {

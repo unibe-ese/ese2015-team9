@@ -90,32 +90,32 @@ public class CourseServiceTest {
         
     }
 
-    /**
-     * Test of deleteProvidedCourse method, of class {@link CourseService}.
-     */
-    @Test
-    public void testDeleteProvidedCourse() {
-        Long courseId = (long) 2;
-        
-        member.setCourseList(coursesMuliple);
-        
-        service.deleteProvidedCourse(member, courseId);
-        assertEquals(coursesSingle, captor.getValue().getCourseList());
-    }
+//    /**
+//     * Test of deleteProvidedCourse method, of class {@link CourseService}.
+//     */
+//    @Test
+//    public void testDeleteProvidedCourse() {
+//        Long courseId = (long) 2;
+//        
+//        member.setCourseList(coursesMuliple);
+//        
+//        service.deleteProvidedCourse(member, courseId);
+//        assertEquals(coursesSingle, captor.getValue().getCourseList());
+//    }
 
     /**
      * Test of addCourseToMember method, of class {@link CourseService}.
      */
-    @Test
-    public void testAddCourseToMember() {
-    	long idCourse2 = 2;
-        Mockito.when(courseDao.findById(idCourse2)).thenReturn(course2List);
-        
-        member.setCourseList(coursesSingle);
-        
-        //service.addCourseToMember(member, idCourse2);
-        assertEquals(coursesMuliple, captor.getValue().getCourseList());
-    }
+//    @Test
+//    public void testAddCourseToMember() {
+//    	long idCourse2 = 2;
+//        Mockito.when(courseDao.findById(idCourse2)).thenReturn(course2List);
+//        
+//        member.setCourseList(coursesSingle);
+//        
+//        //service.addCourseToMember(member, idCourse2);
+//        assertEquals(coursesMuliple, captor.getValue().getCourseList());
+//    }
 
     /**
      * Test of updateDropdown method, of class {@link CourseService}.

@@ -19,9 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.controller.service.CourseService;
+import team9.tutoragency.controller.service.OfferService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.model.Offer;
+import team9.tutoragency.model.TutoringOffer;
 import team9.tutoragency.model.University;
 
 /**
@@ -39,6 +40,9 @@ public class CourseController {
 
 	@Autowired
 	CourseService courseService;
+	
+	@Autowired
+	OfferService offerService;
 
 	/**
 	 * This method is called when a {@link Member} tries to offer a course as a
@@ -97,7 +101,7 @@ public class CourseController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
 		float grade = Float.parseFloat(addCourseForm.getGrade());
-		courseService.addCourseToMember(member, addCourseForm.getSelectedCourse(), grade);
+		offerService.addOffer(member, addCourseForm.getSelectedCourse(), grade);
 		ModelAndView profile = new ModelAndView("redirect:/profile");
 		return profile;
 	}
@@ -137,7 +141,7 @@ public class CourseController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Member member = (Member) authentication.getPrincipal();
 
-		courseService.deleteProvidedCourse(member, id);
+		offerService.removeOffer(member, id);
 
 		return showCourses(response);
 	}

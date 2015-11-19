@@ -49,7 +49,7 @@ import team9.tutoragency.controller.RegisterController;
  * 
  * </p>
  * 
- * 
+ * @author bruno
  * @author laeri
  *
  */
@@ -67,88 +67,18 @@ public class Member implements UserDetails {
 	private String email;
 	private String username;
 	private String password;
+	
 	private Double fee; 
 	private boolean isTutor;
 	private boolean isActivated;
-
-	@ManyToMany(cascade=CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Course> courseList;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<University> universityList;
 
 	@OneToMany(mappedBy = "member")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private Set<Offer> offer = new HashSet<Offer>();
+	private Set<TutoringOffer> offers = new HashSet<TutoringOffer>();
 	
-	
-	public static class Builder{
-		private Long id;
-		private String firstName;
-		private String lastName;
-		private String email;
-		private String username;
-		private String password;
-		private Double fee; 
-		private boolean isTutor;
-		private boolean isActivated;
-		private List<Course> courseList;
-		private List<University> universityList;
-		
-		public Builder(){}
-		public Member build(){
-			if(universityList==null)
-				universityList = new ArrayList<University>();
-			if(courseList==null)
-				courseList = new ArrayList<Course>();
-			return new Member(this);
-		}
-		public Builder id(Long id){
-			this.id=id;
-			return this;
-		}
-		public Builder firstName(String firstName){
-			this.firstName = firstName;
-			return this;
-		}
-		public Builder lastName(String lastName){
-			this.lastName = lastName;
-			return this;
-		}
-		public Builder email(String email){
-			this.email = email;
-			return this;
-		}
-		public Builder username(String username){
-			this.username = username;
-			return this;
-		}
-		public Builder password(String password){
-			this.password = password;
-			return this;
-		}
-		public Builder fee(Double fee){
-			this.fee = fee;
-			return this;
-		}
-		public Builder isTutor(boolean tutor){
-			isTutor = tutor;
-			return this;
-		}
-		public Builder isActivated(boolean activated){
-			isActivated = activated;
-			return this;
-		}
-		public Builder courseList(List<Course> courseList){
-			this.courseList = courseList;
-			return this;
-		}
-		public Builder universityList(List<University> universityList){
-			this.universityList = universityList;
-			return this;
-		}
-	}
 	
 	public Member(String firstName, String lastName, String email, String username, String password) {
 		this.firstName = firstName;
@@ -161,40 +91,17 @@ public class Member implements UserDetails {
 		this.fee = null;
 	}
 	
-	
-	
-
 	public Member() {
 
 	}
 
-	public Member(Builder builder) {
-		this.id = builder.id;
-		this.firstName = builder.firstName;
-		this.lastName = builder.lastName;
-		this.username = builder.username;
-		this.email = builder.email;
-		this.password = builder.password;
-		this.fee = builder.fee;
-		this.isTutor = builder.isTutor;
-		this.isActivated = builder.isActivated;
-		this.courseList = builder.courseList;
-		this.universityList = builder.universityList;
-	}
-
-
-	/**
-	 * We know that the name is ugly, but it makes more sense in the jsp file ;-) .
-	 */
 	public boolean isIsTutor() {
 		return isTutor;
 	}
 	public void setIsTutor(boolean tutor) {
 		this.isTutor = tutor;
 	}
-	/**
-	 * We know that the name is ugly, but it makes more sense in the jsp file ;-) .
-	 */
+	
 	public boolean isIsActivated() {
 		return isActivated;
 	}
@@ -241,22 +148,12 @@ public class Member implements UserDetails {
 		this.email = email;
 	}
 
-	public List<Course> getCourseList() {
-		if (courseList == null)
-			courseList = new ArrayList<Course>();
-		return courseList;
-	}
-
 	public Double getFee() {
 		return fee;
 	}
 
 	public void setFee(Double fee) {
 		this.fee = fee;
-	}
-
-	public void setCourseList(List<Course> courseList) {
-		this.courseList = courseList;
 	}
 
 	public List<University> getUniversityList() {
@@ -297,25 +194,34 @@ public class Member implements UserDetails {
 		this.username = username;
 	}
 
-	public Set<Offer> getOffer() {
-		return offer;
+	public boolean isTutor() {
+		return isTutor;
 	}
 
-
-
-
-	public void setOffer(Set<Offer> offer) {
-		this.offer = offer;
+	public void setTutor(boolean isTutor) {
+		this.isTutor = isTutor;
 	}
 
+	public boolean isActivated() {
+		return isActivated;
+	}
 
+	public void setActivated(boolean isActivated) {
+		this.isActivated = isActivated;
+	}
 
+	public Set<TutoringOffer> getOffers() {
+		return offers;
+	}
+
+	public void setOffers(Set<TutoringOffer> offers) {
+		this.offers = offers;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((courseList == null) ? 0 : courseList.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fee == null) ? 0 : fee.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
@@ -324,7 +230,6 @@ public class Member implements UserDetails {
 		result = prime * result + (isTutor ? 1231 : 1237);
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((universityList == null) ? 0 : universityList.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -338,11 +243,6 @@ public class Member implements UserDetails {
 		if (getClass() != obj.getClass())
 			return false;
 		Member other = (Member) obj;
-		if (courseList == null) {
-			if (other.courseList != null)
-				return false;
-		} else if (!courseList.equals(other.courseList))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -377,11 +277,6 @@ public class Member implements UserDetails {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (universityList == null) {
-			if (other.universityList != null)
-				return false;
-		} else if (!universityList.equals(other.universityList))
-			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -392,10 +287,11 @@ public class Member implements UserDetails {
 
 	@Override
 	public String toString() {
-		return "Member{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", username=" + username + ", password=" + password + ", isTutor=" + isTutor + ", fee=" + fee
-				+ ", isActivated=" + isActivated 
-				+ '}';
+		return "Member [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", username=" + username + ", password=" + password + ", fee=" + fee + ", isTutor=" + isTutor
+				+ ", isActivated=" + isActivated + "]";
 	}
+
+	
 
 }

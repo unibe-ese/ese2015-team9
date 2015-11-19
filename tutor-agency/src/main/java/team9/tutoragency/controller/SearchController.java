@@ -34,7 +34,7 @@ public class SearchController {
 	UniversityAccessService uniService;
 		
 	@RequestMapping(value="/searchresults", method = RequestMethod.POST)
-	public ModelAndView showQuickSearchResults(SearchForm searchForm, BindingResult result) {
+	public ModelAndView showQuickSearchResults(SearchForm searchForm) {
 		ModelAndView model = new ModelAndView("search");
 		model.addObject("universities", uniService.findAllNames());
 		model.addObject("searchResults", searchService.findCoursesByNameContaining(searchForm));
@@ -51,7 +51,7 @@ public class SearchController {
 	public ModelAndView quicksearch(@RequestParam String text) {
 		ModelAndView model = new ModelAndView("search");
 		List<SearchResult> results = searchService.findCoursesByNameContaining(text);
-		System.out.println("text:"+text);
+		
 		model.addObject("searchResults", results);
 		model.addObject("universities", uniService.findAllNames());
 		model.addObject("form", new SearchForm());
