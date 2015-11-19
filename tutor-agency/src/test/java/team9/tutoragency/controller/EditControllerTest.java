@@ -84,7 +84,7 @@ public class EditControllerTest {
 	@Before
 	public void setUp() throws Exception {
         
-        //this allows multiple runners, i.e. MockitoJUnitRunner and SpringJUnit4Runner
+        //this allows multiple runners, i.e. MockitoJUnitRunner and SpringJUnit4ClassRunner
         this.testContextManager = new TestContextManager(getClass());
         this.testContextManager.prepareTestInstance(this);
 
