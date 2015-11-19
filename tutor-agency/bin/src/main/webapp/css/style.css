@@ -8,16 +8,19 @@
 \*------------------------*/
 
 html, body {
-background-color: #d2d2d2;
+/*background-color: #d2d2d2;*/
+background-color: #FFF;
 height: 100%;
 font-family:Verdana, Geneva, sans-serif;
 }
 
 body {
 width:80%;
+min-width:850px;
 margin-left:auto;
 margin-right:auto;
-background-color:#c2c2c2;
+background-color:springgreen;
+/*background-color: #FFF;*/
 line-height:150%;
 position:relative;
 }
@@ -49,18 +52,20 @@ font-size:10px;
 
 .container  {
 width: 70%;
-min-height: calc(100% - 390px);
+min-height: calc(100% - 100px);
 position:absolute;
 left:0;
 -moz-box-shadow:1px 1px 6px #292929; /* Firefox */
 -webkit-box-shadow:1px 1px 6px #292929; /* Chrome, Safari */
 -khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
 box-shadow:1px 1px 6px #292929; /* CSS3 */
-background-color:#c2c2c2;
+/*background-color:#c2c2c2;*/
+background-color: #FFF;
 padding: 50px 25% 0px 5%;
 text-decoration: none;
 color: #000;
 top:100px;
+
 }
 
 .container .sidebar {
@@ -115,7 +120,7 @@ max-width:95%;
 .container  td {
 border: solid 1px;
 padding-left:10px;
-padding-right: 30px;
+padding-right: 30px; 
 }
 
 sup{
@@ -128,7 +133,6 @@ color: #000000;
 font-size: 12px; 
 border: 2px solid #808080; 
 background-color: #FFF0FF; 
-height: 22px; 
 width: 90%;
 padding: 3px;
 margin-bottom: 10px;
@@ -152,7 +156,7 @@ color: #d2d2d2;
 background-color: #595a5b; 
 width: 120px; 
 padding: 5px; 
-line-height: 130%;
+line-height: 150%;
 }
 
 .small a{
@@ -182,6 +186,53 @@ text-decoration:none;
 
 
 
+.error{
+	color: red;
+	font-size: 16px; 
+  	font-style: italic;
+}
+
+
+#courses {
+	
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#courses td, #courses th {
+    /* font-size: 1em; */
+    border: 1px solid #98bf21;
+    padding: 3px 7px 2px 7px;
+}
+
+#courses th {
+    font-size: 1.1em;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background-color: #A7C942;
+    color: #ffffff;
+}
+
+#courses tr.alt td {
+    color: #000000;
+    background-color: #EAF2D3;
+}
+
+.checkboxlabel{
+	display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+.checkbox {
+	width: 13px;
+    height: 13px;
+    padding:0px;
+    margin:0;
+    vertical-align: center;
+    position: relative;
+    top: -1px; 
+}
 /*------------------------*\
 	NAVIGATION
 \*------------------------*/
@@ -198,7 +249,6 @@ background-color:#555;
 -khtml-box-shadow:1px 1px 6px #292929; /* Konqueror */
 box-shadow:1px 1px 6px #292929; /* CSS3 */
 top:50px;
-width:100%;
 z-index:500;
 }
 
@@ -219,7 +269,7 @@ z-index:500;
 	font-size:17px;
 	padding:0 0 0 20px;
 	line-height:50px;
-	width:200px;
+	width:150px;
 }
 
 #nav ul li

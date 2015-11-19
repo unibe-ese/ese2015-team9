@@ -113,7 +113,7 @@ public class CourseServiceTest {
         
         member.setCourseList(coursesSingle);
         
-        service.addCourseToMember(member, idCourse2);
+        //service.addCourseToMember(member, idCourse2);
         assertEquals(coursesMuliple, captor.getValue().getCourseList());
     }
 

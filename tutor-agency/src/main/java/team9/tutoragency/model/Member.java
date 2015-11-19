@@ -1,9 +1,11 @@
-
 package team9.tutoragency.model;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -75,8 +78,12 @@ public class Member implements UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<University> universityList;
 
+	@OneToMany(mappedBy = "member")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Set<Offer> offer = new HashSet<Offer>();
+	
 	/**
-	 * To provide a cleaner construction in the test, when only selected values are important. 
+	 * To provide a cleaner construction, especially when in tests only selected values are important. 
 	 * @author brn
 	 */
 	public static class Builder{
@@ -145,6 +152,7 @@ public class Member implements UserDetails {
 			return this;
 		}
 	}
+	
 	public Member(String firstName, String lastName, String email, String username, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -236,8 +244,6 @@ public class Member implements UserDetails {
 		this.email = email;
 	}
 
-	
-
 	public List<Course> getCourseList() {
 		if (courseList == null)
 			courseList = new ArrayList<Course>();
@@ -294,6 +300,20 @@ public class Member implements UserDetails {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public Set<Offer> getOffer() {
+		return offer;
+	}
+
+
+
+
+	public void setOffer(Set<Offer> offer) {
+		this.offer = offer;
+	}
+
+
+
 
 	@Override
 	public int hashCode() {
@@ -378,7 +398,7 @@ public class Member implements UserDetails {
 	public String toString() {
 		return "Member{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", username=" + username + ", password=" + password + ", isTutor=" + isTutor + ", fee=" + fee
-				+ ", isActivated=" + isActivated + ", courseList=" + courseList + ", universityList=" + universityList
+				+ ", isActivated=" + isActivated 
 				+ '}';
 	}
 

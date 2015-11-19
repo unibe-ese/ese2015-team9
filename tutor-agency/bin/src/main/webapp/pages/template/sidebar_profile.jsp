@@ -13,29 +13,33 @@
 			<h2>Hallo ${member.username}</h2>
 			<br />
 			<br />
-			<a href="profile">Profil ansehen</a>
-			<br />
-			<a href="edit">Profil bearbeiten</a>
-			<form:form action="becomeTutor">
-				<input class="submitbutton" type="submit" value="werde Tutor"
-					name="werde Tutor" />
+			<form:form action="profile" method="get">
+				<input class="submitbutton" type="submit" value="Profil ansehen" />
 			</form:form>
-			
+			<br />
+			<form:form action="edit" method="get">
+				<input class="submitbutton" type="submit" value="Profil bearbeiten" />
+			</form:form>
+			<c:if test="${not member.isTutor }">
+				<form:form action="becomeTutor">
+					<input class="submitbutton" type="submit" value="werde Tutor"
+						name="werde Tutor" />
+
+				</form:form>
+			</c:if>
 			<c:if test="${member.isTutor}">
 				<form:form action="addCourse" method="get">
 					<input class="submitbutton" type="submit" value="Kurs hinzufügen" />
 				</form:form>
-				<form:form action="show" method="get">
+				<form:form action="showCourses" method="get">
 					<input class="submitbutton" type="submit" value="Zeige Kurse an" />
 				</form:form>
 			</c:if>
-			
 			<br />
-			<a href="<c:url value="/j_spring_security_logout"></c:url>">Abmelden</a>
-			<br />
+			<a class="submitbutton" href="<c:url value="/j_spring_security_logout"></c:url>">Abmelden</a>
 			<br />
 			<br />
-			<a href="delete">Profil löschen</a>
+			<br />
 		</c:when>
 		<c:otherwise>
 			<c:import url="template/loginform.jsp" />
