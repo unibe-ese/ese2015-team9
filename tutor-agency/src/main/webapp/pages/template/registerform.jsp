@@ -42,9 +42,10 @@
 				<form:errors path="readAGB" cssStyle="color: #ff0000;"
 					element="span" />
 				<br />
-				<form:checkbox path="readAGB" name="agb"/>
-					Ich habe die
-					<a href="agb">AGB's</a> gelesen und bin damit einverstanden.
+				<form:checkbox path="readAGB" name="agb" id="agb" /><label for="agb"></label>
+                <p>Ich habe die
+					<a href="agb">AGB's</a> gelesen und bin damit einverstanden.</p>
+					
 				<br />
 				<input class="submitbutton" type="submit" value="Anmelden"/>
 				<br />

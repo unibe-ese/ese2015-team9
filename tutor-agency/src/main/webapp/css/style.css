@@ -31,18 +31,9 @@ html, body {
     background-color: #fff;
     height: 100%;
     width: 100%;
-    /*font-family:Verdana, Geneva, sans-serif;*/
+    font-family:Verdana, Geneva, sans-serif;
     font-family: pt_sansregular;
     /*background-image: url(../img/learning1.jpg);*/
-}
-
-body {
-/*    width:80%;
-    margin-left:auto;
-    margin-right:auto;
-    background-color:#c2c2c2;
-    line-height:150%;
-    position:relative;*/
 }
 
 a {
@@ -50,7 +41,7 @@ a {
     text-decoration: none;
 }
 
-a:hover {
+a:hover, a:active {
     color:#D35836;
 }
 
@@ -182,15 +173,15 @@ header span{
     top:50px;
 }*/
 
-.container .stripe {
+/*.container .stripe {
     width: 1px;
     float:right;
     right:22%;
-/*    box-shadow: 1px 1px 20px #000000;*/
+    box-shadow: 1px 1px 20px #000000;
     min-height:100%;
     position:absolute;
     top: 0px;
-}
+}*/
 
 .container .sidebar a {
     color:#000;
@@ -280,6 +271,30 @@ select {
     background: #426B81;
 }
 
+label {
+    display: block;
+    float: left;
+    margin-right: 1em;
+    width: 1.8em;
+    height: 1.8em;
+    border: 5px solid #426B81; 
+    /*background-color: #D35836;*/
+}
+#agb {
+    display: none;
+}
+#agb:checked ~ label {
+    background-color: #426B81;
+}
+
+/*label + input[type="checkbox"] {
+    display: none;
+}
+
+label ~ label + input[type="checkbox"]:checked {
+    background-color: green;
+}*/
+
 /*********************************************************************************/
 /* Search Results                                                                */
 /*********************************************************************************/
@@ -317,7 +332,11 @@ td {
         
 }
 
-.container .footer {
+/*********************************************************************************/
+/* Footer                                                                       */
+/*********************************************************************************/
+
+/*.container .footer {
     background-color:#555;
     height: 40px;
     text-align:center;
@@ -325,13 +344,8 @@ td {
     line-height:250%;
     position:absolute;
     bottom:-40px;
-/*    width:100%;
-    -moz-box-shadow:1px 1px 6px #292929;  Firefox 
-    -webkit-box-shadow:1px 1px 6px #292929;  Chrome, Safari 
-    -khtml-box-shadow:1px 1px 6px #292929;  Konqueror 
-    box-shadow:1px 1px 6px #292929;  CSS3 */
     left: 0;
-}
+}*/
 
 /*********************************************************************************/
 /* Profile                                                                       */
@@ -352,15 +366,6 @@ table {
 }
 
 /*********************************************************************************/
-/* Sidebar                                                                       */
-/*********************************************************************************/
-.sidebar {
-    
-    float: right;
-}
-
-
-/*********************************************************************************/
 /* Navigation                                                                    */
 /*********************************************************************************/
 
@@ -369,7 +374,6 @@ nav {
     top: 0;
     width: 100%;
     height: 4em;
-    /*background-color: #069;*/
     background-color: #426B81;
 }
 
@@ -394,13 +398,70 @@ nav {
   display: block;
   padding-top: 1.5em;
   padding-right: 2em;
-  color: white;
+  color: #fff;
   height: 100%;
 }
 
-.navigation a:hover {
+.navigation a:hover, .navigation a:active {
   color: deepskyblue;
 }
+.flex-fill {
+    flex-basis: 0;
+    flex-grow: 20;
+}
+
+/*#cogmenu {
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    display:none;
+}
+
+.collapse{
+  display:block;
+  height: 100%
+}
+.collapse + input{
+  display:visible;
+}
+.collapse + input + *{
+  display:none;
+}
+.collapse+ input:checked + *{
+  display:block;
+}
+.nav-ext {
+    height: 6em;
+    width: 10em;
+    background-color: #426B81;
+    color: #fff;
+}*/
+
+.nav-svg {
+    height: 100%;
+    width: 100%;
+}
+.nav-svg a {
+    display: initial;
+}
+
+.nav-svg svg {
+    fill: #fff;
+    height: 2em;
+    width: 2em;
+    height: 100%;
+}
+
+.nav-svg:hover svg, .nav-svg:active svg {
+    fill: deepskyblue;
+}
+
+
+/*********************************************************************************/
+/* Media                                                                         */
+/*********************************************************************************/
 
 @media all and (max-width: 800px) {
   .navigation {

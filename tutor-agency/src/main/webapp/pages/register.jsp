@@ -7,7 +7,7 @@
 <c:import url="template/header.jsp" />
 
 
-		<div class="container">
+<div class="container" id="register">
 			<h1>Anmelden</h1>
 			<c:import url="template/registerform.jsp" />
                 

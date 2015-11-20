@@ -9,6 +9,7 @@
 
 
 <spring:url value="/css/style.css" var="css" />
+<c:url value="/img/cog.svg" var="svg"/>
 
 <!DOCTYPE HTML>
 <html>
@@ -46,8 +47,9 @@
 
                             <li><a href="<c:url value="/index" />">Home</a></li>
                             <li><a href="<c:url value="/quicksearch" />">Suche</a></li>
-                            <li><a href="<c:url value="/profile" />">Profil</a></li>
-                            <li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
+                            <li class="flex-fill"></li>
+                            <li class="nav-user"><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
+                            <li><div class="nav-svg"><a href="<c:url value="/profile" />"><%@include file="/img/cog.svg" %></a></div>
 
                         </ul>
                     </nav>
@@ -59,8 +61,15 @@
 
                             <li><a href="<c:url value="/index" />">Home</a></li>
                             <li><a href="<c:url value="/quicksearch" />">Suche</a></li>
-                            <li><a href="<c:url value="/register" />">Registrieren</a></li>
+                            <li><a href="<c:url value="/register#register" />">Registrieren</a></li>
+                            <li class="flex-fill"></li>
                             <li><a href="<c:url value="/login" />">Login</a></li>
+<!--                            <li><div class="nav-svg"><%@include file="/img/cog.svg" %>
+                                    <label class="collapse" for="cogmenu"><%@include file="/img/cog.svg" %></label>
+                                    <input id="cogmenu" type="checkbox">
+                                    <div class="nav-ext">Content 1</div>
+                                </div>
+                            </li>-->
 
                         </ul>
                     </nav>

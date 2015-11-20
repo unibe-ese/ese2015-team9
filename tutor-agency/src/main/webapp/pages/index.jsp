@@ -11,8 +11,8 @@
 <div class="container">
     	
     	<p class="index">Suchst Du einen Nachhilfelehrer oder möchtest Du selbst Nachhilfe unterrichten? Dann bist Du hier genau richtig!
-            <a href="<c:url value="/register" />">Melde Dich an leg gleich los.</a></p>
-    
+            <a href="<c:url value="/register#register" />">Melde Dich an leg gleich los.</a></p>
+
 </div>
 </div>
 <c:import url="template/footer.jsp" />
