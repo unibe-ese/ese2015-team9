@@ -86,17 +86,17 @@ public class EditControllerTest {
 	@Before
 	public void setUp() throws Exception {
 
-		// this allows multiple runners, i.e. MockitoJUnitRunner and
-		// SpringJUnit4Runner
-		this.testContextManager = new TestContextManager(getClass());
-		this.testContextManager.prepareTestInstance(this);
+        //this allows multiple runners, i.e. MockitoJUnitRunner and SpringJUnit4ClassRunner
+        this.testContextManager = new TestContextManager(getClass());
+        this.testContextManager.prepareTestInstance(this);
 
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        
+		//initialize test beans
+		member = new Member("firstname", "lastname", "name@mail.com", "username", "password" );
+        member.setId(Long.valueOf(1));
+		editedMember = new Member("firstname2", "lastname2", "name2@mail.com", "username2", "password2" );
 
-		// initialize test beans
-		member = new Member("firstname", "lastname", "name@mail.com", "username", "password");
-		member.setId(Long.valueOf(1));
-		editedMember = new Member("firstname2", "lastname2", "name2@mail.com", "username2", "password2");
 		uni1 = new University();
 		uni2 = new University();
 		uni1.setName("name1");
