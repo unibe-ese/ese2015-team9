@@ -20,8 +20,6 @@
 </script>
 
 <div class="container">
-	
-
 	<form:form modelAttribute="form" action="searchresults" method="post"
 		 class="searchForm">
 			<p>
@@ -53,22 +51,11 @@
 						</fieldset>
 						</td>
 						</tr>
-						</table>
-					
-						
-						
-					
-					</div>
-				
+						</table>					
+					</div>			
 				</fieldset>
 		</form:form>
-					
-
-
-
-	
-
-
+		<!-- SEARCH-RESULT-TABLE -->
 	<hr>
 	<div style="overflow:auto; margin-bottom:20px;">
 	<table id=courses>
@@ -92,12 +79,8 @@
 		</c:forEach>
 	</table>
 </div>
-	<%-- <div class="stripe"></div>
-
-	<div class="sidebar">
-		<c:import url="template/sidebar.jsp" />
-	</div> --%>
-	<c:import url="template/footer.jsp" />
+	
+<c:import url="template/footer.jsp" />
 
 </div>
 <body></body>

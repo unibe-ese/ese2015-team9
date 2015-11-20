@@ -136,30 +136,15 @@ public class CourseController {
 			RedirectAttributes redirectAttributes) throws IOException {
 
 		Member member = memberService.getAuthenticatedMember().get();
-
 		float grade = Float.parseFloat(addCourseForm.getGrade());
+		
 		offerService.addOffer(member, addCourseForm.getSelectedCourse(), grade);
+		
 		ModelAndView profile = new ModelAndView("redirect:/profile");
 		return profile;
 	}
 
-	/**
-	 * Prepares the model for the showCourses view if a {@link Member} wants to
-	 * list all courses he/she is offering. Is only accessible by a logged in
-	 * user (entry in the springSecurity.xml for /showCourses
-	 * 
-	 * @param response
-	 * @return
-	 * @throws IOException
-	 */
-	@RequestMapping(value = "/showCourses", method = RequestMethod.GET)
-	public ModelAndView showCourses(HttpServletResponse response) throws IOException {
-		ModelAndView model = new ModelAndView("showCourses");
-		Member member = memberService.getAuthenticatedMember().get();
-		model.addObject("member", member);
-		model.addObject("offers", offerService.findByTutor(member));
-		return model;
-	}
+
 
 	/**
 	 * Handles a delete request from a {@link Member} when he/she wants to
@@ -177,7 +162,7 @@ public class CourseController {
 	public ModelAndView deleteCourse(HttpServletResponse response, @PathVariable("id") Long id) throws IOException {
 		Member member = memberService.getAuthenticatedMember().get();
 		offerService.removeOffer(member, id);
-		return showCourses(response);
+		return new ModelAndView("redirect:/profile");
 	}
 
 	public void generateAddCourseModel(ModelAndView addCourse) {
@@ -185,41 +170,10 @@ public class CourseController {
 		addCourse.addObject("universities", universities);
 		addCourse.addObject("courses", courseService.findByUniversity(universities.get(0)));
 		Member member = memberService.getAuthenticatedMember().get();
-		addCourse.addObject("member", member);
+//		addCourse.addObject("member", member);
 		addCourse.addObject("unis", member.getUniversityList());
 		addCourse.addObject("gradeChoices", offerService.getPossibleGrades());
 	}
 
-	/**
-	 * Updates the model for the addCourse view in a workaround fashion. The
-	 * selected {@link University} from the {@link AddCourseForm} is removed
-	 * from the the list and added to the top in order that the selection in the
-	 * addCourse view displays the selected university at the top. The "courses"
-	 * in the model contain only the ones belonging to the specified
-	 * {@link University}.
-	 * 
-	 * @param model
-	 *            which should be displayed after the update
-	 * @param addCourseForm
-	 *            the form which has the selected university
-	 */
-
-	// public void updateDropdown(ModelAndView model, AddCourseForm
-	// addCourseForm) {
-	//// model.addObject("addCourseForm", addCourseForm);
-	//// List<University> universities = Lists.newArrayList(uniDao.findAll());
-	//
-	// University selectedUni =
-	// uniService.findByName(addCourseForm.getSelectedUniversity()).get(0);
-	//// universities.remove(selectedUni);
-	//// universities.add(0, selectedUni); // set chosen university at beginning
-	//// // of list
-	//// model.addObject("universities", universities);
-	// model.addObject("courses", courseService.findByUniversity(selectedUni));
-	// Member member = memberService.getAuthenticatedMember();
-	// model.addObject("member", member);
-	// model.addObject("unis", member.getUniversityList());
-	//
-	// model.addObject("gradeChoices", offerService.getPossibleGrades());
-	// }
+	
 }

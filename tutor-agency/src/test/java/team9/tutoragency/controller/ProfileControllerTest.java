@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.model.Member;
@@ -43,7 +44,7 @@ public class ProfileControllerTest {
         SecurityContextHolder.setContext(securityContext);
         Mockito.when(authentication.getPrincipal()).thenReturn(member);
         
-        ModelAndView model = controller.show();
+        ModelAndView model = controller.show(null);
         assertEquals(member, model.getModel().get("member"));
         assertEquals("profile", model.getViewName());
         

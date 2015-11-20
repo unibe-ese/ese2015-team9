@@ -32,9 +32,7 @@
 				<form:form action="addOffer" method="get">
 					<input class="submitbutton" type="submit" value="Kurs hinzufügen" />
 				</form:form>
-				<form:form action="showCourses" method="get">
-					<input class="submitbutton" type="submit" value="Zeige Kurse an" />
-				</form:form>
+				
 			</c:if>
 			
 			<br />

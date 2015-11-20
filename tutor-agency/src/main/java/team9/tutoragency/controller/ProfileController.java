@@ -1,6 +1,7 @@
 package team9.tutoragency.controller;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.model.Member;
@@ -28,22 +30,23 @@ public class ProfileController {
 	MemberService memberService;
 
 	@RequestMapping(value = "/profileId={id}", method = RequestMethod.GET)
-
 	public ModelAndView showOpenProfile(@PathVariable("id") Long id) {
-		ModelAndView model = new ModelAndView("openprofile");
+		ModelAndView model = new ModelAndView("publicProfile");
 		Member member = memberService.findById(id);
 		model.addObject("member", member);
-		// model.addObject("memberAtHome", isLoggedIn(member));
 		return model;
 	}
 	
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public ModelAndView show() {
+	public ModelAndView show(RedirectAttributes redirectAttributes) {
 		ModelAndView profile = new ModelAndView("profile");
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Member member = (Member) authentication.getPrincipal();
-		profile.addObject("member", member);
+		Optional<Member> member = memberService.getAuthenticatedMember();
+		
+		if(!member.isPresent())
+			return new ModelAndView("redirect:/login?error=true");
+		
+		profile.addObject("member", member.get());
 		return profile;
 	}
 
@@ -56,9 +59,15 @@ public class ProfileController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/becomeTutor", method = RequestMethod.POST)
-	public ModelAndView becomeTutor() {
-		memberService.upgradeAuthenticatedMemberToTutor();
-		return show();
+	public ModelAndView becomeTutor(RedirectAttributes redirectAttributes) {
+		
+		if(!memberService.getAuthenticatedMember().isPresent())
+			return new ModelAndView("redirect:/login?error=true");
+		
+		Member member = memberService.upgradeAuthenticatedMemberToTutor();
+		assert(member.isTutor());
+		
+		return show(redirectAttributes);
 	}
 
 }
