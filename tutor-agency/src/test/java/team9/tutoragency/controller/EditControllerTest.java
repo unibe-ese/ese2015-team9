@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import team9.tutoragency.controller.service.EditFormValidationService;
 import team9.tutoragency.controller.service.MemberService;
-import team9.tutoragency.controller.service.UniversityAccessService;
+import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
 
@@ -71,7 +71,7 @@ public class EditControllerTest {
 	@Mock
 	private MemberService memberService;
 	@Mock
-	private UniversityAccessService uniService;
+	private UniversityService uniService;
 
 	@InjectMocks
 	private EditController controller;

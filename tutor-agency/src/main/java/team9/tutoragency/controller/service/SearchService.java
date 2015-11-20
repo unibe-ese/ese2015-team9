@@ -33,7 +33,7 @@ public class SearchService {
 	CourseDao courseDao;
 
 	@Autowired
-	UniversityAccessService uniService;
+	UniversityService uniService;
 
 	public List<SearchResult> findCoursesByNameContaining(SearchForm form) {
 		if (!form.isFiltered())

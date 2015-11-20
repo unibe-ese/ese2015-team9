@@ -12,6 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import static org.mockito.Mockito.*;
 import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.model.Member;
@@ -42,7 +46,15 @@ public class MemberServiceTest {
     @Test
     public void testUpgradeToTutor() {
         Member member = new Member("firstName", "lastName", "member@email.com", "username", "password");
-        service.upgradeToTutor(member);
+       
+        Authentication authentication = Mockito.mock(Authentication.class);
+		SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+		Mockito.when(authentication.isAuthenticated()).thenReturn(true);
+		Mockito.when(authentication.getPrincipal()).thenReturn(member);
+		Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+		
+		SecurityContextHolder.setContext(securityContext);
+        service.upgradeAuthenticatedMemberToTutor();
         member.setIsTutor(true);
         assertEquals(member, captor.getValue());
     }

@@ -117,39 +117,6 @@ public class CourseServiceTest {
 //        assertEquals(coursesMuliple, captor.getValue().getCourseList());
 //    }
 
-    /**
-     * Test of updateDropdown method, of class {@link CourseService}.
-     */
-    @Test
-    public void testUpdateDropdown() {
-        ModelAndView model = new ModelAndView("addCourse");
-        AddCourseForm addCourseForm = new AddCourseForm();
-        addCourseForm.setSelectedUniversity("uni2");
-        service.updateDropdown(model, addCourseForm);
-        List<University> unisReverse = new ArrayList<University>();
-        unisReverse.add(uni2);
-        unisReverse.add(uni1);
-        ModelMap modelMap = model.getModelMap();
-        
-        assertEquals(member, (Member)modelMap.get("member"));
-        assertEquals(course2List, (List<Course>)modelMap.get("courses"));
-        assertEquals(unisReverse, (List<University>)modelMap.get("universities"));
-        assertEquals(addCourseForm, (AddCourseForm)modelMap.get("addCourseForm"));
-
-    }
-
-    /**
-     * Test of generateAddCourseModel method, of class {@link CourseService}.
-     */
-    @Test
-    public void testGenerateAddCourseModel() {
-        ModelAndView model = new ModelAndView("addCourse");
-        service.generateAddCourseModel(model);
-        ModelMap modelMap = model.getModelMap();
-        
-        assertEquals(member, (Member)modelMap.get("member"));
-        assertEquals(coursesSingle, (List<Course>)modelMap.get("courses"));
-        assertEquals(universitiesAll, (List<University>)modelMap.get("universities"));
-    }
+    
     
 }

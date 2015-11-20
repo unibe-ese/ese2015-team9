@@ -2,6 +2,10 @@
 package team9.tutoragency.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,15 +27,21 @@ import static org.springframework.test.web.ModelAndViewAssert.assertViewName;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.controller.service.CourseService;
+import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.OfferService;
+import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
- import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import team9.tutoragency.model.University;
+import static org.mockito.Mockito.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
  import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -49,64 +59,80 @@ import team9.tutoragency.model.Member;
 @Transactional
 @Rollback
 public class CourseControllerTest {
-    
+	@Mock
+	private OfferService offerService;
+	@Mock
+	private MemberService memberService;
+   @Mock
+   private UniversityService uniService;
     @Mock
     private CourseService service;
     @InjectMocks
     private CourseController controller;
-    private final Member member = new Member();
+    
     
     @Autowired private WebApplicationContext wac;
     private MockMvc mockMvc;
     
+    private University uni1, uni2;
+    private Course course1, course2;
+    private List<University> unis;
+    private Member member;
     private TestContextManager testContextManager;
     
     @Before
     public void setUp() throws Exception {
+    	member = new Member("name", "lname", "uname", "pw", "mail@mail.com");
+    	uni1 = new University(1L, "uni1");
+    	uni2 = new University(2L, "uni2");
+    	unis = Arrays.asList(new University[]{uni1, uni2});
         //this allows multiple runners, i.e. MockitoJUnitRunner and SpringJUnit4Runner
         this.testContextManager = new TestContextManager(getClass());
         this.testContextManager.prepareTestInstance(this);
-
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+//        .webAppContextSetup(this.wac)
+        this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
         
-        // Mocks the security context and returns our member as authenticated user.
-        Authentication authentication = Mockito.mock(Authentication.class);
-        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
-        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
-        SecurityContextHolder.setContext(securityContext);
-        Mockito.when(authentication.getPrincipal()).thenReturn(member);
+//        Authentication authentication = Mockito.mock(Authentication.class);
+//        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+//        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+//        SecurityContextHolder.setContext(securityContext);
+//        Mockito.when(authentication.getPrincipal()).thenReturn(member);
+        
+        Mockito.when(uniService.findAll()).thenReturn(unis);
+        Mockito.when(uniService.findByName("uni1")).thenReturn(Arrays.asList(new University[]{uni1}));
+        Mockito.when(uniService.findByName("uni2")).thenReturn(Arrays.asList(new University[]{uni2}));
+        Mockito.when(offerService.getPossibleGrades()).thenReturn(Arrays.asList(new String[]{"4.2","6.0"}));
+        Mockito.when(offerService.findByTutor(any(Member.class))).thenReturn(null);
+        Mockito.when(memberService.getAuthenticatedMember()).thenReturn( Optional.of(member));
+        
+     
     }
 
     /**
      * Test of showAddCourseView method, of class {@link CourseController}.
      */
     @Test
-    public void testShowAddCourseView() throws Exception {
+    public void testShowAddCourseView() {
         HttpServletResponse response = null;
 //        ModelAndView expResult = new ModelAndView("addCourse");
-        ModelAndView result = controller.showAddCourseView(response);
+        ModelAndView result = controller.showAddCourseView(unis, response);
 //        assertEquals(expResult.getViewName(), result.getViewName());
         assertViewName(result, "addCourse");
-        this.mockMvc.perform(get("/addCourse"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("universities"))
-                .andExpect(model().attributeExists("courses"))
-                .andExpect(model().attributeExists("member"));
+        boolean exception =false;
+        try {
+			this.mockMvc.perform(get("/addOffer"))
+			        .andExpect(status().isOk())
+			        .andExpect(model().attributeExists("universities"))
+			        .andExpect(model().attributeExists("courses"))
+			        .andExpect(model().attributeExists("member"));
+		} catch (Exception e) {
+			exception=true;
+			e.printStackTrace();
+		}
+        assertFalse(exception);
     }
 
-    /**
-     * Test of updateDropdown method, of class {@link CourseController}.
-     */
-    @Test
-    public void testUpdateDropdown() throws Exception {
-        AddCourseForm addCourseForm = new AddCourseForm();
-        BindingResult bResult = null;
-        RedirectAttributes redirectAttributes = null;
-//        ModelAndView expResult = new ModelAndView("addCourse");
-        ModelAndView result = controller.updateDropdown(addCourseForm, bResult, redirectAttributes);
-//        assertEquals(expResult.getViewName(), result.getViewName());
-        assertViewName(result, "addCourse");
-    }
+    
 
     /**
      * Test of showCourses method, of class {@link CourseController}.
@@ -123,4 +149,35 @@ public class CourseControllerTest {
         assertEquals(expResult.getModelMap(), result.getModelMap());
     }
     
+//    @Test
+//    public void testUpdateDropdown() {
+//        ModelAndView model = new ModelAndView("addCourse");
+//        AddCourseForm addCourseForm = new AddCourseForm();
+//        addCourseForm.setSelectedUniversity("uni2");
+//        service.updateDropdown(model, addCourseForm);
+//        List<University> unisReverse = new ArrayList<University>();
+//        unisReverse.add(uni2);
+//        unisReverse.add(uni1);
+//        ModelMap modelMap = model.getModelMap();
+//        
+//        assertEquals(member, (Member)modelMap.get("member"));
+//        assertEquals(course2List, (List<Course>)modelMap.get("courses"));
+//        assertEquals(unisReverse, (List<University>)modelMap.get("universities"));
+//        assertEquals(addCourseForm, (AddCourseForm)modelMap.get("addCourseForm"));
+//
+//    }
+//
+//    /**
+//     * Test of generateAddCourseModel method, of class {@link CourseService}.
+//     */
+//    @Test
+//    public void testGenerateAddCourseModel() {
+//        ModelAndView model = new ModelAndView("addCourse");
+//        controller.generateAddCourseModel(model);
+//        ModelMap modelMap = model.getModelMap();
+//        
+//        assertEquals(member, (Member)modelMap.get("member"));
+//        assertEquals(coursesSingle, (List<Course>)modelMap.get("courses"));
+//        assertEquals(universitiesAll, (List<University>)modelMap.get("universities"));
+//    }
 }

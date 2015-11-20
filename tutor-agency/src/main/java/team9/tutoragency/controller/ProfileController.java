@@ -57,9 +57,7 @@ public class ProfileController {
 	 */
 	@RequestMapping(value = "/becomeTutor", method = RequestMethod.POST)
 	public ModelAndView becomeTutor() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Member member = (Member) authentication.getPrincipal();
-		memberService.upgradeToTutor(member);
+		memberService.upgradeAuthenticatedMemberToTutor();
 		return show();
 	}
 

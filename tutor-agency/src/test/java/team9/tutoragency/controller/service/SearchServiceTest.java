@@ -30,7 +30,7 @@ public class SearchServiceTest {
 	CourseDao courseDao;
 
 	@Mock
-	UniversityAccessService uniService;
+	UniversityService uniService;
 
 	@InjectMocks
 	private SearchService searchService;

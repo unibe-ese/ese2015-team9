@@ -109,7 +109,8 @@
 			</c:if> --%>
 		</tr>
 	
-		<c:forEach items="${member.courseList}" var="course">
+		<c:forEach items="${member.offers}" var="offer">
+			<c:set var="course" value="${offer.course}"/>
 				<tr>
 					<td><c:out value="${course.name}"></c:out></td>
 					<td><c:out value="${course.university.name}"></c:out></td>

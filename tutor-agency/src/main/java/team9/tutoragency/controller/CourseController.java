@@ -7,22 +7,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.common.collect.Lists;
+
 import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.controller.service.CourseService;
+import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.OfferService;
+import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.model.TutoringOffer;
 import team9.tutoragency.model.University;
 
 /**
@@ -33,16 +36,34 @@ import team9.tutoragency.model.University;
  * in(get requests for the views are registered in the springSecurity.xml file).
  * 
  * @author laeri
- *
+ * @author bruno
  */
 @Controller
+
 public class CourseController {
 
 	@Autowired
 	CourseService courseService;
-	
+
 	@Autowired
 	OfferService offerService;
+
+	@Autowired
+	MemberService memberService;
+
+	@Autowired
+	UniversityService uniService;
+
+	@ModelAttribute
+	public void universities(ModelMap modelMap) {
+		if (!modelMap.containsAttribute("universities") || modelMap.get("universities") != null)
+			modelMap.addAttribute("universities", uniService.findAll());
+	}
+
+	@ModelAttribute("member")
+	public Member findMember() {
+		return memberService.getAuthenticatedMember().get();
+	}
 
 	/**
 	 * This method is called when a {@link Member} tries to offer a course as a
@@ -58,11 +79,16 @@ public class CourseController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "/addCourse", method = RequestMethod.GET)
-	public ModelAndView showAddCourseView(HttpServletResponse response) throws IOException {
+	@RequestMapping(value = "/addOffer", method = RequestMethod.GET)
+	public ModelAndView showAddCourseView(@ModelAttribute(value = "universities") List<University> unis,
+			HttpServletResponse response) {
+
 		ModelAndView addCourse = new ModelAndView("addCourse");
-		addCourse.addObject("addCourseForm", new AddCourseForm());
-		courseService.generateAddCourseModel(addCourse);
+
+		AddCourseForm form = new AddCourseForm();
+		form.setSelectedUniversity(unis.get(0).getName());
+		addCourse.addObject("addCourseForm", form);
+		generateAddCourseModel(addCourse);
 		return addCourse;
 	}
 
@@ -80,9 +106,19 @@ public class CourseController {
 	 */
 	@RequestMapping(value = "/updateDropdown", method = RequestMethod.POST)
 	public ModelAndView updateDropdown(@Valid AddCourseForm addCourseForm, BindingResult result,
-			RedirectAttributes redirectAttributes) throws IOException {
-		ModelAndView model = new ModelAndView("addCourse");
-		courseService.updateDropdown(model, addCourseForm);
+			RedirectAttributes redirectAttributes, ModelAndView model) throws IOException {
+		model.addObject("addCourseForm", addCourseForm);
+		model.setViewName("addCourse");
+
+		University selectedUni = uniService.findByName(addCourseForm.getSelectedUniversity()).get(0);
+
+		model.addObject("courses", courseService.findByUniversity(selectedUni));
+		Member member = memberService.getAuthenticatedMember().get();
+		model.addObject("member", member);
+		model.addObject("unis", member.getUniversityList());
+
+		model.addObject("gradeChoices", offerService.getPossibleGrades());
+
 		return model;
 	}
 
@@ -96,10 +132,11 @@ public class CourseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/addCourse", method = RequestMethod.POST)
-	public ModelAndView saveCourse(@Valid AddCourseForm addCourseForm, BindingResult result, RedirectAttributes redirectAttributes)
-			throws IOException {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Member member = (Member) authentication.getPrincipal();
+	public ModelAndView saveCourse(@Valid AddCourseForm addCourseForm, BindingResult result,
+			RedirectAttributes redirectAttributes) throws IOException {
+
+		Member member = memberService.getAuthenticatedMember().get();
+
 		float grade = Float.parseFloat(addCourseForm.getGrade());
 		offerService.addOffer(member, addCourseForm.getSelectedCourse(), grade);
 		ModelAndView profile = new ModelAndView("redirect:/profile");
@@ -118,9 +155,9 @@ public class CourseController {
 	@RequestMapping(value = "/showCourses", method = RequestMethod.GET)
 	public ModelAndView showCourses(HttpServletResponse response) throws IOException {
 		ModelAndView model = new ModelAndView("showCourses");
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Member member = (Member) authentication.getPrincipal();
+		Member member = memberService.getAuthenticatedMember().get();
 		model.addObject("member", member);
+		model.addObject("offers", offerService.findByTutor(member));
 		return model;
 	}
 
@@ -138,11 +175,51 @@ public class CourseController {
 	 */
 	@RequestMapping(value = "/delete_{id}", method = RequestMethod.POST)
 	public ModelAndView deleteCourse(HttpServletResponse response, @PathVariable("id") Long id) throws IOException {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Member member = (Member) authentication.getPrincipal();
-
+		Member member = memberService.getAuthenticatedMember().get();
 		offerService.removeOffer(member, id);
-
 		return showCourses(response);
 	}
+
+	public void generateAddCourseModel(ModelAndView addCourse) {
+		List<University> universities = Lists.newArrayList(uniService.findAll());
+		addCourse.addObject("universities", universities);
+		addCourse.addObject("courses", courseService.findByUniversity(universities.get(0)));
+		Member member = memberService.getAuthenticatedMember().get();
+		addCourse.addObject("member", member);
+		addCourse.addObject("unis", member.getUniversityList());
+		addCourse.addObject("gradeChoices", offerService.getPossibleGrades());
+	}
+
+	/**
+	 * Updates the model for the addCourse view in a workaround fashion. The
+	 * selected {@link University} from the {@link AddCourseForm} is removed
+	 * from the the list and added to the top in order that the selection in the
+	 * addCourse view displays the selected university at the top. The "courses"
+	 * in the model contain only the ones belonging to the specified
+	 * {@link University}.
+	 * 
+	 * @param model
+	 *            which should be displayed after the update
+	 * @param addCourseForm
+	 *            the form which has the selected university
+	 */
+
+	// public void updateDropdown(ModelAndView model, AddCourseForm
+	// addCourseForm) {
+	//// model.addObject("addCourseForm", addCourseForm);
+	//// List<University> universities = Lists.newArrayList(uniDao.findAll());
+	//
+	// University selectedUni =
+	// uniService.findByName(addCourseForm.getSelectedUniversity()).get(0);
+	//// universities.remove(selectedUni);
+	//// universities.add(0, selectedUni); // set chosen university at beginning
+	//// // of list
+	//// model.addObject("universities", universities);
+	// model.addObject("courses", courseService.findByUniversity(selectedUni));
+	// Member member = memberService.getAuthenticatedMember();
+	// model.addObject("member", member);
+	// model.addObject("unis", member.getUniversityList());
+	//
+	// model.addObject("gradeChoices", offerService.getPossibleGrades());
+	// }
 }

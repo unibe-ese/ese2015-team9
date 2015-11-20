@@ -12,4 +12,6 @@ import team9.tutoragency.model.TutoringOffer;
 public interface OfferDao extends CrudRepository<TutoringOffer,Long>{
 
 	public List<TutoringOffer> findByMemberAndCourse(Member member, Course course);
+
+	public List<TutoringOffer> findByMember(Member tutor);
 }

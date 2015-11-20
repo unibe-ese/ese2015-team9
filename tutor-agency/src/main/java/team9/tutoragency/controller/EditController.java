@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.controller.service.EditFormValidationService;
 import team9.tutoragency.controller.service.MemberService;
-import team9.tutoragency.controller.service.UniversityAccessService;
+import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
 
@@ -39,7 +39,7 @@ public class EditController {
 	@Autowired
 	MemberService memberService;
 	@Autowired
-	UniversityAccessService uniService;
+	UniversityService uniService;
 
 	/**
 	 * Prepares the model for the edit view when a {@link Member} would like to

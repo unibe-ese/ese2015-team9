@@ -14,7 +14,7 @@ import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.UniversityDao;
 
 @Service
-public class UniversityAccessService {
+public class UniversityService {
 	@Autowired
 	UniversityDao uniDao;
 

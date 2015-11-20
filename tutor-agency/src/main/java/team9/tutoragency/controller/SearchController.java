@@ -20,7 +20,7 @@ import team9.tutoragency.controller.pojos.SearchForm;
 import team9.tutoragency.controller.pojos.QuickSearchForm;
 import team9.tutoragency.controller.pojos.SearchResult;
 import team9.tutoragency.controller.service.SearchService;
-import team9.tutoragency.controller.service.UniversityAccessService;
+import team9.tutoragency.controller.service.UniversityService;
 
 /**
  * This Controller handles page request related to search mechanisms.
@@ -31,8 +31,9 @@ public class SearchController {
 	@Autowired
 	SearchService searchService;
 	@Autowired 
-	UniversityAccessService uniService;
+	UniversityService uniService;
 		
+	
 	@RequestMapping(value="/searchresults", method = RequestMethod.POST)
 	public ModelAndView showQuickSearchResults(SearchForm searchForm) {
 		ModelAndView model = new ModelAndView("search");
