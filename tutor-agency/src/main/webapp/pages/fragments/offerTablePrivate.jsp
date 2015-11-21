@@ -5,22 +5,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <spring:url value="/css/style.css" var="css" />
-
-<c:import url="template/header.jsp" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-
-<div class="container">
-
-	<table class="forms">
-		<tr>
-			<td>Kurs</td>
-			<td>Universität</td>
-			<td>Note</td>
-			<td>Entfernen</td>
+	<h2 style="font-weight:bold">Open Tutoring Offers</h2>
+	<br>
+	<table class="forms" id=courses>
+	<thead>
+	<tr>
+			<th>Course</th>
+			<th>University</th>
+			<th>Grade</th>
+			<th>Remove</th>
 		</tr>
-		<c:forEach items="${member.offer}" var="offer">
+	</thead>
+		
+		<c:forEach items="${member.offers}" var="offer">
 			<tr>
 				<td><c:out value="${offer.course.name}"></c:out></td>
 				<td><c:out value="${offer.course.university.name}"></c:out></td>
@@ -35,12 +32,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-
-	<div class="stripe"></div>
-	<c:import url="template/sidebar_profile.jsp" />
-	<c:import url="template/footer.jsp" />
-
-</div>
 
 </body>
 </html>

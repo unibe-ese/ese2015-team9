@@ -28,7 +28,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import team9.tutoragency.controller.pojos.SearchForm;
 import team9.tutoragency.controller.service.SearchService;
-import team9.tutoragency.controller.service.UniversityAccessService;
+import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.model.University;
 
 import static org.mockito.Mockito.mock;
@@ -41,7 +41,7 @@ public class SearchControllerTest {
 	@Mock
 	SearchService searchService;
 	@Mock
-	UniversityAccessService uniService;
+	UniversityService uniService;
 	@InjectMocks
 	SearchController controller = new SearchController();
 
@@ -52,12 +52,12 @@ public class SearchControllerTest {
 		/*To avoid some "circular-view path" exception... 
 		standard view-resolver sees a circle, because search is forwarded to search.
 		So we resolve the forwarded view as search.jsp to avoid the circle.*/
+		
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();		
 		viewResolver.setSuffix(".jsp");
 		
 		mockMvc = MockMvcBuilders.standaloneSetup(controller).alwaysExpect(status().isOk())
 				.setViewResolvers(viewResolver).build();
-
 	}
 
 	@Test

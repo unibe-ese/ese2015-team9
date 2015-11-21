@@ -20,7 +20,7 @@
 			<td>Note</td>
 			<td>Entfernen</td>
 		</tr>
-		<c:forEach items="${member.offer}" var="offer">
+		<c:forEach items="${member.offers}" var="offer">
 			<tr>
 				<td><c:out value="${offer.course.name}"></c:out></td>
 				<td><c:out value="${offer.course.university.name}"></c:out></td>

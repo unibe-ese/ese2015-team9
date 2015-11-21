@@ -27,19 +27,16 @@
 
 				</form:form>
 			</c:if>
+			
 			<c:if test="${member.isTutor}">
-				<form:form action="addCourse" method="get">
+				<form:form action="addOffer" method="get">
 					<input class="submitbutton" type="submit" value="Kurs hinzufügen" />
 				</form:form>
-				<form:form action="showCourses" method="get">
-					<input class="submitbutton" type="submit" value="Zeige Kurse an" />
-				</form:form>
+				
 			</c:if>
+			
 			<br />
 			<a class="submitbutton" href="<c:url value="/j_spring_security_logout"></c:url>">Abmelden</a>
-			<br />
-			<br />
-			<br />
 		</c:when>
 		<c:otherwise>
 			<c:import url="template/loginform.jsp" />

@@ -22,7 +22,7 @@ public class UniversityAccessServiceTest {
     @Mock
     private UniversityDao uniDao;
     @InjectMocks
-    private UniversityAccessService service;
+    private UniversityService service;
     private final List<University> listUni1 = new ArrayList<University>();
     private final List<University> listAllUnis = new ArrayList<University>();
 	private final List<University> listUni2 = new ArrayList<University>();
@@ -44,7 +44,7 @@ public class UniversityAccessServiceTest {
         Mockito.when(uniDao.findAll()).thenReturn(listAllUnis);
     }
     /**
-     * Test of findAll method, of class {@link UniversityAccessService}.
+     * Test of findAll method, of class {@link UniversityService}.
      */
     @Test
     public void testFindAll() {
@@ -52,7 +52,7 @@ public class UniversityAccessServiceTest {
         assertEquals(listAllUnis, result);
     }
     /**
-     * Test of findByName method, of class {@link UniversityAccessService}.
+     * Test of findByName method, of class {@link UniversityService}.
      */
     @Test
     public void testFindByName() {

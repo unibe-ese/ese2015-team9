@@ -7,13 +7,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
-import team9.tutoragency.controller.pojos.AddCourseForm;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"member_id", "course_id"}))
 public class Offer implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
@@ -37,6 +41,20 @@ public class Offer implements Serializable {
 		
 	}
 
+	
+	public Offer(Long id, Member member, Course course) {
+		super();
+		this.id = id;
+		this.member = member;
+		this.course = course;
+	}
+	public Offer(Long id, Member member, Course course, float grade) {
+		super();
+		this.id = id;
+		this.member = member;
+		this.course = course;
+		this.grade = grade;
+	}
 	public Long getId() {
 		return id;
 	}

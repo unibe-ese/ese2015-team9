@@ -2,9 +2,12 @@ package team9.tutoragency.controller.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,21 +19,32 @@ import team9.tutoragency.model.dao.UniversityDao;
 
 @Service
 public class MemberService {
+	
 	@Autowired
 	MemberDao memberDao;
 	@Autowired
 	UniversityDao uniDao;
 
-	public void upgradeToTutor(Member member) {
-		member.setIsTutor(true);
-		memberDao.save(member);
-	}
 	@Transactional
-	public Member findById(Long id){
+	public Member upgradeAuthenticatedMemberToTutor() {
+
+		Optional<Member> member = getAuthenticatedMember();
+
+		if (member.isPresent()) {
+			member.get().setIsTutor(true);
+			memberDao.save(member.get());
+		}
+
+		return member.get();
+	}
+
+	@Transactional
+	public Member findById(Long id) {
 		return memberDao.findOne(id);
 	}
+
 	@Transactional
-	public void saveEditChange(Member member, EditForm editForm){
+	public void saveEditChange(Member member, EditForm editForm) {
 		member.setEmail(editForm.getEmail());
 
 		if (editForm.getPassword().length() > 0) {
@@ -48,10 +62,30 @@ public class MemberService {
 				List<University> selectedUni = uniDao.findByName(editForm.getUniversities().get(i));
 				tmpList.add(selectedUni.get(0));
 			}
-            if (!tmpList.isEmpty()) member.setUniversityList(tmpList);
+			if (!tmpList.isEmpty())
+				member.setUniversityList(tmpList);
 		}
 		memberDao.save(member);
 	}
 
-	
+	/**
+	 * Use this method instead of retrieving the authenticated member from the
+	 * SecurityContext, because the lists might otherwise not correspond to the
+	 * DB entities.
+	 * 
+	 * @return Optional.empty, if no authentication found, or an Optional,
+	 *         wrapping the currently authenticated Member (fetched from the DB
+	 *         by Id).
+	 */
+	@Transactional
+	public Optional<Member> getAuthenticatedMember() {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		if (authentication == null)
+			return Optional.empty();
+		else
+			return Optional.of(memberDao.findOne(((Member) authentication.getPrincipal()).getId()));
+	}
+
 }

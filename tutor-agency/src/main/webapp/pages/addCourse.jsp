@@ -18,16 +18,20 @@
 						<tr>
 
 							<td style="width: 150px"><strong>Universität:</strong></td>
+							
 							<td><form:select path="selectedUniversity"
 									name="universityList" id="universityList"
 									onchange="this.form.submit()">
 									<c:forEach items="${universities}" var="universities">
-										<option value="${universities.name}"><c:out
-												value="${universities.name}" /></option>
+										<option value="${universities.name}"
+											<c:if test="${universities.name == addCourseForm.selectedUniversity}" >
+											selected = true</c:if>>
+											<c:out value="${universities.name}" /></option>
 									</c:forEach>
 								</form:select></td>
 						</tr>
 					</table>
+					
 				</form:form> <form:form modelAttribute="addCourseForm" action="addCourse"
 					method="post">
 					<tr>
