@@ -41,7 +41,7 @@ public class Course implements Serializable {
 	
 	@OneToMany(mappedBy = "course")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private Set<TutoringOffer> offers = new HashSet<TutoringOffer>();
+	private Set<Offer> offers;
 	
 	public Course() {
 		super();
@@ -80,11 +80,11 @@ public class Course implements Serializable {
 
 	
 
-	public Set<TutoringOffer> getOffers() {
+	public Set<Offer> getOffers() {
 		return offers;
 	}
 
-	public void setOffers(Set<TutoringOffer> offers) {
+	public void setOffers(Set<Offer> offers) {
 		this.offers = offers;
 	}
 

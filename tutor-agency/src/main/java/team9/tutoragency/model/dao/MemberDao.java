@@ -10,5 +10,5 @@ public interface MemberDao extends CrudRepository<Member,Long> {
 
 	public List<Member> findByUsername(String username);
 	public List<Member> findByEmail(String email);
-	
+	public List<Member> findByFeeBetween(double min, double max);
 }

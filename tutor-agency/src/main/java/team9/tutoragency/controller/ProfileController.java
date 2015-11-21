@@ -39,7 +39,7 @@ public class ProfileController {
 	
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public ModelAndView show(RedirectAttributes redirectAttributes) {
+	public ModelAndView show() {
 		ModelAndView profile = new ModelAndView("profile");
 		Optional<Member> member = memberService.getAuthenticatedMember();
 		
@@ -59,7 +59,7 @@ public class ProfileController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/becomeTutor", method = RequestMethod.POST)
-	public ModelAndView becomeTutor(RedirectAttributes redirectAttributes) {
+	public ModelAndView becomeTutor() {
 		
 		if(!memberService.getAuthenticatedMember().isPresent())
 			return new ModelAndView("redirect:/login?error=true");
@@ -67,7 +67,7 @@ public class ProfileController {
 		Member member = memberService.upgradeAuthenticatedMemberToTutor();
 		assert(member.isTutor());
 		
-		return show(redirectAttributes);
+		return show();
 	}
 
 }

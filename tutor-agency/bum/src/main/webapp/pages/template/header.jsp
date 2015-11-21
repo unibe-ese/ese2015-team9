@@ -30,7 +30,7 @@
 
 	<div class="header">
 	
-<form action="quicksearch" method = "GET" class="searchForm"><input type="search" name="text" />
+<form action="search" method = "GET" class="searchForm"><input type="search" name="text" />
 <input type="submit" value="Search" /></form>
 		<!-- 
 			<img src="<c:url value="/pages/template/header.jpg"/>">

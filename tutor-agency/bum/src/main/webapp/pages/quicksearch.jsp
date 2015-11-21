@@ -72,7 +72,7 @@
 			<td>Tutor</td>
 			<!-- <td>Contact</td> -->
 		</tr>
-		<c:forEach items="${searchResults}" var="result">
+		<c:forEach items="${search}" var="result">
 			<c:forEach items="${result.members}" var="member">
 				<tr>
 					<td><c:out value="${result.course.name}"></c:out></td>

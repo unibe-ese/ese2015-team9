@@ -77,7 +77,7 @@ public class Member implements UserDetails {
 
 	@OneToMany(mappedBy = "member")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private Set<TutoringOffer> offers = new HashSet<TutoringOffer>();
+	private Set<Offer> offers = new HashSet<Offer>();
 	
 	
 	public Member(String firstName, String lastName, String email, String username, String password) {
@@ -210,11 +210,11 @@ public class Member implements UserDetails {
 		this.isActivated = isActivated;
 	}
 
-	public Set<TutoringOffer> getOffers() {
+	public Set<Offer> getOffers() {
 		return offers;
 	}
 
-	public void setOffers(Set<TutoringOffer> offers) {
+	public void setOffers(Set<Offer> offers) {
 		this.offers = offers;
 	}
 

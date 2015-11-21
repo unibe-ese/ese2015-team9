@@ -15,7 +15,7 @@ import com.google.common.collect.Lists;
 import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.model.TutoringOffer;
+import team9.tutoragency.model.Offer;
 import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.MemberDao;

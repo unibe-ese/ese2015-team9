@@ -22,7 +22,7 @@
 <div class="container">
 	
 
-	<form:form modelAttribute="form" action="searchresults" method="post"
+	<form:form modelAttribute="form" action="search" method="post"
 		 class="searchForm">
 			<p>
 			<form:input path="searchText" type="search" onclick="this.value=''" value="enter a course name..."/>
@@ -79,7 +79,7 @@
 			<td>Fee [CHF]</td>
 			<!-- <td>Contact</td> -->
 		</tr>
-		<c:forEach items="${searchResults}" var="result">
+		<c:forEach items="${search}" var="result">
 			<c:forEach items="${result.members}" var="member">
 				<tr>
 					<td><c:out value="${result.course.name}"></c:out></td>

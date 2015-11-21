@@ -12,7 +12,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"member_id", "course_id"}))
-public class TutoringOffer implements Serializable {
+public class Offer implements Serializable {
 
 	/**
 	 * 
@@ -32,15 +32,29 @@ public class TutoringOffer implements Serializable {
 
 	private float grade;
 
-	public TutoringOffer(Member member, Course course, float grade) {
+	public Offer(Member member, Course course, float grade) {
 		this.member = member;
 		this.course = course;
 		this.grade = grade;
 	}
-	public TutoringOffer(){
+	public Offer(){
 		
 	}
 
+	
+	public Offer(Long id, Member member, Course course) {
+		super();
+		this.id = id;
+		this.member = member;
+		this.course = course;
+	}
+	public Offer(Long id, Member member, Course course, float grade) {
+		super();
+		this.id = id;
+		this.member = member;
+		this.course = course;
+		this.grade = grade;
+	}
 	public Long getId() {
 		return id;
 	}

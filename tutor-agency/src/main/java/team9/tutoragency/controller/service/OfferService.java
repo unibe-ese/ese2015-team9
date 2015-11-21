@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.model.TutoringOffer;
+import team9.tutoragency.model.Offer;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.OfferDao;
 
@@ -26,8 +26,8 @@ public class OfferService {
 		Course course = courseDao.findOne(courseId);
 		
 		if(course!= null && member!= null){
-			List<TutoringOffer> offers = offerDao.findByMemberAndCourse(member, course);
-			for(TutoringOffer offer: offers){
+			List<Offer> offers = offerDao.findByMemberAndCourse(member, course);
+			for(Offer offer: offers){
 				offerDao.delete(offer);
 			}
 			return true;
@@ -42,7 +42,7 @@ public class OfferService {
 		Course course = courseDao.findOne(courseId);
 		
 		if(course!= null && member!= null){
-			offerDao.save(new TutoringOffer(member, course, grade));
+			offerDao.save(new Offer(member, course, grade));
 			return true;
 		}
 		return false;
@@ -57,7 +57,7 @@ public class OfferService {
 		return gradeChoices;
 	}
 
-	public List<TutoringOffer> findByTutor(Member tutor) {
+	public List<Offer> findByTutor(Member tutor) {
 		return offerDao.findByMember(tutor);
 	}
 }

@@ -54,9 +54,9 @@ public class MemberServiceTest {
 		Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
 		
 		SecurityContextHolder.setContext(securityContext);
-        service.upgradeAuthenticatedMemberToTutor();
+        
         member.setIsTutor(true);
-        assertEquals(member, captor.getValue());
+        assertEquals(member, service.upgradeAuthenticatedMemberToTutor());
     }
 
     /**
