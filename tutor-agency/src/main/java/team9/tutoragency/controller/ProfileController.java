@@ -1,6 +1,8 @@
 package team9.tutoragency.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.Offer;
 
 /**
  * The {@link ProfileController} handles the interactions of a user with his
@@ -47,6 +50,9 @@ public class ProfileController {
 			return new ModelAndView("redirect:/login?error=true");
 		
 		profile.addObject("member", member.get());
+		List<Offer> subscriptions = new ArrayList<Offer>();
+		subscriptions.addAll(member.get().getSubscriptions());
+		profile.addObject("subscriptions", subscriptions);
 		return profile;
 	}
 

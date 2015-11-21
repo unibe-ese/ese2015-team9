@@ -30,6 +30,14 @@
 							style="height: 10px; width: 10px;" onClick="alert(test);">
 					</form></td>
 			</tr>
+			<c:forEach items="${offer.subscribers}" var="subscriber">
+				<tr>
+					<td colspan="3" style="text-align:center" >
+						<c:out value="Tutoring Request from ${subscriber.username}"/>
+					</td>
+					<td> ACCEPT PLACEHOLDER</td>
+				</tr>
+			</c:forEach>
 		</c:forEach>
 	</table>
 

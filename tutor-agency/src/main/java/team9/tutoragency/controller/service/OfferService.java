@@ -2,6 +2,7 @@ package team9.tutoragency.controller.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class OfferService {
 	
 	@Autowired OfferDao offerDao;
 	@Autowired CourseDao courseDao;
+	@Autowired MemberService memberService;
 	
 	@Transactional
 	public boolean removeOffer(Member member, Long courseId){
@@ -26,7 +28,7 @@ public class OfferService {
 		Course course = courseDao.findOne(courseId);
 		
 		if(course!= null && member!= null){
-			List<Offer> offers = offerDao.findByMemberAndCourse(member, course);
+			List<Offer> offers = offerDao.findByTutorAndCourse(member, course);
 			for(Offer offer: offers){
 				offerDao.delete(offer);
 			}
@@ -58,7 +60,30 @@ public class OfferService {
 	}
 
 	public List<Offer> findByTutor(Member tutor) {
-		return offerDao.findByMember(tutor);
+		return offerDao.findByTutor(tutor);
+	}
+
+	@Transactional
+	public void subscribeAuthMemberToOffer(Long offerId) {
+		Optional<Member> member = memberService.getAuthenticatedMember();
+		
+		if(member.isPresent() || offerDao.exists(offerId)){
+			Offer offer = offerDao.findOne(offerId);
+			List<Member> subscribers = offer.getSubscribers();
+			if(subscribers == null){
+				subscribers = new ArrayList<Member>();
+				subscribers.add(member.get());
+			} else {
+				if(!subscribers.contains(member))
+					subscribers.add(member.get());
+					
+			}
+			offer.setSubscribers(subscribers);
+			offerDao.save(offer);
+			
+		}
+			
+			
 	}
 }
 

@@ -12,7 +12,7 @@
 <div class="container">
 	<h1>Profile</h1>
 	<br>
-	<table class="forms" >
+	<table class="forms">
 		<tr>
 			<th style="text-align: left">Account Informations</th>
 			<c:if test="${member.isTutor}">
@@ -29,7 +29,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="min-width:35px"><strong>Username:</strong></td>
+						<td style="min-width: 35px"><strong>Username:</strong></td>
 						<td>${member.username}</td>
 					</tr>
 					<tr>
@@ -88,12 +88,21 @@
 	<hr>
 	<br>
 	<sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
-		<c:choose>
-			<c:when test="${loggedIn}">
-				<c:import url="fragments/offerTablePrivate.jsp"/>
-			</c:when>
-			</c:choose>
-			
+	<c:choose>
+		<c:when test="${loggedIn}">
+			<c:import url="fragments/offerTablePrivate.jsp" />
+		</c:when>
+	</c:choose>
+
+	<br>
+	<h3>Subscriptions:</h3>
+	<hr>
+		<ul><c:forEach items="${subscriptions}" var="subscription">
+			<li>course : ${subscription.course.name} , tutor:
+				${subscription.tutor.username}</li>
+		</c:forEach>
+		</ul>
+	
 	<div class="stripe"></div>
 	<c:import url="template/sidebar_profile.jsp" />
 	<c:import url="template/footer.jsp" />

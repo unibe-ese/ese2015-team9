@@ -22,7 +22,7 @@
 			<td>Fee</td>
 			<th>Grade</th>
 			<c:if test="${loggedIn}">
-				<th>Contact</th>
+				<th>Subscribe</th>
 			</c:if>
 		</tr>
 	</thead>
@@ -30,9 +30,9 @@
 	<tr>
 		<td><c:out value="${offer.course.name}"></c:out></td>
 		<td><c:out value="${offer.course.university.name}"></c:out></td>
-		<td><a href="profileId=${offer.member.id}"> <c:out
-					value="${offer.member.username}"></c:out></a></td>
-		<td>${offer.member.fee}</td>
+		<td><a href="profileId=${offer.tutor.id}"> <c:out
+					value="${offer.tutor.username}"></c:out></a></td>
+		<td>${offer.tutor.fee}</td>
 		<td>${offer.grade}</td>
 
 
@@ -41,9 +41,9 @@
 
 			<td align="center">
 				<form
-					onsubmit="return confirm('Do you want to request tutoring for ${offer.course.name} from ${offer.member.username}?');"
-					action="contact/${offer.id}" 
-					method="post">
+					onsubmit="return confirm('Do you want to request tutoring for ${offer.course.name} from ${offer.tutor.username}?');"
+					action="subscribe/${offer.id}" 
+					method="get">
 					
 					<input class="none" id="emailIcon" type="image"
 						src="img/email-icon.png" name="email-icon"

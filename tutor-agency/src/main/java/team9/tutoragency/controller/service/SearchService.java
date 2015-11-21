@@ -74,7 +74,7 @@ public class SearchService {
 			if (courses == null || members == null || courses.isEmpty() || members.isEmpty())
 				return offers;
 			else {
-				return offerDao.findByMemberInAndCourseInAndGradeGreaterThanEqual(members, courses,
+				return offerDao.findByTutorInAndCourseInAndGradeGreaterThanEqual(members, courses,
 						Float.parseFloat(form.getMinGrade()));
 			}
 		} else

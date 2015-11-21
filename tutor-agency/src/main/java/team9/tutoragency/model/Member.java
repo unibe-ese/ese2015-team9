@@ -75,10 +75,12 @@ public class Member implements UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<University> universityList;
 
-	@OneToMany(mappedBy = "member")
+	@OneToMany(mappedBy = "tutor")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<Offer> offers = new HashSet<Offer>();
 	
+	@ManyToMany(mappedBy ="subscribers", fetch = FetchType.EAGER)
+	private Set<Offer> subscriptions = new HashSet<Offer>();
 	
 	public Member(String firstName, String lastName, String email, String username, String password) {
 		this.firstName = firstName;
@@ -216,6 +218,14 @@ public class Member implements UserDetails {
 
 	public void setOffers(Set<Offer> offers) {
 		this.offers = offers;
+	}
+
+	public Set<Offer> getSubscriptions() {
+		return subscriptions;
+	}
+
+	public void setSubscriptions(Set<Offer> subscriptions) {
+		this.subscriptions = subscriptions;
 	}
 
 	@Override

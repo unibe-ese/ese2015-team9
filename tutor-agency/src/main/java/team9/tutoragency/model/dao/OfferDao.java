@@ -11,18 +11,18 @@ import team9.tutoragency.model.Offer;
 
 public interface OfferDao extends CrudRepository<Offer, Long> {
 
-	public List<Offer> findByMemberAndCourse(Member member, Course course);
+	public List<Offer> findByTutorAndCourse(Member tutor, Course course);
 
-	public List<Offer> findByMember(Member tutor);
+	public List<Offer> findByTutor(Member tutor);
 
 	public List<Offer> findByCourseIn(Collection<Course> courses);
 
-	public List<Offer> findByMemberInAndCourseIn(Collection<Member> memberMatches, Collection<Course> courseMatches);
+	public List<Offer> findByTutorInAndCourseIn(Collection<Member> memberMatches, Collection<Course> courseMatches);
 
 	public Collection<? extends Offer> findByCourse(Course course);
 
 	public List<Offer> findByGradeGreaterThanEqual(float minGrade);
 
-	public List<Offer> findByMemberInAndCourseInAndGradeGreaterThanEqual(List<Member> members,
+	public List<Offer> findByTutorInAndCourseInAndGradeGreaterThanEqual(List<Member> tutors,
 			List<Course> courses, float parseFloat);
 }

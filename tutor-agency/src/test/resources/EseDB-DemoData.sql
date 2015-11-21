@@ -2,6 +2,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 DELETE FROM member_university;
+DELETE FROM offer_member;
 DELETE FROM offer;
 DELETE FROM course;
 DELETE FROM member;
@@ -36,7 +37,7 @@ INSERT INTO `Member` (`id`, `email`, `fee`, `firstName`, `isActivated`, `isTutor
 
 -- --------------------------------------------------------
 
-INSERT INTO `Offer` (`member_id`, `course_id`, `grade`) VALUES
+INSERT INTO `Offer` (`tutor_id`, `course_id`, `grade`) VALUES
 (3, 1, 4.5),
 (3, 2, 5.5),
 (3, 3, 4.0),
@@ -55,5 +56,17 @@ INSERT INTO `Member_University` (`Member_id`, `universityList_id`) VALUES
 (3, 1),
 (3, 2),
 (4, 3);
+
+-- ---------------------------------------------------------
+INSERT INTO `Offer_Member` (`subscriptions_id`, `subscribers_id`) VALUES
+(11,1),
+(10,2),
+(9, 2),
+(8, 2),
+(1, 4),
+(6, 3),
+(5, 1),
+(4, 1),
+(3, 1);
 
 COMMIT;
