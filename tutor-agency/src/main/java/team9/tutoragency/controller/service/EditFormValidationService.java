@@ -51,6 +51,8 @@ import team9.tutoragency.model.dao.MemberDao;
 public class EditFormValidationService implements ValidationService {
 	@Autowired
 	MemberDao memberDao;
+	@Autowired
+	MemberService memberService;
 
 	private Pattern validCharacterPattern;
 
@@ -63,21 +65,20 @@ public class EditFormValidationService implements ValidationService {
 
 	private void checkEmailAlreadyInUse(Errors errors, Member member, EditForm form) {
 		List<Member> members = memberDao.findByEmail(form.getEmail());
-		if (members.size() != 0 && members.get(0) != member) {
+		if (!members.get(0).equals(member)) {
 			errors.rejectValue("email", "email.invalidName", "Diese Email Adresse wird bereits verwendet");
 		}
 	}
 
 	private void checkUsernameAlreadyInUse(Errors errors, Member member, EditForm form) {
 		List<Member> members = memberDao.findByUsername(form.getUsername());
-		if (members.size() != 0 && members.get(0) != member) {
+		if (!members.get(0).equals(member)) {
 			errors.rejectValue("username", "username.invalidName", "Dieser Username wird bereits verwendet");
 		}
 	}
 
 	public void validate(Form editForm, Errors errors) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Member member = (Member) authentication.getPrincipal();
+		Member member = memberService.getAuthenticatedMember().get();
 
 		EditForm form = (EditForm) editForm;
 
