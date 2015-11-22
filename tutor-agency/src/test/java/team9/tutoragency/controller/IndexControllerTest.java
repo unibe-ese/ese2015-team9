@@ -36,7 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 "file:src/main/webapp/WEB-INF/config/springData.xml" })
 @Transactional
 @Rollback
-public class InfoControllerIT {
+public class IndexControllerTest {
     
     @Autowired private WebApplicationContext wac;
     private MockMvc mockMvc;

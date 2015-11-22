@@ -30,4 +30,33 @@ public class IndexController {
 		return "redirect:/";
 	}
 
+	@RequestMapping(value = "/info")
+    public ModelAndView info() {
+    	ModelAndView model = new ModelAndView("info");
+        return model;
+    }
+    
+    @RequestMapping(value = "/faq")
+    public ModelAndView faq() {
+    	ModelAndView model = new ModelAndView("faq");
+        return model;
+    }    
+    
+    @RequestMapping(value = "/agb")
+    public ModelAndView agb() {
+    	ModelAndView model = new ModelAndView("agb");
+        return model;
+    }    
+    
+    @RequestMapping(value = "/impressum")
+    public ModelAndView impressum() {
+    	ModelAndView model = new ModelAndView("impressum");
+        return model;
+    }    
+    
+    @RequestMapping(value = "/forgot")
+    public ModelAndView forgot() {
+    	ModelAndView model = new ModelAndView("forgottenpassword");
+        return model;
+    }
 }

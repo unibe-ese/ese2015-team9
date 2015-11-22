@@ -3,6 +3,8 @@ package team9.tutoragency.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -52,16 +54,21 @@ public class EditController {
 
 		ModelAndView edit = new ModelAndView("edit");
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Member member = (Member) authentication.getPrincipal();
-		EditForm editForm = new EditForm(member);
-		System.out.println(member.toString());
-		List<University> universities = uniService.findAll();
-		List<String> universityNames = extractNames(universities);
+		Optional<Member> authMember = memberService.getAuthenticatedMember();
+		
+		if(!authMember.isPresent()){
+			return new ModelAndView("redirect:/denied");
+		}
+		
+		//else
+		
+		EditForm editForm = new EditForm(authMember.get());
+		
+		List<String> universityNames = uniService.findAllNames();
 
 		edit.addObject("universityChoices", universityNames);
 		edit.addObject("editForm", editForm);
-		edit.addObject("member", member);
+		edit.addObject("member", authMember.get());
 		return edit;
 	}
 
@@ -81,6 +88,7 @@ public class EditController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveChange(@Valid EditForm editForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
+		
 		assert(isAccessAuthenticated());
 
 		ModelAndView model;
@@ -90,16 +98,15 @@ public class EditController {
 		if (!result.hasErrors()) {
 
 			memberService.saveEditChange(member, editForm);
-			model = new ModelAndView("profile");
-			model.addObject("member", member);
-			model.addObject("unis", member.getUniversityList());
+			model = new ModelAndView("redirect:/profile");
+			
 
 		} else {
 
 			model = new ModelAndView("edit");
 			model.addObject("editForm", editForm);
-			List<University> universities = uniService.findAll();
-			List<String> universityNames = extractNames(universities);
+			
+			List<String> universityNames = uniService.findAllNames();
 
 			model.addObject("universityChoices", universityNames);
 			model.addObject("member", member);
@@ -120,11 +127,5 @@ public class EditController {
 		return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
 	}
 
-	public List<String> extractNames(List<University> universities) {
-		List<String> names = new ArrayList<String>();
-		for (University uni : universities) {
-			names.add(uni.getName());
-		}
-		return names;
-	}
+	
 }

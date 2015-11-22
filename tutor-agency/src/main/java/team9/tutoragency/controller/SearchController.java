@@ -21,6 +21,7 @@ import team9.tutoragency.model.Offer;
 
 /**
  * This Controller handles page request related to search mechanisms.
+ * @author bruno
  */
 @Controller
 public class SearchController {
@@ -66,6 +67,7 @@ public class SearchController {
 	}
 	
 	/**
+	 * Method to get the search page.
 	 * Returns a modelAndView with search.jsp as view, and a new {@link SearchForm} as Object in the Model.
 	 * @return
 	 */

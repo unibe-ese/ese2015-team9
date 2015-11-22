@@ -126,11 +126,11 @@ public class EditControllerTest {
 	public void testInvariant() throws Exception {
 		initSecurityContextNOTAuthenticated();
 		
-		assertTrue(assertionErrorCatchedWhenMvcPerformsget("/edit"));
+		assertTrue(assertionErrorCatchedWhenMvcPerformsGet("/edit"));
 //		assertTrue(assertionErrorCatchedWhenMvcPerformsget("/save"));
 	}
 
-	private boolean assertionErrorCatchedWhenMvcPerformsget(String urlTemplate) throws Exception {
+	private boolean assertionErrorCatchedWhenMvcPerformsGet(String urlTemplate) throws Exception {
 		
 		try {
 			mockMvc.perform(get(urlTemplate));
@@ -154,12 +154,6 @@ public class EditControllerTest {
 		Mockito.when(authentication.getPrincipal()).thenReturn(member);
 		Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
 		SecurityContextHolder.setContext(securityContext);
-	}
-
-	@Test
-	public void testExtractNames() {
-		List<String> expected = Arrays.asList(new String[] { "name1", "name2" });
-		assertEquals(expected, controller.extractNames(universities));
 	}
 
 	@Test

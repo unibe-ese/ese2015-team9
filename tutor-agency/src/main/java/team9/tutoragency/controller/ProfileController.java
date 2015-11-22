@@ -35,24 +35,29 @@ public class ProfileController {
 	@RequestMapping(value = "/profileId={id}", method = RequestMethod.GET)
 	public ModelAndView showOpenProfile(@PathVariable("id") Long id) {
 		ModelAndView model = new ModelAndView("publicProfile");
+		
 		Member member = memberService.findById(id);
+		
 		model.addObject("member", member);
 		return model;
 	}
 	
-
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView show() {
+		
 		ModelAndView profile = new ModelAndView("profile");
+		
 		Optional<Member> member = memberService.getAuthenticatedMember();
 		
 		if(!member.isPresent())
-			return new ModelAndView("redirect:/login?error=true");
+			return new ModelAndView("redirect:/denied");
 		
 		profile.addObject("member", member.get());
+		
 		List<Offer> subscriptions = new ArrayList<Offer>();
 		subscriptions.addAll(member.get().getSubscriptions());
 		profile.addObject("subscriptions", subscriptions);
+		
 		return profile;
 	}
 
