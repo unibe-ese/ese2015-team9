@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import javassist.bytecode.AnnotationsAttribute;
 import team9.tutoragency.controller.pojos.EditForm;
@@ -48,7 +49,7 @@ import team9.tutoragency.model.dao.MemberDao;
  *
  */
 @Service
-public class EditFormValidationService implements ValidationService {
+public class EditFormValidationService implements Validator {
 	@Autowired
 	MemberDao memberDao;
 	@Autowired
@@ -77,10 +78,11 @@ public class EditFormValidationService implements ValidationService {
 		}
 	}
 
-	public void validate(Form editForm, Errors errors) {
+	@Override
+	public void validate(Object target, Errors errors) {
 		Member member = memberService.getAuthenticatedMember().get();
 
-		EditForm form = (EditForm) editForm;
+		EditForm form = (EditForm) target;
 
 		checkUsernameAlreadyInUse(errors, member, form);
 		checkEmailAlreadyInUse(errors, member, form);
@@ -107,4 +109,8 @@ public class EditFormValidationService implements ValidationService {
 		}
 	}
 
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return EditForm.class.isAssignableFrom(clazz);
+	}
 }
