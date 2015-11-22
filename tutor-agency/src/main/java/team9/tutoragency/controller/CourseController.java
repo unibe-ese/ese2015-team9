@@ -80,15 +80,15 @@ public class CourseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/addOffer", method = RequestMethod.GET)
-	public ModelAndView showAddCourseView(@ModelAttribute(value = "universities") List<University> unis,
-			HttpServletResponse response) {
+	public ModelAndView showAddCourseView(HttpServletResponse response) {
 
 		ModelAndView addCourse = new ModelAndView("addCourse");
 
 		AddCourseForm form = new AddCourseForm();
-		form.setSelectedUniversity(unis.get(0).getName());
+		University preselectedUni = uniService.findAll().get(0);
+		form.setSelectedUniversity(preselectedUni.getName());
 		addCourse.addObject("addCourseForm", form);
-		generateAddCourseModel(addCourse);
+		generateAddCourseModel(addCourse, preselectedUni);
 		return addCourse;
 	}
 
@@ -137,14 +137,12 @@ public class CourseController {
 
 		Member member = memberService.getAuthenticatedMember().get();
 		float grade = Float.parseFloat(addCourseForm.getGrade());
-		
+
 		offerService.addOffer(member, addCourseForm.getSelectedCourse(), grade);
-		
+
 		ModelAndView profile = new ModelAndView("redirect:/profile");
 		return profile;
 	}
-
-
 
 	/**
 	 * Handles a delete request from a {@link Member} when he/she wants to
@@ -165,20 +163,20 @@ public class CourseController {
 		return new ModelAndView("redirect:/profile");
 	}
 
-	@RequestMapping(value="/subscribe/{offerId}", method = RequestMethod.GET)
-	public String subscribeToOffer(@PathVariable( value="offerId") Long offerId){
+	@RequestMapping(value = "/subscribe/{offerId}", method = RequestMethod.GET)
+	public String subscribeToOffer(@PathVariable(value = "offerId") Long offerId) {
 		offerService.subscribeAuthMemberToOffer(offerId);
 		return "redirect:/profile";
 	}
-	public void generateAddCourseModel(ModelAndView addCourse) {
+
+	public void generateAddCourseModel(ModelAndView addCourse, University preselectedUni) {
 		List<University> universities = Lists.newArrayList(uniService.findAll());
 		addCourse.addObject("universities", universities);
-		addCourse.addObject("courses", courseService.findByUniversity(universities.get(0)));
+		addCourse.addObject("courses", courseService.findByUniversity(preselectedUni));
 		Member member = memberService.getAuthenticatedMember().get();
-//		addCourse.addObject("member", member);
+		// addCourse.addObject("member", member);
 		addCourse.addObject("unis", member.getUniversityList());
 		addCourse.addObject("gradeChoices", offerService.getPossibleGrades());
 	}
 
-	
 }

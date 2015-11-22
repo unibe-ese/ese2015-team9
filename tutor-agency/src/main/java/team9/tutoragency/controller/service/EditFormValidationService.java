@@ -63,14 +63,14 @@ public class EditFormValidationService implements ValidationService {
 
 	private void checkEmailAlreadyInUse(Errors errors, Member member, EditForm form) {
 		List<Member> members = memberDao.findByEmail(form.getEmail());
-		if (members.size() != 0 && members.get(0).getId() != member.getId()) {
+		if (members.size() != 0 && members.get(0) != member) {
 			errors.rejectValue("email", "email.invalidName", "Diese Email Adresse wird bereits verwendet");
 		}
 	}
 
 	private void checkUsernameAlreadyInUse(Errors errors, Member member, EditForm form) {
 		List<Member> members = memberDao.findByUsername(form.getUsername());
-		if (members.size() != 0 && members.get(0).getId() != member.getId()) {
+		if (members.size() != 0 && members.get(0) != member) {
 			errors.rejectValue("username", "username.invalidName", "Dieser Username wird bereits verwendet");
 		}
 	}

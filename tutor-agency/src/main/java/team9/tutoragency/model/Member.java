@@ -90,7 +90,6 @@ public class Member implements UserDetails {
 		this.username = username;
 		this.isTutor = false;
 		this.isActivated = false;
-		this.fee = null;
 	}
 	
 	public Member() {

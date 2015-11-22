@@ -66,7 +66,7 @@ public class SearchService {
 			System.err.println(universities.toString());
 
 			courses = courseDao.findByNameContainingAndUniversityIn(form.getSearchText(), universities);
-			System.err.println(courses.toString());
+			System.err.println(courses);
 
 			members = memberDao.findByFeeBetween(new Double(form.getMinFee() ), form.getMaxFee() );
 			System.out.println(members);

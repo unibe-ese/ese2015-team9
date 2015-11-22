@@ -74,7 +74,7 @@ public class OfferService {
 				subscribers = new ArrayList<Member>();
 				subscribers.add(member.get());
 			} else {
-				if(!subscribers.contains(member))
+				if(!subscribers.contains(member.get()))
 					subscribers.add(member.get());
 					
 			}
