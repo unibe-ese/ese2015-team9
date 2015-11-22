@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import team9.tutoragency.controller.pojos.Form;
 import team9.tutoragency.controller.pojos.SignupForm;
@@ -20,7 +21,7 @@ import team9.tutoragency.model.dao.MemberDao;
  *
  */
 @Service
-public class SignupFormValidationService implements ValidationService {
+public class SignupFormValidationService implements Validator {
 
 	@Autowired
 	MemberDao memberDao;
@@ -49,8 +50,10 @@ public class SignupFormValidationService implements ValidationService {
 		}
 	}
 
-	public void validate(Form signupForm, Errors errors) {
-		SignupForm form = (SignupForm) signupForm;
+	
+	@Override
+	public void validate(Object target, Errors errors) {
+		SignupForm form = (SignupForm) target;
 		matcher = validCharacterPattern.matcher(form.getUsername());
 		if (!matcher.matches()) {
 			errors.rejectValue("username", "username.invalidName", "Der Name sollte 3-15 Zeichen enthalten.");
@@ -69,4 +72,8 @@ public class SignupFormValidationService implements ValidationService {
 
 	}
 
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return SignupForm.class.isAssignableFrom(clazz);
+	}
 }
