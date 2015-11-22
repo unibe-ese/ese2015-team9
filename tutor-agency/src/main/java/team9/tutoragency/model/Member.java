@@ -1,19 +1,24 @@
-
 package team9.tutoragency.model;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,7 +49,7 @@ import team9.tutoragency.controller.RegisterController;
  * 
  * </p>
  * 
- * 
+ * @author bruno
  * @author laeri
  *
  */
@@ -62,17 +67,21 @@ public class Member implements UserDetails {
 	private String email;
 	private String username;
 	private String password;
+	
 	private Double fee; 
 	private boolean isTutor;
 	private boolean isActivated;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Course> courseList;
-
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<University> universityList;
 
+	@OneToMany(mappedBy = "tutor")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Set<Offer> offers = new HashSet<Offer>();
+	
+	@ManyToMany(mappedBy ="subscribers", fetch = FetchType.EAGER)
+	private Set<Offer> subscriptions = new HashSet<Offer>();
+	
 	public Member(String firstName, String lastName, String email, String username, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -81,25 +90,19 @@ public class Member implements UserDetails {
 		this.username = username;
 		this.isTutor = false;
 		this.isActivated = false;
-		this.fee = null;
 	}
-
+	
 	public Member() {
 
 	}
 
-	/**
-	 * We know that the name is ugly, but it makes more sense in the jsp file ;-) .
-	 */
 	public boolean isIsTutor() {
 		return isTutor;
 	}
 	public void setIsTutor(boolean tutor) {
 		this.isTutor = tutor;
 	}
-	/**
-	 * We know that the name is ugly, but it makes more sense in the jsp file ;-) .
-	 */
+	
 	public boolean isIsActivated() {
 		return isActivated;
 	}
@@ -146,24 +149,12 @@ public class Member implements UserDetails {
 		this.email = email;
 	}
 
-	
-
-	public List<Course> getCourseList() {
-		if (courseList == null)
-			courseList = new ArrayList<Course>();
-		return courseList;
-	}
-
 	public Double getFee() {
 		return fee;
 	}
 
 	public void setFee(Double fee) {
 		this.fee = fee;
-	}
-
-	public void setCourseList(List<Course> courseList) {
-		this.courseList = courseList;
 	}
 
 	public List<University> getUniversityList() {
@@ -178,7 +169,6 @@ public class Member implements UserDetails {
 		Collection<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 		list.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return list;
-
 	}
 
 	public boolean isAccountNonExpired() {
@@ -205,11 +195,42 @@ public class Member implements UserDetails {
 		this.username = username;
 	}
 
+	public boolean isTutor() {
+		return isTutor;
+	}
+
+	public void setTutor(boolean isTutor) {
+		this.isTutor = isTutor;
+	}
+
+	public boolean isActivated() {
+		return isActivated;
+	}
+
+	public void setActivated(boolean isActivated) {
+		this.isActivated = isActivated;
+	}
+
+	public Set<Offer> getOffers() {
+		return offers;
+	}
+
+	public void setOffers(Set<Offer> offers) {
+		this.offers = offers;
+	}
+
+	public Set<Offer> getSubscriptions() {
+		return subscriptions;
+	}
+
+	public void setSubscriptions(Set<Offer> subscriptions) {
+		this.subscriptions = subscriptions;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((courseList == null) ? 0 : courseList.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fee == null) ? 0 : fee.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
@@ -218,7 +239,6 @@ public class Member implements UserDetails {
 		result = prime * result + (isTutor ? 1231 : 1237);
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((universityList == null) ? 0 : universityList.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -232,11 +252,6 @@ public class Member implements UserDetails {
 		if (getClass() != obj.getClass())
 			return false;
 		Member other = (Member) obj;
-		if (courseList == null) {
-			if (other.courseList != null)
-				return false;
-		} else if (!courseList.equals(other.courseList))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -271,11 +286,6 @@ public class Member implements UserDetails {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (universityList == null) {
-			if (other.universityList != null)
-				return false;
-		} else if (!universityList.equals(other.universityList))
-			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -286,10 +296,11 @@ public class Member implements UserDetails {
 
 	@Override
 	public String toString() {
-		return "Member{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", username=" + username + ", password=" + password + ", isTutor=" + isTutor + ", fee=" + fee
-				+ ", isActivated=" + isActivated + ", courseList=" + courseList + ", universityList=" + universityList
-				+ '}';
+		return "Member [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", username=" + username + ", password=" + password + ", fee=" + fee + ", isTutor=" + isTutor
+				+ ", isActivated=" + isActivated + "]";
 	}
+
+	
 
 }

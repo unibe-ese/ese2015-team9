@@ -21,6 +21,17 @@ public class AddCourseForm {
 	@NotNull
 	private String selectedUniversity;
 
+	@NotNull
+	private String grade;
+
+	public String getGrade() {
+		return this.grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
 	public String getSelectedUniversity() {
 		return selectedUniversity;
 	}

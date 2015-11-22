@@ -5,21 +5,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <spring:url value="/css/style.css" var="css" />
-
-<c:import url="template/header.jsp" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-
-<div class="container">
-
-	<table class="forms">
-		<tr>
-			<td>Kurs</td>
-			<td>Universität</td>
-			<td>Note</td>
-			<td>Entfernen</td>
+	<h2 style="font-weight:bold">Open Tutoring Offers</h2>
+	<br>
+	<table class="forms" id=courses>
+	<thead>
+	<tr>
+			<th>Course</th>
+			<th>University</th>
+			<th>Grade</th>
+			<th>Remove</th>
 		</tr>
+	</thead>
+		
 		<c:forEach items="${member.offers}" var="offer">
 			<tr>
 				<td><c:out value="${offer.course.name}"></c:out></td>
@@ -33,14 +30,17 @@
 							style="height: 10px; width: 10px;" onClick="alert(test);">
 					</form></td>
 			</tr>
+			<c:forEach items="${offer.subscribers}" var="subscriber">
+				<tr>
+					<td colspan="3" style="text-align:center" >
+						<c:out value="Tutoring Request from ${subscriber.username}"/>
+					</td>
+					<td> ACCEPT PLACEHOLDER</td>
+				</tr>
+			</c:forEach>
 		</c:forEach>
 	</table>
 
-	</div>
-	
-
-</div>
-    <c:import url="template/footer.jsp" />
 </body>
 </html>
 

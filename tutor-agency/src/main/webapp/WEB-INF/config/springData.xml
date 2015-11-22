@@ -17,7 +17,7 @@
 
     <bean id="mainDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost/EseDB?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost/EseDB2?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8" />
         <property name="username" value="root"/>
         <property name="password" value=""/>
         <property name="idleConnectionTestPeriodInMinutes" value="60"/>
@@ -54,7 +54,7 @@
         </property>
         <property name="jpaProperties">
             <value>
-                hibernate.cache.use_second_level_cache = true
+                hibernate.cache.use_second_level_cache = false
                 hibernate.cache.region.factory_class = org.hibernate.cache.ehcache.EhCacheRegionFactory
                 hibernate.cache.use_query_cache = true
                 hibernate.generate_statistics = true

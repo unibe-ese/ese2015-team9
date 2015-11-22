@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
-           uri="http://www.springframework.org/security/tags"%>
+	uri="http://www.springframework.org/security/tags"%>
 
 
 
@@ -13,13 +13,15 @@
 
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>ese2015-Team9</title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <link type="text/css" rel="stylesheet" href="${css}" />
-    </head>
+<head>
+<title>ese2015-Team9</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link type="text/css" rel="stylesheet" href="${css}" />
+<link type="text/css" rel="stylesheet"
+	href="/tutor-agency/css/searchForm.css" />
+</head>
 
     <body>
 
@@ -32,6 +34,10 @@
                     <h2><span>learning by learning</span></h2>
                     <h2><span>guaranteed no shortcuts</span></h2>
                     <h2><span>get ready to read some books</span></h2></div>
+		<form action="search" method="GET" class="searchForm">
+			<input type="search" name="text" /> <input type="submit"
+				value="Search" />
+		</form>
             </header>
             
                         <!-- 

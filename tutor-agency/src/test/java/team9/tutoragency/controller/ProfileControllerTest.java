@@ -14,12 +14,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.model.Member;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import static org.mockito.Mockito.any;
 @RunWith(MockitoJUnitRunner.class)
 public class ProfileControllerTest {
@@ -37,12 +41,14 @@ public class ProfileControllerTest {
 	
 	@Test
 	public void showProfile(){
-		Authentication authentication = Mockito.mock(Authentication.class);
-        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
-        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
-        SecurityContextHolder.setContext(securityContext);
-        Mockito.when(authentication.getPrincipal()).thenReturn(member);
-        
+//		Authentication authentication = Mockito.mock(Authentication.class);
+//        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+//        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+//        SecurityContextHolder.setContext(securityContext);
+//        Mockito.when(authentication.getPrincipal()).thenReturn(member);
+//        
+        Mockito.when(memberService.getAuthenticatedMember()).thenReturn(Optional.of(member));
+       
         ModelAndView model = controller.show();
         assertEquals(member, model.getModel().get("member"));
         assertEquals("profile", model.getViewName());
@@ -52,7 +58,7 @@ public class ProfileControllerTest {
 	@Test
 	public void testShowOpenProfile(){
 		ModelAndView model = controller.showOpenProfile(1L);
-		assertEquals("openprofile", model.getViewName());
+		assertEquals("publicProfile", model.getViewName());
 		assertEquals(member, model.getModel().get("member"));
 		
 		//when memberService returns null

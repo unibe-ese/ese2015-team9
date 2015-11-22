@@ -1,16 +1,23 @@
 package team9.tutoragency.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import team9.tutoragency.controller.pojos.QuickSearchForm;
+import team9.tutoragency.controller.pojos.SearchForm;
+import team9.tutoragency.controller.service.OfferService;
 import team9.tutoragency.controller.service.SearchService;
+import team9.tutoragency.controller.service.UniversityService;
+import team9.tutoragency.model.Offer;
 
 /**
  * This Controller handles page request related to search mechanisms.
@@ -20,39 +27,54 @@ public class SearchController {
 
 	@Autowired
 	SearchService searchService;
-
+	@Autowired 
+	UniversityService uniService;
+	@Autowired
+	OfferService offerService;
+	
 	/**
-	 * This method returns a model with the quicksearch view adds the
-	 * {@link SearchResult}'s from the {@link SearchService}'s
-	 * findCoursesByNameContaining method.
-	 * 
-	 * @param searchForm
-	 *            - must be not null (unknown consequences if null)
-	 * @param result
-	 * @param redirectAttributes
+	 * This method is invoked before any @RequestMapping - handler method is invoked.
+	 * Also possible grades and university names are added for the search filter.
+	 * @param text, if not null it is interpreted as course name for the quicksearch, and search results are added to the model. 
+	 * @param model
+	 */
+	@ModelAttribute
+	public void addAttributes(@RequestParam(value="text", required = false) String text, Model model){		
+		
+		List<Offer> offers = new ArrayList<Offer>();
+		
+		if(text!=null){
+			offers = searchService.findOffers(new SearchForm(text));
+		}
+		
+		model.addAttribute("offers", offers);
+		model.addAttribute("universities", uniService.findAllNames());
+		model.addAttribute("grades", offerService.getPossibleGrades());
+	}
+	
+	/**
+	 * Method to submit a search form via post request.
+	 * @param form
 	 * @return
 	 */
-	@RequestMapping(value = "/showResults", method = RequestMethod.POST)
-	public ModelAndView showQuickSearchResults(QuickSearchForm searchForm, BindingResult result,
-			RedirectAttributes redirectAttributes) {
-		ModelAndView model = new ModelAndView("quicksearch");
-		model.addObject("searchResults", searchService.findCoursesByNameContaining(searchForm.getSearchText()));
-		model.addObject("searchForm", new QuickSearchForm());
+	@RequestMapping(value="/search", method = RequestMethod.POST)
+	public ModelAndView submit( SearchForm form) {
+		ModelAndView model = new ModelAndView("search");
+		model.addObject("offers", searchService.findOffers(form));
+		model.addObject("form", new SearchForm());
 		return model;
 	}
-
+	
 	/**
-	 * This method returns the quicksearch view in a model without any
-	 * {@link SearchResult}'s set.
-	 * 
-	 * @return modelAndView, with quicksearch as view.
+	 * Returns a modelAndView with search.jsp as view, and a new {@link SearchForm} as Object in the Model.
+	 * @return
 	 */
-	@RequestMapping(value = "/quicksearch", method = RequestMethod.GET)
-	public ModelAndView showQuickSearch() {
-		ModelAndView model = new ModelAndView("quicksearch");
-		model.addObject("searchForm", new QuickSearchForm());
-		
+	@RequestMapping(path="/search", method=RequestMethod.GET)
+	public ModelAndView search(@RequestParam(value="text", required=false) String text) {
+		ModelAndView model = new ModelAndView("search");
+		model.addObject("form", new SearchForm(text));
 		return model;
 	}
+	
 
 }
