@@ -13,7 +13,7 @@
 <div class="container">
 	<h1>Profile</h1>
 	
-    <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
+    <%--<sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
 	<c:choose>
 		<c:when test="${loggedIn}">
 			<form:form action="edit" method="get">
@@ -38,7 +38,7 @@
 		<c:otherwise>
 			<c:import url="template/loginform.jsp" />
 		</c:otherwise>
-	</c:choose>
+	</c:choose>--%>
     
 	<table class="forms" >
 		<tr>
