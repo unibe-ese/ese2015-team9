@@ -3,15 +3,20 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<<<<<<< HEAD
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+=======
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+>>>>>>> master
 <spring:url value="/css/style.css" var="css" />
 
 <c:import url="template/header.jsp" />
 
-
 <div class="container">
 	<h1>Profile</h1>
+<<<<<<< HEAD
 	
     <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
 	<c:choose>
@@ -41,6 +46,10 @@
 	</c:choose>
     
 	<table class="forms" >
+=======
+	<br>
+	<table class="forms">
+>>>>>>> master
 		<tr>
 			<th style="text-align: left">Account Informations</th>
 			<c:if test="${member.isTutor}">
@@ -52,12 +61,16 @@
 			<td>
 				<table class="forms">
 					<tr>
+<<<<<<< HEAD
+						<td style="min-width:35px"><strong>Username:</strong></td>
+=======
 						<td colspan="2">
 							<hr>
 						</td>
 					</tr>
 					<tr>
-						<td style="min-width:35px"><strong>Username:</strong></td>
+						<td style="min-width: 35px"><strong>Username:</strong></td>
+>>>>>>> master
 						<td>${member.username}</td>
 					</tr>
 					<tr>
@@ -82,11 +95,6 @@
 			<c:if test="${member.isTutor}">
 				<td>
 					<table class="forms">
-						<tr>
-							<td colspan="2">
-								<hr>
-							</td>
-						</tr>
 						<tr>
 							<td><strong>Activated</strong>
 							<td>${member.isActivated}</td>
@@ -113,6 +121,13 @@
 			</c:if>
 		</tr>
 	</table>
+<<<<<<< HEAD
+                    
+	<div>
+	
+    </div>
+</div>
+=======
 	<hr>
 	<br>
 	<sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
@@ -131,8 +146,11 @@
 		</c:forEach>
 		</ul>
 	
-    </div>
-</div>
+	<div class="stripe"></div>
+	<c:import url="template/sidebar_profile.jsp" />
+	<c:import url="template/footer.jsp" />
+
+>>>>>>> master
 </div>
     <c:import url="template/footer.jsp" />
 </body>

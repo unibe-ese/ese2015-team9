@@ -1,0 +1,20 @@
+
+header {
+    display: block;
+    min-height: 35em;
+}
+header .img{
+    background-image: none;
+
+}
+#wrapper {
+    background-image: url(../img/learning1.jpg);
+}
+
+p.index {
+    padding: 0.2em;
+    font-size: 1.5em;
+    color: #fff;
+    background-color: rgba(0,0,0,0.8);
+}
+

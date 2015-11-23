@@ -36,12 +36,11 @@
 		</c:forEach>
 	</table>
 
-	<div class="stripe"></div>
-	<c:import url="template/sidebar_profile.jsp" />
-	<c:import url="template/footer.jsp" />
+	</div>
+	
 
 </div>
-
+    <c:import url="template/footer.jsp" />
 </body>
 </html>
 

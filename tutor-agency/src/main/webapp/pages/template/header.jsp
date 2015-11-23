@@ -9,6 +9,7 @@
 
 
 <spring:url value="/css/style.css" var="css" />
+<c:url value="/img/cog.svg" var="svg"/>
 
 <!DOCTYPE HTML>
 <html>
@@ -22,63 +23,55 @@
 	href="/tutor-agency/css/searchForm.css" />
 </head>
 
-<body>
-	<div class="schatten"></div>
+    <body>
 
-	<!-- 
-	A different navigation is created according to the access-role of the user. 
--->
 
-	<div class="header">
 
+        <div id="wrapper">
+
+            <header>
+                <div class="img"><h1><span>Tutorium</span></h1>
+                    <h2><span>learning by learning</span></h2>
+                    <h2><span>guaranteed no shortcuts</span></h2>
+                    <h2><span>get ready to read some books</span></h2></div>
 		<form action="search" method="GET" class="searchForm">
 			<input type="search" name="text" /> <input type="submit"
 				value="Search" />
 		</form>
-		<!-- 
-			<img src="<c:url value="/pages/template/header.jpg"/>">
-		 -->
-		<sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
-		<c:choose>
-			<c:when test="${loggedIn}">
-				<div id="nav">
-					<ul>
-						<li class="main"><a href='<c:url value="/index" />'>Home</a>
-							<ul>
-								<li class="sub"><a href='<c:url value="/info" />'>Informations</a></li>
-								<li class="sub"><a href='<c:url value="/faq" />'>FAQ's</a></li>
-							</ul></li>
+            </header>
+            
+                        <!-- 
+    A different navigation is created according to the access-role of the user. 
+            -->
 
-						<li class="main"><a href='<c:url value="/search" />'>Suche</a>
+            <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
+            <c:choose>
+                <c:when test="${loggedIn}">
+                    <style>header{display: none;}</style>
+                    <nav>
+                        <ul class="navigation">
 
-						</li>
-						<li class="main"><a href='<c:url value="/profile" />'>Profile</a></li>
+                            <li><a href="<c:url value="/index" />">Home</a></li>
+                            <li><a href="<c:url value="/search#search" />">Suche</a></li>
+                            <li class="flex-fill"></li>
+                            <li class="nav-user"><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
+                            <li><div class="nav-svg"><a href="<c:url value="/profile" />"><%@include file="/img/cog.svg" %></a></div>
 
-						<li class="main"><a
-							href='<c:url value="/j_spring_security_logout"></c:url>'>
-								Logout</a></li>
-					</ul>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<div id="nav">
-					<ul>
+                        </ul>
+                    </nav>
 
-						<li class="main"><a href='<c:url value="/index" />'>Home</a>
-							<ul>
-								<li class="sub"><a href='<c:url value="/info" />'>Informations</a></li>
-								<li class="sub"><a href='<c:url value="/faq" />'>FAQ's</a></li>
-							</ul></li>
+                </c:when>
+                <c:otherwise>
+                    <nav>
+                        <ul class="navigation">
 
-						<li class="main"><a href='<c:url value="/search" />'>Suche</a>
-						</li>
-						<li class="main"><a href='<c:url value="/register" />'>Registrieren</a></li>
-						<li class="main"><a href='<c:url value="/login" />'>Login</a></li>
+                            <li><a href="<c:url value="/index" />">Home</a></li>
+                            <li><a href="<c:url value="/search#search" />">Suche</a></li>
+                            <li><a href="<c:url value="/register#register" />">Registrieren</a></li>
+                            <li class="flex-fill"></li>
+                            <li><a href="<c:url value="/login#login" />">Login</a></li>
 
-					</ul>
-				</div>
-			</c:otherwise>
-		</c:choose>
-	</div>
-</body>
-</html>
+                        </ul>
+                    </nav>
+                </c:otherwise>
+            </c:choose>

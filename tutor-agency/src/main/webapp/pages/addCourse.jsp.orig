@@ -30,7 +30,6 @@
 									</c:forEach>
 								</form:select></td>
 						</tr>
-
 					</table>
 					
 				</form:form> <form:form modelAttribute="addCourseForm" action="addCourse"
@@ -67,13 +66,16 @@
 	</table>
 
 
+<<<<<<< HEAD
+=======
+	<div class="stripe"></div>
+	<c:import url="template/sidebar_profile.jsp"></c:import>
+	<c:import url="template/footer.jsp" />
+>>>>>>> master
 
 </div>
 </div>
 	<c:import url="template/footer.jsp" />
-
-</div>
-
 </body>
 </html>
 

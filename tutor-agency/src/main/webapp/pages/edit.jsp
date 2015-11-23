@@ -31,8 +31,6 @@
 		<table class="forms">
 			<tr>
 
-
-				<td class="profil"><img src="img/profil.png" /></td>
 				<td>
 					<table class="forms">
 
@@ -111,10 +109,11 @@
 	</form:form>
 
 
-	<div class="stripe"></div>
-	<c:import url="template/sidebar_profile.jsp" />
+</div>
+	
 
 </div>
+<c:import url="template/footer.jsp" />
 </body>
 </html>
 
