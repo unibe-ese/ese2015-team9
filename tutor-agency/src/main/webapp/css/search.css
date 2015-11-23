@@ -1,0 +1,124 @@
+@CHARSET "utf-8";
+
+#searchForm {
+    width: 100%;
+    float: left;
+}
+#searchText {
+    width: 80%;
+}
+.searchbutton {
+    margin-left: 5%;
+    width: 15%;
+    float: right; 
+}
+
+.searchbutton:hover, .searchbutton:active {
+    background-color: #426B81;
+    color: #fff;
+}
+
+/*.searchForm fieldset.filter {
+	height: 140px;
+	width: 100px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	
+}*/
+
+/*.searchForm fieldset {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	
+}*/
+
+/*.searchForm fieldset span {
+	this allows to display each checkbox,
+	 together with it's label,
+	 on a separate line
+	display: block;
+}*/
+
+/*.scrollList {
+	height: 100px;
+	width: 110px;
+	overflow-y: scroll;
+}*/
+
+.searchForm fieldset input[type=number] {
+	width: 8em;
+}
+.searchForm fieldset #minGrade {
+	width: 8em;
+}
+
+#filtered {
+    display: none;
+}
+#filtered ~ #filters{
+  display:none;
+}
+
+#filtered:checked ~ #filters{
+  display:flex;
+}
+
+.collapse{
+  display:block;
+  height: 100%;
+  margin-bottom: 1em;
+}
+
+.block {
+    float: left;
+    display: inline-block;
+    margin-right: 1em;
+    width: 1.8em;
+    height: 1.8em;
+    border: 5px solid #426B81; 
+}
+
+#filtered:checked ~ label .block {
+    background-color: #426B81;
+}
+
+#filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    /*border: 1px solid black;*/
+}
+.filter {
+    width: 20em;
+    flex-basis: content;
+    border: 5px solid #426B81;
+    padding: 1em;
+}
+
+legend {
+    padding: 0 1em;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    letter-spacing: 0.1em;
+}
+
+label{
+    padding-right: 1em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+thead {
+    text-align: left;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    letter-spacing: 0.1em;
+}
+
+th {
+    /*text-align: left;*/
+}

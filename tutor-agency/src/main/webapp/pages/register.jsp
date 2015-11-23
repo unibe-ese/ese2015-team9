@@ -5,6 +5,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:import url="template/header.jsp" />
+<spring:url value="/css/register.css" var="register" />
+
+<link type="text/css" rel="stylesheet" href="${register}" />
 
 
 <div class="container" id="register">

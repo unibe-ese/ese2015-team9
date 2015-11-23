@@ -116,6 +116,11 @@ public class CourseServiceTest {
 //        //service.addCourseToMember(member, idCourse2);
 //        assertEquals(coursesMuliple, captor.getValue().getCourseList());
 //    }
+    
+    @Test
+    public void test() {
+        assertTrue(true);
+    }
 
     
     

@@ -3,12 +3,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link type="text/css" rel="stylesheet"
-	href="/tutor-agency/css/searchForm.css" />
 
 <c:import url="template/header.jsp" />
+<spring:url value="/css/search.css" var="search" />
 
-<script type="text/javascript">
+<link type="text/css" rel="stylesheet" href="${search}" />
+
+<!--<script type="text/javascript">
 	function changeVisibilityOfFilters() {
 		var el = document.getElementById("filters");
 
@@ -18,66 +19,57 @@
 			el.style.display = "block";
 		}
 	}
-</script>
+</script>-->
 
-<div class="container">
+<div class="container" id="search">
 	<form:form modelAttribute="form" action="search" method="post"
 		class="searchForm">
-		<p>
+
 			<form:input path="searchText" type="search" onclick="this.value=''"
 				value="enter a course name..." />
-			<input type="submit" value="Search" />
-		</p>
+            <input class="searchbutton" type="submit" value="Search" />
+
 		<fieldset>
-			<legend>
-				<form:checkbox class="checkbox" path="filtered"
-					onclick="changeVisibilityOfFilters()" id="filtered" label="filters"
-					labelposition="left" />
-			</legend>
-			<div id="filters" style="display: none">
-				<table>
-					<tr>
-						<td style="border-style: none">
-							<fieldset class="filter">
-								<legend>Universities</legend>
+            
+			<form:checkbox class="checkbox" path="filtered" id="filtered" />
+            <label class="collapse" for="filtered"><span class="block"></span><p>Show filters</p></label>
+			<div id="filters">
+                <fieldset class="filter">
+                    <legend>Universities</legend>
 
-								<div class="scrollList">
+                    <div class="scrollList">
 
-									<form:checkboxes class="checkbox" items="${universities}"
-										path="universityNames" labelposition="left" />
-								</div>
+                        <form:checkboxes class="checkbox" items="${universities}"
+                                         path="universityNames" labelposition="left" />
+                    </div>
 
-							</fieldset>
-						</td>
-						<td style="border-style: none">
-							<fieldset class="filter">
-								<legend>Fee</legend>
-								<label>Min: <form:input path="minFee" type="number"
-										value="${form.minFee }"></form:input></label> <br> <label>Max:
-									<form:input path="maxFee" type="number" value="${form.maxFee }"></form:input>
-								</label>
-							</fieldset>
-						</td>
-						<td style="border-style: none">
-							<fieldset class="filter">
-								<legend>Grade</legend>
-								<label>Min: <form:select path="minGrade"
-										items="${grades}">
-									</form:select></label>
-							</fieldset>
-					</tr>
-				</table>
+                </fieldset>
+
+                <fieldset class="filter">
+                    <legend>Fee</legend>
+                    <label>Min: </label><form:input path="minFee" type="number"
+                                value="${form.minFee }"></form:input> <br> <label>Max:</label>
+                    <form:input path="maxFee" type="number" value="${form.maxFee }"></form:input>
+                    </fieldset>
+
+                    <fieldset class="filter">
+                        <legend>Grade</legend>
+                        <label>Min: </label><form:select path="minGrade"
+                                 items="${grades}">
+                    </form:select>
+                </fieldset>
 			</div>
 		</fieldset>
 	</form:form>
-	<br>
+	<div id="result">
 	<!-- IMPORT TABLE -->
 	<c:import url="fragments/offerTablePublic.jsp"/>
-
-	<c:import url="template/footer.jsp" />
-
+    </div>
+	
 </div>
-<body></body>
-<html></html>
+</div>
+    <c:import url="template/footer.jsp" />
+</body>
+</html>
 
 

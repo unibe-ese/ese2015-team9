@@ -8,7 +8,7 @@
 
 <c:import url="template/header.jsp" />
 
-<div class="container">
+<div class="container" id="login">
 	<div class = "error">${message}</div>
 
 	<form action="<c:url value="/j_spring_security_check"></c:url>"

@@ -52,7 +52,7 @@
                         <ul class="navigation">
 
                             <li><a href="<c:url value="/index" />">Home</a></li>
-                            <li><a href="<c:url value="/quicksearch" />">Suche</a></li>
+                            <li><a href="<c:url value="/search#search" />">Suche</a></li>
                             <li class="flex-fill"></li>
                             <li class="nav-user"><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                             <li><div class="nav-svg"><a href="<c:url value="/profile" />"><%@include file="/img/cog.svg" %></a></div>
@@ -66,16 +66,10 @@
                         <ul class="navigation">
 
                             <li><a href="<c:url value="/index" />">Home</a></li>
-                            <li><a href="<c:url value="/quicksearch" />">Suche</a></li>
+                            <li><a href="<c:url value="/search#search" />">Suche</a></li>
                             <li><a href="<c:url value="/register#register" />">Registrieren</a></li>
                             <li class="flex-fill"></li>
-                            <li><a href="<c:url value="/login" />">Login</a></li>
-<!--                            <li><div class="nav-svg"><%@include file="/img/cog.svg" %>
-                                    <label class="collapse" for="cogmenu"><%@include file="/img/cog.svg" %></label>
-                                    <input id="cogmenu" type="checkbox">
-                                    <div class="nav-ext">Content 1</div>
-                                </div>
-                            </li>-->
+                            <li><a href="<c:url value="/login#login" />">Login</a></li>
 
                         </ul>
                     </nav>
