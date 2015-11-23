@@ -26,6 +26,7 @@ import team9.tutoragency.controller.service.OfferService;
 import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.Offer;
 import team9.tutoragency.model.University;
 
 /**
@@ -117,7 +118,7 @@ public class CourseController {
 		model.addObject("member", member);
 		model.addObject("unis", member.getUniversityList());
 
-		model.addObject("gradeChoices", offerService.getPossibleGrades());
+		model.addObject("gradeChoices", Offer.grades());
 
 		return model;
 	}
@@ -176,7 +177,7 @@ public class CourseController {
 		Member member = memberService.getAuthenticatedMember().get();
 		// addCourse.addObject("member", member);
 		addCourse.addObject("unis", member.getUniversityList());
-		addCourse.addObject("gradeChoices", offerService.getPossibleGrades());
+		addCourse.addObject("gradeChoices", Offer.grades());
 	}
 
 }

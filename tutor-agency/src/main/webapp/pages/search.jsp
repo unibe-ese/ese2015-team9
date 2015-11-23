@@ -25,50 +25,52 @@
 	<form:form modelAttribute="form" action="search" method="post"
 		class="searchForm">
 
-			<form:input path="searchText" type="search" onclick="this.value=''"
-				value="enter a course name..." />
-            <input class="searchbutton" type="submit" value="Search" />
+		<form:input path="searchText" type="search" onclick="this.value=''"
+			value="enter a course name..." />
+		<input class="searchbutton" type="submit" value="Search" />
 
 		<fieldset>
-            
+
 			<form:checkbox class="checkbox" path="filtered" id="filtered" />
-            <label class="collapse" for="filtered"><span class="block"></span><p>Show filters</p></label>
+			<label class="collapse" for="filtered"><span class="block"></span>
+			<p>Show filters</p></label>
 			<div id="filters">
-                <fieldset class="filter">
-                    <legend>Universities</legend>
+				<fieldset class="filter">
+					<legend>Universities</legend>
 
-                    <div class="scrollList">
+					<div class="scrollList">
 
-                        <form:checkboxes class="checkbox" items="${universities}"
-                                         path="universityNames" labelposition="left" />
-                    </div>
+						<form:checkboxes class="checkbox" items="${universities}"
+							path="universityNames" labelposition="left" />
+					</div>
 
-                </fieldset>
+				</fieldset>
 
-                <fieldset class="filter">
-                    <legend>Fee</legend>
-                    <label>Min: </label><form:input path="minFee" type="number"
-                                value="${form.minFee }"></form:input> <br> <label>Max:</label>
-                    <form:input path="maxFee" type="number" value="${form.maxFee }"></form:input>
-                    </fieldset>
+				<fieldset class="filter">
+					<legend>Fee</legend>
+					<label>Min: </label>
+					<form:input path="minFee" type="number" value="${form.minFee }"></form:input>
+					<br> <label>Max:</label>
+					<form:input path="maxFee" type="number" value="${form.maxFee }"></form:input>
+				</fieldset>
 
-                    <fieldset class="filter">
-                        <legend>Grade</legend>
-                        <label>Min: </label><form:select path="minGrade"
-                                 items="${grades}">
-                    </form:select>
-                </fieldset>
+				<fieldset class="filter">
+					<legend>Grade</legend>
+					<label>Min: </label>
+					<form:select path="minGrade" items="${grades}">
+					</form:select>
+				</fieldset>
 			</div>
 		</fieldset>
 	</form:form>
 	<div id="result">
-	<!-- IMPORT TABLE -->
-	<c:import url="fragments/offerTablePublic.jsp"/>
-    </div>
-	
+		<!-- IMPORT TABLE -->
+		<c:import url="fragments/offerTablePublic.jsp" />
+	</div>
+
 </div>
 </div>
-    <c:import url="template/footer.jsp" />
+<c:import url="template/footer.jsp" />
 </body>
 </html>
 

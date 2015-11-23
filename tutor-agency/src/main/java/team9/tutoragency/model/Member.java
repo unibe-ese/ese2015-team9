@@ -93,6 +93,12 @@ public class Member implements UserDetails {
 		this.fee = 0D;
 	}
 	
+	public Member(Long id, String username) {
+		super();
+		this.id = id;
+		this.username = username;
+	}
+
 	public Member() {
 
 	}

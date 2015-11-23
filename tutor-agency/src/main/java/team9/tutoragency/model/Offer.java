@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.LazyCollection;
@@ -141,6 +142,19 @@ public class Offer implements Serializable {
 	@Override
 	public String toString() {
 		return "Offer [id=" + id + ", tutor=" + tutor + ", course=" + course + ", grade=" + grade + "]";
+	}
+	
+	/**
+	 * Returns a list of the string-representations for the possible grades.
+	 * @return
+	 */
+	@Transient
+	public static List<String> grades() {
+		List<String> grades = new ArrayList<String>();
+		for (float i = 4; i <= 6; i += 0.25) {
+			grades.add(Float.toString(i));
+		}
+		return grades;
 	}
 
 }

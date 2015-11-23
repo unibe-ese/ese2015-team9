@@ -50,15 +50,6 @@ public class OfferService {
 		return false;
 	}
 	
-
-	public List<String> getPossibleGrades() {
-		List<String> gradeChoices = new ArrayList<String>();
-		for (float i = 4; i <= 6; i += 0.25) {
-			gradeChoices.add(Float.toString(i));
-		}
-		return gradeChoices;
-	}
-
 	public List<Offer> findByTutor(Member tutor) {
 		return offerDao.findByTutor(tutor);
 	}

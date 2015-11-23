@@ -5,6 +5,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <spring:url value="/css/style.css" var="css" />
+<!--  <script type="text/javascript">
+	function changeVisibility() {
+		var el = document.getElementById("courses");
+
+		if (el.style.display == "block") {
+			el.style.display = "none";
+		} else {
+			el.style.display = "block";
+		}
+	} 
+</script> -->
+
 	<h2 style="font-weight:bold">Open Tutoring Offers</h2>
 	<br>
 	<table class="forms" id=courses>
@@ -22,7 +34,7 @@
 				<td><c:out value="${offer.course.name}"></c:out></td>
 				<td><c:out value="${offer.course.university.name}"></c:out></td>
 				<td><c:out value="${offer.grade}"></c:out></td>
-				<td align="center"><form
+				<td align="center" ><form
 						onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');"
 						action="delete_${offer.course.id}" method="post">
 						<input class="none" id="deleteIcon" type="image"

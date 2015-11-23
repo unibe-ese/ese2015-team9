@@ -30,8 +30,7 @@ public class SearchController {
 	SearchService searchService;
 	@Autowired 
 	UniversityService uniService;
-	@Autowired
-	OfferService offerService;
+	
 	
 	/**
 	 * This method is invoked before any @RequestMapping - handler method is invoked.
@@ -50,7 +49,7 @@ public class SearchController {
 		
 		model.addAttribute("offers", offers);
 		model.addAttribute("universities", uniService.findAllNames());
-		model.addAttribute("grades", offerService.getPossibleGrades());
+		model.addAttribute("grades", Offer.grades());
 	}
 	
 	/**
@@ -59,10 +58,10 @@ public class SearchController {
 	 * @return
 	 */
 	@RequestMapping(value="/search", method = RequestMethod.POST)
-	public ModelAndView submit( SearchForm form) {
+	public ModelAndView submit(SearchForm form) {
 		ModelAndView model = new ModelAndView("search");
 		model.addObject("offers", searchService.findOffers(form));
-		model.addObject("form", new SearchForm());
+		model.addObject("form", form);
 		return model;
 	}
 	

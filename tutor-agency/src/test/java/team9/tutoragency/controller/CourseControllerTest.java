@@ -101,7 +101,6 @@ public class CourseControllerTest {
         Mockito.when(uniService.findAll()).thenReturn(unis);
         Mockito.when(uniService.findByName("uni1")).thenReturn(Arrays.asList(new University[]{uni1}));
         Mockito.when(uniService.findByName("uni2")).thenReturn(Arrays.asList(new University[]{uni2}));
-        Mockito.when(offerService.getPossibleGrades()).thenReturn(Arrays.asList(new String[]{"4.2","6.0"}));
         Mockito.when(offerService.findByTutor(any(Member.class))).thenReturn(null);
         Mockito.when(memberService.getAuthenticatedMember()).thenReturn( Optional.of(member));
         

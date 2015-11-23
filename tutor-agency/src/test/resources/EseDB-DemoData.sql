@@ -13,7 +13,10 @@ COMMIT;
 INSERT INTO `University` (`id`, `name`) VALUES
 (1, 'Bern'),
 (2, 'Basel'),
-(3, 'Zürich');
+(3, 'Zürich'),
+(4, 'Genf'),
+(5, 'Fribourg'),
+(6, 'Neuchatel');
 
 INSERT INTO `Course` (`id`, `name`, `university_id`) VALUES
 (1, 'Datenbanken', 1),
@@ -25,7 +28,13 @@ INSERT INTO `Course` (`id`, `name`, `university_id`) VALUES
 (7, 'Populationsgenetik', 2),
 (8, 'Kunstgeschichte: Methoden der Interpretation', 3),
 (9, 'Einführung in die Geschichte der Kunstgeschichte', 3),
-(10, 'Zoologie', 3);
+(10, 'Zoologie', 3),
+(11, 'Datenbanken', 5),
+(12, 'Software Engineering', 5),
+(13, 'Programmieren 1', 5),
+(14, 'Programmieren 2', 5),
+(15, 'Genetik', 4),
+(16, 'Populationsgenetik', 6);
 
 -- --------------------------------------------------------
 

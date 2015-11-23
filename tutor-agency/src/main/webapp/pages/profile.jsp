@@ -48,7 +48,6 @@
 			</c:if>
 		</tr>
 		<tr>
-			<!-- <td class="profil"><img src="img/profil.png" /></td> -->
 			<td>
 				<table class="forms">
 					<tr>
