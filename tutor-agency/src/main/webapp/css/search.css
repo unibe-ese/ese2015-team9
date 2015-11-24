@@ -88,7 +88,6 @@
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    /*border: 1px solid black;*/
 }
 .filter {
     width: 20em;
@@ -121,4 +120,8 @@ thead {
 
 th {
     /*text-align: left;*/
+}
+
+#result {
+    margin-top: 3em;
 }

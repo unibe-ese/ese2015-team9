@@ -4,7 +4,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<spring:url value="/css/style.css" var="css" />
 <!--  <script type="text/javascript">
 	function changeVisibility() {
 		var el = document.getElementById("courses");
@@ -38,8 +37,7 @@
 						onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');"
 						action="delete_${offer.course.id}" method="post">
 						<input class="none" id="deleteIcon" type="image"
-							src="img/delete-icon.png" name="delete-icon"
-							 onClick="alert(test);">
+							src="img/delete-icon.png" name="delete-icon">
 					</form></td>
 			</tr>
 			<c:forEach items="${offer.subscribers}" var="subscriber">

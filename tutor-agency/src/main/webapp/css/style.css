@@ -146,10 +146,10 @@ input {
 }
 
 input[type="image"] {
-	 border: none;
-	  padding: 0em;
-	  width: 1em;
-	  height: 1em;
+	border: none;
+	padding: 0em;
+	width: 1em;
+	height: 1em;
     margin-bottom: 0em;
 }
 
@@ -177,7 +177,8 @@ select {
 
 .submitbutton {
     cursor: pointer; 
-    width: 10em; 
+    width: auto;
+    min-width: 10em;
     padding: 1em; 
     margin-left: 15em;
 }

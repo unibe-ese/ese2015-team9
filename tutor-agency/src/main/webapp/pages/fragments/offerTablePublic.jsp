@@ -6,7 +6,6 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
-<spring:url value="/css/style.css" var="css" />
 
 <!-- OFFER TABLE -->
 
@@ -46,8 +45,7 @@
 					method="get">
 					
 					<input class="none" id="emailIcon" type="image"
-						src="img/email-icon.png" name="email-icon"
-						style="height: 10px; width: 10px;" onClick="alert(test);">
+						src="img/email-icon.png" name="email-icon">
 				</form></td>
 
 		</c:if>
