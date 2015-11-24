@@ -3,7 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <spring:url value="/css/style.css" var="css" />
 
@@ -12,8 +13,8 @@
 
 <div class="container">
 	<h1>Profile</h1>
-	
-    <%--<sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
+
+	<%--<sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
 	<c:choose>
 		<c:when test="${loggedIn}">
 			<form:form action="edit" method="get">
@@ -39,8 +40,8 @@
 			<c:import url="template/loginform.jsp" />
 		</c:otherwise>
 	</c:choose>--%>
-    
-	<table class="forms" >
+
+	<table class="forms">
 		<tr>
 			<th style="text-align: left">Account Informations</th>
 			<c:if test="${member.isTutor}">
@@ -56,7 +57,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="min-width:35px"><strong>Username:</strong></td>
+						<td style="min-width: 35px"><strong>Username:</strong></td>
 						<td>${member.username}</td>
 					</tr>
 					<tr>
@@ -73,7 +74,13 @@
 						<td><strong>E-Mail:</strong></td>
 						<td>${member.email}</td>
 					</tr>
-
+					<c:if test="${member.isTutor == false}">
+						<tr>
+							<td><form method="post" action="becomeTutor">
+									<input type="submit" class="submitbutton" value="werde Tutor" />
+								</form></td>
+						</tr>
+					</c:if>
 				</table>
 			</td>
 
@@ -124,16 +131,15 @@
 	<br>
 	<h3>Subscriptions:</h3>
 	<hr>
-		<ul><c:forEach items="${subscriptions}" var="subscription">
+	<ul>
+		<c:forEach items="${subscriptions}" var="subscription">
 			<li>course : ${subscription.course.name} , tutor:
 				${subscription.tutor.username}</li>
 		</c:forEach>
-		</ul>
-	
-    </div>
+	</ul>
+
 </div>
-</div>
-    <c:import url="template/footer.jsp" />
+<c:import url="template/footer.jsp" />
 </body>
 </html>
 

@@ -54,6 +54,7 @@
                             <li><a href="<c:url value="/index" />">Home</a></li>
                             <li><a href="<c:url value="/search#search" />">Suche</a></li>
                             <li class="flex-fill"></li>
+                            <li><a href="<c:url value="/addOffer" />">Biete Nachilfe an</a></li>
                             <li class="nav-user"><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                             <li><div class="nav-svg"><a href="<c:url value="/profile" />"><%@include file="/img/cog.svg" %></a></div>
 

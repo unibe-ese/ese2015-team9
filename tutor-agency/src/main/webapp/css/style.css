@@ -144,6 +144,15 @@ input {
     padding: 1em;
     margin-bottom: 2em;
 }
+
+input[type="image"] {
+	 border: none;
+	  padding: 0em;
+	  width: 1em;
+	  height: 1em;
+    margin-bottom: 0em;
+}
+
 input:focus {
     color: #fff;
     background: #426B81;

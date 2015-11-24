@@ -39,7 +39,7 @@
 						action="delete_${offer.course.id}" method="post">
 						<input class="none" id="deleteIcon" type="image"
 							src="img/delete-icon.png" name="delete-icon"
-							style="height: 10px; width: 10px;" onClick="alert(test);">
+							 onClick="alert(test);">
 					</form></td>
 			</tr>
 			<c:forEach items="${offer.subscribers}" var="subscriber">
