@@ -1,4 +1,4 @@
-package team9.tutoragency.controller.service;
+package team9.tutoragency.controller.service.validation;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -15,6 +15,7 @@ import org.springframework.validation.Validator;
 import javassist.bytecode.AnnotationsAttribute;
 import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.controller.pojos.Form;
+import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 

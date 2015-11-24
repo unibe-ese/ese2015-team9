@@ -26,59 +26,40 @@ public class SearchService {
 	OfferService offerService;
 
 	@Autowired
-	CourseDao courseDao;
+	CourseService courseService;
 
 	@Autowired
 	UniversityService uniService;
 
 	@Autowired
-	MemberDao memberDao;
-
-	@Autowired
-	OfferDao offerDao;
-
-	@Autowired
-	UniversityDao uniDao;
-
+	MemberService memberService;
 	/**
 	 * Returns a List of {@link TutoringOffers} matching the specified criteria in the search form. 
-	 * @param form
+	 * @param form - must be not null
 	 * @return
 	 */
-	@Transactional
 	public List<Offer> findOffers(SearchForm form) {
-		if (form.getSearchText() == null)
-			form.setSearchText("");
 
-		List<Offer> offers = new ArrayList<Offer>();
-		System.err.println(form.toString());
 		List<Course> courses = new ArrayList<Course>();
 		List<Member> members = new ArrayList<Member>();
 		List<University> universities = new ArrayList<University>();
+		
+		if(!form.isFiltered()){
+			courses = courseService.findByNameContaining(form.getSearchText());		
+			return offerService.findByCourses(courses);
+		}
+			
+		//else
 
-		if (form.isFiltered()) {
+		if (form.getUniversityNames() == null || form.getUniversityNames().isEmpty()) 
+			universities = uniService.findAll();
+		else
+			universities = uniService.findByNames(form.getUniversityNames());
 
-			if (form.getUniversityNames() == null || form.getUniversityNames().isEmpty())
-				universities = uniService.findAll();
-			else
-				universities = uniDao.findByNameIn(form.getUniversityNames());
-
-			System.err.println(universities.toString());
-
-			courses = courseDao.findByNameContainingAndUniversityIn(form.getSearchText(), universities);
-			System.err.println(courses);
-
-			members = memberDao.findByFeeBetween(new Double(form.getMinFee() ), form.getMaxFee() );
-			System.out.println(members);
-
-			if (courses == null || members == null || courses.isEmpty() || members.isEmpty())
-				return offers;
-			else {
-				return offerDao.findByTutorInAndCourseInAndGradeGreaterThanEqual(members, courses,
-						Float.parseFloat(form.getMinGrade()));
-			}
-		} else
-			return offerDao.findByCourseIn(courseDao.findByNameContainingIgnoreCase(form.getSearchText()));
+		courses = courseService.findByNameAndUniversities(form.getSearchText(), universities);
+		members = memberService.findByFee(form.getMinFee(), form.getMaxFee() );
+		return offerService.findByTutorsCoursesAndGrades(members, courses,form.getMinGrade());
+		
 	}
 
 }

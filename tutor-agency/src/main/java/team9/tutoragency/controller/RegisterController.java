@@ -16,8 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import team9.tutoragency.controller.exceptions.InvalidUserException;
 import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.controller.service.SignupFromSaveService;
+import team9.tutoragency.controller.service.validation.SignupFormValidationService;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.controller.service.SignupFormValidationService;
 
 /**
  * The {@link RegisterController} is responsible for all interactions when a

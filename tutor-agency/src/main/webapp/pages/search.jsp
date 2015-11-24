@@ -22,18 +22,16 @@
 </script>-->
 
 <div class="container" id="search">
-	<form:form modelAttribute="form" action="search" method="post"
-		class="searchForm">
-
+	<form:form modelAttribute="form" action="search#search" method="post"
+		class="searchForm">								
 		<form:input path="searchText" type="search" onclick="this.value=''"
-			value="enter a course name..." />
+			value="" placeholder = "enter a course name"/>
 		<input class="searchbutton" type="submit" value="Search" />
 
 		<fieldset>
-
 			<form:checkbox class="checkbox" path="filtered" id="filtered" />
 			<label class="collapse" for="filtered"><span class="block"></span>
-			<p>Show filters</p></label>
+			Show filters</label>
 			<div id="filters">
 				<fieldset class="filter">
 					<legend>Universities</legend>

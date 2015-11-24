@@ -88,4 +88,8 @@ public class MemberService {
 			return Optional.of(memberDao.findOne(((Member) authentication.getPrincipal()).getId()));
 	}
 
+	public List<Member> findByFee(int min, int max) {
+		return memberDao.findByFeeBetween(new Double(min), new Double(max));
+	}
+
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import team9.tutoragency.controller.service.EditFormValidationService;
+import team9.tutoragency.controller.service.validation.EditFormValidationService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 

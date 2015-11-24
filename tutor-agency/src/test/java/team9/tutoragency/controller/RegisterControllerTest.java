@@ -13,8 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.SignupFormValidationService;
 import team9.tutoragency.controller.service.SignupFromSaveService;
+import team9.tutoragency.controller.service.validation.SignupFormValidationService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegisterControllerTest {

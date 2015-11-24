@@ -20,9 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.pojos.EditForm;
-import team9.tutoragency.controller.service.EditFormValidationService;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.UniversityService;
+import team9.tutoragency.controller.service.validation.EditFormValidationService;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
 

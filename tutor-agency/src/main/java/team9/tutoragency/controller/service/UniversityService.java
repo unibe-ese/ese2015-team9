@@ -29,26 +29,16 @@ public class UniversityService {
 	}
 
 	/**
-	 * Returns a list of universities, as if in the list with names, the
-	 * duplicates were removed. And then the results, obtained from calling for each name
-	 * {@link #findByName(String)}, would be joined together.
-	 * 
-	 * @param names
-	 *            if null, an empty List is returned.
-	 * 
+	 * Returns the result of {@code uniDao}'s {@code findByNameIn} method. Prevents the query from being
+	 * invoked with an empty list. 
+	 * @param names If null, an empty List is returned.
 	 */
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<University> findByNames(List<String> names) {
-		if (names == null)
+		if(names == null || names.isEmpty())
 			return new ArrayList<University>();
-		List<University> unis = new ArrayList<University>();
-		List<String> copy = new ArrayList<String>(names);
-		for (String name : names) {
-			copy.remove(name);
-			if (!copy.contains(name))
-				unis.addAll(uniDao.findByName(name));
-		}
-		return unis;
+		
+		return uniDao.findByNameIn(names);
 	}
 
 	@Transactional(readOnly = true)

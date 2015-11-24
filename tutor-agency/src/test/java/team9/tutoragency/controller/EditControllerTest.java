@@ -11,9 +11,10 @@ import java.util.List;
 
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import team9.tutoragency.controller.service.EditFormValidationService;
+
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.UniversityService;
+import team9.tutoragency.controller.service.validation.EditFormValidationService;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
 

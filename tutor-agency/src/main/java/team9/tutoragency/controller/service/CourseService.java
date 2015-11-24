@@ -34,4 +34,38 @@ public class CourseService {
 		return courseDao.findByUniversity(university);
 	}
 
+
+	/**
+	 * Invokes the course dao query method findByNameContainingIgnoreCase(courseName).
+	 * Prevents the query from being invoked with a null parameter.
+	 * @param searchText - if null, it is treated as empty string.
+	 */
+	@Transactional(readOnly = true)
+	public List<Course> findByNameContaining(String courseName) {
+		if(courseName == null)
+			courseName = "";
+		
+		return courseDao.findByNameContainingIgnoreCase(courseName);
+	}
+
+
+	/**
+	 * Invokes either the course dao query method {@code findByNameContainingIgnoreCase(courseName)} if universities is empty. Or 
+	 * {@code findByNameContainingIgnoreCaseAndUniversityIn} if universities are available.
+	 * Prevents the queries from being invoked with a null parameter.
+	 * @param courseName If null, it is treated as an empty string.
+	 * @param universities If null, treated as an empty list.
+	 */
+	@Transactional(readOnly = true)
+	public List<Course> findByNameAndUniversities(String courseName, List<University> universities) {
+		if(courseName == null)
+			courseName = "";
+		
+		if(universities == null || universities.isEmpty())
+			return courseDao.findByNameContainingIgnoreCase(courseName);
+		else
+			return courseDao.findByNameContainingIgnoreCaseAndUniversityIn(courseName, universities);
+	}
+
+
 }

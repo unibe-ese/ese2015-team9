@@ -13,7 +13,6 @@ public class SearchForm{
 	
 	public static final int DEFAULT_MIN_FEE = 0;
 	public static final int DEFAULT_MAX_FEE = 30;
-	public static final String DEFAULT_SEARCH_TEXT = "enter a course name"; 
 	public static final String DEFAULT_MIN_GRADE = "4.0";
 	
 	private String searchText;
@@ -25,7 +24,7 @@ public class SearchForm{
 	
 	
 	public SearchForm(String searchText, int minFee, int maxFee, List<String> universityNames) {
-		this.searchText = searchText==null? DEFAULT_SEARCH_TEXT : searchText;
+		this.searchText = searchText==null? "" : searchText;
 		
 		this.minFee = minFee;
 		this.maxFee = maxFee;
@@ -35,7 +34,7 @@ public class SearchForm{
 	}
 	
 	public SearchForm() {
-		searchText= DEFAULT_SEARCH_TEXT;
+		searchText= "";
 		minFee = DEFAULT_MIN_FEE;
 		maxFee = DEFAULT_MAX_FEE;
 		this.universityNames = new ArrayList<String>();
@@ -43,7 +42,7 @@ public class SearchForm{
 	}
 
 	public SearchForm(String searchText) {
-		this.searchText = searchText==null? DEFAULT_SEARCH_TEXT : searchText;
+		this.searchText = searchText==null? "" : searchText;
 		minFee = DEFAULT_MIN_FEE;
 		maxFee = DEFAULT_MAX_FEE;
 		this.universityNames = new ArrayList<String>();

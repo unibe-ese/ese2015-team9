@@ -36,7 +36,7 @@ public class SearchServiceTest {
 	private University uni1,uni2;
 	private Member member1, member2;
 	private Course course1, course2;
-	private Offer offer1c1, offer2c1, offer1c2;
+	private Offer offerM1C1, offerM2C1, offerM1C2;
 
 	@Before
 	public void doSetup() {
@@ -49,56 +49,21 @@ public class SearchServiceTest {
 		member2.setFee(30D);
 		
 		course1 = new Course(1L, "course1", uni1);
-		offer1c1 = new Offer(member1, course1, 4.5f);
-		offer2c1 = new Offer(member2, course1, 5.2f);
-		course1.setOffers(new HashSet<Offer>(asList(offer1c1, offer2c1)));
+		offerM1C1 = new Offer(member1, course1, 4.5f);
+		offerM2C1 = new Offer(member2, course1, 5.2f);
+		course1.setOffers(new HashSet<Offer>(asList(offerM1C1, offerM2C1)));
 			
 		course2 = new Course(2L, "course2", uni2);
-		offer1c2 = new Offer(member1, course2, 4.3f);
-		course2.setOffers(new HashSet<Offer>(asList(offer1c2)));
+		offerM1C2 = new Offer(member1, course2, 4.3f);
+		course2.setOffers(new HashSet<Offer>(asList(offerM1C2)));
+		
+		
 	}
 
-	@Test
-	public void testFindOffers() {
-		
-		assertTrue(true);
-		
-		/*
-		 * TODO needs new return values for the dao mocks
-		 */
-		
-//		/*
-//		 * search form with filtered==false should ignore all filter fields and
-//		 * return just the answer from the courseDao wrapped as search
-//		 */
-//		
-//		SearchForm form = new SearchForm("course", 0, 20, asList("uni1"));
-//		when(courseDao.findByNameContainingIgnoreCase("course")).thenReturn(asList(course1, course2));
-//		List<Offer> expected = asList(offer1c1, offer2c1);
-//		
-//
-//		assertEquals(expected, searchService.findOffers(form));
-//
-//		
-//		form.setFiltered(true); 
-//		//test fee maximum
-//		when(uniService.findByNames(asList("uni1"))).thenReturn(asList(uni1));
-//		when(courseDao.findByNameContainingAndUniversity("course", uni1)).thenReturn(asList(course1));
-//		expected = asList(offer1c1);
-//		assertEquals(expected, searchService.findOffers(form));
-//		
-//		//Test fee minimum
-//		form.setMinFee(21);
-//		form.setMaxFee(30);
-//		expected = asList(offer2c1);
-//		assertEquals(expected, searchService.findOffers(form));
-//		
-//		//test university
-//		form.setUniversityNames(asList("uni1", "uni2"));
-//		when(uniService.findByNames(asList("uni1", "uni2"))).thenReturn(asList(uni1, uni2));
-//		when(courseDao.findByNameContainingAndUniversity("course", uni2)).thenReturn(asList(course2));
-//		expected = asList(offer2c1);
-//		assertEquals(expected, searchService.findOffers(form));
-		
+	@Test(expected = NullPointerException.class )
+	public void testFindOffersNullForm() {
+		searchService.findOffers(null);
 	}
+	
+	
 }
