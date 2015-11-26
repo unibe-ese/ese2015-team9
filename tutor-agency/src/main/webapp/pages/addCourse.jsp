@@ -18,7 +18,7 @@
 						<tr>
 
 							<td style="width: 150px"><strong>Universität:</strong></td>
-							
+
 							<td><form:select path="selectedUniversity"
 									name="universityList" id="universityList"
 									onchange="this.form.submit()">
@@ -32,7 +32,7 @@
 						</tr>
 
 					</table>
-					
+
 				</form:form> <form:form modelAttribute="addCourseForm" action="addCourse"
 					method="post">
 					<tr>
@@ -40,9 +40,13 @@
 							<table class="forms">
 								<tr>
 									<td style="width: 150px"><strong>Kurs:</strong></td>
+									<form:errors path="selectedCourse" cssStyle="color: #ff0000;"
+										element="span" />
 									<td><form:select path="selectedCourse" name="courseList"
 											id="courseList">
 											<c:forEach items="${courses}" var="courses">
+												<c:if test="${courses.id eq addCourseForm.selectedCourse}">
+											selected = true</c:if>>
 												<option value="${courses.id}"><c:out
 														value="${courses.name}" /></option>
 											</c:forEach>
@@ -70,7 +74,7 @@
 
 </div>
 </div>
-	<c:import url="template/footer.jsp" />
+<c:import url="template/footer.jsp" />
 
 </div>
 

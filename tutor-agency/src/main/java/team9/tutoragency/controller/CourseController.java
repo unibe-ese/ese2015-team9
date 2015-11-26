@@ -89,7 +89,7 @@ public class CourseController {
 		University preselectedUni = uniService.findAll().get(0);
 		form.setSelectedUniversity(preselectedUni.getName());
 		addCourse.addObject("addCourseForm", form);
-		generateAddCourseModel(addCourse, preselectedUni);
+		generateAddCourseModel(addCourse, form, preselectedUni);
 		return addCourse;
 	}
 
@@ -110,15 +110,8 @@ public class CourseController {
 			RedirectAttributes redirectAttributes, ModelAndView model) throws IOException {
 		model.addObject("addCourseForm", addCourseForm);
 		model.setViewName("addCourse");
-
 		University selectedUni = uniService.findByName(addCourseForm.getSelectedUniversity()).get(0);
-
-		model.addObject("courses", courseService.findByUniversity(selectedUni));
-		Member member = memberService.getAuthenticatedMember().get();
-		model.addObject("member", member);
-		model.addObject("unis", member.getUniversityList());
-
-		model.addObject("gradeChoices", Offer.grades());
+		generateAddCourseModel(model, addCourseForm, selectedUni);
 
 		return model;
 	}
@@ -134,15 +127,19 @@ public class CourseController {
 	 */
 	@RequestMapping(value = "/addCourse", method = RequestMethod.POST)
 	public ModelAndView saveCourse(@Valid AddCourseForm addCourseForm, BindingResult result,
-			RedirectAttributes redirectAttributes) throws IOException {
+			RedirectAttributes redirectAttributes, ModelAndView model) throws IOException {
 
 		Member member = memberService.getAuthenticatedMember().get();
 		float grade = Float.parseFloat(addCourseForm.getGrade());
 
-		offerService.addOffer(member, addCourseForm.getSelectedCourse(), grade);
-
-		ModelAndView profile = new ModelAndView("redirect:/profile");
-		return profile;
+		offerService.addOffer(member, addCourseForm.getSelectedCourse(), grade, result);
+		if(!result.hasErrors()){
+			return new ModelAndView("redirect:/profile");
+		} else {
+			University preselectedUni = courseService.findUniversityForCourse(addCourseForm.getSelectedCourse());
+			generateAddCourseModel(model, addCourseForm, preselectedUni); 
+			 return model;
+		}
 	}
 
 	/**
@@ -170,13 +167,12 @@ public class CourseController {
 		return "redirect:/profile";
 	}
 
-	public void generateAddCourseModel(ModelAndView addCourse, University preselectedUni) {
+	public void generateAddCourseModel(ModelAndView addCourse, AddCourseForm form, University preselectedUni) {
+		
+		form.setSelectedUniversity(preselectedUni.getName());
 		List<University> universities = Lists.newArrayList(uniService.findAll());
 		addCourse.addObject("universities", universities);
 		addCourse.addObject("courses", courseService.findByUniversity(preselectedUni));
-		Member member = memberService.getAuthenticatedMember().get();
-		// addCourse.addObject("member", member);
-		addCourse.addObject("unis", member.getUniversityList());
 		addCourse.addObject("gradeChoices", Offer.grades());
 	}
 

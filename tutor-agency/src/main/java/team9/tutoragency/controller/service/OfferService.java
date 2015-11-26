@@ -8,8 +8,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 
-import team9.tutoragency.controller.exceptions.InvalidValueException;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
@@ -18,101 +18,118 @@ import team9.tutoragency.model.dao.OfferDao;
 
 @Service
 public class OfferService {
-	
-	@Autowired OfferDao offerDao;
-	@Autowired CourseDao courseDao;
-	@Autowired MemberService memberService;
-	
+
+	@Autowired
+	OfferDao offerDao;
+	@Autowired
+	CourseDao courseDao;
+	@Autowired
+	MemberService memberService;
+
 	@Transactional
-	public boolean removeOffer(Member member, Long courseId){
-		assert courseId!=null;
-		
+	public boolean removeOffer(Member member, Long courseId) {
+		assert courseId != null;
+
 		Course course = courseDao.findOne(courseId);
-		
-		if(course!= null && member!= null){
+
+		if (course != null && member != null) {
 			List<Offer> offers = offerDao.findByTutorAndCourse(member, course);
-			for(Offer offer: offers){
+			for (Offer offer : offers) {
 				offerDao.delete(offer);
 			}
 			return true;
 		}
 		return false;
 	}
-	
+
 	@Transactional
-	public boolean addOffer(Member member, Long courseId, float grade){
-		assert courseId!=null;
-		
+	public boolean addOffer(Member member, Long courseId, float grade, BindingResult result) {
+		assert courseId != null;
+
 		Course course = courseDao.findOne(courseId);
-		
-		if(course!= null && member!= null){
+		boolean alreadyOffered = offerDao.findByTutorAndCourse(member, course).size() > 0;
+		if (alreadyOffered) {
+			result.rejectValue("selectedCourse", "selectedCourse.alreadyOffered",
+					"The course " + course.getName() + " already offered by you, please choose another one");
+		} else if (course != null && member != null) {
 			offerDao.save(new Offer(member, course, grade));
 			return true;
 		}
+
 		return false;
 	}
-	
+
 	public List<Offer> findByTutor(Member tutor) {
 		return offerDao.findByTutor(tutor);
 	}
 
 	/**
-	 * Invokes the query method findByCourseIn(courses) of the offer dao. 
+	 * Invokes the query method findByCourseIn(courses) of the offer dao.
 	 * Prevents the query from being invoked with an empty or null course list.
-	 * @param courses - If null or empty an empty List is returned. 
+	 * 
+	 * @param courses
+	 *            - If null or empty an empty List is returned.
 	 */
 	@Transactional(readOnly = true)
-	public List<Offer> findByCourses(Collection<Course> courses){
-		if(courses == null || courses.isEmpty())
+	public List<Offer> findByCourses(Collection<Course> courses) {
+		if (courses == null || courses.isEmpty())
 			return new ArrayList<Offer>();
 		else
 			return offerDao.findByCourseIn(courses);
 	}
-	
+
 	@Transactional
 	public void subscribeAuthMemberToOffer(Long offerId) {
 		Optional<Member> member = memberService.getAuthenticatedMember();
-		
-		if(member.isPresent() && offerDao.exists(offerId)){
+
+		if (member.isPresent() && offerDao.exists(offerId)) {
 			Offer offer = offerDao.findOne(offerId);
 			List<Member> subscribers = offer.getSubscribers();
-			if(subscribers == null){
+			if (subscribers == null) {
 				subscribers = new ArrayList<Member>();
 				subscribers.add(member.get());
 			} else {
-				if(!subscribers.contains(member.get()))
+				if (!subscribers.contains(member.get()))
 					subscribers.add(member.get());
-					
+
 			}
 			offer.setSubscribers(subscribers);
-			offerDao.save(offer);			
-		}	
+			offerDao.save(offer);
+		}
 	}
 
 	/**
-	 * Returns a List of offers , either obtained from {@code OfferDao}'s {@code findByGradeGreaterThanEqual} query method, if members or courses is null. Or else the {@code findByTutorInAndCourseInAndGradeGreaterThanEqual} query. 
-	 * Prevents the queries from being invoked with an empty or null parameters.
-	 * Asserts minGrade not null.
-	 * @param members - if null treated as empty list.
-	 * @param courses - if null treated as empty list.
-	 * @param minGrade must be not null
+	 * Returns a List of offers , either obtained from {@code OfferDao}'s
+	 * {@code findByGradeGreaterThanEqual} query method, if members or courses
+	 * is null. Or else the
+	 * {@code findByTutorInAndCourseInAndGradeGreaterThanEqual} query. Prevents
+	 * the queries from being invoked with an empty or null parameters. Asserts
+	 * minGrade not null.
 	 * 
-	 * @throws NumberFormatException  if the minGrade does not contain a parsable float.
+	 * @param members
+	 *            - if null treated as empty list.
+	 * @param courses
+	 *            - if null treated as empty list.
+	 * @param minGrade
+	 *            must be not null
+	 * 
+	 * @throws NumberFormatException
+	 *             if the minGrade does not contain a parsable float.
 	 */
-	@Transactional(readOnly=true)
-	public List<Offer> findByTutorsCoursesAndGrades(List<Member> members, List<Course> courses, String minGrade) throws NumberFormatException{
-		assert minGrade != null; 
-		
+	@Transactional(readOnly = true)
+	public List<Offer> findByTutorsCoursesAndGrades(List<Member> members, List<Course> courses, String minGrade)
+			throws NumberFormatException {
+		assert minGrade != null;
+
 		float grade = parseGrade(minGrade);
-		
-		if(members == null || courses == null || members.isEmpty() || courses.isEmpty())
+
+		if (members == null || courses == null || members.isEmpty() || courses.isEmpty())
 			return offerDao.findByGradeGreaterThanEqual(grade);
 		else
-			return offerDao.findByTutorInAndCourseInAndGradeGreaterThanEqual(members, courses,grade);
+			return offerDao.findByTutorInAndCourseInAndGradeGreaterThanEqual(members, courses, grade);
 	}
 
-	private float parseGrade(String gradeAsString) throws NumberFormatException{
-		return Float.parseFloat(gradeAsString);		
+	private float parseGrade(String gradeAsString) throws NumberFormatException {
+		return Float.parseFloat(gradeAsString);
 	}
 }
-

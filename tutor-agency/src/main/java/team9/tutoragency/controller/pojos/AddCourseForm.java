@@ -18,7 +18,6 @@ public class AddCourseForm {
 
 	@NotNull
 	private long selectedCourse;
-	@NotNull
 	private String selectedUniversity;
 
 	@NotNull
