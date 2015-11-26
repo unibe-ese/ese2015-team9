@@ -54,10 +54,10 @@ public class ProfileController {
 		
 		profile.addObject("member", member.get());
 		
-		List<Offer> subscriptions = new ArrayList<Offer>();
-		subscriptions.addAll(member.get().getSubscriptions());
-		profile.addObject("subscriptions", subscriptions);
-		
+//		List<Offer> subscriptions = new ArrayList<Offer>();
+//		subscriptions.addAll(member.get().getSubscriptions());
+//		profile.addObject("subscriptions", subscriptions);
+//		
 		return profile;
 	}
 

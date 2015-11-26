@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -79,8 +80,10 @@ public class Member implements UserDetails {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<Offer> offers = new HashSet<Offer>();
 	
-	@ManyToMany(mappedBy ="subscribers", fetch = FetchType.EAGER)
-	private Set<Offer> subscriptions = new HashSet<Offer>();
+	@OneToMany
+	@JoinColumn(name = "member_id")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Subscription> subscriptions = new ArrayList<Subscription>();
 	
 	public Member(String firstName, String lastName, String email, String username, String password) {
 		this.firstName = firstName;
@@ -226,11 +229,13 @@ public class Member implements UserDetails {
 		this.offers = offers;
 	}
 
-	public Set<Offer> getSubscriptions() {
+	
+
+	public List<Subscription> getSubscriptions() {
 		return subscriptions;
 	}
 
-	public void setSubscriptions(Set<Offer> subscriptions) {
+	public void setSubscriptions(List<Subscription> subscriptions) {
 		this.subscriptions = subscriptions;
 	}
 

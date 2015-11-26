@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -21,9 +22,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"tutor_id", "course_id"}))
 public class Offer implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -37,10 +35,10 @@ public class Offer implements Serializable {
 	@JoinColumn(name = "course_id")
 	private Course course;
 
-	@ManyToMany
-	@JoinColumn(name = "subscribers_id")
+	@OneToMany
+	@JoinColumn(name = "offer_id")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Member> subscribers = new ArrayList<Member>();
+	private List<Subscription> subscriptions = new ArrayList<Subscription>();
 	
 	private float grade;
 
@@ -95,11 +93,12 @@ public class Offer implements Serializable {
 	public void setGrade(float grade) {
 		this.grade = grade;
 	}
-	public List<Member> getSubscribers() {
-		return subscribers;
+
+	public List<Subscription> getSubscriptions() {
+		return subscriptions;
 	}
-	public void setSubscribers(List<Member> subscribers) {
-		this.subscribers = subscribers;
+	public void setSubscriptions(List<Subscription> subscriptions) {
+		this.subscriptions = subscriptions;
 	}
 	@Override
 	public int hashCode() {
