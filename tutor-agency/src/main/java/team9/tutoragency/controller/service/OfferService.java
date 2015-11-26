@@ -13,8 +13,10 @@ import team9.tutoragency.controller.exceptions.InvalidValueException;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
+import team9.tutoragency.model.Subscription;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.OfferDao;
+import team9.tutoragency.model.dao.SubscriptionDao;
 
 @Service
 public class OfferService {
@@ -22,6 +24,7 @@ public class OfferService {
 	@Autowired OfferDao offerDao;
 	@Autowired CourseDao courseDao;
 	@Autowired MemberService memberService;
+	@Autowired SubscriptionService subscriptionService;
 	
 	@Transactional
 	public boolean removeOffer(Member member, Long courseId){
@@ -72,20 +75,12 @@ public class OfferService {
 	@Transactional
 	public void subscribeAuthMemberToOffer(Long offerId) {
 		Optional<Member> member = memberService.getAuthenticatedMember();
+		Offer offer = offerDao.findOne(offerId);
+		Optional<Subscription> sub = subscriptionService.findOne(member.get(), offer);
 		
-		if(member.isPresent() && offerDao.exists(offerId)){
-			Offer offer = offerDao.findOne(offerId);
-			List<Member> subscribers = offer.getSubscribers();
-			if(subscribers == null){
-				subscribers = new ArrayList<Member>();
-				subscribers.add(member.get());
-			} else {
-				if(!subscribers.contains(member.get()))
-					subscribers.add(member.get());
-					
-			}
-			offer.setSubscribers(subscribers);
-			offerDao.save(offer);			
+		if(member.isPresent() && offer!= null && !sub.isPresent()){
+			Subscription entity = new Subscription(member.get(), offer);
+			subscriptionService.save(entity);			
 		}	
 	}
 
