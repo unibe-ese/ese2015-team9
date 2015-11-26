@@ -89,7 +89,7 @@ public class MemberService {
 	}
 
 	public List<Member> findByFee(int min, int max) {
-		return memberDao.findByFeeBetween(new Double(min), new Double(max));
+		return memberDao.findByFeeBetween((double) min, (double) max);
 	}
 
 }
