@@ -24,7 +24,7 @@ public class OfferService {
 	@Autowired OfferDao offerDao;
 	@Autowired CourseDao courseDao;
 	@Autowired MemberService memberService;
-	@Autowired SubscriptionDao subscriptionDao;
+	@Autowired SubscriptionService subscriptionService;
 	
 	@Transactional
 	public boolean removeOffer(Member member, Long courseId){
@@ -76,9 +76,11 @@ public class OfferService {
 	public void subscribeAuthMemberToOffer(Long offerId) {
 		Optional<Member> member = memberService.getAuthenticatedMember();
 		Offer offer = offerDao.findOne(offerId);
-		if(member.isPresent() && offer!= null && subscriptionDao.findByMemberAndOffer(member.get(), offer) == null){
+		Optional<Subscription> sub = subscriptionService.findOne(member.get(), offer);
+		
+		if(member.isPresent() && offer!= null && !sub.isPresent()){
 			Subscription entity = new Subscription(member.get(), offer);
-			subscriptionDao.save(entity);			
+			subscriptionService.save(entity);			
 		}	
 	}
 

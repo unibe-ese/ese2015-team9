@@ -40,12 +40,13 @@
 							src="img/delete-icon.png" name="delete-icon">
 					</form></td>
 			</tr>
-			<c:forEach items="${offer.subscribers}" var="subscriber">
+			<c:forEach items="${offer.subscriptions}" var="subscription">
 				<tr>
 					<td colspan="3" style="text-align:center" >
-						<c:out value="Tutoring Request from ${subscriber.username}"/>
+						<c:out value="Tutoring Request from ${subscription.member.username}"/>
 					</td>
-					<td> ACCEPT PLACEHOLDER</td>
+					<c:if test="${!subscription.accepted}">
+					<td> <a href="accept/${subscription.id}">Accept</a></td></c:if>
 				</tr>
 			</c:forEach>
 		</c:forEach>

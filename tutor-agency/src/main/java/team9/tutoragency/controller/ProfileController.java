@@ -16,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.SubscriptionService;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
+import team9.tutoragency.model.Subscription;
 
 /**
  * The {@link ProfileController} handles the interactions of a user with his
@@ -31,6 +33,8 @@ public class ProfileController {
 
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	SubscriptionService subscriptionService;
 
 	@RequestMapping(value = "/profileId={id}", method = RequestMethod.GET)
 	public ModelAndView showOpenProfile(@PathVariable("id") Long id) {
@@ -54,10 +58,9 @@ public class ProfileController {
 		
 		profile.addObject("member", member.get());
 		
-//		List<Offer> subscriptions = new ArrayList<Offer>();
-//		subscriptions.addAll(member.get().getSubscriptions());
-//		profile.addObject("subscriptions", subscriptions);
-//		
+		List<Subscription> subscriptions = subscriptionService.findByMember(member.get());
+		profile.addObject("subscriptions", subscriptions);
+		
 		return profile;
 	}
 

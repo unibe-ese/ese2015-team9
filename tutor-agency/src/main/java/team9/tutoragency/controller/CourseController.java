@@ -164,11 +164,7 @@ public class CourseController {
 		return new ModelAndView("redirect:/profile");
 	}
 
-	@RequestMapping(value = "/subscribe/{offerId}", method = RequestMethod.GET)
-	public String subscribeToOffer(@PathVariable(value = "offerId") Long offerId) {
-		offerService.subscribeAuthMemberToOffer(offerId);
-		return "redirect:/profile";
-	}
+	
 
 	public void generateAddCourseModel(ModelAndView addCourse, University preselectedUni) {
 		List<University> universities = Lists.newArrayList(uniService.findAll());
