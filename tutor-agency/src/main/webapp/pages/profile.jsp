@@ -116,8 +116,16 @@
     <hr>
     <ul>
         <c:forEach items="${subscriptions}" var="subscription">
-            <li>course : ${subscription.course.name} , tutor:
-                ${subscription.tutor.username}</li>
+            <li>course : ${subscription.offer.course.name} , tutor:
+                ${subscription.offer.tutor.username}, 
+                <c:choose>
+                	<c:when test="${subscription.accepted}">
+                		<p>the tutor has accepted your request, he will contact you soon.</p>
+                	</c:when>
+                	<c:otherwise>
+                		<p>waiting for acceptance...</p>
+                	</c:otherwise>
+                </c:choose></li>
             </c:forEach>
     </ul>
 
