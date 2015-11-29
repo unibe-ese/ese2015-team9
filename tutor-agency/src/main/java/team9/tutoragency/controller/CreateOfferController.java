@@ -19,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import team9.tutoragency.controller.pojos.OfferForm;
 import team9.tutoragency.controller.service.AgencyService;
 import team9.tutoragency.controller.service.CourseService;
+import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.validation.OfferFormValidator;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
@@ -41,7 +43,9 @@ public class CreateOfferController {
 
 	@Autowired
 	AgencyService service;
-
+	@Autowired OfferFormValidator validator;
+	@Autowired MemberService memberService;
+	
 	/**
 	 * This method is invoked before any other handler method of this
 	 * controller. Adds the objects needed to populate the selections in the. A
@@ -76,19 +80,31 @@ public class CreateOfferController {
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView createOfferForm() {
+		Optional<Member> member = memberService.getAuthenticatedMember();
+			
+		if(!member.isPresent())
+			return new ModelAndView("redirect:/denied");
+		
+		//else
 		ModelAndView model = new ModelAndView("createOffer");
+		
 		model.addObject("offerForm", new OfferForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public String submitOfferForm(OfferForm offerForm, BindingResult result) {
+	public ModelAndView submitOfferForm(OfferForm offerForm, BindingResult result) {
 		Long memberId = ((Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-
-		if (service.isNewOffer(memberId, offerForm.getCourseId()))
-			service.createOffer(memberId, offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
+		offerForm.setMemberId(memberId);
 		
-		return "redirect:/profile";
+		validator.validate(offerForm, result);
+		if(result.hasErrors())
+			return new ModelAndView("createOffer", "offerForm", offerForm);
+		else{
+			service.createOffer(memberId, offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
+		}
+		
+		return new ModelAndView("redirect:/profile");
 	}
 
 	/**

@@ -37,7 +37,10 @@
 							<table class="forms">
 								<tr>
 									<td style="width: 150px"><strong>Course:</strong></td>
-									<td><form:select path="courseId" name="courseList"
+									<td>
+									<form:errors path="courseId" cssStyle="color: red;"
+								element="span" />
+									<form:select path="courseId" name="courseList"
 											id="courseList">
 											<c:forEach items="${courses}" var="course">
 												<option value="${course.id}"><c:out
@@ -47,7 +50,10 @@
 								</tr>
 								<tr>
 									<td style="width: 150px"><strong>Note:</strong></td>
-									<td><form:select path="grade" name="grade"
+									<td>
+									<form:errors path="grade" cssStyle="color: red;"
+								element="span" />
+									<form:select path="grade" name="grade"
 											id="universityList">
 											<c:forEach items="${grades}" var="grade">
 												<option value="${grade}"><c:out value="${grade}" /></option>

@@ -56,8 +56,8 @@ public class AgencyServiceImpl implements AgencyService{
 	@Override
 	@Transactional
 	public void createOffer(Long memberId, Long courseId, float grade) {
-		assert memberId != null;
-		assert courseId != null;
+		if (memberId==null) throw new AssertionError("memberId is NULL");
+		if (courseId==null) throw new AssertionError("courseId is NULL");
 		assert memberDao.exists(memberId);
 		assert courseDao.exists(courseId);
 		
