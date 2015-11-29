@@ -82,7 +82,7 @@ public class CreateOfferController {
 		Optional<Member> member = memberService.getAuthenticatedMember();
 			
 		if(!member.isPresent())
-			return new ModelAndView("redirect:/denied");
+			return new ModelAndView("redirect:/denied#login");
 		
 		//else
 		ModelAndView model = new ModelAndView("createOffer");	
@@ -103,35 +103,5 @@ public class CreateOfferController {
 		service.createOffer(memberId, offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
 		
 		return new ModelAndView("redirect:/profile");
-	}
-
-	/**
-	 * Handles a delete request from a {@link Member} when he/she wants to
-	 * delete an offered course from the profile.
-	 * 
-	 * @param response
-	 * @param id
-	 *            id for the {@link Course} which should be removed from the
-	 *            offered courses of the {@link Member}
-	 * @return the {@link ModelAndView} of the showCourses page created by
-	 *         {@link #showCourses(HttpServletResponse)}
-	 * @throws IOException
-	 */
-	@RequestMapping(value = "/delete_{id}", method = RequestMethod.POST)
-	public String deleteCourse(HttpServletResponse response, @PathVariable("id") Long id) throws IOException {
-
-		assert id != null;
-
-		Optional<Offer> offer = service.findOfferById(id);
-
-		assert SecurityContextHolder.getContext().getAuthentication() != null;
-
-		Long authenticatedMembersId = ((Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-				.getId();
-
-		if (offer.isPresent() && authenticatedMembersId == offer.get().getTutor().getId())
-			service.removeOffer(id);
-
-		return "redirect:/profile";
 	}
 }

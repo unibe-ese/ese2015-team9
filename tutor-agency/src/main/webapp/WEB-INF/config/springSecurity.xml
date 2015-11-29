@@ -15,7 +15,7 @@
 			when page denied and not logged in is the login-page below! 
 		-->
 		<security:access-denied-handler
-			error-page="/denied" />
+			error-page="/denied#login" />
 		<security:intercept-url pattern="/login"
 			access="permitAll" />
 		<security:intercept-url pattern="/auth/**"
@@ -28,7 +28,7 @@
 			access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/addCourse"
 			access="hasRole('ROLE_USER')" />
-		<security:form-login login-page="/denied"
+		<security:form-login login-page="/denied#login"
 			authentication-failure-url="/login?error=true" default-target-url="/profile" />
 		<security:logout invalidate-session="true"
 			logout-success-url="/" logout-url="/j_spring_security_logout" />
