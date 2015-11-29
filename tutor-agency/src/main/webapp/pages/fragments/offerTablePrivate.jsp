@@ -35,7 +35,7 @@
 				<td><c:out value="${offer.grade}"></c:out></td>
 				<td align="center" ><form
 						onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');"
-						action="delete_${offer.course.id}" method="post">
+						action="auth/offer/${offer.id}/delete" method="get">
 						<input class="none" id="deleteIcon" type="image"
 							src="img/delete-icon.png" name="delete-icon">
 					</form></td>
@@ -46,7 +46,7 @@
 						<c:out value="Tutoring Request from ${subscription.member.username}"/>
 					</td>
 					<c:if test="${!subscription.accepted}">
-					<td> <a href="accept/${subscription.id}">Accept</a></td></c:if>
+					<td> <a href="auth/offer/${offer.id}/accept/${subscription.id}">Accept</a></td></c:if>
 				</tr>
 			</c:forEach>
 		</c:forEach>
