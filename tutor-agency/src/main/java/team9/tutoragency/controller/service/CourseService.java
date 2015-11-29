@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.common.collect.Lists;
 
-import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;

@@ -32,7 +32,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.controller.service.CourseService;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.OfferService;
@@ -45,8 +44,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
  import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Test of the class {@link CourseController}. {@link CourseService} provides
- * underlying functionality of {@link CourseController} and is tested separately 
+ * Test of the class {@link CreateOfferController}. {@link CourseService} provides
+ * underlying functionality of {@link CreateOfferController} and is tested separately 
  * in {@link CourseServiceTest}.
  * 
  * @author curtys
@@ -58,7 +57,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 "file:src/main/webapp/WEB-INF/config/springData.xml" })
 @Transactional
 @Rollback
-public class CourseControllerTest {
+public class CreateOfferControllerTest {
 	@Mock
 	private OfferService offerService;
 	@Mock
@@ -68,7 +67,7 @@ public class CourseControllerTest {
     @Mock
     private CourseService service;
     @InjectMocks
-    private CourseController controller;
+    private CreateOfferController controller;
     
     
     @Autowired private WebApplicationContext wac;
@@ -134,7 +133,7 @@ public class CourseControllerTest {
     
 
     /**
-     * Test of showCourses method, of class {@link CourseController}.
+     * Test of showCourses method, of class {@link CreateOfferController}.
      */
     @Test
     public void testShowCourses() throws Exception {

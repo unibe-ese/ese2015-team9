@@ -19,7 +19,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
-import team9.tutoragency.controller.pojos.AddCourseForm;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
