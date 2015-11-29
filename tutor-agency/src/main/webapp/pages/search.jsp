@@ -22,7 +22,7 @@
 </script>-->
 
 <div class="container" id="search">
-	<form:form modelAttribute="form" action="search#search" method="post"
+	<form:form modelAttribute="form" action="search#result" method="post"
 		class="searchForm">								
 		<form:input path="searchText" type="search" onclick="this.value=''"
 			value="" placeholder = "enter a course name"/>
@@ -31,16 +31,21 @@
 		<fieldset>
 			<form:checkbox class="checkbox" path="filtered" id="filtered" />
 			<label class="collapse" for="filtered"><span class="block"></span>
-			Show filters</label>
+                <p>Show filters</p></label>
 			<div id="filters">
 				<fieldset class="filter">
 					<legend>Universities</legend>
 
-					<div class="scrollList">
-
-						<form:checkboxes class="checkbox" items="${universities}"
-							path="universityNames" labelposition="left" />
-					</div>
+					<div class="uni-flex">
+                        <c:forEach items="${universities}" var="current" >
+                            <div class="uni-flex-item">
+                            <form:checkbox id="${current}" class="uni-checkbox" path="universityNames" value="${current}" />
+                            <label for="${current}"><span class="block"></span><p><c:out value="${current}" /></p></label>
+                            </div>
+                        </c:forEach>
+					</div> 
+                    <%-- <form:checkboxes class="checkbox" items="${universities}"
+                                     path="universityNames"/> --%>
 
 				</fieldset>
 

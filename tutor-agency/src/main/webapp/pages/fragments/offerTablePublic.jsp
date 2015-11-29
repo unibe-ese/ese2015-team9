@@ -10,15 +10,15 @@
 <!-- OFFER TABLE -->
 
 <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
-<h2 style="font-weight: bold">Tutoring Offers</h2>
-<br>
+<c:if test="${not empty offers}">
+<h2>Tutoring Offers</h2>
 <table class="forms" id=courses>
 	<thead>
 		<tr>
 			<th>Course</th>
 			<th>University</th>
 			<th>Tutor</th>
-			<td>Fee</td>
+			<th>Fee</th>
 			<th>Grade</th>
 			<c:if test="${loggedIn}">
 				<th>Subscribe</th>
@@ -52,10 +52,4 @@
 	</tr>
 </c:forEach>
 </table>
-
-
-</body>
-</html>
-
-
-
+</c:if>

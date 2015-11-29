@@ -1,0 +1,206 @@
+/*********************************************************************************/
+/* Profile                                                                       */
+/*********************************************************************************/
+
+/* Buttons */
+
+#command {
+    width: 12em;
+    float: left;
+    margin-bottom: 2em;
+}
+#command .submitbutton {
+    margin: 0;
+}
+#editForm input {
+    margin: 0;
+}
+
+/* Tables (Account Info & Subscriptions) */
+
+table {
+    border-collapse: separate;
+}
+
+thead {
+    text-align: left;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    letter-spacing: 0.1em;
+}
+
+th {
+    padding-right: 0.5em;
+}
+th:last-of-type {
+    padding-right: 0;
+}
+
+table#subscriptions {
+    border-collapse: collapse;
+}
+
+/* Flex Box */
+
+.flex-upper {
+    display: flex;
+    width: 102%;
+    margin-left: -1%;
+    flex-wrap: wrap;
+}
+
+legend {
+    padding: 0 1em;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    letter-spacing: 0.1em;
+}
+
+fieldset {
+    flex-basis: content;
+    flex-grow: 20;
+    border: 5px solid #426B81;
+    padding: 1em;
+    margin: 0.5em 1%;
+}
+
+.flex-lower {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 2 2 auto;
+}
+.flex-lower-item {
+    max-width: 12em;
+    padding: 1em;
+    flex: 2 2 auto;
+}
+.flex-lower-item span {
+    margin-bottom: 0.5em;
+    display: block;
+}
+.flex-lower-item a {
+    display: block;
+    width: auto;
+    padding: 0.5em;
+    margin-top: 1em;
+    text-align: center;
+}
+
+.course-info {
+    border: 5px solid #426B81;
+    color: #426B81;
+}
+
+.open {
+    background-color: #426B81;
+    color: #fff;
+}
+.open a {
+    border: 5px solid #fff;
+    background-color: #426B81;
+    color: #fff;
+}
+.open a:hover, .open a:focus {
+    background-color: #fff;
+    color: #426B81;
+}
+.accepted {
+    background-color: #70A1A8;
+    color: #fff;
+}
+
+.remove {
+    background-color: #D35836;
+    color: #fff;
+}
+.remove input[type="submit"] {
+    width: 100%;
+    height: auto;
+    padding: 0.5em;
+    background-color: #D35836;
+    color: #fff;
+    border: 5px solid #fff;
+    margin-bottom: 0;
+    margin-top: 1em;
+}
+.remove input[type="submit"]:hover, .remove input[type="submit"]:focus {
+    background-color: #fff;
+    color: #D35836;
+}
+
+/* Toggle */
+
+.collapse {
+    display: block;
+    margin-top: 2em;
+}
+
+.block {
+    float: left;
+    display: block;
+    margin-right: 1em;
+    margin-top: 0.5em;
+    width: 2em;
+    height: 2em;
+    border: 5px solid #426B81; 
+}
+
+input[type="checkbox"] {
+    display:none;
+}
+input[type="checkbox"] + label + div{
+    display:none;
+}
+input[type="checkbox"]:checked + label .block{
+    background-color: #426B81;
+}
+input[type="checkbox"]:checked + label + div{
+    display:block;
+}
+
+@media 
+only screen and (max-width: 650px)  {
+
+	/* Force table to not be like tables anymore */
+	table#subscriptions, #subscriptions thead, #subscriptions tbody,
+    #subscriptions th, #subscriptions td, #subscriptions tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	table#subscriptions thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+    
+	table#subscriptions td { 
+		/* Behave  like a "row" */
+		border: none;
+		position: relative;
+		padding-left: 50%; 
+        text-align: left;
+	}
+	
+	table#subscriptions td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		/*padding-right: 10px;*/ 
+		white-space: nowrap;
+        padding-top: 0.5em;
+        text-align: left;
+	}
+    table#subscriptions tr td:first-of-type {
+        font-weight: bold;
+    }
+    /*
+	Label the data
+	*/
+	table#subscriptions td:nth-of-type(1):before { content: "Course";}
+	table#subscriptions td:nth-of-type(2):before { content: "Tutor"; }
+	table#subscriptions td:nth-of-type(3):before { content: "Status"; }
+}

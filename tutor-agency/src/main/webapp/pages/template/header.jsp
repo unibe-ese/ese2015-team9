@@ -34,15 +34,16 @@
                     <h2><span>learning by learning</span></h2>
                     <h2><span>guaranteed no shortcuts</span></h2>
                     <h2><span>get ready to read some books</span></h2></div>
-		<form action="search" method="GET" class="searchForm">
-			<input type="search" name="text" /> <input type="submit"
-				value="Search" />
-		</form>
             </header>
             
                         <!-- 
     A different navigation is created according to the access-role of the user. 
             -->
+            
+            <!-- <form action="search" method="GET" id="searchfield">
+                <input type="search" name="text" /> <input type="submit"
+                                                           value="Search" />
+            </form> -->
 
             <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
             <c:choose>
@@ -54,7 +55,6 @@
                             <li><a href="<c:url value="/index" />">Home</a></li>
                             <li><a href="<c:url value="/search#search" />">Suche</a></li>
                             <li class="flex-fill"></li>
-                            <li><a href="<c:url value="/addOffer" />">Biete Nachilfe an</a></li>
                             <li class="nav-user"><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                             <li><div class="nav-svg"><a href="<c:url value="/profile" />"><%@include file="/img/cog.svg" %></a></div>
 

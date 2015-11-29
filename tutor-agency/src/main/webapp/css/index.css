@@ -18,3 +18,17 @@ p.index {
     background-color: rgba(0,0,0,0.8);
 }
 
+@media all and (max-width: 1100px) {
+    .container {
+        width: 60%;
+    }
+}
+
+@media all and (max-width: 600px) {
+    .container {
+        width: 100%;
+    }
+    p.index {
+        margin-left: 20%;
+    }
+}

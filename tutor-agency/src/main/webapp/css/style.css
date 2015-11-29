@@ -35,13 +35,27 @@ html, body {
     font-family: 'pt_sansregular', pt_sansregular, sans-serife;
 }
 
+// Get rid of the dotted line around buttons when using firefox
+a:focus, a:active,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+  border: 0;
+  outline : 0;
+}
+
 a {
     color: #426B81;
     text-decoration: none;
+    outline: 0;
 }
 
-a:hover, a:active {
+a:hover, a:active, a:focus {
     color:#D35836;
+    outline: 0;
 }
 
 h1 {
@@ -50,8 +64,14 @@ h1 {
 }
 
 h2 {
-    font-size:3em;	
+    font-size:3em;
+    padding-bottom: 1em;
 }
+
+
+/*********************************************************************************/
+/* Basic Classes                                                                 */
+/*********************************************************************************/
 
 .container  {
     width: 60%;
@@ -64,6 +84,14 @@ h2 {
     font-size: 1.3em;
     line-height: 1.2em;
     letter-spacing: 0.1em;
+}
+
+.clear {
+    clear: both;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 /*********************************************************************************/
@@ -137,7 +165,7 @@ footer a{
 /* Form                                                                          */
 /*********************************************************************************/
 
-input {
+input { 
     border: 5px solid #426B81;
     width: 40em;
     height: 4em;
@@ -153,9 +181,10 @@ input[type="image"] {
     margin-bottom: 0em;
 }
 
-input:focus {
+input:focus, input:active {
     color: #fff;
     background: #426B81;
+    outline: 0;
 }
 
 input[type="checkbox"] {
@@ -181,6 +210,7 @@ select {
     min-width: 10em;
     padding: 1em; 
     margin-left: 15em;
+    background: #FFF;
 }
 .submitbutton:focus,  .submitbutton:hover{
     color: #fff;
@@ -193,14 +223,7 @@ select {
 
 table {
     width: 100%;
-}
-tr.title {
-    color: #fff;
-    background: #426B81;
-    font-size: 2em;
-}
-tr.title td {
-    padding: 0.3em 0;
+    border-collapse: separate;
 }
 
 tr {
@@ -208,24 +231,6 @@ tr {
 }
 td {
     padding: 1em 0;
-}
-
-/*********************************************************************************/
-/* Profile                                                                       */
-/*********************************************************************************/
-table {
-    border-collapse: separate;
-}
-#command {
-    width: 12em;
-    float: left;
-    margin-bottom: 2em;
-}
-#command .submitbutton {
-    margin: 0;
-}
-#editForm input {
-    margin: 0;
 }
 
 /*********************************************************************************/
@@ -242,8 +247,8 @@ nav {
 
 .navigation {
 
-    width: 60%;
-    height: 100%;
+  width: 60%;
+  height: 100%;
   list-style: none;
   margin: 0 auto; 
   
@@ -280,13 +285,19 @@ nav {
 
 .nav-svg {
     height: 100%;
-    width: 100%;
+    width: auto;
+    padding-left: 2em;
 }
 .nav-svg a {
-    display: initial;
+    position: absolute;
+    margin-left: -2em;
+    /*display: initial;*/
+    padding: 0;
+    /*margin-top: 50%;*/
 }
 
 .nav-svg svg {
+    
     fill: #fff;
     height: 2em;
     width: 2em;
@@ -297,11 +308,61 @@ nav {
     fill: deepskyblue;
 }
 
+/*#searchfield input[type="search"]{
+    border: none;
+    width: 10em;
+    height: 1em;
+    background: #fff;
+}
+#searchfield input[type="submit"] {
+    width: auto;
+    border: none;
+    height: 1em;
+    padding: 0;
+}*/
+
 /*********************************************************************************/
 /* Media                                                                         */
 /*********************************************************************************/
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 1100px) {
+    .navigation {
+        width: 80%;
+    }
+    
+    header span {
+        width: 100%;
+    }
+    header h1 span:first-of-type {
+        width: inherit;
+    }
+    .container {
+        width: 80%;
+    }
+}
+
+@media all and (max-width: 800px) {
+  .navigation {
+      width: 90%;
+  }
+  .container {
+      width: 90%;
+  }
+  input {
+      width: 100%;
+  }
+}
+
+@media all and (max-width: 650px) {
+    header .img {
+        height: 45em;
+    }
+    .container {
+        margin-top: 5em;
+    }
+}
+
+/*@media all and (max-width: 600px) {
   .navigation {
     -webkit-flex-flow: column wrap;
     flex-flow: column wrap;
@@ -316,18 +377,5 @@ nav {
   .navigation li:last-of-type a {
     border-bottom: none;
   }
-}
+}*/
 
-@media all and (max-width: 800px) {
-  .navigation {
-  }
-}
-
-@media all and (max-width: 1100px) {
-    header span {
-        width: 100%;
-    }
-    header h1 span:first-of-type {
-        width: inherit;
-    }
-}

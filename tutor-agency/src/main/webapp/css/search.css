@@ -1,4 +1,6 @@
-@CHARSET "utf-8";
+/*********************************************************************************/
+/* Search                                                                        */
+/*********************************************************************************/
 
 #searchForm {
     width: 100%;
@@ -17,34 +19,6 @@
     background-color: #426B81;
     color: #fff;
 }
-
-/*.searchForm fieldset.filter {
-	height: 140px;
-	width: 100px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	
-}*/
-
-/*.searchForm fieldset {
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	
-}*/
-
-/*.searchForm fieldset span {
-	this allows to display each checkbox,
-	 together with it's label,
-	 on a separate line
-	display: block;
-}*/
-
-/*.scrollList {
-	height: 100px;
-	width: 110px;
-	overflow-y: scroll;
-}*/
 
 .searchForm fieldset input[type=number] {
 	width: 8em;
@@ -87,13 +61,19 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 100%;
+    width: 102%;
+    margin-left: -1%;
+    /*margin-right: 1%;*/
 }
 .filter {
-    width: 20em;
+    /*width: 20em;*/
     flex-basis: content;
     border: 5px solid #426B81;
     padding: 1em;
+    margin: 0.5em 1%;
+}
+.filter:last-of-type {
+    /*margin-right: 0;*/
 }
 
 legend {
@@ -103,8 +83,26 @@ legend {
     letter-spacing: 0.1em;
 }
 
-label{
-    padding-right: 1em;
+.uni-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.uni-flex-item {
+    flex-basis: 10em;
+    margin: 0.2em;
+}
+.uni-flex-item p{
+    display: inline-block;
+}
+.uni-flex-item .block{
+    /*float: none;*/
+}
+.uni-checkbox {
+    display:none;
+}
+
+.uni-checkbox:checked ~ label .block {
+    background-color: #426B81;
 }
 
 table {
@@ -119,9 +117,79 @@ thead {
 }
 
 th {
-    /*text-align: left;*/
+    padding-right: 0.5em;
+}
+th:last-of-type {
+    padding-right: 0;
 }
 
 #result {
     margin-top: 3em;
+}
+
+@media all and (max-width: 650px) {
+    #searchText {
+        width: 75%;
+    }
+    .searchbutton {
+        width: auto;
+    }
+}
+
+@media 
+only screen and (max-width: 650px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+    
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		position: relative;
+		padding-left: 50%; 
+        text-align: left;
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		/*padding-right: 10px;*/ 
+		white-space: nowrap;
+        padding-top: 0.5em;
+        text-align: left;
+	}
+    tr td:first-of-type {
+        font-weight: bold;
+    }
+    	/*
+	Label the data
+	*/
+	td:nth-of-type(1):before { content: "Course";}
+	td:nth-of-type(2):before { content: "University"; }
+	td:nth-of-type(3):before { content: "Tutor"; }
+	td:nth-of-type(4):before { content: "Fee"; }
+	td:nth-of-type(5):before { content: "Grade"; }
+	td:nth-of-type(6):before { content: "Subscribe"; }
+}
+
+@media all and (max-width: 600px) {
+    #searchText {
+        width: 70%;
+    }
+    #filters{
+        flex-wrap:wrap;
+    }
 }

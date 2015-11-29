@@ -9,12 +9,11 @@
 <div class="container">
     	
 	
-<div class="stripe"></div>
-<div class="sidebar"><c:import url="template/sidebar.jsp" /></div>
+    <p>LOL</p>
     
-<c:import url="template/footer.jsp" />
-    
-</div>
 
+</div>    
+</div>
+<c:import url="template/footer.jsp" />
 </body>
 </html>
