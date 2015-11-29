@@ -46,7 +46,11 @@ public class SearchService {
 		
 		if(!form.isFiltered()){
 			courses = courseService.findByNameContaining(form.getSearchText());		
-			return offerService.findByCourses(courses);
+			List<Offer> offers = new ArrayList<Offer>();
+			for(Course course: courses){
+				offers.addAll(course.getOffers());
+			}
+			return offers;
 		}
 			
 		//else

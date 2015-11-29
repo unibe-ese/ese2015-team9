@@ -47,7 +47,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Test of the class {@link EditController}.
+ * Test of the class {@link AccountController}.
  * 
  * @author brn
  * @author curtys
@@ -75,7 +75,7 @@ public class EditControllerTest {
 	private UniversityService uniService;
 
 	@InjectMocks
-	private EditController controller;
+	private AccountController controller;
 	@Captor
 	private ArgumentCaptor<EditForm> captor;
 
@@ -172,7 +172,7 @@ public class EditControllerTest {
 	}
 
 	/**
-	 * Test of saveChange method, of class {@link EditController}, when errors
+	 * Test of saveChange method, of class {@link AccountController}, when errors
 	 * are present.
 	 */
 	@Test
@@ -192,7 +192,7 @@ public class EditControllerTest {
 	}
 
 	/**
-	 * Test of saveChange method, of class {@link EditController}, when no
+	 * Test of saveChange method, of class {@link AccountController}, when no
 	 * errors are present.
 	 */
 	@Test

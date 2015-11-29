@@ -24,9 +24,6 @@
 </head>
 
     <body>
-
-
-
         <div id="wrapper">
 
             <header>
@@ -56,7 +53,7 @@
                             <li><a href="<c:url value="/search#search" />">Suche</a></li>
                             <li class="flex-fill"></li>
                             <li class="nav-user"><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
-                            <li><div class="nav-svg"><a href="<c:url value="/profile" />"><%@include file="/img/cog.svg" %></a></div>
+                            <li><div class="nav-svg"><a href="<c:url value="/auth/account" />"><%@include file="/img/cog.svg" %></a></div>
 
                         </ul>
                     </nav>

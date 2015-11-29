@@ -24,6 +24,7 @@ import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.controller.service.validation.EditFormValidationService;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.Subscription;
 import team9.tutoragency.model.University;
 
 /**
@@ -34,7 +35,8 @@ import team9.tutoragency.model.University;
  *
  */
 @Controller
-public class EditController {
+@RequestMapping(value="/auth/account")
+public class AccountController {
 
 	@Autowired
 	EditFormValidationService validator;
@@ -43,6 +45,20 @@ public class EditController {
 	@Autowired
 	UniversityService uniService;
 
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ModelAndView show() {
+		ModelAndView profile = new ModelAndView("profile");
+		
+		Optional<Member> member = memberService.getAuthenticatedMember();
+		
+		if(!member.isPresent())
+			return new ModelAndView("redirect:/denied");
+		
+		profile.addObject("member", member.get());
+		
+		return profile;
+	}
+	
 	/**
 	 * Prepares the model for the edit view when a {@link Member} would like to
 	 * edit his profile informations. The {@link EditForm} will contain all
@@ -50,7 +66,6 @@ public class EditController {
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() throws IOException {
-		assert(isAccessAuthenticated());
 
 		ModelAndView edit = new ModelAndView("edit");
 
@@ -99,18 +114,15 @@ public class EditController {
 
 			memberService.saveEditChange(member, editForm);
 			model = new ModelAndView("redirect:/profile");
-			
 
 		} else {
 
-			model = new ModelAndView("edit");
-			model.addObject("editForm", editForm);
-			
+			model = new ModelAndView("edit", "editForm", editForm);
+		
 			List<String> universityNames = uniService.findAllNames();
 
 			model.addObject("universityChoices", universityNames);
 			model.addObject("member", member);
-
 		}
 		return model;
 	}
@@ -127,5 +139,20 @@ public class EditController {
 		return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
 	}
 
+	/**
+	 * Upgrades a tutor with the help of the {@link MemberService} if a user
+	 * clicks the "werde Tutor" button.
+	 * 
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/becomeTutor", method = RequestMethod.POST)
+	public ModelAndView becomeTutor() {
+	
+		memberService.upgradeAuthenticatedMemberToTutor();
+		
+		return show();
+	}
 	
 }

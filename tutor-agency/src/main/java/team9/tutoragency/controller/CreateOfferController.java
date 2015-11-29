@@ -4,14 +4,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +39,8 @@ import team9.tutoragency.model.University;
 @RequestMapping(value = "/auth/offer/")
 public class CreateOfferController {
 
+	@Autowired CourseService courseService;
+	@Autowired UniversityService uniService;
 	@Autowired AgencyService service;
 	@Autowired OfferFormValidator validator;
 	@Autowired MemberService memberService;
@@ -59,17 +59,18 @@ public class CreateOfferController {
 	 */
 	@ModelAttribute
 	public void populateModel(@RequestParam(value = "id", required = false) Long uniId, ModelMap modelMap) {
-		List<University> unis = service.findAllUniversities();
-		assert!unis.isEmpty();
+		List<University> unis = uniService.findAll();
+		
+		if (unis.isEmpty()) throw new AssertionError("No Universities found! Check Database!");
 
 		University selectedUni = new University();
 
 		if (uniId == null)
 			selectedUni = unis.get(0);
 		else
-			selectedUni = service.findUniById(uniId).orElse(unis.get(0));
+			selectedUni = uniService.findOne(uniId).orElse(unis.get(0));
 
-		List<Course> courses = service.findCoursesByUniversity(selectedUni);
+		List<Course> courses = courseService.findByUniversity(selectedUni);
 
 		modelMap.addAttribute("universities", unis);
 		modelMap.addAttribute("courses", courses);

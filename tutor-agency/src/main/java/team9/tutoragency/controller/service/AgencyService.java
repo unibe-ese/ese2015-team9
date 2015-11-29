@@ -10,10 +10,6 @@ import team9.tutoragency.model.University;
 
 public interface AgencyService {
 
-	public List<University> findAllUniversities();
-
-	public List<Course> findCoursesByUniversity(University selectedUni);
-
 	public Optional<Offer> findOfferById(Long id);
 
 	public void removeOffer(Long id);
@@ -22,6 +18,7 @@ public interface AgencyService {
 
 	public boolean isNewOffer(Long memberId, Long courseId);
 
-	public Optional<University> findUniById(Long uniId);
+	public void subscribeMemberToOffer(Long memberId, Long offerId);
 
+	public void acceptSubscription(Long id);
 }
