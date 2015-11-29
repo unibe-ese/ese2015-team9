@@ -2,7 +2,6 @@
 package team9.tutoragency.controller.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,15 +16,16 @@ import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.UniversityDao;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UniversityAccessServiceTest {
+public class UniversityServiceTest {
     
     @Mock
     private UniversityDao uniDao;
     @InjectMocks
     private UniversityService service;
-    private final List<University> listUni1 = new ArrayList<University>();
-    private final List<University> listAllUnis = new ArrayList<University>();
-	private final List<University> listUni2 = new ArrayList<University>();
+    private final List<University> listUni1 = new ArrayList<>();
+    private final List<University> listAllUnis = new ArrayList<>();
+	private final List<University> listUni2 = new ArrayList<>();
+    private final List<String> listUniNames = new ArrayList<>();
     
     @Before
     public void setUp() {
@@ -39,8 +39,9 @@ public class UniversityAccessServiceTest {
         listAllUnis.add(uni1);
         listAllUnis.add(uni2);
         
-        Mockito.when(uniDao.findByName("uni1")).thenReturn(listUni1);
-        Mockito.when(uniDao.findByName("uni2")).thenReturn(listUni2);
+        listUniNames.add(uni1.getName());
+        listUniNames.add(uni2.getName());
+           
         Mockito.when(uniDao.findAll()).thenReturn(listAllUnis);
     }
     /**
@@ -56,20 +57,38 @@ public class UniversityAccessServiceTest {
      */
     @Test
     public void testFindByName() {
+        Mockito.when(uniDao.findByName("uni1")).thenReturn(listUni1);
         String name = "uni1";
         List<University> result = service.findByName(name);
         assertEquals(listUni1, result);
     }
+
+    /**
+     * Test of findByNames method, of class {@link UniversityService}.
+     */
     @Test
-    public void testFindByNameList(){
-    	assertEquals(Arrays.asList(new University[]{}), service.findByNames(null));
-    	
-    	Mockito.when(uniDao.findByName("uni1")).thenReturn(listUni1);
-    	Mockito.when(uniDao.findByName("uni2")).thenReturn(listUni2);
-    	List<String> names = Arrays.asList(new String[]{"uni1", "uni2"});
-    	List<University> result = service.findByNames(names);
-    	assertEquals(listAllUnis, result);
-    	
+    public void testFindByNames() {
+        Mockito.when(uniDao.findByNameIn(listUniNames)).thenReturn(listAllUnis);
+        
+        List<String> names = null;
+        List<University> expResult = new ArrayList<>();
+        List<University> result = service.findByNames(names);
+        assertEquals(expResult, result);
+        names = new ArrayList<>();
+        result = service.findByNames(names);
+        assertEquals(expResult, result);
+            
+        result = service.findByNames(listUniNames);
+        assertEquals(listAllUnis, result);
+    }
+
+    /**
+     * Test of findAllNames method, of class {@link UniversityService}.
+     */
+    @Test
+    public void testFindAllNames() {
+        List<String> result = service.findAllNames();
+        assertEquals(listUniNames, result);
     }
     
 }

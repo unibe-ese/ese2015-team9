@@ -67,14 +67,14 @@ public class EditFormValidationService implements Validator {
 
 	private void checkEmailAlreadyInUse(Errors errors, Member member, EditForm form) {
 		List<Member> members = memberDao.findByEmail(form.getEmail());
-		if (!members.get(0).equals(member)) {
+		if (!members.isEmpty() && !members.get(0).equals(member)) {
 			errors.rejectValue("email", "email.invalidName", "Diese Email Adresse wird bereits verwendet");
 		}
 	}
 
 	private void checkUsernameAlreadyInUse(Errors errors, Member member, EditForm form) {
 		List<Member> members = memberDao.findByUsername(form.getUsername());
-		if (!members.get(0).equals(member)) {
+		if (!members.isEmpty() && !members.get(0).equals(member)) {
 			errors.rejectValue("username", "username.invalidName", "Dieser Username wird bereits verwendet");
 		}
 	}

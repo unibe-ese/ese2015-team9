@@ -3,18 +3,17 @@ package team9.tutoragency.controller.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import static org.mockito.Matchers.anyString;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 import team9.tutoragency.controller.pojos.EditForm;
@@ -30,32 +29,40 @@ public class EditFormValidationServiceTest {
     
     @Mock
     private MemberDao memberDao;
+    @Mock
+    private MemberService memberService;
     @InjectMocks
     private EditFormValidationService service;
     
     @Before
     public void setUp() {
-        Member activeMember = new Member("fName", "lName", "m@email.com", "uname", DigestUtils.md5Hex("password"));
+        final Member activeMember = new Member("fName", "lName", "m@email.com", "uname", DigestUtils.md5Hex("password"));
         activeMember.setIsTutor(true);
         activeMember.setId(Long.valueOf(1));
         Member controllMember = new Member("firstName", "lastName", "member@email.com", "username", "password");
         controllMember.setId(Long.valueOf(2));
-        List<Member> members = new ArrayList<Member>();
+        List<Member> members = new ArrayList<>();
         members.add(controllMember);
-        Mockito.when(
-                memberDao.findByUsername("username"))
-                .thenReturn(members);
-        Mockito.when(
-                memberDao.findByEmail("member@email.com"))
-                .thenReturn(members);
-
-        Authentication authentication = Mockito.mock(Authentication.class);
-        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
-        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
-        SecurityContextHolder.setContext(securityContext);
-        Mockito.when(authentication.getPrincipal()).thenReturn(activeMember);
+        
+        Mockito.when(memberDao.findByUsername("username")).thenReturn(members);
+        Mockito.when(memberDao.findByEmail("member@email.com")).thenReturn(members);
+        Mockito.when(memberService.getAuthenticatedMember()).thenReturn(Optional.of(activeMember));
     }
 
+    /**
+     * Tests if the validation methods can handle empty lists.
+     */
+    @Test
+    public void emptyListTest() {
+        Mockito.when(memberDao.findByEmail(anyString())).thenReturn(new ArrayList<Member>());
+        Mockito.when(memberDao.findByUsername(anyString())).thenReturn(new ArrayList<Member>());
+        
+        EditForm form = createEditForm();
+        Errors error = new DirectFieldBindingResult(form, "editform");             
+        service.validate(form, error);
+        assertFalse(error.hasErrors());
+    }
+    
     @Test
     public void usernameAlreadyInUse() {
         EditForm form = createEditForm();

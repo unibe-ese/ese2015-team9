@@ -66,4 +66,9 @@ public class CourseService {
 	}
 
 
+	public University findUniversityForCourse(long selectedCourse) {
+		return courseDao.findOne(selectedCourse).getUniversity();
+	}
+
+
 }
