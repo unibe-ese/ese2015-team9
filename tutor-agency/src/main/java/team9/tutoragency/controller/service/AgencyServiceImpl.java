@@ -17,6 +17,12 @@ import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.OfferDao;
 import team9.tutoragency.model.dao.SubscriptionDao;
 import team9.tutoragency.model.dao.UniversityDao;
+
+/**
+ * Service for all the "agency" tasks. Meaning everything concerning offers, and subscriptions.
+ * @author brn
+ *
+ */
 @Service
 public class AgencyServiceImpl implements AgencyService{
 
@@ -135,6 +141,7 @@ public class AgencyServiceImpl implements AgencyService{
 	@Override
 	public void acceptSubscription(Long subscriptionId) {
 		if (subscriptionId==null) throw new AssertionError("subscription id is NULL");
+		
 		Subscription entity = subscriptionDao.findOne(subscriptionId);
 		if(entity != null){
 			entity.setAccepted(true);
