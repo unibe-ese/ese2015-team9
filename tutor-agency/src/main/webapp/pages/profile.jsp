@@ -25,7 +25,7 @@
         </form:form>
     </c:if>
     <c:if test="${member.isTutor}">
-        <form:form action="addOffer" method="get">
+        <form:form action="auth/offer/new" method="get">
             <input class="submitbutton" type="submit" value="Nachhilfe anbieten" />
         </form:form>
     </c:if>

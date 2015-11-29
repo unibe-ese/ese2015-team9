@@ -24,6 +24,4 @@ public interface AgencyService {
 
 	public Optional<University> findUniById(Long uniId);
 
-	
-
 }

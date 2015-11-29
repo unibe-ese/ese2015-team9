@@ -36,61 +36,94 @@ public class AgencyServiceImpl implements AgencyService{
 		return courseDao.findByUniversity(university);
 	}
 
+	/**
+	 * Finds the offer with the given Id.
+	 * <p>
+	 * <b>Asserts that:<b>
+	 * <li>id is not null</li>
+	 * </p>
+	 * @return empty Optional if offer does not exist.
+	 */
 	@Override
 	@Transactional(readOnly=true)
-	public Optional<Offer> findOfferById(Long id) {
-		assert id != null;
-		return Optional.ofNullable(offerDao.findOne(id));
+	public Optional<Offer> findOfferById(Long offerId) {
+		if (offerId==null) throw new AssertionError("offer id is null!");
+		return Optional.ofNullable(offerDao.findOne(offerId));
 	}
 
+	/**
+	 * Deletes the offer with the given id.
+	 * <p>
+	 * <b>Asserts that:<b>
+	 * <li>id is not null</li>
+	 * <li>offer with given id exists</li>
+	 * </p>
+	 */
 	@Override
 	@Transactional
-	public void removeOffer(Long id) {
-		assert id != null;
-		assert offerDao.exists(id);
+	public void removeOffer(Long offerId) {
+		if (offerId==null) throw new AssertionError("offer id is null!");
+		if (!offerDao.exists(offerId)) throw new AssertionError("Offer does not exist!");
 		
-		offerDao.delete(id);
+		offerDao.delete(offerId);
 		
 	}
 
+	/**
+	 * Creates an Offer with the passed parameters. And saves it in the Database.
+	 * <p>
+	 * <b>Asserts that:<b>
+	 * <li>memberId is not null</li>
+	 * <li>member with given id exists</li>
+	 * <li>courseId is not null</li>
+	 * <li>course with given id exists</li>
+	 * <li>offer with member and course does not exist</li>
+	 * </p>
+	 */
 	@Override
 	@Transactional
 	public void createOffer(Long memberId, Long courseId, float grade) {
 		if (memberId==null) throw new AssertionError("memberId is NULL");
 		if (courseId==null) throw new AssertionError("courseId is NULL");
-		assert memberDao.exists(memberId);
-		assert courseDao.exists(courseId);
-		
+		if (!memberDao.exists(memberId)) throw new AssertionError("Member does not exist!");
+		if (!courseDao.exists(courseId)) throw new AssertionError("Course does not exist!");
+			
 		Offer offer = new Offer(memberDao.findOne(memberId), courseDao.findOne(courseId), grade);
 		
-		assert isNew(offer);
+		if (!isNew(offer)) throw new AssertionError("Offer [" + offer.getTutor().getUsername() + ", "+ offer.getCourse().getName() +"] already exists!");
 		
 		offerDao.save(offer);
 	}
 
+	/**
+	 * Returns true if no offer with the given member and course exists.
+	 * <p>
+	 * <b>Asserts that:<b>
+	 * <li>memberId is not null</li>
+	 * <li>member with given id exists</li>
+	 * <li>courseId is not null</li>
+	 * <li>course with given id exists</li>
+	 * </p>
+	 */
 	@Transactional(readOnly=true)
 	public boolean isNewOffer(Long memberId, Long courseId){
-		assert memberId!= null;
-		assert courseId!= null;
+		if (memberId==null) throw new AssertionError("memberId is NULL");
+		if (courseId==null) throw new AssertionError("courseId is NULL");
+		if (!memberDao.exists(memberId)) throw new AssertionError("Member does not exist!");
+		if (!courseDao.exists(courseId)) throw new AssertionError("Course does not exist!");
 		
 		Member member = memberDao.findOne(memberId);
 		Course course = courseDao.findOne(courseId);
 		
-		assert member != null;
-		assert course != null;
-		
-		if(offerDao.findByTutorAndCourse(member, course).isEmpty())
+		List<Offer> matches = offerDao.findByTutorAndCourse(member, course);
+		if(matches==null || matches.isEmpty())
 			return true;
 		else 
 			return false;
 	}
 	
-	@Transactional(readOnly=true)
 	private boolean isNew(Offer offer) {
-		if(offerDao.findByTutorAndCourse(offer.getTutor(), offer.getCourse())==null)
-			return true;
-		else
-			return false;
+		return isNewOffer(offer.getTutor().getId(), offer.getCourse().getId());
 	}
 
 	@Override

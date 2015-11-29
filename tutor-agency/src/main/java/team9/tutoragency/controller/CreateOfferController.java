@@ -20,6 +20,7 @@ import team9.tutoragency.controller.pojos.OfferForm;
 import team9.tutoragency.controller.service.AgencyService;
 import team9.tutoragency.controller.service.CourseService;
 import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.controller.service.validation.OfferFormValidator;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
@@ -35,14 +36,12 @@ import team9.tutoragency.model.University;
  * 
  * @author laeri
  * @author bruno
- * 
  */
 @Controller
 @RequestMapping(value = "/auth/offer/")
 public class CreateOfferController {
 
-	@Autowired
-	AgencyService service;
+	@Autowired AgencyService service;
 	@Autowired OfferFormValidator validator;
 	@Autowired MemberService memberService;
 	
@@ -86,8 +85,7 @@ public class CreateOfferController {
 			return new ModelAndView("redirect:/denied");
 		
 		//else
-		ModelAndView model = new ModelAndView("createOffer");
-		
+		ModelAndView model = new ModelAndView("createOffer");	
 		model.addObject("offerForm", new OfferForm());
 		return model;
 	}
@@ -98,11 +96,11 @@ public class CreateOfferController {
 		offerForm.setMemberId(memberId);
 		
 		validator.validate(offerForm, result);
+		
 		if(result.hasErrors())
 			return new ModelAndView("createOffer", "offerForm", offerForm);
-		else{
-			service.createOffer(memberId, offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
-		}
+		//else
+		service.createOffer(memberId, offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
 		
 		return new ModelAndView("redirect:/profile");
 	}
