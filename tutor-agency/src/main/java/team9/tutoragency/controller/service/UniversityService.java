@@ -3,6 +3,7 @@ package team9.tutoragency.controller.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,20 @@ public class UniversityService {
 
 	@Transactional
 	public List<University> findAll() {
-		return Lists.newArrayList(uniDao.findAll());
+		return uniDao.findAll();
 	}
-
+	/**
+	 * Returns an empty Optional if no university with this id is found, or an Optional wrapping the University with the given id.
+	 * <p>
+	 * <b>Asserts that:<b>
+	 * <li>uniId is not null</li>
+	 * <p>
+	 */
+	public Optional<University> findOne(Long uniId) {
+		if (uniId==null) throw new AssertionError("uniId is NULL");
+		return Optional.ofNullable(uniDao.findOne(uniId));
+	}
+	
 	@Transactional
 	public List<University> findByName(String name) {
 		return Lists.newArrayList(uniDao.findByName(name));
@@ -49,4 +61,5 @@ public class UniversityService {
 		}
 		return names;
 	}		
+	
 }

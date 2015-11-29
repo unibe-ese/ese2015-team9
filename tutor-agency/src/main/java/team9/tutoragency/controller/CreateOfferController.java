@@ -18,6 +18,7 @@ import team9.tutoragency.controller.pojos.OfferForm;
 import team9.tutoragency.controller.service.AgencyService;
 import team9.tutoragency.controller.service.CourseService;
 import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.controller.service.validation.OfferFormValidator;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
@@ -38,6 +39,8 @@ import team9.tutoragency.model.University;
 @RequestMapping(value = "/auth/offer/")
 public class CreateOfferController {
 
+	@Autowired CourseService courseService;
+	@Autowired UniversityService uniService;
 	@Autowired AgencyService service;
 	@Autowired OfferFormValidator validator;
 	@Autowired MemberService memberService;
@@ -56,17 +59,18 @@ public class CreateOfferController {
 	 */
 	@ModelAttribute
 	public void populateModel(@RequestParam(value = "id", required = false) Long uniId, ModelMap modelMap) {
-		List<University> unis = service.findAllUniversities();
-		assert!unis.isEmpty();
+		List<University> unis = uniService.findAll();
+		
+		if (unis.isEmpty()) throw new AssertionError("No Universities found! Check Database!");
 
 		University selectedUni = new University();
 
 		if (uniId == null)
 			selectedUni = unis.get(0);
 		else
-			selectedUni = service.findUniById(uniId).orElse(unis.get(0));
+			selectedUni = uniService.findOne(uniId).orElse(unis.get(0));
 
-		List<Course> courses = service.findCoursesByUniversity(selectedUni);
+		List<Course> courses = courseService.findByUniversity(selectedUni);
 
 		modelMap.addAttribute("universities", unis);
 		modelMap.addAttribute("courses", courses);

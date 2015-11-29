@@ -10,10 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
+import team9.tutoragency.model.Subscription;
 import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.OfferDao;
+import team9.tutoragency.model.dao.SubscriptionDao;
 import team9.tutoragency.model.dao.UniversityDao;
 @Service
 public class AgencyServiceImpl implements AgencyService{
@@ -22,20 +24,8 @@ public class AgencyServiceImpl implements AgencyService{
 	@Autowired CourseDao courseDao;
 	@Autowired OfferDao offerDao;
 	@Autowired MemberDao memberDao;
+	@Autowired SubscriptionDao subscriptionDao;
 	
-	@Override
-	@Transactional(readOnly=true)
-	public List<University> findAllUniversities() {
-		return uniDao.findAll();
-	}
-
-	@Override
-	@Transactional(readOnly=true)
-	public List<Course> findCoursesByUniversity(University university) {
-		assert university != null;
-		return courseDao.findByUniversity(university);
-	}
-
 	/**
 	 * Finds the offer with the given Id.
 	 * <p>
@@ -127,9 +117,28 @@ public class AgencyServiceImpl implements AgencyService{
 	}
 
 	@Override
-	public Optional<University> findUniById(Long uniId) {
-		assert uniId != null;
-		return Optional.ofNullable(uniDao.findOne(uniId));
+	public void subscribeMemberToOffer(Long memberId, Long offerId) {
+		if (memberId==null) throw new AssertionError("memberId is NULL");
+		if (offerId==null) throw new AssertionError("offerId is NULL");
+		if (!memberDao.exists(memberId)) throw new AssertionError("Member does not exist!");
+		if (!offerDao.exists(offerId)) throw new AssertionError("Offer does not exist!");
+		
+		Member member = memberDao.findOne(memberId);
+		Offer offer = offerDao.findOne(offerId);
+		
+		if(subscriptionDao.findByMemberAndOffer(member, offer).isEmpty()){
+			Subscription entity = new Subscription(member, offer);
+			subscriptionDao.save(entity);			
+		}	
 	}
 
+	@Override
+	public void acceptSubscription(Long subscriptionId) {
+		if (subscriptionId==null) throw new AssertionError("subscription id is NULL");
+		Subscription entity = subscriptionDao.findOne(subscriptionId);
+		if(entity != null){
+			entity.setAccepted(true);
+			subscriptionDao.save(entity);
+		}	
+	}
 }

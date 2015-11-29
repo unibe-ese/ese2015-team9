@@ -26,12 +26,19 @@ public class CourseService {
 	@Autowired
 	CourseDao courseDao;
 
-
+	/**
+	 * Finds all courses with the given University as field.
+	 * <p>
+	 * <b>Asserts that:<b>
+	 * <li>University is not null</li>
+	 * </p>
+	 */
 	@Transactional(readOnly=true)
 	public List<Course> findByUniversity(University university) {
+		if (university==null) throw new AssertionError("University is NULL!");
+
 		return courseDao.findByUniversity(university);
 	}
-
 
 	/**
 	 * Invokes the course dao query method findByNameContainingIgnoreCase(courseName).
@@ -45,7 +52,6 @@ public class CourseService {
 		
 		return courseDao.findByNameContainingIgnoreCase(courseName);
 	}
-
 
 	/**
 	 * Invokes either the course dao query method {@code findByNameContainingIgnoreCase(courseName)} if universities is empty. Or 
@@ -66,9 +72,9 @@ public class CourseService {
 	}
 
 
-	public University findUniversityForCourse(long selectedCourse) {
-		return courseDao.findOne(selectedCourse).getUniversity();
-	}
+//	public University findUniversityForCourse(long selectedCourse) {
+//		return courseDao.findOne(selectedCourse).getUniversity();
+//	}
 
 
 }

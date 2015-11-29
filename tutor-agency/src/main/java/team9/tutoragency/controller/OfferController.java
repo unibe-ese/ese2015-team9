@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import team9.tutoragency.controller.service.AgencyService;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.OfferService;
-import team9.tutoragency.controller.service.SubscriptionService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
@@ -27,18 +25,20 @@ public class OfferController {
 	@Autowired MemberService memberService;
 	@Autowired AgencyService service;
 	@Autowired OfferService offerService;
-	@Autowired SubscriptionService subscriptionService;
 	
 	@RequestMapping(value = "/subscribe", method = RequestMethod.GET)
 	public String subscribe(@PathVariable(value = "offerId") Long offerId) {
-		offerService.subscribeAuthMemberToOffer(offerId);
-		return "redirect:/profile";
+		service.subscribeMemberToOffer(memberService.getAuthenticatedMember().get().getId(), offerId);
+		return "redirect:/auth/account";
 	}
 	
 	@RequestMapping(value = "/accept/{subscriptionId}", method = RequestMethod.GET)
 	public String acceptSubscription(@PathVariable(value = "subscriptionId") Long id){
-		subscriptionService.acceptSubscriptionIfFromAuthMember(id);
-		return "redirect:/profile";
+		Optional<Offer> offer = service.findOfferById(id);
+		Optional<Member> member = memberService.getAuthenticatedMember();
+		if(offer.isPresent() && member.isPresent() && offer.get().getTutor().equals(member.get()))
+		service.acceptSubscription(id);
+		return "redirect:/auth/account";
 	}
 	
 	/**
@@ -61,6 +61,6 @@ public class OfferController {
 		if (offer.isPresent() && member.get().getId() == offer.get().getTutor().getId())
 			service.removeOffer(id);
 
-		return "redirect:/profile";
+		return "redirect:/auth/account";
 	}
 }

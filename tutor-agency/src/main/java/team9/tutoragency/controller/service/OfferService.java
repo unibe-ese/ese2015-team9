@@ -25,72 +25,63 @@ public class OfferService {
 	@Autowired OfferDao offerDao;
 	@Autowired CourseDao courseDao;
 	@Autowired MemberService memberService;
-	@Autowired SubscriptionService subscriptionService;
 	
-	@Transactional
-	public boolean removeOffer(Member member, Long courseId) {
-		assert courseId != null;
+//	@Transactional
+//	public boolean removeOffer(Member member, Long courseId) {
+//		assert courseId != null;
+//
+//		Course course = courseDao.findOne(courseId);
+//
+//		if (course != null && member != null) {
+//			List<Offer> offers = offerDao.findByTutorAndCourse(member, course);
+//			for (Offer offer : offers) {
+//				offerDao.delete(offer);
+//			}
+//			return true;
+//		}
+//		return false;
+//	}
 
-		Course course = courseDao.findOne(courseId);
+//	@Transactional
+//	public boolean addOffer(Member member, Long courseId, float grade, BindingResult result) {
+//		assert courseId != null;
+//
+//		Course course = courseDao.findOne(courseId);
+//		boolean alreadyOffered = offerDao.findByTutorAndCourse(member, course).size() > 0;
+//		if (alreadyOffered) {
+//			result.rejectValue("selectedCourse", "selectedCourse.alreadyOffered",
+//					"The course " + course.getName() + " already offered by you, please choose another one");
+//		} else if (course != null && member != null) {
+//			offerDao.save(new Offer(member, course, grade));
+//			return true;
+//		}
+//
+//		return false;
+//	}
 
-		if (course != null && member != null) {
-			List<Offer> offers = offerDao.findByTutorAndCourse(member, course);
-			for (Offer offer : offers) {
-				offerDao.delete(offer);
-			}
-			return true;
-		}
-		return false;
-	}
+//	public List<Offer> findByTutor(Member tutor) {
+//		return offerDao.findByTutor(tutor);
+//	}
 
-	@Transactional
-	public boolean addOffer(Member member, Long courseId, float grade, BindingResult result) {
-		assert courseId != null;
+//	/**
+//	 * Invokes the query method findByCourseIn(courses) of the offer dao.
+//	 * Prevents the query from being invoked with an empty or null course list.
+//	 * 
+//	 * @param courses
+//	 *            - If null or empty an empty List is returned.
+//	 */
+//	@Transactional(readOnly = true)
+//	public List<Offer> findByCourses(Collection<Course> courses) {
+//		if (courses == null || courses.isEmpty())
+//			return new ArrayList<Offer>();
+//		else
+//			return offerDao.findByCourseIn(courses);
+//	}
 
-		Course course = courseDao.findOne(courseId);
-		boolean alreadyOffered = offerDao.findByTutorAndCourse(member, course).size() > 0;
-		if (alreadyOffered) {
-			result.rejectValue("selectedCourse", "selectedCourse.alreadyOffered",
-					"The course " + course.getName() + " already offered by you, please choose another one");
-		} else if (course != null && member != null) {
-			offerDao.save(new Offer(member, course, grade));
-			return true;
-		}
-
-		return false;
-	}
-
-	public List<Offer> findByTutor(Member tutor) {
-		return offerDao.findByTutor(tutor);
-	}
-
-	/**
-	 * Invokes the query method findByCourseIn(courses) of the offer dao.
-	 * Prevents the query from being invoked with an empty or null course list.
-	 * 
-	 * @param courses
-	 *            - If null or empty an empty List is returned.
-	 */
-	@Transactional(readOnly = true)
-	public List<Offer> findByCourses(Collection<Course> courses) {
-		if (courses == null || courses.isEmpty())
-			return new ArrayList<Offer>();
-		else
-			return offerDao.findByCourseIn(courses);
-	}
-
-	@Transactional
-	public void subscribeAuthMemberToOffer(Long offerId) {
-		Optional<Member> member = memberService.getAuthenticatedMember();
-
-		Offer offer = offerDao.findOne(offerId);
-		Optional<Subscription> sub = subscriptionService.findOne(member.get(), offer);
-		
-		if(member.isPresent() && offer!= null && !sub.isPresent()){
-			Subscription entity = new Subscription(member.get(), offer);
-			subscriptionService.save(entity);			
-		}	
-	}
+//	@Transactional
+//	public void subscribeAuthMemberToOffer(Long offerId) {
+//		
+//	}
 
 	/**
 	 * Returns a List of offers , either obtained from {@code OfferDao}'s
