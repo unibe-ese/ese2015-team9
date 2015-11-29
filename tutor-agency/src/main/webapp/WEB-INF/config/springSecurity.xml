@@ -29,7 +29,7 @@
 		<security:intercept-url pattern="/addCourse"
 			access="hasRole('ROLE_USER')" />
 		<security:form-login login-page="/denied#login"
-			authentication-failure-url="/login?error=true" default-target-url="/profile" />
+			authentication-failure-url="/login?error=true" default-target-url="/auth/account" />
 		<security:logout invalidate-session="true"
 			logout-success-url="/" logout-url="/j_spring_security_logout" />
 	</security:http>

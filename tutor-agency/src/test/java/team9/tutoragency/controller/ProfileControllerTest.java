@@ -39,22 +39,20 @@ public class ProfileControllerTest {
 		when(memberService.findById(any(Long.class))).thenReturn(member, null);
 	}
 	
-	@Test
-	public void showProfile(){
-//		Authentication authentication = Mockito.mock(Authentication.class);
-//        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
-//        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
-//        SecurityContextHolder.setContext(securityContext);
-//        Mockito.when(authentication.getPrincipal()).thenReturn(member);
-//        
-        Mockito.when(memberService.getAuthenticatedMember()).thenReturn(Optional.of(member));
-       
-        ModelAndView model = controller.show();
-        assertEquals(member, model.getModel().get("member"));
-        assertEquals("profile", model.getViewName());
-        
-        
-	}
+//	@Test
+//	public void showProfile(){
+////		Authentication authentication = Mockito.mock(Authentication.class);
+////        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+////        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+////        SecurityContextHolder.setContext(securityContext);
+////        Mockito.when(authentication.getPrincipal()).thenReturn(member);
+////        
+//        Mockito.when(memberService.getAuthenticatedMember()).thenReturn(Optional.of(member));
+//       
+//        ModelAndView model = controller.show();
+//        assertEquals(member, model.getModel().get("member"));
+//        assertEquals("profile", model.getViewName());      
+//	}
 	@Test
 	public void testShowOpenProfile(){
 		ModelAndView model = controller.showOpenProfile(1L);

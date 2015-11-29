@@ -13,11 +13,11 @@
 <div class="container">
     <h1>Profile</h1>
 
-    <form:form action="edit" method="get">
+    <form:form action="account/edit" method="get">
         <input class="submitbutton" type="submit" value="Edit Profile" />
     </form:form>
     <c:if test="${not member.isTutor }">
-        <form:form action="becomeTutor">
+        <form:form action="account/becomeTutor">
             <input class="submitbutton" type="submit" value="Become a Tutor"
                    name="werde Tutor" />
 

@@ -14,7 +14,7 @@
 			<th>Status</th>
 		</tr>
 	</thead>
-<c:forEach items="${subscriptions}" var="subscription">
+<c:forEach items="${member.subscriptions}" var="subscription">
 	<tr>
 		<td><c:out value="${subscription.offer.course.name}"></c:out></td>
 		<td><a href="profileId=${subscription.offer.tutor.id}"> <c:out

@@ -33,9 +33,7 @@ public class ProfileController {
 
 	@Autowired
 	MemberService memberService;
-	@Autowired
-	SubscriptionService subscriptionService;
-
+	
 	@RequestMapping(value = "/profileId={id}", method = RequestMethod.GET)
 	public ModelAndView showOpenProfile(@PathVariable("id") Long id) {
 		ModelAndView model = new ModelAndView("publicProfile");
@@ -45,43 +43,4 @@ public class ProfileController {
 		model.addObject("member", member);
 		return model;
 	}
-	
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public ModelAndView show() {
-		
-		ModelAndView profile = new ModelAndView("profile");
-		
-		Optional<Member> member = memberService.getAuthenticatedMember();
-		
-		if(!member.isPresent())
-			return new ModelAndView("redirect:/denied");
-		
-		profile.addObject("member", member.get());
-		
-		List<Subscription> subscriptions = subscriptionService.findByMember(member.get());
-		profile.addObject("subscriptions", subscriptions);
-		
-		return profile;
-	}
-
-	/**
-	 * Upgrades a tutor with the help of the {@link MemberService} if a user
-	 * clicks the "werde Tutor" button.
-	 * 
-	 * @param response
-	 * @return
-	 * @throws IOException
-	 */
-	@RequestMapping(value = "/becomeTutor", method = RequestMethod.POST)
-	public ModelAndView becomeTutor() {
-		
-		if(!memberService.getAuthenticatedMember().isPresent())
-			return new ModelAndView("redirect:/login?error=true");
-		
-		Member member = memberService.upgradeAuthenticatedMemberToTutor();
-		assert(member.isTutor());
-		
-		return show();
-	}
-
 }
