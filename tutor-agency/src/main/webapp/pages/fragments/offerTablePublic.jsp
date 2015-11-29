@@ -41,7 +41,7 @@
 			<td align="center">
 				<form
 					onsubmit="return confirm('Do you want to request tutoring for ${offer.course.name} from ${offer.tutor.username}?');"
-					action="subscribe/${offer.id}" 
+					action="auth/offer/${offer.id}/subscribe" 
 					method="get">
 					
 					<input class="none" id="emailIcon" type="image"

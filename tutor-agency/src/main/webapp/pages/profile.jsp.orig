@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"
-	contentType="text/html;charset=utf-8"%>
+         contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -24,8 +24,13 @@
         </form:form>
     </c:if>
     <c:if test="${member.isTutor}">
-        <form:form action="auth/offer/new" method="get">
+<<<<<<< HEAD
+        <form:form action="addOffer" method="get">
             <input class="submitbutton" type="submit" value="Add Course" />
+=======
+        <form:form action="auth/offer/new" method="get">
+            <input class="submitbutton" type="submit" value="Nachhilfe anbieten" />
+>>>>>>> 57e2d6164179acb758562ccf1ee9e58e99d16285
         </form:form>
     </c:if>
     <div class="clear"></div>
