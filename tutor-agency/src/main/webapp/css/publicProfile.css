@@ -1,0 +1,80 @@
+legend {
+    padding: 0 1em;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    letter-spacing: 0.1em;
+}
+
+fieldset {
+    border: 5px solid #426B81;
+    padding: 1em;
+}
+
+thead {
+    text-align: left;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    letter-spacing: 0.1em;
+}
+
+th {
+    padding-right: 0.5em;
+}
+th:last-of-type {
+    padding-right: 0;
+}
+
+table#courses {
+    border-collapse: collapse;
+}
+
+h2 {
+    margin-top: 2em;
+}
+
+@media 
+only screen and (max-width: 650px)  {
+
+	/* Force table to not be like tables anymore */
+	table#courses, #courses thead, #courses tbody,
+    #courses th, #courses td, #courses tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	table#courses thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+    
+	table#courses td { 
+		/* Behave  like a "row" */
+		border: none;
+		position: relative;
+		padding-left: 50%; 
+        text-align: left;
+	}
+	
+	table#courses td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		/*padding-right: 10px;*/ 
+		white-space: nowrap;
+        padding-top: 0.5em;
+        text-align: left;
+	}
+    table#courses tr td:first-of-type {
+        font-weight: bold;
+    }
+    /*
+	Label the data
+	*/
+	table#courses td:nth-of-type(1):before { content: "Course";}
+	table#courses td:nth-of-type(2):before { content: "University"; }
+	table#courses td:nth-of-type(3):before { content: "Subscribe"; }
+}

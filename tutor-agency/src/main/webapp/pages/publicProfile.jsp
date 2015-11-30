@@ -5,56 +5,49 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<spring:url value="/css/style.css" var="css" />
 
 <c:import url="template/header.jsp" />
+<spring:url value="/css/publicProfile.css" var="profile" />
+<link type="text/css" rel="stylesheet" href="${profile}" />
 
 <div class="container">
 	<h1>
 		<c:out value="${member.username}"></c:out>
 	</h1>
-	<table class="forms">
-		<tr>
-			<td class="profil"><img src="img/profil.png" /></td>
-			<td>
-				<table class="forms">
-					<tr>
-						<td><strong>Nickname:</strong></td>
-						<td>${member.username}</td>
-					</tr>
-					<c:if test="${member.isTutor}">
-						<tr>
-							<td><strong>Preis für Nachhilfe:</strong>
-							<td>${member.fee}</td>
-							
-						<tr>
-						
-						<td><strong>Locations:</strong></td>
-								<td>
-									<ol>
-										<c:forEach items="${member.universityList}" var="unis">
-											<li>${unis.name}</li>
-										</c:forEach>
-									</ol>
+    <div>
+    <fieldset>
+                            <legend>
+                                Basic Information
+                            </legend>
+                            <table class="forms">
+                                <tr>
+                                    <td class="bold">Username:</td>
+                                    <td>${member.username}</td>
+                            </tr>
+                            <c:if test="${member.isTutor}">
+                                <tr>
+                                    <td class="bold">Tutoring fee</td>
+                                    <td>${member.fee}</td>
 
-						
-						
-						</tr>
+                                <tr/>
+                                <tr>
+                                    <td class="bold">Locations:</td>
+                                    <td>
+                                        <ol>
+                                            <c:forEach items="${member.universityList}" var="unis">
+                                                <li>${unis.name}</li>
+                                                </c:forEach>
+                                        </ol>
+                                </tr>
+                                    
+                                </c:if>
 
-						<%-- <tr>
-							<td><strong>Alle Standorte:</strong></td>
-							<td><select><c:forEach items="${unis}" var="unis">
-										<option value="${unis.name}"><c:out
-												value="${unis.name}" /></option>
-									</c:forEach></select></td>
+                            </table>
 
-						</tr> --%>
-					</c:if>
-				</table>
-			</td>
-		</tr>
-	</table>
-
+                        </fieldset>
+        </div>
+<!-- delete this? -->                    
+                    
 		<%-- <c:choose>
 			<c:when test="${memberAtHome}">
 				<c:choose>
@@ -85,8 +78,46 @@
 				<a>Contact</a>
 			</c:otherwise>
 		</c:choose> --%>
+        
+        <h2>Offers</h2>
+        <div>
+        <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
+        <table id=courses>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>University</th>
+                    <c:if test="${loggedIn}">
+                        <th>Subscribe</th>
+                    </c:if>
+                </tr>
+            </thead>
+            <c:forEach items="${member.offers}" var="offer">
+                <c:set var="course" value="${offer.course}"/>
+                <tr>
+                    <td><c:out value="${course.name}"></c:out></td>
+                    <td><c:out value="${course.university.name}"></c:out></td>
 
-	<table id="courses" >
+                    <c:if test="${loggedIn}">
+                        <!-- ADD CONTACT ICON -->
+
+                        <td align="center">
+                            <form
+                                onsubmit="return confirm('Do you want to request tutoring for ${course.name}?');"
+                                action="auth/offer/${offer.id}/subscribe" 
+                                method="get">
+
+                                <input class="none" id="emailIcon" type="image"
+                                       src="img/email-icon.png" name="email-icon">
+                            </form></td>
+
+                    </c:if>
+                </tr>
+            </c:forEach>
+        </table>
+        </div>
+<!-- delete this? -->        
+        <table id="courses" style="display: none">
 		<tr class="title">
 			<td>Course</td>
 			<td>University</td>
@@ -117,6 +148,8 @@
 				</tr>
 			</c:forEach>
 	</table>
+        
+        
 </div>
 </div>
         	<c:import url="template/footer.jsp" />
