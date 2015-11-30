@@ -31,7 +31,7 @@
                                         <div class="flex-lower-item request open">
                                             <p>Request from</p>
                                             <p class="bold"><c:out value="${subscription.member.username}"/></p>
-                                            <a href="auth/offer/${offer.id}/accept/${subscription.id}">Accept</a>
+                                            <a href="offer/${offer.id}/accept/${subscription.id}">Accept</a>
                                         </div>
                                         
                                     </c:when>
@@ -51,7 +51,7 @@
                         <div class="flex-lower-item remove">
                             <p>Remove this course?</p>
                             <form onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');" 
-                              action="auth/offer/${offer.id}/delete" method="get">
+                              action="offer/${offer.id}/delete" method="get">
                             <input type="submit" value="Remove">
                 </form>
                         </div>

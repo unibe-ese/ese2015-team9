@@ -18,7 +18,7 @@
 <c:forEach items="${member.subscriptions}" var="subscription">
 	<tr>
         <td><c:out value="${subscription.offer.course.name}"></c:out></td>
-		<td><a href="profileId=${subscription.offer.tutor.id}"> <c:out
+		<td><a href="../profileId=${subscription.offer.tutor.id}"> <c:out
 					value="${subscription.offer.tutor.username}"></c:out></a></td>
         <c:choose>
             <c:when test="${subscription.accepted}">

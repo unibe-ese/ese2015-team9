@@ -46,7 +46,7 @@ public class AccountController {
 	UniversityService uniService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView show() {
+	public ModelAndView showProfile() {
 		ModelAndView profile = new ModelAndView("profile");
 		
 		Optional<Member> member = memberService.getAuthenticatedMember();
@@ -72,7 +72,7 @@ public class AccountController {
 		Optional<Member> authMember = memberService.getAuthenticatedMember();
 		
 		if(!authMember.isPresent()){
-			return new ModelAndView("redirect:/denied");
+			return new ModelAndView("redirect:../../denied");
 		}
 		
 		//else
@@ -113,7 +113,7 @@ public class AccountController {
 		if (!result.hasErrors()) {
 
 			memberService.saveEditChange(member, editForm);
-			model = new ModelAndView("redirect:/profile");
+			model = showProfile();
 
 		} else {
 
@@ -152,7 +152,7 @@ public class AccountController {
 	
 		memberService.upgradeAuthenticatedMemberToTutor();
 		
-		return show();
+		return showProfile();
 	}
 	
 }

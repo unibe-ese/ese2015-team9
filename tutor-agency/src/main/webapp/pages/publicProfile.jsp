@@ -46,38 +46,6 @@
 
                         </fieldset>
         </div>
-<!-- delete this? -->                    
-                    
-		<%-- <c:choose>
-			<c:when test="${memberAtHome}">
-				<c:choose>
-					<c:when test="${member.isTutor}">
-						<a href="edit">Edit Profile</a>
-						<a href="/show">Courses</a>
-						<a href="delete">Delete Profile</a>
-						<br />
-						<form:form action="show" method="get">
-							<input class="submitbutton" type="submit" value="show Courses" />
-						</form:form>
-						<form:form action="addCourse" method="get">
-						<input class="submitbutton" type="submit" value="add a Course" />
-					</form:form>
-					</c:when>
-					<c:otherwise>
-						<form:form action="becomeTutor">
-							<input class="submitbutton" type="submit" value="become tutor"
-								name="become tutor" />
-						</form:form>
-					</c:otherwise>
-				</c:choose>
-				
-				<a href="<c:url value="/j_spring_security_logout"></c:url>">Abmelden</a>
-					
-			</c:when>
-			<c:otherwise>
-				<a>Contact</a>
-			</c:otherwise>
-		</c:choose> --%>
         
         <h2>Offers</h2>
         <div>
