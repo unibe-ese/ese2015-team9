@@ -51,7 +51,7 @@
                         <div class="flex-lower-item remove">
                             <p>Remove this course?</p>
                             <form onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');" 
-                              action="auth/offer/${offer.id}/delete" method="get">
+                              action="offer/${offer.id}/delete" method="get">
                             <input type="submit" value="Remove">
                 </form>
                         </div>
