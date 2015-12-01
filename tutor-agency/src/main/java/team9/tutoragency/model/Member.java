@@ -71,7 +71,6 @@ public class Member implements UserDetails {
 	
 	private Double fee; 
 	private boolean isTutor;
-	private boolean isActivated;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<University> universityList;
@@ -92,7 +91,6 @@ public class Member implements UserDetails {
 		this.password = password;
 		this.username = username;
 		this.isTutor = false;
-		this.isActivated = false;
 		this.fee = 0D;
 	}
 	
@@ -102,9 +100,7 @@ public class Member implements UserDetails {
 		this.username = username;
 	}
 
-	public Member() {
-
-	}
+	public Member() {}
 
 	public boolean isIsTutor() {
 		return isTutor;
@@ -113,12 +109,6 @@ public class Member implements UserDetails {
 		this.isTutor = tutor;
 	}
 	
-	public boolean isIsActivated() {
-		return isActivated;
-	}
-	public void setIsActivated(boolean activated) {
-		this.isActivated = activated;
-	}
 	public String getPassword() {
 		return password;
 	}
@@ -213,14 +203,6 @@ public class Member implements UserDetails {
 		this.isTutor = isTutor;
 	}
 
-	public boolean isActivated() {
-		return isActivated;
-	}
-
-	public void setActivated(boolean isActivated) {
-		this.isActivated = isActivated;
-	}
-
 	public Set<Offer> getOffers() {
 		return offers;
 	}
@@ -228,8 +210,6 @@ public class Member implements UserDetails {
 	public void setOffers(Set<Offer> offers) {
 		this.offers = offers;
 	}
-
-	
 
 	public List<Subscription> getSubscriptions() {
 		return subscriptions;
@@ -247,7 +227,6 @@ public class Member implements UserDetails {
 		result = prime * result + ((fee == null) ? 0 : fee.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isActivated ? 1231 : 1237);
 		result = prime * result + (isTutor ? 1231 : 1237);
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -284,8 +263,6 @@ public class Member implements UserDetails {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (isActivated != other.isActivated)
-			return false;
 		if (isTutor != other.isTutor)
 			return false;
 		if (lastName == null) {
@@ -310,7 +287,7 @@ public class Member implements UserDetails {
 	public String toString() {
 		return "Member [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", username=" + username + ", password=" + password + ", fee=" + fee + ", isTutor=" + isTutor
-				+ ", isActivated=" + isActivated + "]";
+				+ "]";
 	}
 
 	

@@ -34,10 +34,7 @@
                         <c:if test="${member.isTutor}">
                             <fieldset><legend>Tutoring</legend>
                                 <table class="forms">
-                                    <tr>
-                                        <td class="bold">Activated</td>
-                                        <td>${member.isActivated}</td>
-                                    </tr>
+                                    
                                     <c:if test="${member.isTutor}">
                                         <tr>
                                             <td class="bold">Fee:</td>
