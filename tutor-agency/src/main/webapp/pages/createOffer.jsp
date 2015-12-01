@@ -8,6 +8,7 @@
 
 <c:import url="template/header.jsp" />
 <div class="container">
+<h2>Create a Tutoring Offer</h2>
 	<table class="forms">
 		<tr>
 			<td><form:form modelAttribute="selectedUniversity"
