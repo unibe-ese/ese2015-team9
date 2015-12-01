@@ -162,4 +162,88 @@ public class EditForm implements Form {
 	public void setUniversities(List<String> universities) {
 		this.universities = universities;
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((fee == null) ? 0 : fee.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((oldPassword == null) ? 0 : oldPassword.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((passwordConfirm == null) ? 0 : passwordConfirm.hashCode());
+		result = prime * result + (readAGB ? 1231 : 1237);
+		result = prime * result + ((universities == null) ? 0 : universities.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EditForm other = (EditForm) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (fee == null) {
+			if (other.fee != null)
+				return false;
+		} else if (!fee.equals(other.fee))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (oldPassword == null) {
+			if (other.oldPassword != null)
+				return false;
+		} else if (!oldPassword.equals(other.oldPassword))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (passwordConfirm == null) {
+			if (other.passwordConfirm != null)
+				return false;
+		} else if (!passwordConfirm.equals(other.passwordConfirm))
+			return false;
+		if (readAGB != other.readAGB)
+			return false;
+		if (universities == null) {
+			if (other.universities != null)
+				return false;
+		} else if (!universities.equals(other.universities))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
 }

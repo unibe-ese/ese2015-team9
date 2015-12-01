@@ -32,10 +32,11 @@ import team9.tutoragency.model.University;
  * information.
  * 
  * @author laeri
+ * @author bruno
  *
  */
 @Controller
-@RequestMapping(value="/auth/account")
+@RequestMapping(value="/auth/account") 	
 public class AccountController {
 
 	@Autowired
@@ -45,16 +46,17 @@ public class AccountController {
 	@Autowired
 	UniversityService uniService;
 
+	/**
+	 * Asserts that the request token is authenticated (authenticated member is present).
+	 * @return
+	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView showProfile() {
 		ModelAndView profile = new ModelAndView("profile");
 		
-		Optional<Member> member = memberService.getAuthenticatedMember();
-		
-		if(!member.isPresent())
-			return new ModelAndView("redirect:/denied");
-		
-		profile.addObject("member", member.get());
+		Member member = getAuthenticatedMember();
+
+		profile.addObject("member", member);
 		
 		return profile;
 	}
@@ -69,21 +71,15 @@ public class AccountController {
 
 		ModelAndView edit = new ModelAndView("edit");
 
-		Optional<Member> authMember = memberService.getAuthenticatedMember();
+		Member member = getAuthenticatedMember();
 		
-		if(!authMember.isPresent()){
-			return new ModelAndView("redirect:../../denied");
-		}
-		
-		//else
-		
-		EditForm editForm = new EditForm(authMember.get());
+		EditForm editForm = new EditForm(member);
 		
 		List<String> universityNames = uniService.findAllNames();
 
 		edit.addObject("universityChoices", universityNames);
 		edit.addObject("editForm", editForm);
-		edit.addObject("member", authMember.get());
+		edit.addObject("member", member);
 		return edit;
 	}
 
@@ -101,15 +97,13 @@ public class AccountController {
 	 *         will be shown again
 	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView saveChange(@Valid EditForm editForm, BindingResult result,
-			RedirectAttributes redirectAttributes) throws IOException {
-		
-		assert(isAccessAuthenticated());
+	public ModelAndView saveChange(@Valid EditForm editForm, BindingResult result) throws IOException {
 
 		ModelAndView model;
 		validator.validate(editForm, result);
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Member member = (Member) authentication.getPrincipal();
+		
+		Member member = getAuthenticatedMember();
+
 		if (!result.hasErrors()) {
 
 			memberService.saveEditChange(member, editForm);
@@ -128,18 +122,6 @@ public class AccountController {
 	}
 
 	/**
-	 * Invariant, that must be true whenever a request method is invoked.
-	 * 
-	 * @return false, iff the security context has no authentication available
-	 *         or the token isn't authenticated.
-	 */
-	public boolean isAccessAuthenticated() {
-		if (SecurityContextHolder.getContext().getAuthentication() == null)
-			return false;
-		return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
-	}
-
-	/**
 	 * Upgrades a tutor with the help of the {@link MemberService} if a user
 	 * clicks the "werde Tutor" button.
 	 * 
@@ -155,4 +137,13 @@ public class AccountController {
 		return showProfile();
 	}
 	
+	/**
+	 * <b>Asserts</b>, that the request token is authenticated (authenticated member is present).
+	 */
+	private Member getAuthenticatedMember(){
+		Optional<Member> member = memberService.getAuthenticatedMember();
+		if(!member.isPresent()) throw new AssertionError("The URL should have been intercepted by Spring Security!");
+		
+		return member.get();
+	}
 }
