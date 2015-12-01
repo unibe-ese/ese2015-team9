@@ -2,6 +2,7 @@ package team9.tutoragency.controller.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -71,10 +72,13 @@ public class CourseService {
 			return courseDao.findByNameContainingIgnoreCaseAndUniversityIn(courseName, universities);
 	}
 
-
-//	public University findUniversityForCourse(long selectedCourse) {
-//		return courseDao.findOne(selectedCourse).getUniversity();
-//	}
-
-
+	/**
+	 * Asserts courseId not null.
+	 * @param courseId must be not null
+	 * @return empty Optional if course with given id does not exist.
+	 */
+	public Optional<Course> findOne(Long courseId) {
+		if(courseId==null) throw new AssertionError("Course Id is Null");
+		return Optional.ofNullable(courseDao.findOne(courseId));
+	}
 }

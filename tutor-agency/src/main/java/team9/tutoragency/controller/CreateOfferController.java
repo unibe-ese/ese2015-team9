@@ -92,14 +92,20 @@ public class CreateOfferController {
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public ModelAndView submitOfferForm(OfferForm offerForm, BindingResult result) {
+	public ModelAndView submitOfferForm(@ModelAttribute University selectedUniversity, OfferForm offerForm, BindingResult result) {
 		Long memberId = ((Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 		offerForm.setMemberId(memberId);
 		
 		validator.validate(offerForm, result);
 		
-		if(result.hasErrors())
-			return new ModelAndView("createOffer", "offerForm", offerForm);
+		if(result.hasErrors()){
+			ModelAndView model = new ModelAndView("createOffer", "offerForm", offerForm);	
+			
+			Optional<Course> course = courseService.findOne(offerForm.getCourseId());
+			if(course.isPresent())
+				model.addObject("selectedUniversity", course.get().getUniversity());
+			return model;
+		}
 		//else
 		service.createOffer(memberId, offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
 		
