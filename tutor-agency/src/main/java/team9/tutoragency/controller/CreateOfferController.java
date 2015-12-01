@@ -103,6 +103,6 @@ public class CreateOfferController {
 		//else
 		service.createOffer(memberId, offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
 		
-		return new ModelAndView("redirect:/profile");
+		return new ModelAndView("redirect:../account");
 	}
 }

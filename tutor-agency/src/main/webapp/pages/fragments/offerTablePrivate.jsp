@@ -31,7 +31,7 @@
                                         <div class="flex-lower-item request open">
                                             <p>Request from</p>
                                             <p class="bold"><c:out value="${subscription.member.username}"/></p>
-                                            <a href="auth/offer/${offer.id}/accept/${subscription.id}">Accept</a>
+                                            <a href="offer/${offer.id}/accept/${subscription.id}">Accept</a>
                                         </div>
                                         
                                     </c:when>
