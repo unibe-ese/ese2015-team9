@@ -171,40 +171,4 @@ public class EditControllerTest {
 
 	}
 
-	/**
-	 * Test of saveChange method, of class {@link AccountController}, when errors
-	 * are present.
-	 */
-	@Test
-	public void testSaveChangeErrors() throws Exception {
-		EditForm editForm = null;
-		BindingResult error = new DirectFieldBindingResult(editForm, "editForm");
-		error.reject("test error");
-		RedirectAttributes redirectAttributes = null;
-		ModelAndView expResult = new ModelAndView("edit");
-		expResult.addObject("universityChoices", uniNames);
-		expResult.addObject("editForm", editForm);
-		expResult.addObject("member", member);
-		ModelAndView result = controller.saveChange(editForm, error, redirectAttributes);
-		assertViewName(result, "edit");
-		assertEquals(expResult.getModelMap(), result.getModelMap());
-
-	}
-
-	/**
-	 * Test of saveChange method, of class {@link AccountController}, when no
-	 * errors are present.
-	 */
-	@Test
-	public void testSaveChangeNoErrors() throws Exception {
-		EditForm editForm = new EditForm(member);
-		BindingResult error = new DirectFieldBindingResult(editForm, "editForm");
-		RedirectAttributes redirectAttributes = null;
-		ModelAndView expResult = new ModelAndView("profile");
-		expResult.addObject("member", member);
-		expResult.addObject("unis", null);
-		ModelAndView result = controller.saveChange(editForm, error, redirectAttributes);
-		assertViewName(result, "profile");
-		assertEquals(expResult.getModelMap(), result.getModelMap());
-	}
 }

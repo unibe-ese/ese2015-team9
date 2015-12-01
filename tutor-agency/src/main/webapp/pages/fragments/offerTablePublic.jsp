@@ -12,6 +12,10 @@
 <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
 <c:if test="${not empty offers}">
 <h2>Tutoring Offers</h2>
+<c:if test="${loggedIn}">
+<h6>*Note: to make it simpler to test, a member can request tutoring for an offer from himself.*</h6>
+<br>
+</c:if>
 <table class="forms" id=courses>
 	<thead>
 		<tr>
@@ -21,7 +25,7 @@
 			<th>Fee</th>
 			<th>Grade</th>
 			<c:if test="${loggedIn}">
-				<th>Subscribe</th>
+				<th>Request Tutoring</th>
 			</c:if>
 		</tr>
 	</thead>

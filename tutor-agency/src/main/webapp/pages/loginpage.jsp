@@ -22,9 +22,6 @@
                 <input class="submitbutton" type="submit" value="Login" />
 	</form>
 
-	<div>
-		<a href="forgot">Passwort vergessen?</a>
-	</div>
 
 </div>
 </div> <%-- Do not delete this div --%>

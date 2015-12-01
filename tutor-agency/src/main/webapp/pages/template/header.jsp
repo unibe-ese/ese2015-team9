@@ -37,7 +37,8 @@
     A different navigation is created according to the access-role of the user. 
             -->
             
-            <!-- <form action="search" method="GET" id="searchfield">
+            <!-- QUICKSEARCH FIELD 
+            <form action="search" method="GET" id="searchfield">
                 <input type="search" name="text" /> <input type="submit"
                                                            value="Search" />
             </form> -->
@@ -50,7 +51,7 @@
                         <ul class="navigation">
 
                             <li><a href="<c:url value="/index" />">Home</a></li>
-                            <li><a href="<c:url value="/search#search" />">Suche</a></li>
+                            <li><a href="<c:url value="/search#search" />">Search Tutoring Offers</a></li>
                             <li class="flex-fill"></li>
                             <li class="nav-user"><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                             <li><div class="nav-svg"><a href="<c:url value="/auth/account" />"><%@include file="/img/cog.svg" %></a></div>
@@ -64,9 +65,10 @@
                         <ul class="navigation">
 
                             <li><a href="<c:url value="/index" />">Home</a></li>
-                            <li><a href="<c:url value="/search#search" />">Suche</a></li>
-                            <li><a href="<c:url value="/register#register" />">Registrieren</a></li>
+                            <li><a href="<c:url value="/search#search" />">Search Tutoring Offers</a></li>
                             <li class="flex-fill"></li>
+                            <li><a href="<c:url value="/register#register" />">Sign Up</a></li>
+       
                             <li><a href="<c:url value="/login#login" />">Login</a></li>
 
                         </ul>
