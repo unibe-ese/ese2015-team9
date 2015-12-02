@@ -13,18 +13,18 @@
 <div class="container">
 	<h1>Profile</h1>
 
-	<form:form action="account/edit" method="get">
+	<form:form action="/tutor-agency/auth/account/edit" method="get">
 		<input class="submitbutton" type="submit" value="Edit Profile" />
 	</form:form>
 	<c:if test="${not member.isTutor }">
-		<form:form action="account/becomeTutor">
+		<form:form action="/tutor-agency/auth/account/becomeTutor">
 			<input class="submitbutton" type="submit" value="Become a Tutor"
 				name="werde Tutor" />
 
 		</form:form>
 	</c:if>
 	<c:if test="${member.isTutor}">
-		<form:form action="offer/new" method="get">
+		<form:form action="/tutor-agency/auth/offer/new" method="get">
 			<input class="submitbutton" type="submit" value="Create a Tutoring Offer" />
 		</form:form>
 	</c:if>
