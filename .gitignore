@@ -13,3 +13,4 @@ tutor-agency/.project
 tutor-agency/src/main/webapp/WEB-INF/glassfish-web.xml
 tutor-agency/nbactions.xml
 
+tutor-agency/src/test/resources/EseDB-DemoData.sql
