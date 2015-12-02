@@ -30,7 +30,7 @@
                                     <c:when test="${!subscription.accepted}">
                                         <div class="flex-lower-item request open">
                                             <p>Request from</p>
-                                            <p class="bold"><c:out value="${subscription.member.username}"/></p>
+                                            <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
                                             <a href="offer/${offer.id}/accept/${subscription.id}">Accept</a>
                                         </div>
                                         
@@ -39,7 +39,7 @@
                                         <div class="flex-lower-item request accepted">
                                             <p>Accepted Request</p>
                                             <br>
-                                            <p class="bold"><c:out value="${subscription.member.username}"/></p>
+                                            <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
                                         </div>
                                         
                                     </c:otherwise>

@@ -53,6 +53,17 @@
                             <li><a href="<c:url value="/index" />">Home</a></li>
                             <li><a href="<c:url value="/search#search" />">Search Tutoring Offers</a></li>
                             <li class="flex-fill"></li>
+                            <c:forEach items="${member.offers}" var="offer">
+                            <c:if test="${not empty offer.subscriptions}">
+                            <c:forEach items="${offer.subscriptions}" var="subscription">
+                            <c:if test="${!subscription.accepted}">
+                            <li>
+                            <a href="account" style="color:red;font-size:1.5em;padding-top:0.75em;">You got a new request!</a>
+                            </li>
+                            </c:if>
+                            </c:forEach>
+                            </c:if>
+                            </c:forEach>
                             <li class="nav-user"><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                             <li><div class="nav-svg"><a href="<c:url value="/auth/account" />"><%@include file="/img/cog.svg" %></a></div>
 
