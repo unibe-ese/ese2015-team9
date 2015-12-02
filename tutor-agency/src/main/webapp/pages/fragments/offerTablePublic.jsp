@@ -10,50 +10,56 @@
 <!-- OFFER TABLE -->
 
 <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
-<c:if test="${not empty offers}">
-<h2>Tutoring Offers</h2>
-<c:if test="${loggedIn}">
-<h6>*Note: to make it simpler to test, a member can request tutoring for an offer from himself.*</h6>
-<br>
-</c:if>
-<table class="forms" id=courses>
-	<thead>
-		<tr>
-			<th>Course</th>
-			<th>University</th>
-			<th>Tutor</th>
-			<th>Fee</th>
-			<th>Grade</th>
+<c:choose>
+	<c:when test="${not empty offers}">
+		<h2>Tutoring Offers</h2>
 			<c:if test="${loggedIn}">
-				<th>Request Tutoring</th>
+			<h6>*Note: to make it simpler to test, a member can request tutoring for an offer from himself.*</h6>
+			<br>
 			</c:if>
-		</tr>
-	</thead>
-<c:forEach items="${offers}" var="offer">
-	<tr>
-		<td><c:out value="${offer.course.name}"></c:out></td>
-		<td><c:out value="${offer.course.university.name}"></c:out></td>
-		<td><a href="profileId=${offer.tutor.id}"> <c:out
-					value="${offer.tutor.username}"></c:out></a></td>
-		<td>${offer.tutor.fee}</td>
-		<td>${offer.grade}</td>
-
-
-		<c:if test="${loggedIn}">
-			<!-- ADD CONTACT ICON -->
-
-			<td align="center">
-				<form
-					onsubmit="return confirm('Do you want to request tutoring for ${offer.course.name} from ${offer.tutor.username}?');"
-					action="auth/offer/${offer.id}/subscribe" 
-					method="get">
+		
+			<table class="forms" id=courses>
+				<thead>
+					<tr>
+						<th>Course</th>
+						<th>University</th>
+						<th>Tutor</th>
+						<th>Fee</th>
+						<th>Grade</th>
+						<c:if test="${loggedIn}">
+							<th>Request Tutoring</th>
+						</c:if>
+					</tr>
+				</thead>
 					
-					<input class="none" id="emailIcon" type="image"
-						src="img/email-icon.png" name="email-icon">
-				</form></td>
-
-		</c:if>
-	</tr>
-</c:forEach>
-</table>
-</c:if>
+				<c:forEach items="${offers}" var="offer">
+					<tr>
+						<td><c:out value="${offer.course.name}"></c:out></td>
+						<td><c:out value="${offer.course.university.name}"></c:out></td>
+						<td><a href="profileId=${offer.tutor.id}"> <c:out
+									value="${offer.tutor.username}"></c:out></a></td>
+						<td>${offer.tutor.fee}</td>
+						<td>${offer.grade}</td>
+				
+						<c:if test="${loggedIn}">
+							<!-- ADD CONTACT ICON -->
+				
+							<td align="center">
+								<form
+									onsubmit="return confirm('Do you want to request tutoring for ${offer.course.name} from ${offer.tutor.username}?');"
+									action="auth/offer/${offer.id}/subscribe" 
+									method="get">
+									
+									<input class="none" id="emailIcon" type="image"
+										src="img/email-icon.png" name="email-icon">
+								</form></td>
+						</c:if>
+						
+					</tr>
+				</c:forEach>
+			</table>
+	</c:when>
+	<c:otherwise>
+		<p>No results found in database...</p>
+	</c:otherwise>
+</c:choose>
