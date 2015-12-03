@@ -11,7 +11,7 @@
 <spring:url value="/js/profile.js" var="js" />
 <link type="text/css" rel="stylesheet" href="${profile}" />
 <script src='<c:url value="/js/jquery-2.1.4.min.js"/>'></script>
-<script src='<c:url value="/js/p.js"/>'></script>
+<script src='<c:url value="/js/profile.js"/>'></script>
 
 <div class="container">
 	<%-- message for positive feedback if the user made an action
@@ -41,7 +41,7 @@
 	</c:if>
 	<div class="clear"></div>
 	<input type="checkbox" id="checkbox-info" checked> <label
-		class="collapse" for="checkbox-info"> <span class="block"></span>
+		class="collapse" for="checkbox-info"> <span class="labelblock"></span>
 		<h2>Account Information</h2></label>
 	<div id="account-info">
 		<c:import url="fragments/accountInformation.jsp" />
@@ -50,9 +50,9 @@
 	<c:if test="${member.isTutor && not empty member.offers}">
 		<input type="checkbox" id="checkbox-offer">
 		<label class="collapse" for="checkbox-offer"> <span
-			class="block"></span>
+			class="labelblock"></span>
             <h2 id="offers">Open Tutoring Offers</h2></label>
-		<div>
+        <div id="offers-seg">
 			<c:import url="fragments/offerTablePrivate.jsp" />
 		</div>
 	</c:if>
@@ -60,9 +60,9 @@
 
 	<input type="checkbox" id="checkbox-subscription"> <label
 		class="collapse" for="checkbox-subscription"> <span
-		class="block"></span>
+		class="labelblock"></span>
 		<h2>Subscriptions</h2></label>
-	<div>
+    <div id="subscriptions">
 		<h6>*Here you can see the tutoring offers, for which you
 			requested tutoring.*</h6>
 		<c:if test="${empty member.subscriptions }">

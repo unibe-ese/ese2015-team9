@@ -3,5 +3,4 @@ $(document).ready(function () {
     if(spl[spl.length-1] === 'offers') {
         $('#checkbox-offer').prop('checked', true);
     }
-
 });

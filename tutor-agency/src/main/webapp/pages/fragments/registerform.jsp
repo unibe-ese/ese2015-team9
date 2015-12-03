@@ -43,7 +43,7 @@
 				<form:errors path="readAGB" class="error"
 					element="p" />
 				<br />
-                <form:checkbox path="readAGB" name="agb" id="agb" /><label class="registerlabel" for="agb"></label>
+                <form:checkbox path="readAGB" name="agb" id="agb" /><label class="labelblock" for="agb"></label>
                 <p>I have read and agree to the
 					<a href="agb#agb">Terms and Conditions</a>.</p>
 					

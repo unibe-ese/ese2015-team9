@@ -30,7 +30,7 @@
 
 		<fieldset>
 			<form:checkbox class="checkbox" path="filtered" id="filtered" />
-			<label class="collapse" for="filtered"><span class="block"></span>
+			<label class="collapse" for="filtered"><span class="labelblock"></span>
                 <p>Show filters</p></label>
 			<div id="filters">
 				<fieldset class="filter">
@@ -40,7 +40,7 @@
                         <c:forEach items="${universities}" var="current" >
                             <div class="uni-flex-item">
                             <form:checkbox id="${current}" class="uni-checkbox" path="universityNames" value="${current}" />
-                            <label for="${current}"><span class="block"></span><p><c:out value="${current}" /></p></label>
+                            <label for="${current}"><span class="labelblock"></span><p><c:out value="${current}" /></p></label>
                             </div>
                         </c:forEach>
 					</div> 

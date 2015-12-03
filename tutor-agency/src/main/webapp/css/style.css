@@ -51,6 +51,9 @@ a {
     color: #426B81;
     text-decoration: none;
     outline: 0;
+    -webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+    transition: all 0.5s;
 }
 
 a:hover, a:active, a:focus {
@@ -92,6 +95,18 @@ h2 {
 
 .bold {
     font-weight: bold;
+}
+
+.labelblock {
+    display: block;
+    float: left;
+    margin-right: 1em;
+    width: 1.8em;
+    height: 1.8em;
+    border: 5px solid #426B81;
+    -webkit-transition: background-color 0.2s ease-in-out;
+	-moz-transition: background-color 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out;
 }
 
 /*********************************************************************************/
@@ -171,6 +186,9 @@ input {
     height: 4em;
     padding: 1em;
     margin-bottom: 2em;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
 }
 
 input[type="text"], input[type="password"] {
@@ -313,6 +331,9 @@ nav {
     height: 2em;
     width: 2em;
     height: 100%;
+    -webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+    transition: all 0.5s;    
 }
 
 .nav-svg:hover svg, .nav-svg:active svg {
