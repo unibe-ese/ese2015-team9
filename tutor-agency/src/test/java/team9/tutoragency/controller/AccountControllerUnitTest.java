@@ -124,16 +124,4 @@ public class AccountControllerUnitTest {
 		assertEquals(member, result.getModelMap().get("member"));
 		
 	}
-	
-	@Test
-	public void test_noAuthenticationThrowsAssertionError(){
-		when(memberService.getAuthenticatedMember()).thenReturn(Optional.ofNullable((Member) null));
-		
-		try {
-			mockMvc.perform(get(URL));
-		} catch (Exception e) {
-			assertEquals(NestedServletException.class, e.getClass());
-			assertEquals(AssertionError.class, e.getCause().getClass());
-		}
-	}
 }
