@@ -18,6 +18,7 @@
 }
 
 @media all and (max-width: 800px) {
+
   .submitbutton {
       display: block;
         margin-left: auto;
