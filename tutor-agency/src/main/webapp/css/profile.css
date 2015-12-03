@@ -64,10 +64,6 @@ fieldset {
     margin: 0.5em 1%;
 }
 
-fieldset a {
-    color: #fff;
-}
-
 .flex-lower {
     display: flex;
     flex-wrap: wrap;
@@ -81,6 +77,9 @@ fieldset a {
 .flex-lower-item span {
     margin-bottom: 0.5em;
     display: block;
+}
+a {
+    color: #fff;
 }
 
 .flex-lower-item a.button {
@@ -104,9 +103,6 @@ fieldset a {
     border: 5px solid #fff;
     background-color: #426B81;
     color: #fff;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    transition: all 0.5s;
 }
 .open a.button:hover, .open a.button:focus {
     background-color: #fff;
@@ -130,9 +126,6 @@ fieldset a {
     border: 5px solid #fff;
     margin-bottom: 0;
     margin-top: 1em;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    transition: all 0.5s;
 }
 .remove input[type="submit"]:hover, .remove input[type="submit"]:focus {
     background-color: #fff;
@@ -146,34 +139,27 @@ fieldset a {
     margin-top: 2em;
 }
 
-.labelblock {
+.block {
+    float: left;
+    display: block;
+    margin-right: 1em;
     margin-top: 0.5em;
     width: 2em;
     height: 2em;
+    border: 5px solid #426B81; 
 }
 
 input[type="checkbox"] {
     display:none;
 }
 input[type="checkbox"] + label + div{
-    /*display:block;*/
-    /*display:none;*/
-    opacity: 0;
-    max-height: 0;
-    height: 0;
-    overflow: hidden;
-    -webkit-transition: all 1.5s;
-	-moz-transition: all 1.5s;
-	transition: all 1.5s;
+    display:none;
 }
-input[type="checkbox"]:checked + label .labelblock{
+input[type="checkbox"]:checked + label .block{
     background-color: #426B81;
 }
 input[type="checkbox"]:checked + label + div{
-    /*display:block;*/
-    opacity: 1;
-    height: auto;
-    max-height: 1000em;
+    display:block;
 }
 
 @media 

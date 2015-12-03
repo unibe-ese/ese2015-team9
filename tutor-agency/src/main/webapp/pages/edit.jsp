@@ -4,116 +4,91 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<spring:url value="/css/style.css" var="css" />
-
 <c:import url="template/header.jsp" />
+<spring:url value="/css/edit.css" var="css" />
+
+<link type="text/css" rel="stylesheet" href="${css}" />
+
 
 
 <div class="container">
-
-	<script type="text/javascript">
-		function changeVisibility() {
-			var el = document.getElementById("universitySelection");
-
-			if (el.style.display == "block") {
-				el.style.display = "none";
-			} else {
-				el.style.display = "block";
-			}
-		}
-	</script>
-
-	<form:form action="save" id="editForm" modelAttribute="editForm"
-		method="post">
-		<h1>Mein Profil</h1>
-		<br />
-		<br />
-		<table class="forms">
-			<tr>
-
-				<td>
-					<table class="forms">
-
-						<tr>
-							<td>Vorname:<sup>*</sup></td>
-							<td><form:errors path="firstName" cssStyle="color: #ff0000;"
-									element="span" /> <form:input path="firstName" type="text"
-									name="vorname" value="${editForm.firstName}" /></td>
-						</tr>
-						<tr>
-							<td>Nachname:<sup>*</sup></td>
-							<td><form:errors path="lastName" cssStyle="color: #ff0000;"
-									element="span" /> <form:input path="lastName" type="text"
-									name="nachname" value="${editForm.lastName}" /></td>
-						</tr>
-
-						<tr>
-							<td>Nickname:<sup>*</sup></td>
-							<td><form:errors path="username" cssStyle="color: #ff0000;"
-									element="span" /> <form:input path="username" type="text"
-									name="nickname" value="${editForm.username}" /></td>
-						</tr>
-						<tr>
-							<td>E-mail:<sup>*</sup></td>
-							<td><form:errors path="email" cssStyle="color: #ff0000;"
-									element="span" /> <form:input path="email"
-									onclick="this.value=''" type="text" name="email"
-									value="${editForm.email}" /></td>
-						</tr>
-						<tr>
-							<td>Beschreibung:<sup>*</sup></td>
-							<td><form:errors path="description" cssStyle="color: #ff0000;"
-									element="span" /> <form:input path="description"
-									onclick="this.value=''" type="text" name="Beschreibung"
-									value="${editForm.description}" /></td>
-						</tr>
-						<c:if test="${member.isTutor}">
-							<tr>
-								<td>Gebühr pro Kurs:<sup>*</sup></td>
-								<td><form:errors path="fee" cssStyle="color: #ff0000;"
-										element="span" /> <form:input path="fee"
-										onclick="this.value=''" type="text" name="fee"
-										value="${editForm.fee}" /></td>
-							</tr>
-							<tr>
-								<td><form:button type="button"
-										onclick="changeVisibility();">Wähle Standorte</form:button></td>
-								<td>
-									<div id="universitySelection" style="display: none">
-										<form:checkboxes items="${universityChoices}"
-											path="universities" />
-									</div>
-								</td>
-							</tr>
-						</c:if>
-						<tr>
-							<td>Altes Passwort:<sup>*</sup></td>
-							<td><form:errors path="oldPassword"
-									cssStyle="color: #ff0000;" element="span" /> <form:input
-									path="oldPassword" type="password" name="pw" /></td>
-						</tr>
-						<tr>
-							<td>Neues Passwort:<sup>*</sup></td>
-							<td><form:errors path="password" cssStyle="color: #ff0000;"
-									element="span" /> <form:input path="password"
-									onclick="this.value=''" type="password" name="pw" /></td>
-						</tr>
-						<tr>
-							<td>Neues Passwort bestätigen:<sup>*</sup></td>
-							<td><form:errors path="passwordConfirm"
-									cssStyle="color: #ff0000;" element="span" /> <form:input
-									path="passwordConfirm" type="password" name="Passwort2" /></td>
-						</tr>
-						<tr>
-
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-		<input class="submitbutton" type="submit" value="Save"
-			style="margin-left: 400px;" />
-	</form:form>
+    
+    <h1>Mein Profil</h1>
+    
+    <form:form action="save" id="editForm" modelAttribute="editForm"
+        method="post" cssClass="forms">
+        
+        <label><p>First Name</p></label>
+        <form:errors path="firstName" cssClass="error"
+			element="p" />
+        <form:input path="firstName" type="text" name="vorname" 
+            value="${editForm.firstName}" />
+        
+        <label><p>Last Name</p></label>
+        <form:errors path="lastName" cssClass="error"
+			element="p" />
+        <form:input path="lastName" type="text" name="nachname"
+            value="${editForm.lastName}" />
+        
+        <label><p>Username</p></label>
+        <form:errors path="username" cssClass="error"
+			element="p" />
+        <form:input path="username" type="text" name="nickname"
+            value="${editForm.username}" />
+        
+        <label><p>Email</p></label>
+        <form:errors path="email" cssClass="error"
+			element="p" />
+        <form:input path="email" type="text" 
+            name="email" value="${editForm.email}" />
+            
+        <label><p>Beschreibung</p></label>
+        <form:errors path="description" cssClass="error"
+			element="p" />
+        <form:input path="description" type="text" 
+            name="description" value="${editForm.description}" />
+        
+        <c:if test="${member.isTutor}">
+            <label><p>Fee</p></label>
+            <form:errors path="fee" cssClass="error"
+				element="p" />
+            <form:input path="fee"type="text" 
+                name="fee" value="${editForm.fee}" />
+            
+            <input type="checkbox" id="showUnis" />
+            <label class="collapse" for="showUnis"><span class="labelblock"></span>
+                <p>Select Universities</p></label>
+            <fieldset>
+            <div class="uni-flex">
+                <c:forEach items="${universityChoices}" var="current" >
+                    <div class="uni-flex-item">
+                        <form:checkbox id="${current}" class="uni-checkbox" path="universities" value="${current}" />
+                            <label for="${current}"><span class="labelblock"></span><p><c:out value="${current}" /></p></label>
+                    </div>
+                </c:forEach>
+            </div>
+            </fieldset>
+        </c:if>
+        
+                <label><p>Old password</p></label>
+        <form:errors path="oldPassword" cssClass="error"
+            element="p" />
+        <form:input path="oldPassword" type="password" name="pw" /> 
+        
+        <label><p>New password</p></label>
+        <form:errors path="password" cssClass="error"
+			element="p" />
+        <form:input path="password" onclick="this.value=''" 
+            type="password" name="pw" />
+        
+        <label><p>Confirm new password</p></label>
+        <form:errors path="passwordConfirm" cssClass="error"
+            element="p" />
+        <form:input path="passwordConfirm" type="password" name="Passwort2" />
+        
+        <input class="submitbutton" type="submit" value="Save" />
+    </form:form>
+>>>>>>> 0f39ec6fcd5e05a9f79d1e6dacfd44be1eb61138
 
 
 </div>

@@ -1,8 +1,8 @@
 /*********************************************************************************/
-/* Register                                                                      */
+/* AGB                                                                      */
 /*********************************************************************************/
 
-.registerlabel {
+.agblabel {
     display: block;
     float: left;
     margin-right: 1em;
@@ -11,7 +11,7 @@
     border: 5px solid #426B81; 
 }
 #agb {
-    display: none;
+    display: block;
 }
 #agb:checked ~ label {
     background-color: #426B81;
