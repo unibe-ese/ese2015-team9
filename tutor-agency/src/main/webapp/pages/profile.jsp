@@ -15,7 +15,7 @@
 		 e.g. created and offer, edited the profile
 	--%>
 	<c:if test="${not empty message}">
-		<h3><c:out value="${message}" /></h3>
+		<h2><c:out value="${message}" /></h2>
 	</c:if>
 
 	<h1>Profile</h1>
