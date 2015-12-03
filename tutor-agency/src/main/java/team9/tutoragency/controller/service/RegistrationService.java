@@ -25,8 +25,9 @@ public class RegistrationService implements SignupFromSaveService{
 		String nickname = signupForm.getUsername();
 		String email = signupForm.getEmail();
 		String password = DigestUtils.md5Hex(signupForm.getPassword());
+		String description = signupForm.getDescription();
 
-		Member member = new Member(firstName,lastName,email,nickname,password);
+		Member member = new Member(firstName,lastName,email,nickname,password,description);
 
 		memberDao.save(member);
 

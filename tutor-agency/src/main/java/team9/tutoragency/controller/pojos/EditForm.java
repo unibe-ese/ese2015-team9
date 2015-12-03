@@ -26,6 +26,8 @@ public class EditForm implements Form {
 	private String lastName;
 	@NotNull(message = "Please enter a username.")
 	private String username;
+	
+	private String description;
 
 	private List<String> universities;
 
@@ -58,6 +60,7 @@ public class EditForm implements Form {
 		lastName = member.getLastName();
 		username = member.getUsername();
 		email = member.getEmail();
+		description = member.getDescription();
 		if (member.getFee() != null) 
 			fee = member.getFee().toString();
 		else 
@@ -162,6 +165,14 @@ public class EditForm implements Form {
 	public void setUniversities(List<String> universities) {
 		this.universities = universities;
 	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
 
 
 	@Override
@@ -179,6 +190,7 @@ public class EditForm implements Form {
 		result = prime * result + (readAGB ? 1231 : 1237);
 		result = prime * result + ((universities == null) ? 0 : universities.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		return result;
 	}
 

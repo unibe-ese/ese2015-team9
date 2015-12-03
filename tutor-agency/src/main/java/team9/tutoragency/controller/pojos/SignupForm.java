@@ -32,6 +32,8 @@ public class SignupForm implements Form {
 	@NotNull
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
 	private String email;
+	
+	private String description;
 
 	private boolean readAGB;
 
@@ -40,6 +42,7 @@ public class SignupForm implements Form {
 		lastName = "Nachname";
 		username = "Nickname";
 		email = "E-mail";
+		description = null;
 	}
 
 	public String getFirstName() {
@@ -105,6 +108,14 @@ public class SignupForm implements Form {
 	public void setReadAGB(boolean readAGB) {
 		this.readAGB = readAGB;
 	}
+	
+	public String getDescription() {
+		return this.description;
+	}
+	
+	public void setDescription(String description) {
+		description = this.description;
+	}
 
     @Override
     public int hashCode() {
@@ -116,6 +127,7 @@ public class SignupForm implements Form {
         hash = 89 * hash + (this.password != null ? this.password.hashCode() : 0);
         hash = 89 * hash + (this.passwordConfirm != null ? this.passwordConfirm.hashCode() : 0);
         hash = 89 * hash + (this.email != null ? this.email.hashCode() : 0);
+        hash = 89 * hash + (this.description != null ? this.description.hashCode() : 0);
         hash = 89 * hash + (this.readAGB ? 1 : 0);
         return hash;
     }
@@ -152,6 +164,9 @@ public class SignupForm implements Form {
         }
         if (this.readAGB != other.readAGB) {
             return false;
+        }
+        if (this.description != other.description) {
+        	return false;
         }
         return true;
     }

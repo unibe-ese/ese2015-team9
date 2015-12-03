@@ -68,6 +68,7 @@ public class Member implements UserDetails {
 	private String email;
 	private String username;
 	private String password;
+	private String description;
 	
 	
 	private Double fee; 
@@ -75,6 +76,8 @@ public class Member implements UserDetails {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<University> universityList;
+	
+
 
 	@OneToMany(mappedBy = "tutor")
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -85,7 +88,7 @@ public class Member implements UserDetails {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Subscription> subscriptions = new ArrayList<Subscription>();
 	
-	public Member(String firstName, String lastName, String email, String username, String password) {
+	public Member(String firstName, String lastName, String email, String username, String password, String description) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -93,6 +96,7 @@ public class Member implements UserDetails {
 		this.username = username;
 		this.isTutor = false;
 		this.fee = 0D;
+		this.description = description;
 	}
 	
 	public Member(Long id, String username) {
@@ -219,6 +223,14 @@ public class Member implements UserDetails {
 	public void setSubscriptions(List<Subscription> subscriptions) {
 		this.subscriptions = subscriptions;
 	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	@Override
 	public int hashCode() {
@@ -232,6 +244,7 @@ public class Member implements UserDetails {
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		return result;
 	}
 

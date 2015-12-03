@@ -81,7 +81,7 @@ public class CreateOfferControllerTest {
     
     @Before
     public void setUp() throws Exception {
-    	member = new Member("name", "lname", "uname", "pw", "mail@mail.com");
+    	member = new Member("name", "lname", "uname", "pw", "mail@mail.com", "description");
     	uni1 = new University(1L, "uni1");
     	uni2 = new University(2L, "uni2");
     	unis = Arrays.asList(new University[]{uni1, uni2});

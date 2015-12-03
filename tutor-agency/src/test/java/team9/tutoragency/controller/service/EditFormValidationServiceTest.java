@@ -36,10 +36,10 @@ public class EditFormValidationServiceTest {
     
     @Before
     public void setUp() {
-        final Member activeMember = new Member("fName", "lName", "m@email.com", "uname", DigestUtils.md5Hex("password"));
+        final Member activeMember = new Member("fName", "lName", "m@email.com", "uname", DigestUtils.md5Hex("password"), "description");
         activeMember.setIsTutor(true);
         activeMember.setId(Long.valueOf(1));
-        Member controllMember = new Member("firstName", "lastName", "member@email.com", "username", "password");
+        Member controllMember = new Member("firstName", "lastName", "member@email.com", "username", "password", "description");
         controllMember.setId(Long.valueOf(2));
         List<Member> members = new ArrayList<>();
         members.add(controllMember);

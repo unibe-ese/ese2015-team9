@@ -60,6 +60,13 @@
 									onclick="this.value=''" type="text" name="email"
 									value="${editForm.email}" /></td>
 						</tr>
+						<tr>
+							<td>Beschreibung:<sup>*</sup></td>
+							<td><form:errors path="description" cssStyle="color: #ff0000;"
+									element="span" /> <form:input path="description"
+									onclick="this.value=''" type="text" name="Beschreibung"
+									value="${editForm.description}" /></td>
+						</tr>
 						<c:if test="${member.isTutor}">
 							<tr>
 								<td>Gebühr pro Kurs:<sup>*</sup></td>

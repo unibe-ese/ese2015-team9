@@ -53,6 +53,7 @@ public class MemberService {
 		member.setFirstName(editForm.getFirstName());
 		member.setLastName(editForm.getLastName());
 		member.setUsername(editForm.getUsername());
+		member.setDescription(editForm.getDescription());
 
 		if (member.isIsTutor()) {
 			double fee = Double.parseDouble(editForm.getFee());

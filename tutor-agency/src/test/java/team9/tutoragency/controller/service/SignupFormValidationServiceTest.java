@@ -31,7 +31,7 @@ public class SignupFormValidationServiceTest {
     
     @Before
     public void setUp() {
-        Member member = new Member("firstName", "lastName", "member@email.com", "username", "password");
+        Member member = new Member("firstName", "lastName", "member@email.com", "username", "password", "description");
         List<Member> members = new ArrayList<Member>();
         members.add(member);
         Mockito.when(memberDao.findByUsername("username")).thenReturn(members);
