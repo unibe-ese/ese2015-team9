@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"
-	contentType="text/html;charset=utf-8"%>
+         contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -18,43 +18,43 @@
                             Grade: <c:out value="${offer.grade}"></c:out>
                         </span>
                     </div>
-                        <div class="flex-lower-item course-info">
-                            <p><c:out value="${offer.course.university.name}"></c:out></p>
-                            <br>
-                            <p>Grade: <c:out value="${offer.grade}"></c:out></p>
-                        </div>
-                    <c:if test="${not empty offer.subscriptions}">
+                    <div class="flex-lower-item course-info">
+                        <p><c:out value="${offer.course.university.name}"></c:out></p>
+                        <br>
+                        <p>Grade: <c:out value="${offer.grade}"></c:out></p>
+                    </div>
+                <c:if test="${not empty offer.subscriptions}">
 
-                            <c:forEach items="${offer.subscriptions}" var="subscription">
-                                <c:choose>
-                                    <c:when test="${!subscription.accepted}">
-                                        <div class="flex-lower-item request open">
-                                            <p>Request from</p>
-                                            <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
-                                            <a href="offer/${offer.id}/accept/${subscription.id}">Accept</a>
-                                        </div>
-                                        
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="flex-lower-item request accepted">
-                                            <p>Accepted Request</p>
-                                            <br>
-                                            <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
-                                        </div>
-                                        
-                                    </c:otherwise>
-                                </c:choose>
+                    <c:forEach items="${offer.subscriptions}" var="subscription">
+                        <c:choose>
+                            <c:when test="${!subscription.accepted}">
+                                <div class="flex-lower-item request open">
+                                    <p>Request from</p>
+                                    <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
+                                    <a class="button" href="offer/${offer.id}/accept/${subscription.id}">Accept</a>
+                                </div>
 
-                            </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="flex-lower-item request accepted">
+                                    <p>Accepted Request</p>
+                                    <br>
+                                    <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
+                                </div>
 
-                    </c:if>
-                        <div class="flex-lower-item remove">
-                            <p>Remove this course?</p>
-                            <form onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');" 
-                              action="offer/${offer.id}/delete" method="get">
-                            <input type="submit" value="Remove">
-                </form>
-                        </div>
+                            </c:otherwise>
+                        </c:choose>
+
+                    </c:forEach>
+
+                </c:if>
+                <div class="flex-lower-item remove">
+                    <p>Remove this course?</p>
+                    <form onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');" 
+                          action="offer/${offer.id}/delete" method="get">
+                        <input type="submit" value="Remove">
+                    </form>
+                </div>
 
             </div>
         </fieldset>

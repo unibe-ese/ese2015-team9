@@ -68,14 +68,14 @@ public class EditFormValidationService implements Validator {
 	private void checkEmailAlreadyInUse(Errors errors, Member member, EditForm form) {
 		List<Member> members = memberDao.findByEmail(form.getEmail());
 		if (!members.isEmpty() && !members.get(0).equals(member)) {
-			errors.rejectValue("email", "email.invalidName", "Diese Email Adresse wird bereits verwendet");
+			errors.rejectValue("email", "email.invalidName", "Email already in use");
 		}
 	}
 
 	private void checkUsernameAlreadyInUse(Errors errors, Member member, EditForm form) {
 		List<Member> members = memberDao.findByUsername(form.getUsername());
 		if (!members.isEmpty() && !members.get(0).equals(member)) {
-			errors.rejectValue("username", "username.invalidName", "Dieser Username wird bereits verwendet");
+			errors.rejectValue("username", "username.invalidName", "Username already in use");
 		}
 	}
 
@@ -91,21 +91,21 @@ public class EditFormValidationService implements Validator {
 		matcher = validCharacterPattern.matcher(form.getUsername());
 
 		if (!matcher.matches()) {
-			errors.rejectValue("username", "username.invalidName", "Der Name sollte 3-15 Zeichen enthalten.");
+			errors.rejectValue("username", "username.invalidName", "Username needs to be 3-15 characters long");
 		}
 
 		if (!DigestUtils.md5Hex(form.getOldPassword()).equals(member.getPassword())) {
-			errors.rejectValue("oldPassword", "oldPassword.invalidValue", "Altes Passwort ist nicht korrekt");
+			errors.rejectValue("oldPassword", "oldPassword.invalidValue", "Old password not correct");
 		}
 		if (form.getPassword().length() != 0 && !form.getPassword().equals(form.getPasswordConfirm())) {
-			errors.rejectValue("passwordConfirm", "password.mismatch", "Passwörter stimmen nicht überein");
+			errors.rejectValue("passwordConfirm", "password.mismatch", "Passwords do not match");
 		}
 
 		if (member.isIsTutor()) {
 			try {
 				Double.parseDouble(form.getFee());
 			} catch (Exception e) {
-				errors.rejectValue("fee", "fee.invalidValue", "Bitte eine gültige Zahl eingeben");
+				errors.rejectValue("fee", "fee.invalidValue", "Please enter a valid number");
 			}
 		}
 	}

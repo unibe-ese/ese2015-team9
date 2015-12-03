@@ -84,7 +84,7 @@ public class MemberService {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		if (authentication == null)
+		if (authentication == null || authentication.getPrincipal().equals("anonymousUser"))
 			return Optional.empty();
 		else
 			return Optional.of(memberDao.findOne(((Member) authentication.getPrincipal()).getId()));

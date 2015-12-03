@@ -64,6 +64,10 @@ fieldset {
     margin: 0.5em 1%;
 }
 
+fieldset a {
+    color: #fff;
+}
+
 .flex-lower {
     display: flex;
     flex-wrap: wrap;
@@ -78,7 +82,8 @@ fieldset {
     margin-bottom: 0.5em;
     display: block;
 }
-.flex-lower-item a {
+
+.flex-lower-item a.button {
     display: block;
     width: auto;
     padding: 0.5em;
@@ -95,12 +100,15 @@ fieldset {
     background-color: #426B81;
     color: #fff;
 }
-.open a {
+.open a.button {
     border: 5px solid #fff;
     background-color: #426B81;
     color: #fff;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
 }
-.open a:hover, .open a:focus {
+.open a.button:hover, .open a.button:focus {
     background-color: #fff;
     color: #426B81;
 }
@@ -122,6 +130,9 @@ fieldset {
     border: 5px solid #fff;
     margin-bottom: 0;
     margin-top: 1em;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
 }
 .remove input[type="submit"]:hover, .remove input[type="submit"]:focus {
     background-color: #fff;
@@ -135,27 +146,34 @@ fieldset {
     margin-top: 2em;
 }
 
-.block {
-    float: left;
-    display: block;
-    margin-right: 1em;
+.labelblock {
     margin-top: 0.5em;
     width: 2em;
     height: 2em;
-    border: 5px solid #426B81; 
 }
 
 input[type="checkbox"] {
     display:none;
 }
 input[type="checkbox"] + label + div{
-    display:none;
+    /*display:block;*/
+    /*display:none;*/
+    opacity: 0;
+    max-height: 0;
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: all 1.5s;
+	-moz-transition: all 1.5s;
+	transition: all 1.5s;
 }
-input[type="checkbox"]:checked + label .block{
+input[type="checkbox"]:checked + label .labelblock{
     background-color: #426B81;
 }
 input[type="checkbox"]:checked + label + div{
-    display:block;
+    /*display:block;*/
+    opacity: 1;
+    height: auto;
+    max-height: 1000em;
 }
 
 @media 

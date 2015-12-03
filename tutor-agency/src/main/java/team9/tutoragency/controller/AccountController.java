@@ -1,31 +1,24 @@
 package team9.tutoragency.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.controller.service.validation.EditFormValidationService;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.model.Subscription;
-import team9.tutoragency.model.University;
 
 /**
  * Handles all interactions of a {@link Member} in order to edit the profile
@@ -36,7 +29,7 @@ import team9.tutoragency.model.University;
  *
  */
 @Controller
-@RequestMapping(value="/auth/account") 	
+@RequestMapping(value = "/auth/account")
 public class AccountController {
 
 	@Autowired
@@ -47,20 +40,31 @@ public class AccountController {
 	UniversityService uniService;
 
 	/**
-	 * Asserts that the request token is authenticated (authenticated member is present).
+	 * Asserts that the request token is authenticated (authenticated member is
+	 * present).
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView showProfile() {
 		ModelAndView profile = new ModelAndView("profile");
-		
+
 		Member member = getAuthenticatedMember();
 
 		profile.addObject("member", member);
-		
+
 		return profile;
 	}
-	
+
+	@RequestMapping(value = "/message", method = RequestMethod.GET)
+	public ModelAndView showProfileWithMessage(@RequestParam(value = "message", required = false) String message) {
+
+		ModelAndView profileWithMessage = showProfile();
+		profileWithMessage.addObject("message", message);
+
+		return profileWithMessage;
+	}
+
 	/**
 	 * Prepares the model for the edit view when a {@link Member} would like to
 	 * edit his profile informations. The {@link EditForm} will contain all
@@ -72,9 +76,9 @@ public class AccountController {
 		ModelAndView edit = new ModelAndView("edit");
 
 		Member member = getAuthenticatedMember();
-		
+
 		EditForm editForm = new EditForm(member);
-		
+
 		List<String> universityNames = uniService.findAllNames();
 
 		edit.addObject("universityChoices", universityNames);
@@ -101,19 +105,20 @@ public class AccountController {
 
 		ModelAndView model;
 		validator.validate(editForm, result);
-		
+
 		Member member = getAuthenticatedMember();
 
 		if (!result.hasErrors()) {
 
 			memberService.saveEditChange(member, editForm);
 			model = showProfile();
+			model.addObject("message", "You have successfully changed your profile information.");
 
 		} else {
 			editForm.setOldPassword("");
 			
 			model = new ModelAndView("edit", "editForm", editForm);
-		
+
 			List<String> universityNames = uniService.findAllNames();
 
 			model.addObject("universityChoices", universityNames);
@@ -132,19 +137,21 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/becomeTutor", method = RequestMethod.POST)
 	public ModelAndView becomeTutor() {
-	
+
 		memberService.upgradeAuthenticatedMemberToTutor();
-		
+
 		return showProfile();
 	}
-	
+
 	/**
-	 * <b>Asserts</b>, that the request token is authenticated (authenticated member is present).
+	 * <b>Asserts</b>, that the request token is authenticated (authenticated
+	 * member is present).
 	 */
-	private Member getAuthenticatedMember(){
+	private Member getAuthenticatedMember() {
 		Optional<Member> member = memberService.getAuthenticatedMember();
-		if(!member.isPresent()) throw new AssertionError("The URL should have been intercepted by Spring Security!");
-		
+		if (!member.isPresent())
+			throw new AssertionError("The URL should have been intercepted by Spring Security!");
+
 		return member.get();
 	}
 }

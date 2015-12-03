@@ -33,15 +33,9 @@
                     <h2><span>get ready to read some books</span></h2></div>
             </header>
             
-                        <!-- 
-    A different navigation is created according to the access-role of the user. 
+            <!-- 
+            A different navigation is created according to the access-role of the user. 
             -->
-            
-            <!-- QUICKSEARCH FIELD 
-            <form action="search" method="GET" id="searchfield">
-                <input type="search" name="text" /> <input type="submit"
-                                                           value="Search" />
-            </form> -->
 
             <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
             <c:choose>
@@ -53,16 +47,21 @@
                             <li><a href="<c:url value="/index" />">Home</a></li>
                             <li><a href="<c:url value="/search#search" />">Search Tutoring Offers</a></li>
                             <li class="flex-fill"></li>
+                            
+                            <c:set var="messageAdded" value="false"></c:set>
                             <c:forEach items="${member.offers}" var="offer">
-                            <c:if test="${not empty offer.subscriptions}">
-                            <c:forEach items="${offer.subscriptions}" var="subscription">
-                            <c:if test="${!subscription.accepted}">
-                            <li>
-                            <a href="account" style="color:red;font-size:1.5em;padding-top:0.75em;">You got a new request!</a>
-                            </li>
-                            </c:if>
-                            </c:forEach>
-                            </c:if>
+                                <c:if test="${not empty offer.subscriptions and not messageAdded}">
+                                    <c:forEach items="${offer.subscriptions}" var="subscription">
+                                        <c:if test="${!subscription.accepted and not messageAdded}">
+                                            <c:set var="messageAdded" value="true"></c:set>
+                                            <li>
+                                                <a  class="nav-request" 
+                                                    href="<c:url value="/auth/account#offers" />" 
+                                                    title="You have reveived a Request">!</a>
+                                            </li>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
                             </c:forEach>
                             <li class="nav-user"><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                             <li><div class="nav-svg"><a href="<c:url value="/auth/account" />"><%@include file="/img/cog.svg" %></a></div>

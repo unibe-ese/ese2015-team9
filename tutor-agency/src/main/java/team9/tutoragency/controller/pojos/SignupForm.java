@@ -25,7 +25,7 @@ public class SignupForm implements Form {
 	@NotNull(message = "Please enter a username.")
 	private String username;
 	@NotNull(message = "Please enter a password.")
-	@Size(min = 6, max = 18, message = "Passwort sollte aus 6-18 Zeichen bestehen")
+	@Size(min = 6, max = 18, message = "Password needs to be 6-18 characters long")
 	private String password;
 	@NotNull(message = "Please enter a matching password.")
 	private String passwordConfirm;

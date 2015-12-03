@@ -109,6 +109,8 @@ public class CreateOfferController {
 		//else
 		service.createOffer(memberId, offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
 		
-		return new ModelAndView("redirect:../account");
+		ModelAndView model = new ModelAndView("redirect:../account/message");
+		model.addObject("message","You have successfully created an offer. ");
+		return model;
 	}
 }

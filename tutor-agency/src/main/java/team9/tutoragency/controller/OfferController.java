@@ -1,6 +1,7 @@
 package team9.tutoragency.controller;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -37,8 +38,8 @@ public class OfferController {
 		Optional<Offer> offer = service.findOfferById(id);
 		Optional<Member> member = memberService.getAuthenticatedMember();
 		if(offer.isPresent() && member.isPresent() && offer.get().getTutor().equals(member.get()))
-		service.acceptSubscription(id);
-		return "redirect:/auth/account";
+            service.acceptSubscription(id);
+		return "redirect:/auth/account#offers";
 	}
 	
 	/**
@@ -58,7 +59,7 @@ public class OfferController {
 		Optional<Offer> offer = service.findOfferById(id);
 		Optional<Member> member = memberService.getAuthenticatedMember();
 
-		if (offer.isPresent() && member.get().getId() == offer.get().getTutor().getId())
+		if (offer.isPresent() && Objects.equals(member.get().getId(), offer.get().getTutor().getId()))
 			service.removeOffer(id);
 
 		return "redirect:/auth/account";
