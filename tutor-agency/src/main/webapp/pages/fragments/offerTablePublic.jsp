@@ -60,6 +60,6 @@
 			</table>
 	</c:when>
 	<c:otherwise>
-		<p>No results found in database...</p>
+        <p id="noresult">No results found in database...</p>
 	</c:otherwise>
 </c:choose>
