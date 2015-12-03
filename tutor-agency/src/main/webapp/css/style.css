@@ -319,6 +319,13 @@ nav {
     fill: deepskyblue;
 }
 
+a.nav-request {
+    color: #D35836;
+    font-size:2em;
+    padding-top:0.5em;
+    padding-right: 1em;
+}
+
 /*#searchfield input[type="search"]{
     border: none;
     width: 10em;

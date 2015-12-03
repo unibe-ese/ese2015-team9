@@ -50,16 +50,18 @@
                             
                             <c:set var="messageAdded" value="false"></c:set>
                             <c:forEach items="${member.offers}" var="offer">
-                            <c:if test="${not empty offer.subscriptions and not messageAdded}">
-                            <c:forEach items="${offer.subscriptions}" var="subscription">
-                            <c:if test="${!subscription.accepted and not messageAdded}">
-                            <c:set var="messageAdded" value="true"></c:set>
-                            <li>
-                            <a href="account" style="color:red;font-size:1.5em;padding-top:0.75em;">You got a new request!</a>
-                            </li>
-                            </c:if>
-                            </c:forEach>
-                            </c:if>
+                                <c:if test="${not empty offer.subscriptions and not messageAdded}">
+                                    <c:forEach items="${offer.subscriptions}" var="subscription">
+                                        <c:if test="${!subscription.accepted and not messageAdded}">
+                                            <c:set var="messageAdded" value="true"></c:set>
+                                            <li>
+                                                <a  class="nav-request" 
+                                                    href="<c:url value="/auth/account#offers" />" 
+                                                    title="You have reveived a Request">!</a>
+                                            </li>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
                             </c:forEach>
                             <li class="nav-user"><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                             <li><div class="nav-svg"><a href="<c:url value="/auth/account" />"><%@include file="/img/cog.svg" %></a></div>

@@ -39,7 +39,7 @@ public class OfferController {
 		Optional<Member> member = memberService.getAuthenticatedMember();
 		if(offer.isPresent() && member.isPresent() && offer.get().getTutor().equals(member.get()))
             service.acceptSubscription(id);
-		return "redirect:/auth/account";
+		return "redirect:/auth/account#offers";
 	}
 	
 	/**

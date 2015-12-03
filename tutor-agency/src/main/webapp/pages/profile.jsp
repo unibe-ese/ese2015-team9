@@ -8,7 +8,10 @@
 
 <c:import url="template/header.jsp" />
 <spring:url value="/css/profile.css" var="profile" />
+<spring:url value="/js/profile.js" var="js" />
 <link type="text/css" rel="stylesheet" href="${profile}" />
+<script src='<c:url value="/js/jquery-2.1.4.min.js"/>'></script>
+<script src='<c:url value="/js/p.js"/>'></script>
 
 <div class="container">
 	<%-- message for positive feedback if the user made an action
@@ -48,8 +51,8 @@
 		<input type="checkbox" id="checkbox-offer">
 		<label class="collapse" for="checkbox-offer"> <span
 			class="block"></span>
-			<h2>Open Tutoring Offers</h2></label>
-		<div id="offers">
+            <h2 id="offers">Open Tutoring Offers</h2></label>
+		<div>
 			<c:import url="fragments/offerTablePrivate.jsp" />
 		</div>
 	</c:if>
@@ -59,7 +62,7 @@
 		class="collapse" for="checkbox-subscription"> <span
 		class="block"></span>
 		<h2>Subscriptions</h2></label>
-	<div id="offers">
+	<div>
 		<h6>*Here you can see the tutoring offers, for which you
 			requested tutoring.*</h6>
 		<c:if test="${empty member.subscriptions }">
