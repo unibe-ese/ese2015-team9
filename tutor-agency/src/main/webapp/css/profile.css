@@ -78,7 +78,11 @@ fieldset {
     margin-bottom: 0.5em;
     display: block;
 }
-.flex-lower-item a {
+a {
+    color: #fff;
+}
+
+.flex-lower-item a.button {
     display: block;
     width: auto;
     padding: 0.5em;
@@ -95,12 +99,12 @@ fieldset {
     background-color: #426B81;
     color: #fff;
 }
-.open a {
+.open a.button {
     border: 5px solid #fff;
     background-color: #426B81;
     color: #fff;
 }
-.open a:hover, .open a:focus {
+.open a.button:hover, .open a.button:focus {
     background-color: #fff;
     color: #426B81;
 }
