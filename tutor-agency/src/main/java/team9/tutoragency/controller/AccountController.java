@@ -1,31 +1,24 @@
 package team9.tutoragency.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.controller.service.validation.EditFormValidationService;
 import team9.tutoragency.model.Member;
-import team9.tutoragency.model.Subscription;
-import team9.tutoragency.model.University;
 
 /**
  * Handles all interactions of a {@link Member} in order to edit the profile
@@ -59,6 +52,14 @@ public class AccountController {
 		profile.addObject("member", member);
 		
 		return profile;
+	}
+	@RequestMapping(value = "/message", method = RequestMethod.GET)
+	public ModelAndView showProfileWithMessage(@RequestParam(value="message", required=false) String message) {
+		
+		ModelAndView profileWithMessage = showProfile();
+		profileWithMessage.addObject("message",message);
+		
+		return profileWithMessage;
 	}
 	
 	/**
@@ -108,6 +109,7 @@ public class AccountController {
 
 			memberService.saveEditChange(member, editForm);
 			model = showProfile();
+			model.addObject("message","You have successfully changed your profile information.");
 
 		} else {
 

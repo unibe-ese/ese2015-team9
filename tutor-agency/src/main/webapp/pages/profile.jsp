@@ -11,6 +11,13 @@
 <link type="text/css" rel="stylesheet" href="${profile}" />
 
 <div class="container">
+	<%-- message for positive feedback if the user made an action
+		 e.g. created and offer, edited the profile
+	--%>
+	<c:if test="${not empty message}">
+		<h2><c:out value="${message}" /></h2>
+	</c:if>
+
 	<h1>Profile</h1>
 
 	<form:form action="/tutor-agency/auth/account/edit" method="get">
@@ -25,12 +32,13 @@
 	</c:if>
 	<c:if test="${member.isTutor}">
 		<form:form action="/tutor-agency/auth/offer/new" method="get">
-			<input class="submitbutton" type="submit" value="Create a Tutoring Offer" />
+			<input class="submitbutton" type="submit"
+				value="Create a Tutoring Offer" />
 		</form:form>
 	</c:if>
 	<div class="clear"></div>
 	<input type="checkbox" id="checkbox-info" checked> <label
-		class="collapse" for="checkbox-info" > <span class="block"></span>
+		class="collapse" for="checkbox-info"> <span class="block"></span>
 		<h2>Account Information</h2></label>
 	<div id="account-info">
 		<c:import url="fragments/accountInformation.jsp" />
@@ -52,12 +60,13 @@
 		class="block"></span>
 		<h2>Subscriptions</h2></label>
 	<div id="offers">
-	<h6>*Here you can see the tutoring offers, for which you requested tutoring.*</h6>
+		<h6>*Here you can see the tutoring offers, for which you
+			requested tutoring.*</h6>
 		<c:if test="${empty member.subscriptions }">
 			<br>But you have subscribed to no offer yet.
 		</c:if>
 		<c:if test="${not empty member.subscriptions }">
-		<c:import url="fragments/subscriptions.jsp" />
+			<c:import url="fragments/subscriptions.jsp" />
 		</c:if>
 	</div>
 
