@@ -108,6 +108,7 @@ public class AccountController {
 
 			memberService.saveEditChange(member, editForm);
 			model = showProfile();
+			model.addObject("message","You have successfully changed your profile information.");
 
 		} else {
 

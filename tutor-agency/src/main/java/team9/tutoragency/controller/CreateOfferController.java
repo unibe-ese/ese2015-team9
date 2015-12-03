@@ -1,6 +1,5 @@
 package team9.tutoragency.controller;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import team9.tutoragency.controller.pojos.OfferForm;
 import team9.tutoragency.controller.service.AgencyService;
 import team9.tutoragency.controller.service.CourseService;
@@ -105,10 +105,11 @@ public class CreateOfferController {
 			if(course.isPresent())
 				model.addObject("selectedUniversity", course.get().getUniversity());
 			return model;
-		}
+		} 
 		//else
 		service.createOffer(memberId, offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
-		
-		return new ModelAndView("redirect:../account");
+		ModelAndView model = new ModelAndView("profile");
+		model.addObject("message","You have successfully created an offer. ");
+		return model ;
 	}
 }
