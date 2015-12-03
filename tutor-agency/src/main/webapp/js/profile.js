@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    var spl = $(location).attr('href').split('#');
-    if(spl[spl.length-1] === 'offers') {
+    var res = $(location).attr('href').split('#');
+    if(res[res.length-1] === 'offers') {
         $('#checkbox-offer').prop('checked', true);
     }
 });

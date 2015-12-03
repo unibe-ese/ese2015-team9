@@ -6,7 +6,6 @@
 
 <c:import url="template/header.jsp" />
 <spring:url value="/css/search.css" var="search" />
-
 <link type="text/css" rel="stylesheet" href="${search}" />
 <script src='<c:url value="/js/jquery-2.1.4.min.js"/>'></script>
 <script src='<c:url value="/js/search.js"/>'></script>
@@ -60,7 +59,7 @@
     </div>
 
 </div>
-</div>
+</div> <%-- Do not delete this div --%>
 <c:import url="template/footer.jsp" />
 </body>
 </html>
