@@ -1,0 +1,59 @@
+/*********************************************************************************/
+/* Edit                                                                         */
+/*********************************************************************************/
+
+fieldset {
+    border: 5px solid #426B81;
+    padding: 1em;
+    width: 100%;
+    margin-bottom: 2em;
+}
+
+.collapse{
+    display:block;
+    margin-bottom: 1em;
+}
+
+#showUnis {
+    display: none;
+}
+
+#showUnis + label + fieldset {
+    display: none;
+}
+
+#showUnis:checked + label + fieldset {
+    display: flex;
+}
+
+#showUnis:checked + label .labelblock {
+    background-color: #426B81;
+}
+
+.uni-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.uni-flex-item {
+    flex-basis: 10em;
+    margin: 0.2em;
+}
+.uni-flex-item p{
+    display: inline-block;
+}
+
+.uni-checkbox {
+    display:none;
+}
+
+.uni-checkbox:checked ~ label .labelblock {
+    background-color: #426B81;
+}
+
+@media all and (max-width: 800px) {
+  .submitbutton {
+      display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

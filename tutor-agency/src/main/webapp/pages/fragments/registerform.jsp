@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <form:form modelAttribute="signupForm" action="create"
-           id="signupForm" method="post">
+           id="signupForm" method="post" cssClass="forms">
 
     <form:errors path="firstName" class="error" element="p" />
     <form:input path="firstName"

@@ -12,7 +12,7 @@
     <div class="error"><p>${message}</p></div>
 
     <form action="<c:url value="/j_spring_security_check"></c:url>"
-          method="post">
+          method="post" class="forms">
 
             <input id="j_username" name="j_username"
                    onclick="this.value = ''" value="Username" type="text" placeholder="Username"/>
