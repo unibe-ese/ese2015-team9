@@ -69,6 +69,7 @@ public class Member implements UserDetails {
 	private String username;
 	private String password;
 	
+	
 	private Double fee; 
 	private boolean isTutor;
 
@@ -289,6 +290,7 @@ public class Member implements UserDetails {
 				+ ", username=" + username + ", password=" + password + ", fee=" + fee + ", isTutor=" + isTutor
 				+ "]";
 	}
+
 
 	
 

@@ -47,10 +47,13 @@
                             <li><a href="<c:url value="/index" />">Home</a></li>
                             <li><a href="<c:url value="/search#search" />">Search Tutoring Offers</a></li>
                             <li class="flex-fill"></li>
+                            
+                            <c:set var="messageAdded" value="false"></c:set>
                             <c:forEach items="${member.offers}" var="offer">
-                            <c:if test="${not empty offer.subscriptions}">
+                            <c:if test="${not empty offer.subscriptions and not messageAdded}">
                             <c:forEach items="${offer.subscriptions}" var="subscription">
-                            <c:if test="${!subscription.accepted}">
+                            <c:if test="${!subscription.accepted and not messageAdded}">
+                            <c:set var="messageAdded" value="true"></c:set>
                             <li>
                             <a href="account" style="color:red;font-size:1.5em;padding-top:0.75em;">You got a new request!</a>
                             </li>

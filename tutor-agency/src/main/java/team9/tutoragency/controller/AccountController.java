@@ -29,7 +29,7 @@ import team9.tutoragency.model.Member;
  *
  */
 @Controller
-@RequestMapping(value="/auth/account") 	
+@RequestMapping(value = "/auth/account")
 public class AccountController {
 
 	@Autowired
@@ -40,28 +40,31 @@ public class AccountController {
 	UniversityService uniService;
 
 	/**
-	 * Asserts that the request token is authenticated (authenticated member is present).
+	 * Asserts that the request token is authenticated (authenticated member is
+	 * present).
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView showProfile() {
 		ModelAndView profile = new ModelAndView("profile");
-		
+
 		Member member = getAuthenticatedMember();
 
 		profile.addObject("member", member);
-		
+
 		return profile;
 	}
+
 	@RequestMapping(value = "/message", method = RequestMethod.GET)
-	public ModelAndView showProfileWithMessage(@RequestParam(value="message", required=false) String message) {
-		
+	public ModelAndView showProfileWithMessage(@RequestParam(value = "message", required = false) String message) {
+
 		ModelAndView profileWithMessage = showProfile();
-		profileWithMessage.addObject("message",message);
-		
+		profileWithMessage.addObject("message", message);
+
 		return profileWithMessage;
 	}
-	
+
 	/**
 	 * Prepares the model for the edit view when a {@link Member} would like to
 	 * edit his profile informations. The {@link EditForm} will contain all
@@ -73,9 +76,9 @@ public class AccountController {
 		ModelAndView edit = new ModelAndView("edit");
 
 		Member member = getAuthenticatedMember();
-		
+
 		EditForm editForm = new EditForm(member);
-		
+
 		List<String> universityNames = uniService.findAllNames();
 
 		edit.addObject("universityChoices", universityNames);
@@ -102,19 +105,19 @@ public class AccountController {
 
 		ModelAndView model;
 		validator.validate(editForm, result);
-		
+
 		Member member = getAuthenticatedMember();
 
 		if (!result.hasErrors()) {
 
 			memberService.saveEditChange(member, editForm);
 			model = showProfile();
-			model.addObject("message","You have successfully changed your profile information.");
+			model.addObject("message", "You have successfully changed your profile information.");
 
 		} else {
 
 			model = new ModelAndView("edit", "editForm", editForm);
-		
+
 			List<String> universityNames = uniService.findAllNames();
 
 			model.addObject("universityChoices", universityNames);
@@ -133,19 +136,21 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/becomeTutor", method = RequestMethod.POST)
 	public ModelAndView becomeTutor() {
-	
+
 		memberService.upgradeAuthenticatedMemberToTutor();
-		
+
 		return showProfile();
 	}
-	
+
 	/**
-	 * <b>Asserts</b>, that the request token is authenticated (authenticated member is present).
+	 * <b>Asserts</b>, that the request token is authenticated (authenticated
+	 * member is present).
 	 */
-	private Member getAuthenticatedMember(){
+	private Member getAuthenticatedMember() {
 		Optional<Member> member = memberService.getAuthenticatedMember();
-		if(!member.isPresent()) throw new AssertionError("The URL should have been intercepted by Spring Security!");
-		
+		if (!member.isPresent())
+			throw new AssertionError("The URL should have been intercepted by Spring Security!");
+
 		return member.get();
 	}
 }
