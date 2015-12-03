@@ -162,7 +162,7 @@ public class EditControllerTest {
 		EditForm form = new EditForm(member);
 		form.setUniversities(uniNames);
 
-		ModelAndView result = controller.edit();
+		ModelAndView result = controller.getEditPage();
 		assertViewName(result, "edit");
 
 		mockMvc.perform(get("/edit")).andExpect(forwardedUrl("/pages/edit.jsp"))

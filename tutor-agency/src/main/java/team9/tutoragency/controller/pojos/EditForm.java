@@ -165,6 +165,15 @@ public class EditForm implements Form {
 
 
 	@Override
+	public String toString() {
+		return "EditForm [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", universities=" + universities + ", oldPassword=" + oldPassword + ", password=" + password
+				+ ", passwordConfirm=" + passwordConfirm + ", fee=" + fee + ", email=" + email + ", readAGB=" + readAGB
+				+ "]";
+	}
+
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

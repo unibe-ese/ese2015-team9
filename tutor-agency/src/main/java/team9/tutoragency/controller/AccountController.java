@@ -67,7 +67,7 @@ public class AccountController {
 	 * values of a {@link Member} to be edited.
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit() throws IOException {
+	public ModelAndView getEditPage() throws IOException {
 
 		ModelAndView edit = new ModelAndView("edit");
 
@@ -110,7 +110,8 @@ public class AccountController {
 			model = showProfile();
 
 		} else {
-
+			editForm.setOldPassword("");
+			
 			model = new ModelAndView("edit", "editForm", editForm);
 		
 			List<String> universityNames = uniService.findAllNames();

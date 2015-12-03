@@ -107,54 +107,68 @@ public class SignupForm implements Form {
 	}
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 89 * hash + (this.firstName != null ? this.firstName.hashCode() : 0);
-        hash = 89 * hash + (this.lastName != null ? this.lastName.hashCode() : 0);
-        hash = 89 * hash + (this.username != null ? this.username.hashCode() : 0);
-        hash = 89 * hash + (this.password != null ? this.password.hashCode() : 0);
-        hash = 89 * hash + (this.passwordConfirm != null ? this.passwordConfirm.hashCode() : 0);
-        hash = 89 * hash + (this.email != null ? this.email.hashCode() : 0);
-        hash = 89 * hash + (this.readAGB ? 1 : 0);
-        return hash;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((passwordConfirm == null) ? 0 : passwordConfirm.hashCode());
+		result = prime * result + (readAGB ? 1231 : 1237);
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final SignupForm other = (SignupForm) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        if ((this.firstName == null) ? (other.firstName != null) : !this.firstName.equals(other.firstName)) {
-            return false;
-        }
-        if ((this.lastName == null) ? (other.lastName != null) : !this.lastName.equals(other.lastName)) {
-            return false;
-        }
-        if ((this.username == null) ? (other.username != null) : !this.username.equals(other.username)) {
-            return false;
-        }
-        if ((this.password == null) ? (other.password != null) : !this.password.equals(other.password)) {
-            return false;
-        }
-        if ((this.passwordConfirm == null) ? (other.passwordConfirm != null) : !this.passwordConfirm.equals(other.passwordConfirm)) {
-            return false;
-        }
-        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
-            return false;
-        }
-        if (this.readAGB != other.readAGB) {
-            return false;
-        }
-        return true;
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SignupForm other = (SignupForm) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (passwordConfirm == null) {
+			if (other.passwordConfirm != null)
+				return false;
+		} else if (!passwordConfirm.equals(other.passwordConfirm))
+			return false;
+		if (readAGB != other.readAGB)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
     
     
 

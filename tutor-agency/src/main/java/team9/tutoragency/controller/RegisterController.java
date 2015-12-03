@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.exceptions.InvalidUserException;
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.SignupFromSaveService;
+import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.validation.SignupFormValidationService;
 import team9.tutoragency.model.Member;
 
@@ -30,21 +30,26 @@ import team9.tutoragency.model.Member;
 public class RegisterController {
 
 	@Autowired
-	SignupFromSaveService saveService;
+	MemberService memberService;
 
-	@Autowired
 	SignupFormValidationService validator;
-
+	
+	@Autowired
+    public void setValidator(SignupFormValidationService validator) {
+        this.validator = validator;
+    }
+	
 	/**
 	 * Creates the model for the register view. A {@link SignupForm} will
 	 * contain all informations a user needs to edit in order to register
 	 * successfully.
 	 * 
-	 * @return model for the register view
+	 * @return ModelAndView with a new {@code SignupForm} in the model, and
+	 *         {@code signupPage.jsp} as view.
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public ModelAndView register(HttpServletResponse response) throws IOException {
-		ModelAndView register = new ModelAndView("register");
+	public ModelAndView register() throws IOException {
+		ModelAndView register = new ModelAndView("signupPage");
 		register.addObject("signupForm", new SignupForm());
 		return register;
 	}
@@ -52,7 +57,7 @@ public class RegisterController {
 	/**
 	 * Tries to create a {@link Member} based on the information provided in the
 	 * {@link SignupForm}. If the result doesn't have any errors the
-	 * {@link SignupFromSaveService} tries to save the member persistently to
+	 * {@link SignupFormSaveService} tries to save the member persistently to
 	 * the database. If there are any errors, the user isn't redirected but a
 	 * number of errors are displayed.
 	 * 
@@ -62,20 +67,22 @@ public class RegisterController {
 	 *         again to edit changes
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public ModelAndView createUser(@Valid SignupForm signupForm, BindingResult result,
+	public ModelAndView createMember(@Valid SignupForm signupForm, BindingResult result,
 			RedirectAttributes redirectAttributes) throws IOException {
 		ModelAndView model;
+		
 		validator.validate(signupForm, result);
+		
 		if (!result.hasErrors()) {
 			try {
-				saveService.saveFrom(signupForm);
+				memberService.createMember(signupForm);
 				model = new ModelAndView("registerSuccess");
 			} catch (InvalidUserException e) {
 				model = new ModelAndView("register", "signupForm", signupForm);
 			}
 		} else {
 
-			model = new ModelAndView("register", "signupForm", signupForm);
+			model = new ModelAndView("signupPage", "signupForm", signupForm);
 		}
 		return model;
 	}
