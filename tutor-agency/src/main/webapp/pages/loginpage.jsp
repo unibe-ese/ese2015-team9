@@ -9,7 +9,7 @@
 <link type="text/css" rel="stylesheet" href="${login}" />
 
 <div class="container" id="login">
-	<div class = "error">${message}</div>
+    <div class="error"><p>${message}</p></div>
 
 	<form action="<c:url value="/j_spring_security_check"></c:url>"
 		method="post">

@@ -11,8 +11,8 @@
 
 
 <div class="container" id="register">
-			<h1>Anmelden</h1>
-			<c:import url="template/registerform.jsp" />
+			<h1>Register</h1>
+			<c:import url="fragments/registerform.jsp" />
 </div>
 </div> <%-- Do not delete this div --%>
 <c:import url="template/footer.jsp" />

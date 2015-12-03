@@ -38,7 +38,7 @@ public class SignupFormValidationService implements Validator {
 	private void checkUsernameAlreadyInUse(Errors errors, SignupForm form) {
 		List<Member> registeredMembers = memberDao.findByUsername(form.getUsername());
 		if (registeredMembers.size() != 0) {
-			errors.rejectValue("username", "username.alreadyRegistered", "Nickname wird bereits verwendet");
+			errors.rejectValue("username", "username.alreadyRegistered", "Username already in use");
 		}
 	}
 
@@ -46,7 +46,7 @@ public class SignupFormValidationService implements Validator {
 		List<Member> registeredMembers;
 		registeredMembers = memberDao.findByEmail(form.getEmail());
 		if (registeredMembers.size() != 0) {
-			errors.rejectValue("email", "email.alreadyRegistered", "Email wird bereits verwendet");
+			errors.rejectValue("email", "email.alreadyRegistered", "Email already in use");
 		}
 	}
 
@@ -56,15 +56,15 @@ public class SignupFormValidationService implements Validator {
 		SignupForm form = (SignupForm) target;
 		matcher = validCharacterPattern.matcher(form.getUsername());
 		if (!matcher.matches()) {
-			errors.rejectValue("username", "username.invalidName", "Der Name sollte 3-15 Zeichen enthalten.");
+			errors.rejectValue("username", "username.invalidName", "Username needs to be 3-15 characters long");
 		}
 
 		if (!form.getPassword().equals(form.getPasswordConfirm())) {
-			errors.rejectValue("passwordConfirm", "password.mismatch", "Passwörter stimmen nicht überein");
+			errors.rejectValue("passwordConfirm", "password.mismatch", "Passwords do not match");
 		}
 
 		if (!form.isReadAGB()) {
-			errors.rejectValue("readAGB", "readAGB.notRead", "Bitte lies die AGB und bestätige dies mit einem Klick.");
+			errors.rejectValue("readAGB", "readAGB.notRead", "Please read and confirm the Terms and Conditions");
 		}
 		checkUsernameAlreadyInUse(errors, form);
 
