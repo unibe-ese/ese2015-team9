@@ -173,6 +173,10 @@ input {
     margin-bottom: 2em;
 }
 
+input[type="text"], input[type="password"] {
+    display: block;
+}
+
 input[type="image"] {
 	border: none;
 	padding: 0em;

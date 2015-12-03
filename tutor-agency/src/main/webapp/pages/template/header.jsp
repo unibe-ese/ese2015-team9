@@ -33,15 +33,9 @@
                     <h2><span>get ready to read some books</span></h2></div>
             </header>
             
-                        <!-- 
-    A different navigation is created according to the access-role of the user. 
+            <!-- 
+            A different navigation is created according to the access-role of the user. 
             -->
-            
-            <!-- QUICKSEARCH FIELD 
-            <form action="search" method="GET" id="searchfield">
-                <input type="search" name="text" /> <input type="submit"
-                                                           value="Search" />
-            </form> -->
 
             <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
             <c:choose>
