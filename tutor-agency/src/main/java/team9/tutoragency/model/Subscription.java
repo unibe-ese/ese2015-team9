@@ -40,6 +40,12 @@ public class Subscription implements Serializable{
 		this.offer = offer;
 	}
 
+	public Subscription(long id, Member tutor1, Offer offer7) {
+		this.member = tutor1;
+		this.offer = offer7;
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

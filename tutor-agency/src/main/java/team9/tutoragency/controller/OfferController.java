@@ -33,12 +33,12 @@ public class OfferController {
 		return "redirect:/auth/account";
 	}
 	
-	@RequestMapping(value = "/accept/{subscriptionId}", method = RequestMethod.GET)
-	public String acceptSubscription(@PathVariable(value = "subscriptionId") Long id){
-		Optional<Offer> offer = agencyService.findOfferById(id);
+	@RequestMapping(value = "/accept/{subscriptionId}/", method = RequestMethod.GET)
+	public String acceptSubscription(@PathVariable(value = "offerId") Long offerId, @PathVariable(value = "subscriptionId") Long subscriptionId){
+		Optional<Offer> offer = agencyService.findOfferById(offerId);
 		Optional<Member> member = memberService.getAuthenticatedMember();
 		if(offer.isPresent() && member.isPresent() && offer.get().getTutor().equals(member.get()))
-            agencyService.acceptSubscription(id);
+            agencyService.acceptSubscription(subscriptionId);
 		return "redirect:/auth/account#offers";
 	}
 	

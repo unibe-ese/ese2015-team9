@@ -67,7 +67,8 @@ public class AccountControllerUnitTest {
 
 		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).setViewResolvers(viewResolver).build();
 
-		member = new Member(1L, "username");
+		member = mock(Member.class);
+		when(member.getUniversityList()).thenReturn(asList(new University(1L, "uni1")));
 
 		when(memberService.getAuthenticatedMember()).thenReturn(Optional.of(member));
 		when(uniService.findAllNames()).thenReturn(asList("uniname"));

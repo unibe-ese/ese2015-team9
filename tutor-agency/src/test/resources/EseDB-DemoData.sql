@@ -1,12 +1,12 @@
 ﻿SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-DELETE FROM member_university;
-DELETE FROM subscription;
-DELETE FROM offer;
-DELETE FROM course;
-DELETE FROM member;
-DELETE FROM university;
+DELETE FROM Member_University;
+DELETE FROM Subscription;
+DELETE FROM Offer;
+DELETE FROM Course;
+DELETE FROM Member;
+DELETE FROM University;
 
 COMMIT;
 

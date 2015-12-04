@@ -61,6 +61,7 @@ public class AgencyServiceImpl implements AgencyService{
 		if (offerId==null) throw new AssertionError("offer id is null!");
 		if (!offerDao.exists(offerId)) throw new AssertionError("Offer does not exist!");
 		
+		subscriptionDao.delete(subscriptionDao.findByOffer( offerDao.findOne(offerId)));
 		offerDao.delete(offerId);
 		
 	}
