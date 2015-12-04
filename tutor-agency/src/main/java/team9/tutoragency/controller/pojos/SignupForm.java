@@ -1,5 +1,6 @@
 package team9.tutoragency.controller.pojos;
 
+import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -13,6 +14,7 @@ import team9.tutoragency.model.Member;
  * will be validated by the {@link SignupFormValidationService}.
  * 
  * @author laeri
+ * @author curtys
  *
  */
 public class SignupForm implements Form {
@@ -30,7 +32,9 @@ public class SignupForm implements Form {
 	@NotNull(message = "Please enter a matching password.")
 	private String passwordConfirm;
 	@NotNull
-	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
+	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*"
+            + "@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
+            message = "Must be valid email address")
 	private String email;
 
 	private boolean readAGB;
@@ -107,69 +111,59 @@ public class SignupForm implements Form {
 	}
 
     @Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((passwordConfirm == null) ? 0 : passwordConfirm.hashCode());
-		result = prime * result + (readAGB ? 1231 : 1237);
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.lastName);
+        hash = 23 * hash + Objects.hashCode(this.username);
+        hash = 23 * hash + Objects.hashCode(this.password);
+        hash = 23 * hash + Objects.hashCode(this.passwordConfirm);
+        hash = 23 * hash + Objects.hashCode(this.email);
+        hash = 23 * hash + (this.readAGB ? 1 : 0);
+        return hash;
+    }
 
     @Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SignupForm other = (SignupForm) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (passwordConfirm == null) {
-			if (other.passwordConfirm != null)
-				return false;
-		} else if (!passwordConfirm.equals(other.passwordConfirm))
-			return false;
-		if (readAGB != other.readAGB)
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SignupForm other = (SignupForm) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.firstName, other.firstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        if (!Objects.equals(this.passwordConfirm, other.passwordConfirm)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (this.readAGB != other.readAGB) {
+            return false;
+        }
+        return true;
+    }
+
+	@Override
+	public String toString() {
+		return "SignupForm [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + ", passwordConfirm=" + passwordConfirm + ", email=" + email + ", readAGB="
+				+ readAGB + "]";
 	}
     
-    
-
 }

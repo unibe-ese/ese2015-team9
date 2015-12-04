@@ -2,12 +2,12 @@ package team9.tutoragency.controller.pojos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import team9.tutoragency.controller.service.validation.EditFormValidationService;
-import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 
 /**
@@ -16,6 +16,7 @@ import team9.tutoragency.model.Member;
  * {@link EditFormValidationService}.
  * 
  * @author laeri
+ * @author curtys
  *
  */
 public class EditForm implements Form {
@@ -26,6 +27,8 @@ public class EditForm implements Form {
 	private String lastName;
 	@NotNull(message = "Please enter a username.")
 	private String username;
+	
+	private String description;
 
 	private List<String> universities;
 
@@ -38,7 +41,9 @@ public class EditForm implements Form {
 	private String fee;
 
 	@NotNull
-	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
+	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*"
+            + "@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
+            message = "Must be valid email address")
 	private String email;
 
 	private boolean readAGB;
@@ -47,7 +52,7 @@ public class EditForm implements Form {
 		oldPassword = "";
 		password = "";
 		passwordConfirm = "";
-		universities = new ArrayList<String>();
+		universities = new ArrayList<>();
 
 	}
 
@@ -58,6 +63,7 @@ public class EditForm implements Form {
 		lastName = member.getLastName();
 		username = member.getUsername();
 		email = member.getEmail();
+		description = member.getDescription();
 		if (member.getFee() != null) 
 			fee = member.getFee().toString();
 		else 
@@ -65,7 +71,7 @@ public class EditForm implements Form {
 		oldPassword = "";
 		password = "";
 		passwordConfirm = "";
-		universities = new ArrayList<String>();
+		universities = new ArrayList<>();
 			
 		
 	}
@@ -155,104 +161,95 @@ public class EditForm implements Form {
 
 	public List<String> getUniversities() {
 		if (universities == null)
-			universities = new ArrayList<String>();
+			universities = new ArrayList<>();
 		return universities;
 	}
 
 	public void setUniversities(List<String> universities) {
 		this.universities = universities;
 	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.firstName);
+        hash = 53 * hash + Objects.hashCode(this.lastName);
+        hash = 53 * hash + Objects.hashCode(this.username);
+        hash = 53 * hash + Objects.hashCode(this.description);
+        hash = 53 * hash + Objects.hashCode(this.universities);
+        hash = 53 * hash + Objects.hashCode(this.oldPassword);
+        hash = 53 * hash + Objects.hashCode(this.password);
+        hash = 53 * hash + Objects.hashCode(this.passwordConfirm);
+        hash = 53 * hash + Objects.hashCode(this.fee);
+        hash = 53 * hash + Objects.hashCode(this.email);
+        hash = 53 * hash + (this.readAGB ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EditForm other = (EditForm) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.firstName, other.firstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.universities, other.universities)) {
+            return false;
+        }
+        if (!Objects.equals(this.oldPassword, other.oldPassword)) {
+            return false;
+        }
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        if (!Objects.equals(this.passwordConfirm, other.passwordConfirm)) {
+            return false;
+        }
+        if (!Objects.equals(this.fee, other.fee)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (this.readAGB != other.readAGB) {
+            return false;
+        }
+        return true;
+    }
 
 
 	@Override
 	public String toString() {
 		return "EditForm [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-				+ ", universities=" + universities + ", oldPassword=" + oldPassword + ", password=" + password
-				+ ", passwordConfirm=" + passwordConfirm + ", fee=" + fee + ", email=" + email + ", readAGB=" + readAGB
-				+ "]";
+				+ ", description=" + description + ", universities=" + universities + ", oldPassword=" + oldPassword
+				+ ", password=" + password + ", passwordConfirm=" + passwordConfirm + ", fee=" + fee + ", email="
+				+ email + ", readAGB=" + readAGB + "]";
 	}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((fee == null) ? 0 : fee.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((oldPassword == null) ? 0 : oldPassword.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((passwordConfirm == null) ? 0 : passwordConfirm.hashCode());
-		result = prime * result + (readAGB ? 1231 : 1237);
-		result = prime * result + ((universities == null) ? 0 : universities.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EditForm other = (EditForm) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (fee == null) {
-			if (other.fee != null)
-				return false;
-		} else if (!fee.equals(other.fee))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (oldPassword == null) {
-			if (other.oldPassword != null)
-				return false;
-		} else if (!oldPassword.equals(other.oldPassword))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (passwordConfirm == null) {
-			if (other.passwordConfirm != null)
-				return false;
-		} else if (!passwordConfirm.equals(other.passwordConfirm))
-			return false;
-		if (readAGB != other.readAGB)
-			return false;
-		if (universities == null) {
-			if (other.universities != null)
-				return false;
-		} else if (!universities.equals(other.universities))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
-	}
+    
 }

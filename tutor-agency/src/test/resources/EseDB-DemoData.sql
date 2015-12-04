@@ -1,4 +1,4 @@
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+﻿SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 DELETE FROM member_university;
@@ -30,11 +30,11 @@ INSERT INTO `Course` (`id`, `name`, `university_id`) VALUES
 
 -- --------------------------------------------------------
 
-INSERT INTO `Member` (`id`, `email`, `fee`, `firstName`, `isTutor`, `lastName`, `password`, `username`) VALUES
-(1, 'ese@example.com', 0, 'ese', 0, 'ese', 'e00760db8ed95a90efbbdefa0d167e6a', 'ese'),
-(2, 'student@example.com', 0, 'student', 0, 'student', '5f4dcc3b5aa765d61d8327deb882cf99', 'student'),
-(3, 'tutor1@example.com', 20, 'Tutor1', 1, 'Tutor1', '0b2f99d74e41e808a5e3c0c50223ae7f', 'tutor1'),
-(4, 'tutor2@example.com', 30, 'Tutor2', 1, 'Tutor2', 'eb007e610d25769d69f081ebbb337b13', 'tutor2');
+INSERT INTO `Member` (`id`, `description`, `email`, `fee`, `firstName`, `isTutor`, `lastName`, `password`, `username`) VALUES
+(1, 'Das ist eine Beschreibung von ese', 'ese@example.com', 0, 'ese', 0, 'ese', 'e00760db8ed95a90efbbdefa0d167e6a', 'ese'),
+(2, 'Das ist eine Beschreibung von student', 'student@example.com', 0, 'student', 0, 'student', '5f4dcc3b5aa765d61d8327deb882cf99', 'student'),
+(3, 'Das ist eine Beschreibung von Tutor1', 'tutor1@example.com', 20, 'Tutor1', 1, 'Tutor1', '0b2f99d74e41e808a5e3c0c50223ae7f', 'tutor1'),
+(4, 'Das ist eine Beschreibung von Tutor2', 'tutor2@example.com', 30, 'Tutor2', 1, 'Tutor2', 'eb007e610d25769d69f081ebbb337b13', 'tutor2');
 
 -- --------------------------------------------------------
 

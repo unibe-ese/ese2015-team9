@@ -22,12 +22,22 @@
                 <td class="bold">Last Name:</td>
                 <td>${member.lastName}</td>
             </tr>
-
             <tr>
                 <td class="bold">E-Mail:</td>
                 <td>${member.email}</td>
             </tr>
-
+            <tr>
+                <td class="bold">Beschreibung:</td>
+                <td><c:choose>
+                		<c:when test="${not empty member.description}">
+                			${member.description}
+                		</c:when>
+                		<c:otherwise>
+                			Don't forget to write a <a href="./account/edit?" style="color:#426B81;font-weight:bold;" onmouseover="this.style.color='#D35836';" onmouseout="this.style.color='#426B81';">description</a>
+                		</c:otherwise>
+                	</c:choose>
+                </td>
+            </tr>
         </table>
 
     </fieldset>

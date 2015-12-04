@@ -12,7 +12,7 @@
 
 <div class="container">
     
-    <h1>Mein Profil</h1>
+    <h1>My Profile</h1>
     
     <form:form action="save" id="editForm" modelAttribute="editForm"
         method="post" cssClass="forms">
@@ -40,6 +40,12 @@
 			element="p" />
         <form:input path="email" type="text" 
             name="email" value="${editForm.email}" />
+            
+        <label><p>Description</p></label>
+        <form:errors path="description" cssClass="error"
+			element="p" />
+        <form:input path="description" type="text" 
+            name="description" value="${editForm.description}" />
         
         <c:if test="${member.isTutor}">
             <label><p>Fee</p></label>

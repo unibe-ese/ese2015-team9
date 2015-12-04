@@ -55,11 +55,12 @@ public class MemberService {
 		member.setFirstName(editForm.getFirstName());
 		member.setLastName(editForm.getLastName());
 		member.setUsername(editForm.getUsername());
+		member.setDescription(editForm.getDescription());
 
 		if (member.isIsTutor()) {
 			double fee = Double.parseDouble(editForm.getFee());
 			member.setFee(fee);
-			List<University> tmpList = new ArrayList<University>();
+			List<University> tmpList = new ArrayList<>();
 			for (int i = 0; i < editForm.getUniversities().size(); i++) {
 				List<University> selectedUni = uniDao.findByName(editForm.getUniversities().get(i));
 				tmpList.add(selectedUni.get(0));

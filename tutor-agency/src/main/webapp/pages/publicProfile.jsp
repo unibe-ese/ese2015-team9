@@ -39,7 +39,11 @@
                                     </c:forEach>
                             </ol>
                     </tr>
-
+                    <tr>
+                        <td class="bold">Beschreibung:</td>
+                        <td>${member.description}</td>
+                </tr>
+                        
                 </c:if>
 
             </table>
