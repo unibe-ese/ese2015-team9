@@ -9,7 +9,7 @@
         <legend>
             Basic Information
         </legend>
-        <table class="forms">
+        <table>
             <tr>
                 <td class="bold">Username:</td>
                 <td>${member.username}</td>
@@ -26,24 +26,12 @@
                 <td class="bold">E-Mail:</td>
                 <td>${member.email}</td>
             </tr>
-            <tr>
-                <td class="bold">Beschreibung:</td>
-                <td><c:choose>
-                		<c:when test="${not empty member.description}">
-                			${member.description}
-                		</c:when>
-                		<c:otherwise>
-                			Don't forget to write a <a href="./account/edit?" style="color:#426B81;font-weight:bold;" onmouseover="this.style.color='#D35836';" onmouseout="this.style.color='#426B81';">description</a>
-                		</c:otherwise>
-                	</c:choose>
-                </td>
-            </tr>
         </table>
 
     </fieldset>
     <c:if test="${member.isTutor}">
         <fieldset><legend>Tutoring</legend>
-            <table class="forms">
+            <table>
 
                 <c:if test="${member.isTutor}">
                     <tr>
@@ -64,4 +52,17 @@
             </table>
         </fieldset>
     </c:if>
+
+    <fieldset>
+        <legend>Description</legend>
+        <c:choose>
+            <c:when test="${not empty member.description}">
+                ${member.description}
+            </c:when>
+            <c:otherwise>
+                Don't forget to write a 
+                <a href="<c:url value="/auth/account/edit" />" >description</a>
+            </c:otherwise>
+        </c:choose>
+    </fieldset>        
 </div>

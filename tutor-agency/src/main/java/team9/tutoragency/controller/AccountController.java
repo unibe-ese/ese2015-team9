@@ -1,6 +1,7 @@
 package team9.tutoragency.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.controller.service.validation.EditFormValidator;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.University;
 
 /**
  * Handles requests for showing, and editing the account.
@@ -80,10 +82,14 @@ public class AccountController {
 		EditForm editForm = new EditForm(member);
 
 		List<String> universityNames = uniService.findAllNames();
-
+		List<String> alreadySelectedUniversities = new ArrayList<String>();
+		for(University uni: member.getUniversityList()){
+			alreadySelectedUniversities.add(uni.getName());
+		}
 		edit.addObject("universityChoices", universityNames);
 		edit.addObject("editForm", editForm);
 		edit.addObject("member", member);
+		edit.addObject("alreadySelectedUniversities", alreadySelectedUniversities);
 		return edit;
 	}
 
