@@ -40,10 +40,10 @@
                             </ol>
                     </tr>
                     <tr>
-                        <td class="bold">Beschreibung:</td>
+                        <td class="bold">Description:</td>
                         <td>${member.description}</td>
-                </tr>
-                        
+                    </tr>
+
                 </c:if>
 
             </table>
@@ -51,43 +51,49 @@
         </fieldset>
     </div>
 
-    <h2>Offers</h2>
-    <div>
-        <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
-        <table id=courses>
-            <thead>
-                <tr>
-                    <th>Course</th>
-                    <th>University</th>
+    <c:if test="${not empty member.offers}">            
+        <h2>Offers</h2>
+        <div>
+            <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
+
+            <table id=courses>
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>University</th>
+                            <c:if test="${loggedIn}">
+                            <th>Subscribe</th>
+                            </c:if>
+                    </tr>
+                </thead>
+                <c:forEach items="${member.offers}" var="offer">
+                    <c:set var="course" value="${offer.course}"/>
+                    <tr>
+                        <td><c:out value="${course.name}"></c:out></td>
+                        <td><c:out value="${course.university.name}"></c:out></td>
+
                         <c:if test="${loggedIn}">
-                        <th>Subscribe</th>
+                            <!-- ADD CONTACT ICON -->
+
+                            <td align="center">
+                                <form
+                                    onsubmit="return confirm('Do you want to request tutoring for ${course.name}?');"
+                                    action="auth/offer/${offer.id}/subscribe" 
+                                    method="get">
+
+                                    <input class="none" id="emailIcon" type="image"
+                                           src="img/email-icon.png" name="email-icon">
+                                </form></td>
+
                         </c:if>
-                </tr>
-            </thead>
-            <c:forEach items="${member.offers}" var="offer">
-                <c:set var="course" value="${offer.course}"/>
-                <tr>
-                    <td><c:out value="${course.name}"></c:out></td>
-                    <td><c:out value="${course.university.name}"></c:out></td>
+                    </tr>
+                </c:forEach>
+            </table>
 
-                    <c:if test="${loggedIn}">
-                        <!-- ADD CONTACT ICON -->
+        </div>
 
-                        <td align="center">
-                            <form
-                                onsubmit="return confirm('Do you want to request tutoring for ${course.name}?');"
-                                action="auth/offer/${offer.id}/subscribe" 
-                                method="get">
+    </c:if>
 
-                                <input class="none" id="emailIcon" type="image"
-                                       src="img/email-icon.png" name="email-icon">
-                            </form></td>
-
-                    </c:if>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
 
 </div>
 </div> <%-- Do not delete this div --%>

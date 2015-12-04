@@ -29,17 +29,21 @@
                         <c:choose>
                             <c:when test="${!subscription.accepted}">
                                 <div class="flex-lower-item request open">
-                                    <p>Request from</p>
-                                    <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
+                                    <div class="item-text">
+                                        <p>Request from</p>
+                                        <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
+                                    </div>
                                     <a class="button" href="offer/${offer.id}/accept/${subscription.id}">Accept</a>
                                 </div>
 
                             </c:when>
                             <c:otherwise>
                                 <div class="flex-lower-item request accepted">
-                                    <p>Accepted Request</p>
-                                    <br>
-                                    <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
+                                    <div class="item-text">
+                                        <p>Accepted Request</p>
+                                        <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
+                                    </div>
+                                    <a class="button" href="mailto:<c:out value="${subscription.member.email}" />">Contact</a>
                                 </div>
 
                             </c:otherwise>
@@ -49,7 +53,9 @@
 
                 </c:if>
                 <div class="flex-lower-item remove">
-                    <p>Remove this course?</p>
+                    <div class="item-text">
+                        <p>Remove this course?</p>
+                    </div>
                     <form onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');" 
                           action="offer/${offer.id}/delete" method="get">
                         <input type="submit" value="Remove">
