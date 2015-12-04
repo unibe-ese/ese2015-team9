@@ -63,8 +63,9 @@
             class="labelblock"></span>
         <h2>Subscriptions</h2></label>
     <div id="subscriptions">
-        <h6>*Here you can see the tutoring offers, for which you
-            requested tutoring.*</h6>
+        <p>Here you can see the tutoring offers, for which you
+            requested tutoring.</p>
+        <br>
             <c:if test="${empty member.subscriptions }">
             <br>But you have subscribed to no offer yet.
         </c:if>
