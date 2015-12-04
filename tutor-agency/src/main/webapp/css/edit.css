@@ -2,6 +2,15 @@
 /* Edit                                                                         */
 /*********************************************************************************/
 
+textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 8em;
+    border: 5px solid #426B81;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
 fieldset {
     border: 5px solid #426B81;
     padding: 1em;

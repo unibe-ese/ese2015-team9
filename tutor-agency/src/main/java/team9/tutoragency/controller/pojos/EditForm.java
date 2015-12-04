@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import team9.tutoragency.controller.service.validation.EditFormValidationService;
 import team9.tutoragency.model.Member;
@@ -28,6 +29,7 @@ public class EditForm implements Form {
 	@NotNull(message = "Please enter a username.")
 	private String username;
 	
+    @Size(max = 2000, message = "Description is to long.")
 	private String description;
 
 	private List<String> universities;

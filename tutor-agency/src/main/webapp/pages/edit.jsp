@@ -40,8 +40,8 @@
 
 		<label><p>Description</p></label>
 		<form:errors path="description" cssClass="error" element="p" />
-		<form:input path="description" type="text" name="description"
-			value="${editForm.description}" />
+        <form:textarea path="description" type="textfield" name="description"
+			value="${editForm.description}"/>
 
 		<c:if test="${member.isTutor}">
 			<label><p>Fee</p></label>
