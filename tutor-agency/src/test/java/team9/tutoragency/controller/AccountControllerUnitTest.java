@@ -18,7 +18,7 @@ import org.springframework.web.util.NestedServletException;
 import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.UniversityService;
-import team9.tutoragency.controller.service.validation.EditFormValidationService;
+import team9.tutoragency.controller.service.validation.EditFormValidator;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
 
@@ -47,7 +47,7 @@ public class AccountControllerUnitTest {
 	private MockMvc mockMvc;
 
 	@Mock
-	private EditFormValidationService validator;
+	private EditFormValidator validator;
 	@Mock
 	private MemberService memberService;
 	@Mock

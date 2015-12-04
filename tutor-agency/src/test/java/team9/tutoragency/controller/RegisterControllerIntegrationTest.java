@@ -31,7 +31,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.controller.service.MemberService;
-import team9.tutoragency.controller.service.validation.SignupFormValidationService;
+import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import util.SignupFormValidatorMock;
 
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.UniversityService;
-import team9.tutoragency.controller.service.validation.EditFormValidationService;
+import team9.tutoragency.controller.service.validation.EditFormValidator;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
 
@@ -68,7 +68,7 @@ public class EditControllerTest {
 	private List<String> uniNames;
 
 	@Mock
-	private EditFormValidationService validator;
+	private EditFormValidator validator;
 	@Mock
 	private MemberService memberService;
 	@Mock

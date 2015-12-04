@@ -4,9 +4,9 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.validation.SignupFormValidationService;
+import team9.tutoragency.controller.service.validation.SignupFormValidator;
 
-public class SignupFormValidatorMock extends SignupFormValidationService{
+public class SignupFormValidatorMock extends SignupFormValidator{
 
 	private boolean rejecting;
 	

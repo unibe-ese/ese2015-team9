@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import team9.tutoragency.controller.exceptions.InvalidUserException;
 import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.controller.service.MemberService;
-import team9.tutoragency.controller.service.validation.SignupFormValidationService;
+import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import team9.tutoragency.model.Member;
 
 /**
@@ -32,10 +32,10 @@ public class RegisterController {
 	@Autowired
 	MemberService memberService;
 
-	SignupFormValidationService validator;
+	SignupFormValidator validator;
 	
 	@Autowired
-    public void setValidator(SignupFormValidationService validator) {
+    public void setValidator(SignupFormValidator validator) {
         this.validator = validator;
     }
 	

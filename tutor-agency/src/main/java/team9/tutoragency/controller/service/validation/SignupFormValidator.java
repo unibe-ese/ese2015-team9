@@ -15,13 +15,13 @@ import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
 /**
- * The {@link SignupFormValidationService} validates a {@link SignupForm}.
+ * The {@link SignupFormValidator} validates a {@link SignupForm}.
  * 
  * @author laeri
  *
  */
 @Service
-public class SignupFormValidationService implements Validator {
+public class SignupFormValidator implements Validator {
 
 	@Autowired
 	MemberDao memberDao;
@@ -31,7 +31,7 @@ public class SignupFormValidationService implements Validator {
 	private Matcher matcher;
 	private final String namePattern = "^[a-zA-Z0-9_-]{3,15}$";
 
-	public SignupFormValidationService() {
+	public SignupFormValidator() {
 		validCharacterPattern = Pattern.compile(namePattern);
 	}
 

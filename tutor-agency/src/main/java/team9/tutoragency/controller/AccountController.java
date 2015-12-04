@@ -17,12 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.UniversityService;
-import team9.tutoragency.controller.service.validation.EditFormValidationService;
+import team9.tutoragency.controller.service.validation.EditFormValidator;
 import team9.tutoragency.model.Member;
 
 /**
- * Handles all interactions of a {@link Member} in order to edit the profile
- * information.
+ * Handles requests for showing, and editing the account.
+ * The URL is intercepted by spring security if no member is logged in.
  * 
  * @author laeri
  * @author bruno
@@ -33,7 +33,7 @@ import team9.tutoragency.model.Member;
 public class AccountController {
 
 	@Autowired
-	EditFormValidationService validator;
+	EditFormValidator validator;
 	@Autowired
 	MemberService memberService;
 	@Autowired
@@ -90,7 +90,7 @@ public class AccountController {
 	/**
 	 * Handles saving an {@link EditForm} with the help of the
 	 * {@link MemberService} to the database. The {@link EditForm} is validated
-	 * by the {@link EditFormValidationService}. If the validation passes the
+	 * by the {@link EditFormValidator}. If the validation passes the
 	 * {@link MemberService} saves the change persistently, if not the edit view
 	 * is again displayed containing any errors.
 	 * 

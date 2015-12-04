@@ -14,12 +14,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.validation.SignupFormValidationService;
+import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
 /**
- * Tests the class {@link SignupFormValidationService}
+ * Tests the class {@link SignupFormValidator}
  */
 @RunWith(MockitoJUnitRunner.class)
 public class SignupFormValidationServiceTest {
@@ -27,7 +27,7 @@ public class SignupFormValidationServiceTest {
     @Mock
     private MemberDao memberDao;
     @InjectMocks
-    private final SignupFormValidationService validator = new SignupFormValidationService();
+    private final SignupFormValidator validator = new SignupFormValidator();
     
     @Before
     public void setUp() {

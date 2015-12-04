@@ -16,7 +16,7 @@ import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.validation.SignupFormValidationService;
+import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import util.SignupFormValidatorMock;
 
 import static org.springframework.test.web.ModelAndViewAssert.assertViewName;
@@ -42,7 +42,7 @@ import static java.util.Arrays.asList;
 @RunWith(MockitoJUnitRunner.class)
 public class RegisterControllerTest {
 
-	private SignupFormValidationService validator;
+	private SignupFormValidator validator;
     
 	@InjectMocks
     private RegisterController controller;
