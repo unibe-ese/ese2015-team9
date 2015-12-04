@@ -34,7 +34,7 @@ public class MemberServiceTest {
     private MemberService service;
     @Captor
     private ArgumentCaptor<Member> captor;
-    private final Member activeMember = new Member("firstName", "lastName", "member@email.com", "username", "password", "description");
+    private final Member activeMember = new Member("firstName", "lastName", "member@email.com", "username", "password");
     
     @Before
     public void setUp() {
@@ -77,8 +77,8 @@ public class MemberServiceTest {
     public void testSaveEditChange() {
         Mockito.when(memberDao.save(captor.capture())).thenReturn(any(Member.class));
         
-        Member expMember = new Member("fName", "lName", "newemail@email.com", "uname", "password", "description");
-        Member memberBefore = new Member("firstName", "lastName", "member@email.com", "username", "password", "description");
+        Member expMember = new Member("fName", "lName", "newemail@email.com", "uname", "password");
+        Member memberBefore = new Member("firstName", "lastName", "member@email.com", "username", "password");
         
         EditForm form = new EditForm();
         form.setEmail(expMember.getEmail());

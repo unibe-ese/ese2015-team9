@@ -50,6 +50,7 @@ import team9.tutoragency.controller.RegisterController;
  * 
  * </p>
  * 
+ * @author curtys
  * @author bruno
  * @author laeri
  *
@@ -81,14 +82,14 @@ public class Member implements UserDetails {
 
 	@OneToMany(mappedBy = "tutor")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private Set<Offer> offers = new HashSet<Offer>();
+	private Set<Offer> offers = new HashSet<>();
 	
 	@OneToMany
 	@JoinColumn(name = "member_id")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Subscription> subscriptions = new ArrayList<Subscription>();
+	private List<Subscription> subscriptions = new ArrayList<>();
 	
-	public Member(String firstName, String lastName, String email, String username, String password, String description) {
+	public Member(String firstName, String lastName, String email, String username, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -96,7 +97,7 @@ public class Member implements UserDetails {
 		this.username = username;
 		this.isTutor = false;
 		this.fee = 0D;
-		this.description = description;
+		this.description = "";
 	}
 	
 	public Member(Long id, String username) {
@@ -114,6 +115,7 @@ public class Member implements UserDetails {
 		this.isTutor = tutor;
 	}
 	
+    @Override
 	public String getPassword() {
 		return password;
 	}
@@ -170,28 +172,34 @@ public class Member implements UserDetails {
 		this.universityList = universityList;
 	}
 
+    @Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Collection<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+		Collection<GrantedAuthority> list = new ArrayList<>();
 		list.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return list;
 	}
 
+    @Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
+    @Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
+    @Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
+    @Override
 	public boolean isEnabled() {
 		return true;
 	}
 
+    @Override
 	public String getUsername() {
 		return username;
 	}
