@@ -59,7 +59,7 @@ public class EditFormValidationService implements Validator {
 	private Pattern validCharacterPattern;
 
 	private Matcher matcher;
-	private final String namePattern = "^[a-zA-Z0-9_-]{3,15}$";
+	private final static String namePattern = "^[a-zA-Z0-9_-]{3,15}$";
 
 	public EditFormValidationService() {
 		validCharacterPattern = Pattern.compile(namePattern);
@@ -103,10 +103,14 @@ public class EditFormValidationService implements Validator {
 
 		if (member.isIsTutor()) {
 			try {
-				Double.parseDouble(form.getFee());
+				double fee = Double.parseDouble(form.getFee());
+				if(fee < 0){
+					errors.rejectValue("fee", "fee.invalidValue", "You should enter a positive number in this case");
+				}
 			} catch (Exception e) {
 				errors.rejectValue("fee", "fee.invalidValue", "Please enter a valid number");
 			}
+			
 		}
 	}
 

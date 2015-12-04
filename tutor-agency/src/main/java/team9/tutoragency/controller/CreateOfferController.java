@@ -27,10 +27,10 @@ import team9.tutoragency.model.University;
 
 /**
  * The {@link CreateOfferController} handles all interactions a registered
- * {@link Member} to add an {@code Offer}. The class
- * interacts with {@link CourseService} in order to write the changes
- * persistently to the database. For all methods the user has to be logged
- * in(get requests for the views are registered in the springSecurity.xml file).
+ * {@link Member} to add an {@code Offer}. The class interacts with
+ * {@link CourseService} in order to write the changes persistently to the
+ * database. For all methods the user has to be logged in(get requests for the
+ * views are registered in the springSecurity.xml file).
  * 
  * @author laeri
  * @author bruno
@@ -39,12 +39,17 @@ import team9.tutoragency.model.University;
 @RequestMapping(value = "/auth/offer/")
 public class CreateOfferController {
 
-	@Autowired CourseService courseService;
-	@Autowired UniversityService uniService;
-	@Autowired AgencyService service;
-	@Autowired OfferFormValidator validator;
-	@Autowired MemberService memberService;
-	
+	@Autowired
+	CourseService courseService;
+	@Autowired
+	UniversityService uniService;
+	@Autowired
+	AgencyService service;
+	@Autowired
+	OfferFormValidator validator;
+	@Autowired
+	MemberService memberService;
+
 	/**
 	 * This method is invoked before any other handler method of this
 	 * controller. Adds the objects needed to populate the selections in the. A
@@ -60,8 +65,9 @@ public class CreateOfferController {
 	@ModelAttribute
 	public void populateModel(@RequestParam(value = "id", required = false) Long uniId, ModelMap modelMap) {
 		List<University> unis = uniService.findAll();
-		
-		if (unis.isEmpty()) throw new AssertionError("No Universities found! Check Database!");
+
+		if (unis.isEmpty())
+			throw new AssertionError("No Universities found! Check Database!");
 
 		University selectedUni = new University();
 
@@ -81,36 +87,40 @@ public class CreateOfferController {
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView createOfferForm() {
 		Optional<Member> member = memberService.getAuthenticatedMember();
-			
-		if(!member.isPresent())
+
+		if (!member.isPresent())
 			return new ModelAndView("redirect:/denied#login");
-		
-		//else
-		ModelAndView model = new ModelAndView("createOffer");	
+
+		// else
+		ModelAndView model = new ModelAndView("createOffer");
 		model.addObject("offerForm", new OfferForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public ModelAndView submitOfferForm(@ModelAttribute University selectedUniversity, OfferForm offerForm, BindingResult result) {
-		Long memberId = ((Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-		offerForm.setMemberId(memberId);
-		
+	public ModelAndView submitOfferForm(@ModelAttribute University selectedUniversity, OfferForm offerForm,
+			BindingResult result) {
+		Member member = memberService.getAuthenticatedMember().get();
+		offerForm.setMemberId(member.getId());
+
 		validator.validate(offerForm, result);
-		
-		if(result.hasErrors()){
-			ModelAndView model = new ModelAndView("createOffer", "offerForm", offerForm);	
-			
+
+		if (result.hasErrors()) {
+			ModelAndView model = new ModelAndView("createOffer", "offerForm", offerForm);
+
 			Optional<Course> course = courseService.findOne(offerForm.getCourseId());
-			if(course.isPresent())
+			if (course.isPresent()){
 				model.addObject("selectedUniversity", course.get().getUniversity());
+				model.addObject("selectedCourse", course.get());
+				model.addObject("courses", courseService.findByUniversity(course.get().getUniversity()));
+			}
 			return model;
 		}
-		//else
-		service.createOffer(memberId, offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
-		
+		// else
+		service.createOffer(member.getId(), offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
+
 		ModelAndView model = new ModelAndView("redirect:../account/message");
-		model.addObject("message","You have successfully created an offer. ");
+		model.addObject("message", "You have successfully created an offer. ");
 		return model;
 	}
 }
