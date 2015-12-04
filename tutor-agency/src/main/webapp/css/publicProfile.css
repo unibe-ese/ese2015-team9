@@ -6,8 +6,11 @@ legend {
 }
 
 fieldset {
+    flex-basis: content;
+    flex-grow: 20;
     border: 5px solid #426B81;
     padding: 1em;
+    margin: 0.5em 1%;
 }
 
 thead {
@@ -30,6 +33,13 @@ table#courses {
 
 h2 {
     margin-top: 2em;
+}
+
+.flex-upper {
+    display: flex;
+    width: 102%;
+    margin-left: -1%;
+    flex-wrap: wrap;
 }
 
 @media 

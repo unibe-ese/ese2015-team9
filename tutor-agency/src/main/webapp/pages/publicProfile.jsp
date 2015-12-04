@@ -11,58 +11,21 @@
 <link type="text/css" rel="stylesheet" href="${profile}" />
 
 <div class="container">
-    <h1>
-        <c:out value="${member.username}"></c:out>
-        </h1>
-        <div>
-            <fieldset>
-                <legend>
-                    Basic Information
-                </legend>
-                <table class="forms">
-                    <tr>
-                        <td class="bold">Username:</td>
-                        <td>${member.username}</td>
-                </tr>
-                <c:if test="${member.isTutor}">
-                    <tr>
-                        <td class="bold">Tutoring fee</td>
-                        <td>${member.fee}</td>
+    <h1><c:out value="${member.username}"></c:out></h1>
 
-                    <tr/>
-                    <tr>
-                        <td class="bold">Locations:</td>
-                        <td>
-                            <ol>
-                                <c:forEach items="${member.universityList}" var="unis">
-                                    <li>${unis.name}</li>
-                                    </c:forEach>
-                            </ol>
-                    </tr>
-                    <tr>
-                        <td class="bold">Description:</td>
-                        <td>${member.description}</td>
-                    </tr>
-
-                </c:if>
-
-            </table>
-
-        </fieldset>
-    </div>
+    <c:import url="fragments/publicProfileInformation.jsp" />        
 
     <c:if test="${not empty member.offers}">            
         <h2>Offers</h2>
         <div>
             <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
-
             <table id=courses>
                 <thead>
                     <tr>
                         <th>Course</th>
                         <th>University</th>
                             <c:if test="${loggedIn}">
-                            <th>Subscribe</th>
+                                <th>Subscribe</th>
                             </c:if>
                     </tr>
                 </thead>
