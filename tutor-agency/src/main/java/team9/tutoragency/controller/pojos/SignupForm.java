@@ -14,6 +14,7 @@ import team9.tutoragency.model.Member;
  * will be validated by the {@link SignupFormValidationService}.
  * 
  * @author laeri
+ * @author curtys
  *
  */
 public class SignupForm implements Form {
@@ -35,8 +36,6 @@ public class SignupForm implements Form {
             + "@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
             message = "Must be valid email address")
 	private String email;
-	
-	private String description;
 
 	private boolean readAGB;
 
@@ -45,7 +44,6 @@ public class SignupForm implements Form {
 		lastName = "Nachname";
 		username = "Nickname";
 		email = "E-mail";
-		description = null;
 	}
 
 	public String getFirstName() {
@@ -111,14 +109,6 @@ public class SignupForm implements Form {
 	public void setReadAGB(boolean readAGB) {
 		this.readAGB = readAGB;
 	}
-	
-	public String getDescription() {
-		return this.description;
-	}
-	
-	public void setDescription(String description) {
-		description = this.description;
-	}
 
     @Override
     public int hashCode() {
@@ -129,7 +119,6 @@ public class SignupForm implements Form {
         hash = 23 * hash + Objects.hashCode(this.password);
         hash = 23 * hash + Objects.hashCode(this.passwordConfirm);
         hash = 23 * hash + Objects.hashCode(this.email);
-        hash = 23 * hash + Objects.hashCode(this.description);
         hash = 23 * hash + (this.readAGB ? 1 : 0);
         return hash;
     }
@@ -162,9 +151,6 @@ public class SignupForm implements Form {
             return false;
         }
         if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
         if (this.readAGB != other.readAGB) {
