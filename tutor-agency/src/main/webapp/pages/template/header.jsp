@@ -49,10 +49,10 @@
                             <li class="flex-fill"></li>
                             
                             <c:set var="messageAdded" value="false"></c:set>
-                            <c:forEach items="${member.offers}" var="offer">
-                                <c:if test="${not empty offer.subscriptions and not messageAdded}">
-                                    <c:forEach items="${offer.subscriptions}" var="subscription">
-                                        <c:if test="${!subscription.accepted and not messageAdded}">
+                            <c:forEach items="${loggedInMember.offers}" var="openOffers">
+                                <c:if test="${not empty openOffers.subscriptions and not messageAdded}">
+                                    <c:forEach items="${openOffers.subscriptions}" var="openSubscription">
+                                        <c:if test="${!openSubscription.accepted and not messageAdded}">
                                             <c:set var="messageAdded" value="true"></c:set>
                                             <li>
                                                 <a  class="nav-request" 

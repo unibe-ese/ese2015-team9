@@ -32,7 +32,7 @@ public class HeaderInfoInterceptor extends HandlerInterceptorAdapter {
 			return;
 		}
 		if (memberService.getAuthenticatedMember().isPresent()) {
-			modelAndView.addObject("member", memberService.getAuthenticatedMember().get());
+			modelAndView.addObject("loggedInMember", memberService.getAuthenticatedMember().get());
 		}
 	}
 
