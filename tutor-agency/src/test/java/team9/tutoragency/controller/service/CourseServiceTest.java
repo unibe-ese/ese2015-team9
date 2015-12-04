@@ -126,15 +126,15 @@ public class CourseServiceTest {
 //    public void testFindUniversityForCourse() {
 //        Mockito.when(courseDao.findOne(anyLong())).thenReturn(course1List.get(0));
 //        long selectedCourse = Long.MIN_VALUE;
-//        University result = service.findUniversityForCourse(selectedCourse);
+//        University result = agencyService.findUniversityForCourse(selectedCourse);
 //        assertEquals(uni1, result);
 //        selectedCourse = Long.MAX_VALUE;
-//        result = service.findUniversityForCourse(selectedCourse);
+//        result = agencyService.findUniversityForCourse(selectedCourse);
 //        assertEquals(uni1, result);
 //        
 //        selectedCourse = 2L;
 //        Mockito.when(courseDao.findOne(selectedCourse)).thenReturn(course2List.get(0));
-//        result = service.findUniversityForCourse(selectedCourse);
+//        result = agencyService.findUniversityForCourse(selectedCourse);
 //        assertEquals(uni2, result);
 //
 //    } 

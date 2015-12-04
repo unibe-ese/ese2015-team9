@@ -152,7 +152,7 @@ public class CreateOfferControllerTest {
 //        ModelAndView model = new ModelAndView("addCourse");
 //        AddCourseForm addCourseForm = new AddCourseForm();
 //        addCourseForm.setSelectedUniversity("uni2");
-//        service.updateDropdown(model, addCourseForm);
+//        agencyService.updateDropdown(model, addCourseForm);
 //        List<University> unisReverse = new ArrayList<University>();
 //        unisReverse.add(uni2);
 //        unisReverse.add(uni1);
