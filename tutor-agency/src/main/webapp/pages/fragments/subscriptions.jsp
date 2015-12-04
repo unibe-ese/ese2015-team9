@@ -22,7 +22,9 @@
                         value="${subscription.offer.tutor.username}"></c:out></a></td>
                     <c:choose>
                         <c:when test="${subscription.accepted}">
-                    <td>the tutor has accepted your request, he will contact you soon</td>
+                        <td>Accepted: <a href="mailto:<c:out value="${subscription.offer.tutor.email}" />">
+                            Contact ${subscription.offer.tutor.username}</a>
+                    </td>
                 </c:when>
                 <c:otherwise>
                     <td>waiting for acceptance...</td>

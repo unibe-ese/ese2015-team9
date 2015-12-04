@@ -11,83 +11,52 @@
 <link type="text/css" rel="stylesheet" href="${profile}" />
 
 <div class="container">
-    <h1>
-        <c:out value="${member.username}"></c:out>
-        </h1>
+    <h1><c:out value="${member.username}"></c:out></h1>
+
+    <c:import url="fragments/publicProfileInformation.jsp" />        
+
+    <c:if test="${not empty member.offers}">            
+        <h2>Offers</h2>
         <div>
-            <fieldset>
-                <legend>
-                    Basic Information
-                </legend>
-                <table class="forms">
+            <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
+            <table id=courses>
+                <thead>
                     <tr>
-                        <td class="bold">Username:</td>
-                        <td>${member.username}</td>
-                </tr>
-                <c:if test="${member.isTutor}">
-                    <tr>
-                        <td class="bold">Tutoring fee</td>
-                        <td>${member.fee}</td>
-
-                    <tr/>
-                    <tr>
-                        <td class="bold">Locations:</td>
-                        <td>
-                            <ol>
-                                <c:forEach items="${member.universityList}" var="unis">
-                                    <li>${unis.name}</li>
-                                    </c:forEach>
-                            </ol>
+                        <th>Course</th>
+                        <th>University</th>
+                            <c:if test="${loggedIn}">
+                                <th>Subscribe</th>
+                            </c:if>
                     </tr>
+                </thead>
+                <c:forEach items="${member.offers}" var="offer">
+                    <c:set var="course" value="${offer.course}"/>
                     <tr>
-                        <td class="bold">Beschreibung:</td>
-                        <td>${member.description}</td>
-                </tr>
-                        
-                </c:if>
+                        <td><c:out value="${course.name}"></c:out></td>
+                        <td><c:out value="${course.university.name}"></c:out></td>
 
+                        <c:if test="${loggedIn}">
+                            <!-- ADD CONTACT ICON -->
+
+                            <td align="center">
+                                <form
+                                    onsubmit="return confirm('Do you want to request tutoring for ${course.name}?');"
+                                    action="auth/offer/${offer.id}/subscribe" 
+                                    method="get">
+
+                                    <input class="none" id="emailIcon" type="image"
+                                           src="img/email-icon.png" name="email-icon">
+                                </form></td>
+
+                        </c:if>
+                    </tr>
+                </c:forEach>
             </table>
 
-        </fieldset>
-    </div>
+        </div>
 
-    <h2>Offers</h2>
-    <div>
-        <sec:authorize var="loggedIn" access="hasRole('ROLE_USER')" />
-        <table id=courses>
-            <thead>
-                <tr>
-                    <th>Course</th>
-                    <th>University</th>
-                        <c:if test="${loggedIn}">
-                        <th>Subscribe</th>
-                        </c:if>
-                </tr>
-            </thead>
-            <c:forEach items="${member.offers}" var="offer">
-                <c:set var="course" value="${offer.course}"/>
-                <tr>
-                    <td><c:out value="${course.name}"></c:out></td>
-                    <td><c:out value="${course.university.name}"></c:out></td>
+    </c:if>
 
-                    <c:if test="${loggedIn}">
-                        <!-- ADD CONTACT ICON -->
-
-                        <td align="center">
-                            <form
-                                onsubmit="return confirm('Do you want to request tutoring for ${course.name}?');"
-                                action="auth/offer/${offer.id}/subscribe" 
-                                method="get">
-
-                                <input class="none" id="emailIcon" type="image"
-                                       src="img/email-icon.png" name="email-icon">
-                            </form></td>
-
-                    </c:if>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
 
 </div>
 </div> <%-- Do not delete this div --%>

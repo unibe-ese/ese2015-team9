@@ -78,17 +78,27 @@ fieldset p a {
     padding: 1em;
     flex: 2 2 auto;
 }
-.flex-lower-item span {
+/*.flex-lower-item span {
     margin-bottom: 0.5em;
     display: block;
+}*/
+
+.item-text {
+    height: 4em;
 }
 
-.flex-lower-item a.button {
+a.button {
     display: block;
     width: auto;
     padding: 0.5em;
     margin-top: 1em;
     text-align: center;
+    border: 5px solid #fff;
+    color: #fff;
+    background-color: #fff;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
 }
 
 .course-info {
@@ -101,31 +111,36 @@ fieldset p a {
     color: #fff;
 }
 .open a.button {
-    border: 5px solid #fff;
     background-color: #426B81;
-    color: #fff;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    transition: all 0.5s;
 }
-.open a.button:hover, .open a.button:focus {
-    background-color: #fff;
+.open a.button:hover, .open a.button:focus,.open a.button:active {
     color: #426B81;
+    background-color: #fff;
 }
 .accepted {
     background-color: #70A1A8;
     color: #fff;
 }
 
+.accepted a.button {
+    background-color: #70A1A8;
+}
+.accepted a.button:hover, .accepted a.button:focus,.accepted a.button:active {
+    color: #70A1A8;
+    background-color: #fff;
+}
+
 .remove {
-    background-color: #D35836;
+    /*background-color: #D35836;*/
+    background-color: #db795e;
     color: #fff;
 }
 .remove input[type="submit"] {
     width: 100%;
     height: auto;
     padding: 0.5em;
-    background-color: #D35836;
+    /*background-color: #D35836;*/
+    background-color: #db795e;
     color: #fff;
     border: 5px solid #fff;
     margin-bottom: 0;

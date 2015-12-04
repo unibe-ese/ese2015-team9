@@ -29,7 +29,7 @@ public class SignupFormValidator implements Validator {
 	private Pattern validCharacterPattern;
 
 	private Matcher matcher;
-	private final String namePattern = "^[a-zA-Z0-9_-]{3,15}$";
+	private final static String namePattern = "^[a-zA-Z0-9_-]{3,15}$";
 
 	public SignupFormValidator() {
 		validCharacterPattern = Pattern.compile(namePattern);
