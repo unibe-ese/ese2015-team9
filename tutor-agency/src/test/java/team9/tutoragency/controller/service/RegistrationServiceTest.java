@@ -45,7 +45,7 @@ public class RegistrationServiceTest {
         form.setUsername("username");
         form.setPassword("password");
         Member expectedMember = new Member("firstName", "lastName", "member@email.com", "username",
-                DigestUtils.md5Hex("password"), "description");
+                DigestUtils.md5Hex("password"));
         service.saveFrom(form);
         assertTrue(expectedMember.equals(captor.getValue()));
         

@@ -10,10 +10,9 @@
 <link type="text/css" rel="stylesheet" href="${css}" />
 
 
-
 <div class="container">
     
-    <h1>Mein Profil</h1>
+    <h1>My Profile</h1>
     
     <form:form action="save" id="editForm" modelAttribute="editForm"
         method="post" cssClass="forms">
@@ -42,7 +41,7 @@
         <form:input path="email" type="text" 
             name="email" value="${editForm.email}" />
             
-        <label><p>Beschreibung</p></label>
+        <label><p>Description</p></label>
         <form:errors path="description" cssClass="error"
 			element="p" />
         <form:input path="description" type="text" 
@@ -88,7 +87,6 @@
         
         <input class="submitbutton" type="submit" value="Save" />
     </form:form>
->>>>>>> 0f39ec6fcd5e05a9f79d1e6dacfd44be1eb61138
 
 
 </div>

@@ -94,9 +94,9 @@ public class EditControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         
 		//initialize test beans
-		member = new Member("firstname", "lastname", "name@mail.com", "username", "password", "description" );
+		member = new Member("firstname", "lastname", "name@mail.com", "username", "password");
         member.setId(Long.valueOf(1));
-		editedMember = new Member("firstname2", "lastname2", "name2@mail.com", "username2", "password2", "description" );
+		editedMember = new Member("firstname2", "lastname2", "name2@mail.com", "username2", "password2");
 
 		uni1 = new University();
 		uni2 = new University();

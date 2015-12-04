@@ -26,16 +26,19 @@
 .searchForm fieldset #minGrade {
 	width: 8em;
 }
+#noresult {
+    display: none;
+}
 
 #filtered {
     display: none;
 }
 #filtered ~ #filters{
-  display:none;
+    display: none;
 }
 
 #filtered:checked ~ #filters{
-  display:flex;
+    display: flex;
 }
 
 .collapse{
@@ -44,16 +47,7 @@
   margin-bottom: 1em;
 }
 
-.block {
-    float: left;
-    display: inline-block;
-    margin-right: 1em;
-    width: 1.8em;
-    height: 1.8em;
-    border: 5px solid #426B81; 
-}
-
-#filtered:checked ~ label .block {
+#filtered:checked ~ label .labelblock {
     background-color: #426B81;
 }
 
@@ -63,17 +57,12 @@
     align-items: flex-start;
     width: 102%;
     margin-left: -1%;
-    /*margin-right: 1%;*/
 }
 .filter {
-    /*width: 20em;*/
     flex-basis: content;
     border: 5px solid #426B81;
     padding: 1em;
     margin: 0.5em 1%;
-}
-.filter:last-of-type {
-    /*margin-right: 0;*/
 }
 
 legend {
@@ -101,7 +90,7 @@ legend {
     display:none;
 }
 
-.uni-checkbox:checked ~ label .block {
+.uni-checkbox:checked ~ label .labelblock {
     background-color: #426B81;
 }
 
@@ -190,6 +179,6 @@ only screen and (max-width: 650px)  {
         width: 70%;
     }
     #filters{
-        flex-wrap:wrap;
+        flex-wrap: wrap;
     }
 }
