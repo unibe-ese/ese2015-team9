@@ -1,5 +1,6 @@
 package team9.tutoragency.controller.pojos;
 
+import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -30,7 +31,9 @@ public class SignupForm implements Form {
 	@NotNull(message = "Please enter a matching password.")
 	private String passwordConfirm;
 	@NotNull
-	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Must be valid email address")
+	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*"
+            + "@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
+            message = "Must be valid email address")
 	private String email;
 	
 	private String description;
@@ -120,15 +123,14 @@ public class SignupForm implements Form {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 89 * hash + (this.firstName != null ? this.firstName.hashCode() : 0);
-        hash = 89 * hash + (this.lastName != null ? this.lastName.hashCode() : 0);
-        hash = 89 * hash + (this.username != null ? this.username.hashCode() : 0);
-        hash = 89 * hash + (this.password != null ? this.password.hashCode() : 0);
-        hash = 89 * hash + (this.passwordConfirm != null ? this.passwordConfirm.hashCode() : 0);
-        hash = 89 * hash + (this.email != null ? this.email.hashCode() : 0);
-        hash = 89 * hash + (this.description != null ? this.description.hashCode() : 0);
-        hash = 89 * hash + (this.readAGB ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.lastName);
+        hash = 23 * hash + Objects.hashCode(this.username);
+        hash = 23 * hash + Objects.hashCode(this.password);
+        hash = 23 * hash + Objects.hashCode(this.passwordConfirm);
+        hash = 23 * hash + Objects.hashCode(this.email);
+        hash = 23 * hash + Objects.hashCode(this.description);
+        hash = 23 * hash + (this.readAGB ? 1 : 0);
         return hash;
     }
 
@@ -141,36 +143,35 @@ public class SignupForm implements Form {
             return false;
         }
         final SignupForm other = (SignupForm) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if ((this.firstName == null) ? (other.firstName != null) : !this.firstName.equals(other.firstName)) {
+        if (!Objects.equals(this.firstName, other.firstName)) {
             return false;
         }
-        if ((this.lastName == null) ? (other.lastName != null) : !this.lastName.equals(other.lastName)) {
+        if (!Objects.equals(this.lastName, other.lastName)) {
             return false;
         }
-        if ((this.username == null) ? (other.username != null) : !this.username.equals(other.username)) {
+        if (!Objects.equals(this.username, other.username)) {
             return false;
         }
-        if ((this.password == null) ? (other.password != null) : !this.password.equals(other.password)) {
+        if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        if ((this.passwordConfirm == null) ? (other.passwordConfirm != null) : !this.passwordConfirm.equals(other.passwordConfirm)) {
+        if (!Objects.equals(this.passwordConfirm, other.passwordConfirm)) {
             return false;
         }
-        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
         if (this.readAGB != other.readAGB) {
             return false;
         }
-        if (this.description != other.description) {
-        	return false;
-        }
         return true;
     }
-    
     
 
 }
