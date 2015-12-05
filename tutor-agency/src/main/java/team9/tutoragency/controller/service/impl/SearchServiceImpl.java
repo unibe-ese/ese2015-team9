@@ -1,4 +1,4 @@
-package team9.tutoragency.controller.service;
+package team9.tutoragency.controller.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import team9.tutoragency.controller.pojos.SearchForm;
+import team9.tutoragency.controller.service.SearchService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;

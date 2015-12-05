@@ -23,7 +23,7 @@ public class ProfileController {
 	MemberService memberService;
 	
 	@RequestMapping(value = "/profileId={id}", method = RequestMethod.GET)
-	public ModelAndView showOpenProfile(@PathVariable("id") Long id) {
+	public ModelAndView showPublicProfile(@PathVariable("id") Long id) {
 		ModelAndView model = new ModelAndView("publicProfile");
 		
 		Member member = memberService.findById(id);

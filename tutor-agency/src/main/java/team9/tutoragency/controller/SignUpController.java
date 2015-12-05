@@ -20,14 +20,14 @@ import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import team9.tutoragency.model.Member;
 
 /**
- * The {@link RegisterController} is responsible for all interactions when a
+ * The {@link SignUpController} is responsible for all interactions when a
  * user wants to register as a {@link Member} of the Tutoring Agency.
  * 
  * @author laeri
  *
  */
 @Controller
-public class RegisterController {
+public class SignUpController {
 
 	@Autowired
 	MemberService memberService;

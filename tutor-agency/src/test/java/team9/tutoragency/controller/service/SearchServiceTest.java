@@ -19,6 +19,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import team9.tutoragency.controller.pojos.SearchForm;
+import team9.tutoragency.controller.service.impl.SearchServiceImpl;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
