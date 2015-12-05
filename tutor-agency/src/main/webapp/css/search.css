@@ -12,7 +12,8 @@
 .searchbutton {
     margin-left: 5%;
     width: 15%;
-    float: right; 
+    float: right;
+    background: #fff;
 }
 
 .searchbutton:hover, .searchbutton:active {
@@ -23,9 +24,11 @@
 .searchForm fieldset input[type=number] {
 	width: 8em;
 }
-.searchForm fieldset #minGrade {
-	width: 8em;
+
+select {
+    margin: 0;
 }
+
 #noresult {
     display: none;
 }

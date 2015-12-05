@@ -31,9 +31,11 @@
                                 <div class="flex-lower-item request open">
                                     <div class="item-text">
                                         <p>Request from</p>
-                                        <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
+                                        <p class="bold"><a href="<c:url value="/profileId=${subscription.member.id}" />">
+                                                <c:out value="${subscription.member.username}"/></a></p>
                                     </div>
-                                    <a class="button" href="offer/${offer.id}/accept/${subscription.id}/">Accept</a>
+                                    <a class="button" href="offer/${offer.id}/accept/${subscription.id}/">
+                                        Accept</a>
                                 </div>
 
                             </c:when>
@@ -41,9 +43,11 @@
                                 <div class="flex-lower-item request accepted">
                                     <div class="item-text">
                                         <p>Accepted Request</p>
-                                        <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
+                                        <p class="bold"><a href="<c:url value="/profileId=${subscription.member.id}" />">
+                                                <c:out value="${subscription.member.username}"/></a></p>
                                     </div>
-                                    <a class="button" href="mailto:<c:out value="${subscription.member.email}" />">Contact</a>
+                                    <a class="button" href="mailto:<c:out value="${subscription.member.email}" />">
+                                        Contact</a>
                                 </div>
 
                             </c:otherwise>
@@ -56,7 +60,7 @@
                     <div class="item-text">
                         <p>Remove this course?</p>
                     </div>
-                    <form onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');" 
+                    <form onsubmit="return confirm('Do you want to remove ${offer.course.name}?');" 
                           action="offer/${offer.id}/delete" method="get">
                         <input type="submit" value="Remove">
                     </form>

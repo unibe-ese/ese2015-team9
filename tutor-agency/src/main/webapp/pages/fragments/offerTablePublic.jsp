@@ -18,7 +18,7 @@
             <br>
         </c:if>
 
-        <table class="forms" id=courses>
+        <table id=courses>
             <thead>
                 <tr>
                     <th>Course</th>

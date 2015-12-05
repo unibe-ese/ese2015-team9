@@ -17,7 +17,7 @@
                     value="" placeholder = "enter a course name"/>
         <input class="searchbutton" type="submit" value="Search" />
 
-        <fieldset>
+        <div>
             <form:checkbox class="checkbox" path="filtered" id="filtered" />
             <label class="collapse" for="filtered"><span class="labelblock"></span>
                 <p>Show filters</p></label>
@@ -39,19 +39,24 @@
                 <fieldset class="filter">
                     <legend>Fee</legend>
                     <label>Min: </label>
+                    <br>
                     <form:input path="minFee" type="number" value="${form.minFee }"></form:input>
-                        <br> <label>Max:</label>
+                    <br> <label>Max:</label> <br>
                     <form:input path="maxFee" type="number" value="${form.maxFee }"></form:input>
                     </fieldset>
 
                     <fieldset class="filter">
                         <legend>Grade</legend>
                         <label>Min: </label>
-                    <form:select path="minGrade" items="${grades}">
-                    </form:select>
+                        <div>
+                            <label class="select-label">
+                                <form:select path="minGrade" items="${grades}" />
+                            </label>
+                        </div>
                 </fieldset>
+                        
             </div>
-        </fieldset>
+        </div>
     </form:form>
     <div id="result">
         <!-- IMPORT TABLE -->

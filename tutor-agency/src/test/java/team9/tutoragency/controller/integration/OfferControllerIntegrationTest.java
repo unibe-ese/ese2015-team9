@@ -41,7 +41,7 @@ import org.springframework.security.test.context.support.WithUserDetails;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/config/springMVC.xml",
-		"file:src/main/webapp/WEB-INF/config/springData.xml",
+		"file:src/test/resources/test_springData.xml",
 		"file:src/main/webapp/WEB-INF/config/springSecurity.xml" })
 @Transactional
 public class OfferControllerIntegrationTest {
@@ -82,7 +82,7 @@ public class OfferControllerIntegrationTest {
 	@Test
 	@WithUserDetails("ese")
 	@Commit
-	public void test_offerLiveCycle() throws Exception {
+	public void test_offerLifeCycle() throws Exception {
 		assertEquals(0, offerDao.findByTutorAndCourse(member, course).size());
 		
 		//create offer
