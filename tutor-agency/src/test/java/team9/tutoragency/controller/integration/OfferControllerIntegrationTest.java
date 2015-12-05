@@ -82,7 +82,7 @@ public class OfferControllerIntegrationTest {
 	@Test
 	@WithUserDetails("ese")
 	@Commit
-	public void test_offerLiveCycle() throws Exception {
+	public void test_offerLifeCycle() throws Exception {
 		assertEquals(0, offerDao.findByTutorAndCourse(member, course).size());
 		
 		//create offer
