@@ -13,10 +13,6 @@
 <c:choose>
     <c:when test="${not empty offers}">
         <h2>Tutoring Offers</h2>
-        <c:if test="${loggedIn}">
-            <h6>*Note: to make it simpler to test, a member can request tutoring for an offer from himself.*</h6>
-            <br>
-        </c:if>
 
         <table id=courses>
             <thead>
