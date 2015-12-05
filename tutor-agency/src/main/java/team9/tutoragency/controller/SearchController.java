@@ -1,12 +1,12 @@
 package team9.tutoragency.controller;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,61 +20,54 @@ import team9.tutoragency.model.Offer;
 
 /**
  * This Controller handles page request related to search mechanisms.
+ * 
  * @author bruno
  */
 @Controller
 public class SearchController {
 
 	@Autowired
-	SearchService searchServiceImpl;
-	@Autowired 
+	SearchService searchService;
+	@Autowired
 	BasicDataService dataService;
-	
-	
+
 	/**
-	 * This method is invoked before any @RequestMapping - handler method is invoked.
-	 * Also possible grades and university names are added for the search filter.
-	 * @param text, if not null it is interpreted as course name for the quicksearch, and search results are added to the model. 
-	 * @param model
+	 * This method is invoked before any @RequestMapping and adds the filter
+	 * data for the filter options to the model.
 	 */
 	@ModelAttribute
-	public void addAttributes(@RequestParam(value="text", required = false) String text, Model model){		
-		
-		List<Offer> offers = new ArrayList<Offer>();
-		
-		if(text!=null){
-			offers = searchServiceImpl.findOffers(new SearchForm(text));
-		}
-		
-		model.addAttribute("offers", offers);
-		model.addAttribute("universities", dataService.findAllUniversityNames());
-		model.addAttribute("grades", Offer.grades());
+	public void setFilterOptions(ModelMap model) {
+
+//		List<Offer> offers = new ArrayList<Offer>();
+//
+//		model.addAttribute("offers", offers);
+		model.addAttribute("universities", dataService.findAllUniversities());
+		model.addAttribute("grades", Offer.possibleGrades());
 	}
-	
+
 	/**
 	 * Method to submit a search form via post request.
+	 * 
 	 * @param form
 	 * @return
 	 */
-	@RequestMapping(value="/search", method = RequestMethod.POST)
-	public ModelAndView submit(SearchForm form) {
-		ModelAndView model = new ModelAndView("search");
-		model.addObject("offers", searchServiceImpl.findOffers(form));
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView showSearchResults(SearchForm form) {
+		ModelAndView model = new ModelAndView("searchPage");
+		model.addObject("offers", searchService.findOffers(form));
 		model.addObject("form", form);
 		return model;
 	}
-	
+
 	/**
-	 * Method to get the search page.
-	 * Returns a modelAndView with search.jsp as view, and a new {@link SearchForm} as Object in the Model.
-	 * @return
+	 * Method to get the search page. Returns a modelAndView with searchPage.jsp as
+	 * view, and a new {@link SearchForm} as Object in the Model.
 	 */
-	@RequestMapping(path="/search", method=RequestMethod.GET)
-	public ModelAndView search(@RequestParam(value="text", required=false) String text) {
-		ModelAndView model = new ModelAndView("search");
-		model.addObject("form", new SearchForm(text));
+	@RequestMapping(path = "/search", method = RequestMethod.GET)
+	public ModelAndView getSearchPage() {
+		ModelAndView model = new ModelAndView("searchPage");
+		model.addObject("form", new SearchForm());
 		return model;
 	}
-	
 
 }

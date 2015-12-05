@@ -33,10 +33,13 @@
     </bean>
 
     <!-- JDBC -->
+    
     <jdbc:initialize-database data-source="mainDataSource">
         <jdbc:script location="classpath:EseDB-TestData.sql"/>
-    </jdbc:initialize-database>
-
+    </jdbc:initialize-database> 
+  	
+	
+	
     <!-- SPRING - JPA -->
     <jpa:repositories base-package="team9.tutoragency.model.dao" entity-manager-factory-ref="entityManagerFactory" />
 	<tx:annotation-driven transaction-manager="transactionManager" />

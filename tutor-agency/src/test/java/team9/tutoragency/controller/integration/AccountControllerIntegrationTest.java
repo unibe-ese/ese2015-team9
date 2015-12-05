@@ -52,7 +52,7 @@ public class AccountControllerIntegrationTest {
 	public void setUp() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 
-		tutor1 = memberDao.findOne(3L);
+		tutor1 = memberDao.findOne(1L);
 	}
 
 	/*
@@ -68,43 +68,43 @@ public class AccountControllerIntegrationTest {
 	// }
 
 	@Test
-	@WithUserDetails("tutor1")
+	@WithUserDetails("bob")
 	public void test_showProfile() throws Exception {
 
 		mockMvc.perform(get(URL)).andExpect(forwardedUrl("/pages/profile.jsp")).andExpect(status().isOk())
-				.andExpect(model().attribute("member", memberDao.findOne(3L)));
+				.andExpect(model().attribute("member", memberDao.findOne(1L)));
 	}
 
 	@Test
-	@WithUserDetails("tutor1")
+	@WithUserDetails("bob")
 	public void test_getEditPage() throws Exception {
 
 		EditForm form = new EditForm(tutor1);
 
 		mockMvc.perform(get(URL + "/edit")).andExpect(forwardedUrl("/pages/edit.jsp"))
 				.andExpect(model().attribute("editForm", form))
-				.andExpect(model().attribute("universityChoices", asList("Bern", "Basel", "Zürich")))
+				.andExpect(model().attribute("universityChoices", asList("Bern", "Luzern")))
 				.andExpect(model().attribute("member", tutor1));
 	}
 
 	@Test
-	@WithUserDetails("tutor1")
+	@WithUserDetails("bob")
 	public void test_saveChanges_invalidForm() throws Exception {
 		EditForm form = new EditForm();
 
 		form.setEmail("test_mail@mail.com");
 		form.setLastName("TestName");
-		form.setUsername("Student");
+		form.setUsername("eve");
 
 		mockMvc.perform(post(URL + "/save").param("email", "test_mail@mail.com").param("oldPassword", "password")
-				.param("lastName", "TestName").param("username", "Student")).andExpect(status().isOk())
+				.param("lastName", "TestName").param("username", "eve")).andExpect(status().isOk())
 				.andExpect(model().attribute("member", tutor1)).andExpect(model().attribute("editForm", form))
-				.andExpect(model().attribute("universityChoices", asList("Bern", "Basel", "Zürich")))
+				.andExpect(model().attribute("universityChoices", asList("Bern", "Luzern")))
 				.andExpect(forwardedUrl("/pages/edit.jsp"));
 	}
 
 	@Test
-	@WithUserDetails("tutor1")
+	@WithUserDetails("bob")
 	public void test_saveChanges_validForm() throws Exception {
 		EditForm form = new EditForm();
 
@@ -112,7 +112,7 @@ public class AccountControllerIntegrationTest {
 		form.setLastName("TestName");
 		form.setUsername("Student");
 
-		mockMvc.perform(post(URL + "/save").param("email", tutor1.getEmail()).param("oldPassword", "tutor1")
+		mockMvc.perform(post(URL + "/save").param("email", tutor1.getEmail()).param("oldPassword", "password")
 				.param("lastName", tutor1.getLastName()).param("fee", "40").param("username", "tutor1"))
 				.andExpect(status().isOk()).andExpect(forwardedUrl("/pages/profile.jsp"));
 	}

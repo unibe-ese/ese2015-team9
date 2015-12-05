@@ -17,7 +17,7 @@ import team9.tutoragency.model.University;
  */
 public interface BasicDataService {
 
-	List<University> findAllUniversites();
+	List<University> findAllUniversities();
 
 	/** 
 	 * @param uniId

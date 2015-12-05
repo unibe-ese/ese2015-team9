@@ -40,7 +40,7 @@ public class BasicDataServiceTest {
     @Test
     public void test_FindAllUniversities() {
     	when(uniDao.findAll()).thenReturn(asList(uni1, uni2));
-        List<University> result = service.findAllUniversites();
+        List<University> result = service.findAllUniversities();
         assertEquals(asList(uni1, uni2), result);
     }
 
