@@ -33,10 +33,26 @@
     </bean>
 
     <!-- JDBC -->
-    <jdbc:initialize-database data-source="mainDataSource">
+    
+    <!-- <jdbc:initialize-database data-source="mainDataSource">
         <jdbc:script location="classpath:EseDB-TestData.sql"/>
-    </jdbc:initialize-database>
-
+    </jdbc:initialize-database> 
+  	The following workaround is needed, becaus else äöü are not correctly read-->
+	<bean id="dataSourceInitializer" class="org.springframework.jdbc.datasource.init.DataSourceInitializer">
+	    <property name="dataSource" ref="mainDataSource"/>
+	    <property name="databasePopulator">
+	        <bean class="org.springframework.jdbc.datasource.init.ResourceDatabasePopulator">
+	            <property name="sqlScriptEncoding" value="UTF-8"/>
+	            <property name="scripts">
+	                <list>
+	                    <value>classpath:EseDB-TestData.sql</value>
+	                </list>
+	            </property>
+	        </bean>
+	    </property>
+	</bean>
+	
+	
     <!-- SPRING - JPA -->
     <jpa:repositories base-package="team9.tutoragency.model.dao" entity-manager-factory-ref="entityManagerFactory" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
