@@ -2,11 +2,16 @@
 
 ## Documentation
 
-The Software Requirements Specification and the database model can be found in /Documentation
-
+The Software Requirements Specification and the database model can be found in 
+```
+/Documentation/SRS
+```
 ## Demo Data
 
-A SQL-script with demo data is provided in /Documentation/Demo data
+A SQL-script with demo data is provided in
+```
+/tutor-agency/src/main/resources
+```
 
 The following members are available: (username/password)
 -  ese/ese
@@ -25,3 +30,6 @@ The following courses are registered:
 -  Kunstgeschichte: Methoden der Interpretation
 -  Einführung in die Geschichte der Kunstgeschichte
 -  Zoologie
+
+##It's a feature not a bug!
+To make it simpler to test, a member can request tutoring for an offer from himself.
