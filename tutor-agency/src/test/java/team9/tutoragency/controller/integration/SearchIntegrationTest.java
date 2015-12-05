@@ -31,6 +31,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * This test class performs an Integration test for the {@code SearchController.class} and {@code SearchServiceImpl.class}.
+ * All possible filter settings are tested separately. 
+ * The results are compared to the persistent data, which should be created automatically from EseDB-TestData.sql. 
+ * The data itself is first verified in the {@link #setUp()} method. 
+ * @see {@linkplain SearchController} , {@linkplain SearchService}
+ * @author bruno
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/config/springMVC.xml",
@@ -100,9 +109,13 @@ public class SearchIntegrationTest {
 	
 	@Test
 	public void test_getSearchPage() throws Exception{
+		
+		SearchForm searchForm = new SearchForm();
+		searchForm.setUniversityNames(asList(uniBern.getName(), uniLuzern.getName()));
+		
 		mockMvc.perform(get(URL)).andExpect(status().isOk())
 				.andExpect(forwardedUrl("/pages/searchPage.jsp"))
-				.andExpect(model().attribute("form", new SearchForm()))
+				.andExpect(model().attribute("form", searchForm))
 				.andExpect(model().attribute("universities", asList(uniBern, uniLuzern)))
 				.andExpect(model().attribute("grades", Offer.possibleGrades()));
 	}

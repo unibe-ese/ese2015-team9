@@ -40,12 +40,12 @@ import static org.mockito.Mockito.verify;
 import static java.util.Arrays.asList;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RegisterControllerTest {
+public class SignUpControllerTest {
 
 	private SignupFormValidator validator;
     
 	@InjectMocks
-    private RegisterController controller;
+    private SignUpController controller;
     
     private MockMvc mockMvc;
     @Before
@@ -55,7 +55,7 @@ public class RegisterControllerTest {
     }
 
     /**
-     * Test of register method, of class {@link RegisterController}.
+     * Test of register method, of class {@link SignUpController}.
      */
     @Test
     public void testRegister() throws Exception {
@@ -81,7 +81,7 @@ public class RegisterControllerTest {
    
     
     /**
-     * Test of createUser method, of class {@link RegisterController}. Tests the correctness of the
+     * Test of createUser method, of class {@link SignUpController}. Tests the correctness of the
      * returned view, if validation is not successful.
      */
 //    @Test
@@ -94,7 +94,7 @@ public class RegisterControllerTest {
 //        
 //    }
     /**
-     * Test of createUser method, of class {@link RegisterController}. Tests the correctness of the
+     * Test of createUser method, of class {@link SignUpController}. Tests the correctness of the
      * returned view, if validation is successful.
      */
 //    @Test

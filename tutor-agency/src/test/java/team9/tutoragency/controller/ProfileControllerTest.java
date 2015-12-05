@@ -55,12 +55,12 @@ public class ProfileControllerTest {
 //	}
 	@Test
 	public void testShowOpenProfile(){
-		ModelAndView model = controller.showOpenProfile(1L);
+		ModelAndView model = controller.showPublicProfile(1L);
 		assertEquals("publicProfile", model.getViewName());
 		assertEquals(member, model.getModel().get("member"));
 		
 		//when memberService returns null
-		model = controller.showOpenProfile(1L);
+		model = controller.showPublicProfile(1L);
 		assertEquals(null, model.getModel().get("member"));
 	}
 //	@Test

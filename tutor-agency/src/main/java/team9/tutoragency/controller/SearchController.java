@@ -38,9 +38,6 @@ public class SearchController {
 	@ModelAttribute
 	public void setFilterOptions(ModelMap model) {
 
-//		List<Offer> offers = new ArrayList<Offer>();
-//
-//		model.addAttribute("offers", offers);
 		model.addAttribute("universities", dataService.findAllUniversities());
 		model.addAttribute("grades", Offer.possibleGrades());
 	}
@@ -66,7 +63,11 @@ public class SearchController {
 	@RequestMapping(path = "/search", method = RequestMethod.GET)
 	public ModelAndView getSearchPage() {
 		ModelAndView model = new ModelAndView("searchPage");
-		model.addObject("form", new SearchForm());
+		
+		SearchForm form = new SearchForm();
+		form.setUniversityNames(dataService.findAllUniversityNames());
+		
+		model.addObject("form", form);
 		return model;
 	}
 

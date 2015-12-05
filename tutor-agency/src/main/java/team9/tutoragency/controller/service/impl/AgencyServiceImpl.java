@@ -1,4 +1,4 @@
-package team9.tutoragency.controller.service;
+package team9.tutoragency.controller.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import team9.tutoragency.controller.service.AgencyService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
