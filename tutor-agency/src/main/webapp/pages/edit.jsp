@@ -107,8 +107,11 @@
 		<label><p>Confirm new password</p></label>
 		<form:errors path="passwordConfirm" cssClass="error" element="p" />
 		<form:input path="passwordConfirm" type="password" name="Passwort2" />
-
-		<input class="submitbutton" type="submit" value="Save" />
+        <div class="button-container">
+            <input class="submitbutton" type="submit" value="Save" />
+            <input class="submitbutton cancelbutton" type="submit" value="Cancel" 
+                   formaction="<c:url value="/auth/account" />" formmethod="get" />
+        </div>
 	</form:form>
 
 
