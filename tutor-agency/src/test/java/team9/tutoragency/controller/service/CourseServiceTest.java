@@ -26,7 +26,7 @@ public class CourseServiceTest {
 	@Mock
 	private CourseDao courseDao;
     @InjectMocks
-    private CourseService service;
+    private BasicDataServiceImpl service;
     @Captor
     private ArgumentCaptor<Member> captor;
     @Captor
@@ -69,7 +69,7 @@ public class CourseServiceTest {
     }
 
     /**
-     * Test of findByUniversity method, of class {@link CourseService}.
+     * Test of findByUniversity method, of class {@link CourseServiceImpl}.
      */
     @Test
     public void testFindByUniversity() {
@@ -78,49 +78,14 @@ public class CourseServiceTest {
         
         University university = uni1;
         List<Course> expResult = course1List;
-        List<Course> result = service.findByUniversity(university);
+        List<Course> result = service.findCourseByUniversity(university);
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of findByNameContaining method, of class {@link CourseService}.
-     */
-    @Test
-    public void testFindByNameContaining() {
-        
-        Mockito.when(courseDao.findByNameContainingIgnoreCase(stringCaptor.capture()))
-                .thenReturn(course1List);
-        List<Course> result = service.findByNameContaining(null);
-        assertEquals("", stringCaptor.getValue());
-        
-        Mockito.when(courseDao.findByNameContainingIgnoreCase("co")).thenReturn(coursesAll);
-        result = service.findByNameContaining("co");
-        assertEquals(coursesAll, result);
-    }
-
-    /**
-     * Test of findByNameAndUniversities method, of class {@link CourseService}.
-     */
-    @Test
-    public void testFindByNameAndUniversities() {
-        Mockito.when(courseDao.findByNameContainingIgnoreCase(stringCaptor.capture()))
-                .thenReturn(coursesAll);
-        service.findByNameAndUniversities(null, null);
-        assertEquals("", stringCaptor.getValue());
-        service.findByNameAndUniversities(null, new ArrayList<University>());
-        assertEquals("", stringCaptor.getValue());
-        List<Course> result = service.findByNameAndUniversities("co", new ArrayList<University>());
-        assertEquals(coursesAll, result);
-        
-        Mockito.when(courseDao
-                .findByNameContainingIgnoreCaseAndUniversityIn("course1", universitiesAll))
-                .thenReturn(course1List);
-        result = service.findByNameAndUniversities("course1", universitiesAll);
-        assertEquals(course1List, result);
-    }
+    
 
 //    /**
-//     * Test of findUniversityForCourse method, of class {@link CourseService}.
+//     * Test of findUniversityForCourse method, of class {@link CourseServiceImpl}.
 //     */
 //    @Test
 //    public void testFindUniversityForCourse() {

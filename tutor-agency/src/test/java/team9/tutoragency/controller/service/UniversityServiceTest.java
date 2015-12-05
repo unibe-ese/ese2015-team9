@@ -21,7 +21,7 @@ public class UniversityServiceTest {
     @Mock
     private UniversityDao uniDao;
     @InjectMocks
-    private UniversityService service;
+    private BasicDataServiceImpl service;
     private final List<University> listUni1 = new ArrayList<>();
     private final List<University> listAllUnis = new ArrayList<>();
 	private final List<University> listUni2 = new ArrayList<>();
@@ -45,26 +45,16 @@ public class UniversityServiceTest {
         Mockito.when(uniDao.findAll()).thenReturn(listAllUnis);
     }
     /**
-     * Test of findAll method, of class {@link UniversityService}.
+     * Test of findAll method, of class {@link UniversityServiceImpl}.
      */
     @Test
     public void testFindAll() {
-        List<University> result = service.findAll();
+        List<University> result = service.findAllUniversites();
         assertEquals(listAllUnis, result);
-    }
-    /**
-     * Test of findByName method, of class {@link UniversityService}.
-     */
-    @Test
-    public void testFindByName() {
-        Mockito.when(uniDao.findByName("uni1")).thenReturn(listUni1);
-        String name = "uni1";
-        List<University> result = service.findByName(name);
-        assertEquals(listUni1, result);
     }
 
     /**
-     * Test of findByNames method, of class {@link UniversityService}.
+     * Test of findByNames method, of class {@link UniversityServiceImpl}.
      */
     @Test
     public void testFindByNames() {
@@ -72,22 +62,22 @@ public class UniversityServiceTest {
         
         List<String> names = null;
         List<University> expResult = new ArrayList<>();
-        List<University> result = service.findByNames(names);
+        List<University> result = service.findUniversitiesByNames(names);
         assertEquals(expResult, result);
         names = new ArrayList<>();
-        result = service.findByNames(names);
+        result = service.findUniversitiesByNames(names);
         assertEquals(expResult, result);
             
-        result = service.findByNames(listUniNames);
+        result = service.findUniversitiesByNames(listUniNames);
         assertEquals(listAllUnis, result);
     }
 
     /**
-     * Test of findAllNames method, of class {@link UniversityService}.
+     * Test of findAllNames method, of class {@link UniversityServiceImpl}.
      */
     @Test
     public void testFindAllNames() {
-        List<String> result = service.findAllNames();
+        List<String> result = service.findAllUniversityNames();
         assertEquals(listUniNames, result);
     }
     

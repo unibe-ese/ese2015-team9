@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import team9.tutoragency.controller.service.AgencyService;
 import team9.tutoragency.controller.service.MemberService;
-import team9.tutoragency.controller.service.OfferService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
@@ -25,7 +24,7 @@ import team9.tutoragency.model.Offer;
 public class OfferController {
 	@Autowired MemberService memberService;
 	@Autowired AgencyService agencyService;
-	@Autowired OfferService offerService;
+	
 	
 	@RequestMapping(value = "/subscribe", method = RequestMethod.GET)
 	public String subscribe(@PathVariable(value = "offerId") Long offerId) {

@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import team9.tutoragency.controller.pojos.SearchForm;
-import team9.tutoragency.controller.service.OfferService;
+import team9.tutoragency.controller.service.BasicDataService;
 import team9.tutoragency.controller.service.SearchService;
-import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.model.Offer;
 
 /**
@@ -29,7 +28,7 @@ public class SearchController {
 	@Autowired
 	SearchService searchService;
 	@Autowired 
-	UniversityService uniService;
+	BasicDataService dataService;
 	
 	
 	/**
@@ -48,7 +47,7 @@ public class SearchController {
 		}
 		
 		model.addAttribute("offers", offers);
-		model.addAttribute("universities", uniService.findAllNames());
+		model.addAttribute("universities", dataService.findAllUniversityNames());
 		model.addAttribute("grades", Offer.grades());
 	}
 	

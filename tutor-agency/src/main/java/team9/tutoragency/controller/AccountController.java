@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import team9.tutoragency.controller.pojos.EditForm;
+import team9.tutoragency.controller.service.BasicDataService;
 import team9.tutoragency.controller.service.MemberService;
-import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.controller.service.validation.EditFormValidator;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
@@ -37,7 +37,7 @@ public class AccountController extends AutenthicatedAccessController{
 	@Autowired
 	EditFormValidator validator;
 	@Autowired
-	UniversityService uniService;
+	BasicDataService dataService;
 
 	/**
 	 * Asserts that the request token is authenticated (authenticated member is
@@ -46,24 +46,19 @@ public class AccountController extends AutenthicatedAccessController{
 	 * @return
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView showProfile() {
+	public ModelAndView showProfile(@RequestParam(value = "message", required = false) String message) {
 		ModelAndView profile = new ModelAndView("profile");
 
 		Member member = getAuthenticatedMember();
 
 		profile.addObject("member", member);
-
+		if(message!= null)
+			profile.addObject("message", message);
+		
 		return profile;
 	}
 
-	@RequestMapping(value = "/message", method = RequestMethod.GET)
-	public ModelAndView showProfileWithMessage(@RequestParam(value = "message", required = false) String message) {
-
-		ModelAndView profileWithMessage = showProfile();
-		profileWithMessage.addObject("message", message);
-
-		return profileWithMessage;
-	}
+	
 
 	/**
 	 * Prepares the model for the edit view when a {@link Member} would like to
@@ -79,7 +74,7 @@ public class AccountController extends AutenthicatedAccessController{
 
 		EditForm editForm = new EditForm(member);
 
-		List<String> universityNames = uniService.findAllNames();
+		List<String> universityNames = dataService.findAllUniversityNames();
 		List<String> alreadySelectedUniversities = new ArrayList<String>();
 		for(University uni: member.getUniversityList()){
 			alreadySelectedUniversities.add(uni.getName());
@@ -115,15 +110,14 @@ public class AccountController extends AutenthicatedAccessController{
 		if (!result.hasErrors()) {
 
 			memberService.saveEditChange(member, editForm);
-			model = showProfile();
-			model.addObject("message", "You have successfully changed your profile information.");
+			model = showProfile("You have successfully changed your profile information.");
 
 		} else {
 			editForm.setOldPassword("");
 			
 			model = new ModelAndView("edit", "editForm", editForm);
 
-			List<String> universityNames = uniService.findAllNames();
+			List<String> universityNames = dataService.findAllUniversityNames();
 
 			model.addObject("universityChoices", universityNames);
 			model.addObject("member", member);
@@ -144,7 +138,7 @@ public class AccountController extends AutenthicatedAccessController{
 
 		memberService.upgradeAuthenticatedMemberToTutor();
 
-		return showProfile();
+		return showProfile("You can now create tutoring offers.");
 	}
 
 	
