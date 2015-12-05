@@ -28,7 +28,7 @@
                     <div class="uni-flex">
                         <c:forEach items="${universities}" var="current" >
                             <div class="uni-flex-item">
-                                <form:checkbox id="${current}" class="uni-checkbox" path="universityNames" value="${current}" />
+                                <form:checkbox id="${current.name}" class="uni-checkbox" path="universityNames" value="${current.name}" />
                                 <label for="${current}"><span class="labelblock"></span><p><c:out value="${current}" /></p></label>
                             </div>
                         </c:forEach>

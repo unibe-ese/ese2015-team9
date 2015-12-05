@@ -42,7 +42,7 @@ public class BasicDataServiceImpl implements BasicDataService{
 
 	@Override
 	@Transactional
-	public List<University> findAllUniversites(){
+	public List<University> findAllUniversities(){
 		return uniDao.findAll();
 	}
 

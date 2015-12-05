@@ -2,7 +2,7 @@ package team9.tutoragency.controller.service;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -81,11 +81,11 @@ public class SearchServiceTest {
         Mockito.when(courseDao.findByNameContainingIgnoreCase(stringCaptor.capture()))
                 .thenReturn(asList(course1, course2));
         searchServiceImpl.findCoursesByNameAndUniversities(null, null);
-        assertEquals("", stringCaptor.getValue());
+       verify(courseDao, never()).findByNameContainingIgnoreCase(any(String.class));
         searchServiceImpl.findCoursesByNameAndUniversities(null, new ArrayList<University>());
-        assertEquals("", stringCaptor.getValue());
+        verify(courseDao, never()).findByNameContainingIgnoreCase(any(String.class));
         List<Course> result = searchServiceImpl.findCoursesByNameAndUniversities("co", new ArrayList<University>());
-        assertEquals(asList(course1, course2), result);
+        verify(courseDao, never()).findByNameContainingIgnoreCase(any(String.class));
         
         Mockito.when(courseDao
                 .findByNameContainingIgnoreCaseAndUniversityIn("course1", asList(uni1, uni2)))

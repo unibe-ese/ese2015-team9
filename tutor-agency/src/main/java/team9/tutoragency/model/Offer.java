@@ -149,7 +149,7 @@ public class Offer implements Serializable {
 	 * @return
 	 */
 	@Transient
-	public static List<String> grades() {
+	public static List<String> possibleGrades() {
 		List<String> grades = new ArrayList<String>();
 		for (float i = 4; i <= 6; i += 0.25) {
 			grades.add(Float.toString(i));

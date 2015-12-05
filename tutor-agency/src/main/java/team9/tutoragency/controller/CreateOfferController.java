@@ -61,7 +61,7 @@ public class CreateOfferController extends AutenthicatedAccessController{
 	 */
 	@ModelAttribute
 	public void populateModel(@RequestParam(value = "id", required = false) Long uniId, ModelMap modelMap) {
-		List<University> unis = dataService.findAllUniversites();
+		List<University> unis = dataService.findAllUniversities();
 
 		if (unis.isEmpty())
 			throw new AssertionError("No Universities in Database!");
@@ -78,7 +78,7 @@ public class CreateOfferController extends AutenthicatedAccessController{
 		modelMap.addAttribute("universities", unis);
 		modelMap.addAttribute("courses", courses);
 		modelMap.addAttribute("selectedUniversity", selectedUni);
-		modelMap.addAttribute("grades", Offer.grades());
+		modelMap.addAttribute("grades", Offer.possibleGrades());
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
