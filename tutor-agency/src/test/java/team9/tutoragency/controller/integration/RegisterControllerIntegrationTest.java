@@ -38,7 +38,7 @@ import util.SignupFormValidatorMock;
 @WebAppConfiguration
 @ContextConfiguration(locations = {
 "file:src/main/webapp/WEB-INF/config/springMVC.xml",
-"file:src/main/webapp/WEB-INF/config/springData.xml" })
+"file:src/test/resources/test_springData.xml" })
 @Transactional
 @Rollback
 public class RegisterControllerIntegrationTest {

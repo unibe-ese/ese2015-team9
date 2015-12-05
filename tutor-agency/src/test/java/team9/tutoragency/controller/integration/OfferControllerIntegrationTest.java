@@ -41,7 +41,7 @@ import org.springframework.security.test.context.support.WithUserDetails;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/config/springMVC.xml",
-		"file:src/main/webapp/WEB-INF/config/springData.xml",
+		"file:src/test/resources/test_springData.xml",
 		"file:src/main/webapp/WEB-INF/config/springSecurity.xml" })
 @Transactional
 public class OfferControllerIntegrationTest {
