@@ -26,7 +26,7 @@ import team9.tutoragency.model.Offer;
 public class SearchController {
 
 	@Autowired
-	SearchService searchService;
+	SearchService searchServiceImpl;
 	@Autowired 
 	BasicDataService dataService;
 	
@@ -43,7 +43,7 @@ public class SearchController {
 		List<Offer> offers = new ArrayList<Offer>();
 		
 		if(text!=null){
-			offers = searchService.findOffers(new SearchForm(text));
+			offers = searchServiceImpl.findOffers(new SearchForm(text));
 		}
 		
 		model.addAttribute("offers", offers);
@@ -59,7 +59,7 @@ public class SearchController {
 	@RequestMapping(value="/search", method = RequestMethod.POST)
 	public ModelAndView submit(SearchForm form) {
 		ModelAndView model = new ModelAndView("search");
-		model.addObject("offers", searchService.findOffers(form));
+		model.addObject("offers", searchServiceImpl.findOffers(form));
 		model.addObject("form", form);
 		return model;
 	}

@@ -91,10 +91,6 @@ public class MemberService {
 			return Optional.of(memberDao.findOne(((Member) authentication.getPrincipal()).getId()));
 	}
 
-	public List<Member> findByFee(int min, int max) {
-		return memberDao.findByFeeBetween((double) min, (double) max);
-	}
-
 	@Transactional
 	public SignupForm createMember(SignupForm signupForm) throws InvalidUserException {
 
