@@ -18,8 +18,8 @@
     <c:forEach items="${member.subscriptions}" var="subscription">
         <tr>
             <td><c:out value="${subscription.offer.course.name}"></c:out></td>
-            <td><a href="/tutor-agency/profileId=${subscription.offer.tutor.id}"> <c:out
-                        value="${subscription.offer.tutor.username}"></c:out></a></td>
+            <td><a href="<c:url value="/profileId=${subscription.offer.tutor.id}" />">
+                    <c:out value="${subscription.offer.tutor.username}"></c:out></a></td>
                     <c:choose>
                         <c:when test="${subscription.accepted}">
                         <td>Accepted: <a href="mailto:<c:out value="${subscription.offer.tutor.email}" />">
