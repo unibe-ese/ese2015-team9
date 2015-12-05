@@ -62,7 +62,7 @@ public class OfferControllerUnitTest {
 		
 		String view = controller.subscribe(1L);
 		
-		verify(agencyService, times(1)).subscribeMemberToOffer(1L, 1L);
+		verify(agencyService, times(1)).createSubscription(1L, 1L);
 		assertEquals("redirect:/auth/account", view);
 	}
 	

@@ -1,23 +1,22 @@
 package team9.tutoragency.controller.service;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import static java.util.Arrays.asList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.UniversityDao;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+import static java.util.Arrays.asList;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BasicDataServiceTest {

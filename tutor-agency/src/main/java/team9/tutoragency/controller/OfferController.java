@@ -28,13 +28,13 @@ public class OfferController {
 	
 	@RequestMapping(value = "/subscribe", method = RequestMethod.GET)
 	public String subscribe(@PathVariable(value = "offerId") Long offerId) {
-		agencyService.subscribeMemberToOffer(memberService.getAuthenticatedMember().get().getId(), offerId);
+		agencyService.createSubscription(memberService.getAuthenticatedMember().get().getId(), offerId);
 		return "redirect:/auth/account";
 	}
 	
 	@RequestMapping(value = "/accept/{subscriptionId}/", method = RequestMethod.GET)
 	public String acceptSubscription(@PathVariable(value = "offerId") Long offerId, @PathVariable(value = "subscriptionId") Long subscriptionId){
-		Optional<Offer> offer = agencyService.findOfferById(offerId);
+		Optional<Offer> offer = agencyService.findOffer(offerId);
 		Optional<Member> member = memberService.getAuthenticatedMember();
 		if(offer.isPresent() && member.isPresent() && offer.get().getTutor().equals(member.get()))
             agencyService.acceptSubscription(subscriptionId);
@@ -55,7 +55,7 @@ public class OfferController {
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteCourse(@PathVariable("offerId") Long id) throws IOException {
-		Optional<Offer> offer = agencyService.findOfferById(id);
+		Optional<Offer> offer = agencyService.findOffer(id);
 		Optional<Member> member = memberService.getAuthenticatedMember();
 
 		if (offer.isPresent() && Objects.equals(member.get().getId(), offer.get().getTutor().getId()))

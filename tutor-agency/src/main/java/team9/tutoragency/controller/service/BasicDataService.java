@@ -19,8 +19,7 @@ public interface BasicDataService {
 
 	List<University> findAllUniversites();
 
-	/**
-	 * 
+	/** 
 	 * @param uniId
 	 *            mustn't be null.
 	 * @return An empty {@code Optional} when no University with this was found.

@@ -17,7 +17,6 @@ import team9.tutoragency.model.dao.UniversityDao;
  * Implementation of {@code BasicDataService}.
  * @see {@linkplain BasicDataService}.
  * @author bruno
- *
  */
 @Service
 public class BasicDataServiceImpl implements BasicDataService{
