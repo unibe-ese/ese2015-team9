@@ -46,6 +46,8 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   border: 0;
   outline : 0;
 }
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
 
 a {
     color: #426B81;
@@ -219,15 +221,16 @@ input[type="checkbox"] {
     margin-right: 1em;
 }
 
-select {
-    color: #000000; 
-    font-size: 12px; 
-    border: 1px solid #c0c0c0; 
-    background-color: #FFF0FF; 
-    height: 22px; 
-    width: 250px; 
-    padding: 3px;
-    margin-bottom: 10px;
+/* Buttons */
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.button-container .submitbutton{
+    /*margin: 0;*/
 }
 
 .submitbutton {
@@ -240,9 +243,65 @@ select {
     margin-left: auto;
     margin-right: auto;
 }
-.submitbutton:focus,  .submitbutton:hover{
+.submitbutton:focus,  .submitbutton:hover, .submitbutton:active{
     color: #fff;
     background: #426B81;
+}
+
+.cancelbutton {
+    color: #D35836;
+    border-color: #D35836;
+}
+.cancelbutton:focus,  .cancelbutton:hover, .cancelbutton:active{
+    color: #fff;
+    background: #D35836;
+}
+
+/* Dropdown select */
+
+select {
+    padding: 0.4em;
+    padding-left: 0.4em;
+    margin-bottom: 2em;
+    width: 100%;
+    font-size: 1.1em;
+
+    background: #426B81;
+    color:#fff;
+    border:none;
+    outline:none;
+    display: inline-block;
+    cursor:pointer;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+label.select-label {
+    position:relative;
+}
+label.select-label:after {
+    content:'<>';
+    color: #fff;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:8px; top:2px;
+    padding:0 0 2px;
+    position:absolute;
+    pointer-events:none;
+}
+label.select-label:before {
+    content:'';
+    right:6px; top:0px;
+    width:20px; height:20px;
+    background:#426B81;
+    position:absolute;
+    pointer-events:none;
 }
 
 /* Error message */
