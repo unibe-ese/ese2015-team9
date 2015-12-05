@@ -35,7 +35,7 @@ public class SearchServiceTest {
 	BasicDataService dataService;
 
 	@InjectMocks
-	private SearchService searchService;
+	private SearchServiceImpl searchServiceImpl;
 
 	private University uni1,uni2;
 	private Member member1, member2;
@@ -69,24 +69,9 @@ public class SearchServiceTest {
 
 	@Test(expected = NullPointerException.class )
 	public void testFindOffersNullForm() {
-		searchService.findOffers(null);
+		searchServiceImpl.findOffers(null);
 	}
 	
-	/**
-     * Test of findByNameContaining method, of class {@link CourseServiceImpl}.
-     */
-    @Test
-    public void testFindByNameContaining() {
-        
-        Mockito.when(courseDao.findByNameContainingIgnoreCase(stringCaptor.capture()))
-                .thenReturn(asList(course1));
-        List<Course> result = searchService.findCoursesByNameContaining(null);
-        assertEquals("", stringCaptor.getValue());
-        
-        Mockito.when(courseDao.findByNameContainingIgnoreCase("co")).thenReturn(asList(course1, course2));
-        result = searchService.findCoursesByNameContaining("co");
-        assertEquals(asList(course1, course2), result);
-    }
 
     /**
      * Test of findByNameAndUniversities method, of class {@link CourseServiceImpl}.
@@ -95,17 +80,17 @@ public class SearchServiceTest {
     public void testFindByNameAndUniversities() {
         Mockito.when(courseDao.findByNameContainingIgnoreCase(stringCaptor.capture()))
                 .thenReturn(asList(course1, course2));
-        searchService.findCoursesByNameAndUniversities(null, null);
+        searchServiceImpl.findCoursesByNameAndUniversities(null, null);
         assertEquals("", stringCaptor.getValue());
-        searchService.findCoursesByNameAndUniversities(null, new ArrayList<University>());
+        searchServiceImpl.findCoursesByNameAndUniversities(null, new ArrayList<University>());
         assertEquals("", stringCaptor.getValue());
-        List<Course> result = searchService.findCoursesByNameAndUniversities("co", new ArrayList<University>());
+        List<Course> result = searchServiceImpl.findCoursesByNameAndUniversities("co", new ArrayList<University>());
         assertEquals(asList(course1, course2), result);
         
         Mockito.when(courseDao
                 .findByNameContainingIgnoreCaseAndUniversityIn("course1", asList(uni1, uni2)))
                 .thenReturn(asList(course1));
-        result = searchService.findCoursesByNameAndUniversities("course1", asList(uni1, uni2));
+        result = searchServiceImpl.findCoursesByNameAndUniversities("course1", asList(uni1, uni2));
         assertEquals(asList(course1), result);
     }
 }

@@ -32,7 +32,7 @@ import team9.tutoragency.model.University;
 public class SearchControllerTest {
 
 	@Mock
-	SearchService searchService;
+	SearchService searchServiceImpl;
 	@Mock
 	BasicDataService dataService;
 
@@ -69,7 +69,7 @@ public class SearchControllerTest {
 		offer1 = new Offer(member1, course1, 4.0F);
 		offer2 = new Offer(member2, course2, 6.0F);
 
-		when(searchService.findOffers(any(SearchForm.class))).thenReturn(asList(offer1, offer2));
+		when(searchServiceImpl.findOffers(any(SearchForm.class))).thenReturn(asList(offer1, offer2));
 		when(dataService.findAllUniversityNames()).thenReturn(asList("uni1", "uni2"));
 	}
 
