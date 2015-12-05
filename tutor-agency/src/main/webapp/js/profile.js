@@ -6,5 +6,6 @@ $(document).ready(function () {
         $('html, body').animate({
             scrollTop: $("#offers").offset().top
         }, 800);
+        $('offer-seg').removeClass('.notransitions');
     }
 });

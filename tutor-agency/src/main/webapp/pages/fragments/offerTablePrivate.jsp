@@ -56,7 +56,7 @@
                     <div class="item-text">
                         <p>Remove this course?</p>
                     </div>
-                    <form onsubmit="return confirm('Willst du den Kurs: ${offer.course.name} wirklich entfernen?');" 
+                    <form onsubmit="return confirm('Do you want to remove ${offer.course.name}?');" 
                           action="offer/${offer.id}/delete" method="get">
                         <input type="submit" value="Remove">
                     </form>
