@@ -78,7 +78,7 @@ public class CourseServiceTest {
         
         University university = uni1;
         List<Course> expResult = course1List;
-        List<Course> result = service.findCourseByUniversity(university);
+        List<Course> result = service.findCoursesByUniversity(university);
         assertEquals(expResult, result);
     }
 

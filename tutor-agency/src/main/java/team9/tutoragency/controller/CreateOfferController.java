@@ -73,7 +73,7 @@ public class CreateOfferController extends AutenthicatedAccessController{
 		else
 			selectedUni = dataService.findUniversity(uniId).orElse(unis.get(0));
 
-		List<Course> courses = dataService.findCourseByUniversity(selectedUni);
+		List<Course> courses = dataService.findCoursesByUniversity(selectedUni);
 
 		modelMap.addAttribute("universities", unis);
 		modelMap.addAttribute("courses", courses);
@@ -103,7 +103,7 @@ public class CreateOfferController extends AutenthicatedAccessController{
 			if (course.isPresent()){
 				model.addObject("selectedUniversity", course.get().getUniversity());
 				model.addObject("selectedCourse", course.get());
-				model.addObject("courses", dataService.findCourseByUniversity(course.get().getUniversity()));
+				model.addObject("courses", dataService.findCoursesByUniversity(course.get().getUniversity()));
 			}
 			return model;
 		}
