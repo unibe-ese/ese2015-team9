@@ -33,7 +33,7 @@
                                         <p>Request from</p>
                                         <p class="bold"><a href="../profileId=${subscription.member.id}"><c:out value="${subscription.member.username}"/></a></p>
                                     </div>
-                                    <a class="button" href="offer/${offer.id}/accept/${subscription.id}">Accept</a>
+                                    <a class="button" href="offer/${offer.id}/accept/${subscription.id}/">Accept</a>
                                 </div>
 
                             </c:when>

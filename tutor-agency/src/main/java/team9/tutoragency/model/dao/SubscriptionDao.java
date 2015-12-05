@@ -15,4 +15,6 @@ public interface SubscriptionDao extends CrudRepository<Subscription, Long>{
 
 	public List<Subscription> findByMember(Member member);
 
+	public List<Subscription> findByOffer(Offer findOne);
+
 }

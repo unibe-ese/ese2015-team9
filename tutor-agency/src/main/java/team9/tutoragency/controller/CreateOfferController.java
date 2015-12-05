@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import team9.tutoragency.controller.pojos.OfferForm;
 import team9.tutoragency.controller.service.AgencyService;
-import team9.tutoragency.controller.service.CourseService;
+import team9.tutoragency.controller.service.BasicDataService;
 import team9.tutoragency.controller.service.MemberService;
-import team9.tutoragency.controller.service.UniversityService;
+
 import team9.tutoragency.controller.service.validation.OfferFormValidator;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
@@ -28,7 +28,7 @@ import team9.tutoragency.model.University;
 /**
  * The {@link CreateOfferController} handles all interactions a registered
  * {@link Member} to add an {@code Offer}. The class interacts with
- * {@link CourseService} in order to write the changes persistently to the
+ * {@link CourseServiceImpl} in order to write the changes persistently to the
  * database. For all methods the user has to be logged in(get requests for the
  * views are registered in the springSecurity.xml file).
  * 
@@ -37,18 +37,15 @@ import team9.tutoragency.model.University;
  */
 @Controller
 @RequestMapping(value = "/auth/offer/")
-public class CreateOfferController {
+public class CreateOfferController extends AutenthicatedAccessController{
 
 	@Autowired
-	CourseService courseService;
-	@Autowired
-	UniversityService uniService;
+	BasicDataService dataService;
 	@Autowired
 	AgencyService service;
 	@Autowired
 	OfferFormValidator validator;
-	@Autowired
-	MemberService memberService;
+	
 
 	/**
 	 * This method is invoked before any other handler method of this
@@ -64,19 +61,19 @@ public class CreateOfferController {
 	 */
 	@ModelAttribute
 	public void populateModel(@RequestParam(value = "id", required = false) Long uniId, ModelMap modelMap) {
-		List<University> unis = uniService.findAll();
+		List<University> unis = dataService.findAllUniversites();
 
 		if (unis.isEmpty())
-			throw new AssertionError("No Universities found! Check Database!");
+			throw new AssertionError("No Universities in Database!");
 
 		University selectedUni = new University();
 
 		if (uniId == null)
 			selectedUni = unis.get(0);
 		else
-			selectedUni = uniService.findOne(uniId).orElse(unis.get(0));
+			selectedUni = dataService.findUniversity(uniId).orElse(unis.get(0));
 
-		List<Course> courses = courseService.findByUniversity(selectedUni);
+		List<Course> courses = dataService.findCoursesByUniversity(selectedUni);
 
 		modelMap.addAttribute("universities", unis);
 		modelMap.addAttribute("courses", courses);
@@ -86,12 +83,6 @@ public class CreateOfferController {
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView createOfferForm() {
-		Optional<Member> member = memberService.getAuthenticatedMember();
-
-		if (!member.isPresent())
-			return new ModelAndView("redirect:/denied#login");
-
-		// else
 		ModelAndView model = new ModelAndView("createOffer");
 		model.addObject("offerForm", new OfferForm());
 		return model;
@@ -100,7 +91,7 @@ public class CreateOfferController {
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public ModelAndView submitOfferForm(@ModelAttribute University selectedUniversity, OfferForm offerForm,
 			BindingResult result) {
-		Member member = memberService.getAuthenticatedMember().get();
+		Member member = super.getAuthenticatedMember();
 		offerForm.setMemberId(member.getId());
 
 		validator.validate(offerForm, result);
@@ -108,18 +99,18 @@ public class CreateOfferController {
 		if (result.hasErrors()) {
 			ModelAndView model = new ModelAndView("createOffer", "offerForm", offerForm);
 
-			Optional<Course> course = courseService.findOne(offerForm.getCourseId());
+			Optional<Course> course = dataService.findCourse(offerForm.getCourseId());
 			if (course.isPresent()){
 				model.addObject("selectedUniversity", course.get().getUniversity());
 				model.addObject("selectedCourse", course.get());
-				model.addObject("courses", courseService.findByUniversity(course.get().getUniversity()));
+				model.addObject("courses", dataService.findCoursesByUniversity(course.get().getUniversity()));
 			}
 			return model;
 		}
 		// else
 		service.createOffer(member.getId(), offerForm.getCourseId(), Float.parseFloat(offerForm.getGrade()));
 
-		ModelAndView model = new ModelAndView("redirect:../account/message");
+		ModelAndView model = new ModelAndView("redirect:../account");
 		model.addObject("message", "You have successfully created an offer. ");
 		return model;
 	}

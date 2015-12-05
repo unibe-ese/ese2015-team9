@@ -17,8 +17,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import team9.tutoragency.controller.pojos.EditForm;
+import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.UniversityDao;
@@ -105,5 +107,24 @@ public class MemberServiceTest {
         assertEquals(expMember, captor.getValue());
     }
     
-    
+    /**
+     * Test of create member method, of class {@link MemberService}.
+     */
+     @Test
+     public void testCreateMember() {
+    	 
+         Mockito.when(memberDao.save(captor.capture())).thenReturn(any(Member.class));
+
+         SignupForm form = new SignupForm();
+         form.setFirstName("firstName");
+         form.setLastName("lastName");
+         form.setEmail("member@email.com");
+         form.setUsername("username");
+         form.setPassword("password");
+         Member expectedMember = new Member("firstName", "lastName", "member@email.com", "username",
+                 DigestUtils.md5Hex("password"));
+         service.createMember(form);
+         assertTrue(expectedMember.equals(captor.getValue()));
+         
+     }
 }

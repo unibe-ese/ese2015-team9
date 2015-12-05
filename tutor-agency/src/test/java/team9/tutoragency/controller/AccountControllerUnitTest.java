@@ -16,9 +16,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.util.NestedServletException;
 
 import team9.tutoragency.controller.pojos.EditForm;
+import team9.tutoragency.controller.service.BasicDataService;
+import team9.tutoragency.controller.service.BasicDataServiceImpl;
 import team9.tutoragency.controller.service.MemberService;
-import team9.tutoragency.controller.service.UniversityService;
-import team9.tutoragency.controller.service.validation.EditFormValidationService;
+
+import team9.tutoragency.controller.service.validation.EditFormValidator;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
 
@@ -47,11 +49,11 @@ public class AccountControllerUnitTest {
 	private MockMvc mockMvc;
 
 	@Mock
-	private EditFormValidationService validator;
+	private EditFormValidator validator;
 	@Mock
 	private MemberService memberService;
 	@Mock
-	private UniversityService uniService;
+	private BasicDataService dataService;
 
 	@InjectMocks
 	private AccountController controller = new AccountController();
@@ -67,10 +69,11 @@ public class AccountControllerUnitTest {
 
 		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).setViewResolvers(viewResolver).build();
 
-		member = new Member(1L, "username");
+		member = mock(Member.class);
+		when(member.getUniversityList()).thenReturn(asList(new University(1L, "uni1")));
 
 		when(memberService.getAuthenticatedMember()).thenReturn(Optional.of(member));
-		when(uniService.findAllNames()).thenReturn(asList("uniname"));
+		when(dataService.findAllUniversityNames()).thenReturn(asList("uniname"));
 	}
 
 	@Test
@@ -81,8 +84,8 @@ public class AccountControllerUnitTest {
 	}
 
 	@Test
-	public void test_edit() throws Exception {
-		when(uniService.findAllNames()).thenReturn(asList("uniname"));
+	public void test_getEditPage() throws Exception {
+		when(dataService.findAllUniversityNames()).thenReturn(asList("uniname"));
 
 		EditForm expectedForm = new EditForm(member);
 
@@ -123,17 +126,5 @@ public class AccountControllerUnitTest {
 		assertViewName(result, "profile");
 		assertEquals(member, result.getModelMap().get("member"));
 		
-	}
-	
-	@Test
-	public void test_noAuthenticationThrowsAssertionError(){
-		when(memberService.getAuthenticatedMember()).thenReturn(Optional.ofNullable((Member) null));
-		
-		try {
-			mockMvc.perform(get(URL));
-		} catch (Exception e) {
-			assertEquals(NestedServletException.class, e.getClass());
-			assertEquals(AssertionError.class, e.getCause().getClass());
-		}
 	}
 }

@@ -5,13 +5,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import team9.tutoragency.controller.service.validation.SignupFormValidationService;
+import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import team9.tutoragency.model.Member;
 
 /**
  * A SignupForm contains all values which need to be set in order to allow a
  * user to register as a {@link Member} in the register view. The SignupForm
- * will be validated by the {@link SignupFormValidationService}.
+ * will be validated by the {@link SignupFormValidator}.
  * 
  * @author laeri
  * @author curtys
@@ -158,6 +158,12 @@ public class SignupForm implements Form {
         }
         return true;
     }
-    
 
+	@Override
+	public String toString() {
+		return "SignupForm [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + ", passwordConfirm=" + passwordConfirm + ", email=" + email + ", readAGB="
+				+ readAGB + "]";
+	}
+    
 }

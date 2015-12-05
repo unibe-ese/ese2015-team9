@@ -20,7 +20,7 @@ import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
 /**
- * The EditFormValidationService validates ({@link #validate(Form, Errors)}) the
+ * The EditFormValidator validates ({@link #validate(Form, Errors)}) the
  * {@link EditForm} which is used to edit changes to the profile of a
  * {@link Member}.
  * 
@@ -50,7 +50,7 @@ import team9.tutoragency.model.dao.MemberDao;
  *
  */
 @Service
-public class EditFormValidationService implements Validator {
+public class EditFormValidator implements Validator {
 	@Autowired
 	MemberDao memberDao;
 	@Autowired
@@ -61,7 +61,7 @@ public class EditFormValidationService implements Validator {
 	private Matcher matcher;
 	private final static String namePattern = "^[a-zA-Z0-9_-]{3,15}$";
 
-	public EditFormValidationService() {
+	public EditFormValidator() {
 		validCharacterPattern = Pattern.compile(namePattern);
 	}
 
