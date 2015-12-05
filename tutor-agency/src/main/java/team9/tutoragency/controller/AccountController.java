@@ -32,12 +32,10 @@ import team9.tutoragency.model.University;
  */
 @Controller
 @RequestMapping(value = "/auth/account")
-public class AccountController {
+public class AccountController extends AutenthicatedAccessController{
 
 	@Autowired
 	EditFormValidator validator;
-	@Autowired
-	MemberService memberService;
 	@Autowired
 	UniversityService uniService;
 
@@ -149,15 +147,5 @@ public class AccountController {
 		return showProfile();
 	}
 
-	/**
-	 * <b>Asserts</b>, that the request token is authenticated (authenticated
-	 * member is present).
-	 */
-	private Member getAuthenticatedMember() {
-		Optional<Member> member = memberService.getAuthenticatedMember();
-		if (!member.isPresent())
-			throw new AssertionError("The URL should have been intercepted by Spring Security!");
-
-		return member.get();
-	}
+	
 }

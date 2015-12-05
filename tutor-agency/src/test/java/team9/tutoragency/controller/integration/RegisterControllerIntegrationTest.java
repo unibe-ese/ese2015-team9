@@ -1,4 +1,4 @@
-package team9.tutoragency.controller;
+package team9.tutoragency.controller.integration;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;

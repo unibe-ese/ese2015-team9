@@ -1,4 +1,4 @@
-package team9.tutoragency.controller;
+package team9.tutoragency.controller.integration;
 
 import org.junit.After;
 import org.junit.Before;

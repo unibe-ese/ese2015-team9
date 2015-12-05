@@ -25,7 +25,7 @@ import team9.tutoragency.model.dao.MemberDao;
  * Tests of the class {@link EditFormValidator}.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class EditFormValidationServiceTest {
+public class EditFormValidatorTest {
     
     @Mock
     private MemberDao memberDao;
@@ -69,7 +69,6 @@ public class EditFormValidationServiceTest {
         form.setUsername("username");
         Errors error = new DirectFieldBindingResult(form, "editform");
         service.validate(form, error);
-        System.out.println(error.toString());
         assertTrue(error.hasErrors());
     }
     

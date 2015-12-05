@@ -82,7 +82,7 @@ public class AccountControllerUnitTest {
 	}
 
 	@Test
-	public void test_edit() throws Exception {
+	public void test_getEditPage() throws Exception {
 		when(uniService.findAllNames()).thenReturn(asList("uniname"));
 
 		EditForm expectedForm = new EditForm(member);

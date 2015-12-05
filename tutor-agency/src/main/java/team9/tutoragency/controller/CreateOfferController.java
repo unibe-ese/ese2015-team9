@@ -37,7 +37,7 @@ import team9.tutoragency.model.University;
  */
 @Controller
 @RequestMapping(value = "/auth/offer/")
-public class CreateOfferController {
+public class CreateOfferController extends AutenthicatedAccessController{
 
 	@Autowired
 	CourseService courseService;
@@ -47,8 +47,7 @@ public class CreateOfferController {
 	AgencyService service;
 	@Autowired
 	OfferFormValidator validator;
-	@Autowired
-	MemberService memberService;
+	
 
 	/**
 	 * This method is invoked before any other handler method of this
@@ -67,7 +66,7 @@ public class CreateOfferController {
 		List<University> unis = uniService.findAll();
 
 		if (unis.isEmpty())
-			throw new AssertionError("No Universities found! Check Database!");
+			throw new AssertionError("No Universities in Database!");
 
 		University selectedUni = new University();
 
@@ -86,12 +85,6 @@ public class CreateOfferController {
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView createOfferForm() {
-		Optional<Member> member = memberService.getAuthenticatedMember();
-
-		if (!member.isPresent())
-			return new ModelAndView("redirect:/denied#login");
-
-		// else
 		ModelAndView model = new ModelAndView("createOffer");
 		model.addObject("offerForm", new OfferForm());
 		return model;
@@ -100,7 +93,7 @@ public class CreateOfferController {
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public ModelAndView submitOfferForm(@ModelAttribute University selectedUniversity, OfferForm offerForm,
 			BindingResult result) {
-		Member member = memberService.getAuthenticatedMember().get();
+		Member member = super.getAuthenticatedMember();
 		offerForm.setMemberId(member.getId());
 
 		validator.validate(offerForm, result);
