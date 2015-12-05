@@ -21,6 +21,7 @@ import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
 import team9.tutoragency.model.Subscription;
+import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.OfferDao;
@@ -48,6 +49,7 @@ public class OfferControllerIntegrationTest {
 
 	@Autowired
 	private WebApplicationContext wac;
+	
 	@Autowired
 	MemberDao memberDao;
 	@Autowired
@@ -60,8 +62,10 @@ public class OfferControllerIntegrationTest {
 	CourseDao courseDao;
 
 	private MockMvc mockMvc;
-	private Member member;
-	private Course course;
+	
+	private Member eve;
+	private Course dbBern;
+	private University uniBern;
 
 	private static final String URL = "/auth/account"; // @RequestMapping value
 
@@ -69,8 +73,16 @@ public class OfferControllerIntegrationTest {
 	public void setUp() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 
-		member = memberDao.findOne(1L);
-		course = courseDao.findOne(1L);
+		uniBern = uniDao.findOne(1L);
+		assertEquals("Bern", uniBern.getName());
+		
+		eve = memberDao.findOne(2L);
+		assertEquals("eve", eve.getUsername());
+		assertEquals(30D, eve.getFee(), 1);
+		
+		dbBern = courseDao.findOne(1L);
+		assertEquals("Databases", dbBern.getName());
+		assertEquals(uniBern, dbBern.getUniversity());
 
 	}
 
@@ -80,38 +92,38 @@ public class OfferControllerIntegrationTest {
 	 * @throws Exception
 	 */
 	@Test
-	@WithUserDetails("ese")
+	@WithUserDetails("eve")
 	@Commit
 	public void test_offerLifeCycle() throws Exception {
-		assertEquals(0, offerDao.findByTutorAndCourse(member, course).size());
+		assertEquals(0, offerDao.findByTutorAndCourse(eve, dbBern).size());
 		
 		//create offer
 		mockMvc.perform(post("/auth/offer/new/")
-				.param("memberId", "1")
-				.param("courseId", "1")
+				.param("memberId", eve.getId().toString())
+				.param("courseId", dbBern.getId().toString())
 				.param("grade", "4.0"))
 				.andExpect(status().is3xxRedirection());
 		
-		assertEquals(1, offerDao.findByTutorAndCourse(member, courseDao.findOne(1L)).size());
-		Offer offer = offerDao.findByTutorAndCourse(member, courseDao.findOne(1L)).get(0);
+		assertEquals(1, offerDao.findByTutorAndCourse(eve, dbBern).size());
+		Offer offer = offerDao.findByTutorAndCourse(eve, dbBern).get(0);
 		
 		//subscribe to offer
 		mockMvc.perform(get("/auth/offer/" + offer.getId() + "/subscribe"))
 			.andExpect(status().is3xxRedirection());
 		
-		assertEquals(1, subscriptionDao.findByMemberAndOffer(member, offer).size());
-		Subscription subscription = subscriptionDao.findByMemberAndOffer(member, offer).get(0);
+		assertEquals(1, subscriptionDao.findByMemberAndOffer(eve, offer).size());
+		Subscription subscription = subscriptionDao.findByMemberAndOffer(eve, offer).get(0);
 		
 		//accept offer
 		mockMvc.perform(get("/auth/offer/" + offer.getId() + "/accept/" + subscription.getId() + "/"))
 				.andExpect(status().is3xxRedirection());
 		
-		subscription = subscriptionDao.findByMemberAndOffer(member, offer).get(0);
+		subscription = subscriptionDao.findByMemberAndOffer(eve, offer).get(0);
 		assertEquals(true, subscription.isAccepted());
 		
 		//delete offer
 		mockMvc.perform(get("/auth/offer/" + offer.getId() + "/delete"));
-		assertEquals(0, offerDao.findByTutorAndCourse(memberDao.findOne(1L), courseDao.findOne(1L)).size());	
+		assertEquals(0, offerDao.findByTutorAndCourse(eve, dbBern).size());	
 	}
 	
 

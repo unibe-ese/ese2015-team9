@@ -12,7 +12,7 @@ import team9.tutoragency.model.University;
 public class SearchForm{
 	
 	public static final int DEFAULT_MIN_FEE = 0;
-	public static final int DEFAULT_MAX_FEE = 30;
+	public static final int DEFAULT_MAX_FEE = 40;
 	public static final String DEFAULT_MIN_GRADE = "4.0";
 	
 	private String searchText;
