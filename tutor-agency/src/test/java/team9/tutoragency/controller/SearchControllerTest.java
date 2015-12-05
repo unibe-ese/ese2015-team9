@@ -21,8 +21,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import team9.tutoragency.controller.pojos.SearchForm;
+import team9.tutoragency.controller.service.BasicDataService;
 import team9.tutoragency.controller.service.SearchService;
-import team9.tutoragency.controller.service.UniversityService;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
@@ -34,7 +34,7 @@ public class SearchControllerTest {
 	@Mock
 	SearchService searchService;
 	@Mock
-	UniversityService uniService;
+	BasicDataService dataService;
 
 	@InjectMocks
 	SearchController controller = new SearchController();
@@ -70,7 +70,7 @@ public class SearchControllerTest {
 		offer2 = new Offer(member2, course2, 6.0F);
 
 		when(searchService.findOffers(any(SearchForm.class))).thenReturn(asList(offer1, offer2));
-		when(uniService.findAllNames()).thenReturn(asList("uni1", "uni2"));
+		when(dataService.findAllUniversityNames()).thenReturn(asList("uni1", "uni2"));
 	}
 
 	@Test

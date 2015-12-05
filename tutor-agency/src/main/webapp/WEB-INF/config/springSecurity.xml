@@ -20,14 +20,6 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/auth/**"
 			access="hasRole('ROLE_USER')" />
-		<!-- <security:intercept-url pattern="/profile"
-			access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/showCourses"
-			access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/editProfile"
-			access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/addCourse"
-			access="hasRole('ROLE_USER')" /> -->
 		<security:form-login login-page="/denied#login"
 			authentication-failure-url="/login?error=true" default-target-url="/auth/account" />
 		<security:logout invalidate-session="true"

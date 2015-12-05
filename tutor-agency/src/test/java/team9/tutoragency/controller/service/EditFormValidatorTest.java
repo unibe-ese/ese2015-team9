@@ -17,22 +17,22 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 import team9.tutoragency.controller.pojos.EditForm;
-import team9.tutoragency.controller.service.validation.EditFormValidationService;
+import team9.tutoragency.controller.service.validation.EditFormValidator;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
 /**
- * Tests of the class {@link EditFormValidationService}.
+ * Tests of the class {@link EditFormValidator}.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class EditFormValidationServiceTest {
+public class EditFormValidatorTest {
     
     @Mock
     private MemberDao memberDao;
     @Mock
     private MemberService memberService;
     @InjectMocks
-    private EditFormValidationService service;
+    private EditFormValidator service;
     
     @Before
     public void setUp() {
@@ -69,7 +69,6 @@ public class EditFormValidationServiceTest {
         form.setUsername("username");
         Errors error = new DirectFieldBindingResult(form, "editform");
         service.validate(form, error);
-        System.out.println(error.toString());
         assertTrue(error.hasErrors());
     }
     

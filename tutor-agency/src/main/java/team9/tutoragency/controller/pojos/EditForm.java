@@ -8,13 +8,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import team9.tutoragency.controller.service.validation.EditFormValidationService;
+import team9.tutoragency.controller.service.validation.EditFormValidator;
 import team9.tutoragency.model.Member;
 
 /**
  * The EditForm stores all values to be displayed in the edit view to edit a
  * profile of a {@link Member}. The EditForm will be validated by the
- * {@link EditFormValidationService}.
+ * {@link EditFormValidator}.
  * 
  * @author laeri
  * @author curtys
@@ -244,5 +244,14 @@ public class EditForm implements Form {
         }
         return true;
     }
+
+
+	@Override
+	public String toString() {
+		return "EditForm [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", description=" + description + ", universities=" + universities + ", oldPassword=" + oldPassword
+				+ ", password=" + password + ", passwordConfirm=" + passwordConfirm + ", fee=" + fee + ", email="
+				+ email + ", readAGB=" + readAGB + "]";
+	}
     
 }

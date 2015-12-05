@@ -11,7 +11,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import team9.tutoragency.controller.exceptions.InvalidUserException;
 import team9.tutoragency.controller.pojos.EditForm;
+import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.MemberDao;
@@ -93,4 +95,19 @@ public class MemberService {
 		return memberDao.findByFeeBetween((double) min, (double) max);
 	}
 
+	@Transactional
+	public SignupForm createMember(SignupForm signupForm) throws InvalidUserException {
+
+		String firstName = signupForm.getFirstName();
+		String lastName = signupForm.getLastName();
+		String nickname = signupForm.getUsername();
+		String email = signupForm.getEmail();
+		String password = DigestUtils.md5Hex(signupForm.getPassword());
+
+		Member member = new Member(firstName,lastName,email,nickname,password);
+
+		memberDao.save(member);
+
+		return signupForm;
+	}
 }

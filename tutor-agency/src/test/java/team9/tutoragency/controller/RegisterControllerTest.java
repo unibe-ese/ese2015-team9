@@ -9,26 +9,49 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DirectFieldBindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.SignupFromSaveService;
-import team9.tutoragency.controller.service.validation.SignupFormValidationService;
+import team9.tutoragency.controller.service.validation.SignupFormValidator;
+import util.SignupFormValidatorMock;
+
+import static org.springframework.test.web.ModelAndViewAssert.assertViewName;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.io.IOException;
+import java.util.Optional;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static java.util.Arrays.asList;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegisterControllerTest {
-    
 
-	@Mock
-	private SignupFromSaveService saveService;
-	@Mock
-	private SignupFormValidationService validator;
-    @InjectMocks
+	private SignupFormValidator validator;
+    
+	@InjectMocks
     private RegisterController controller;
     
+    private MockMvc mockMvc;
     @Before
     public void setUp() {
+		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
     }
 
     /**
@@ -36,36 +59,50 @@ public class RegisterControllerTest {
      */
     @Test
     public void testRegister() throws Exception {
-        HttpServletResponse response = null;
-        ModelAndView expResult = new ModelAndView("register", "signupform", new SignupForm());
-        ModelAndView result = controller.register(response);
-        assertEquals((SignupForm)expResult.getModelMap().get("signupform"), 
-                (SignupForm)result.getModelMap().get("signupForm"));
-        assertEquals(expResult.getViewName(), result.getViewName());
+    	
+    	mockMvc.perform(get("/register")).andExpect(status().isOk())
+    		.andExpect(forwardedUrl("signupPage"))
+    		.andExpect(model().attribute("signupForm", new SignupForm()));
     }
+    
+    @Test
+    public void testCreateMember_formRejected() throws Exception{
+    	SignupForm form = new SignupForm();
+    	form.setUsername("username");
+    	
+    	validator = new SignupFormValidatorMock(true);	
+    	controller.setValidator(validator);
+    	
+    	mockMvc.perform(post("/create").param("username", "username"))
+    			.andExpect(status().isOk())
+    			.andExpect(forwardedUrl("signupPage"))
+    			.andExpect(model().attribute("signupForm", form));
+    }
+   
+    
     /**
      * Test of createUser method, of class {@link RegisterController}. Tests the correctness of the
      * returned view, if validation is not successful.
      */
-    @Test
-    public void createUserErrors() throws Exception {
-        SignupForm form = new SignupForm();
-        BindingResult error = new DirectFieldBindingResult(form, "signupForm");
-        error.reject("test error");
-        ModelAndView result = controller.createUser(form, error, null);
-        assertEquals("register", result.getViewName());
-        
-    }
+//    @Test
+//    public void createUserErrors() throws Exception {
+//        SignupForm form = new SignupForm();
+//        BindingResult error = new DirectFieldBindingResult(form, "signupForm");
+//        error.reject("test error");
+//        ModelAndView result = controller.createMember(form, error, null);
+//        assertEquals("register", result.getViewName());
+//        
+//    }
     /**
      * Test of createUser method, of class {@link RegisterController}. Tests the correctness of the
      * returned view, if validation is successful.
      */
-    @Test
-    public void createUserSuccess() throws Exception {
-        SignupForm form = new SignupForm();
-        BindingResult error = new DirectFieldBindingResult(form, "signupForm");
-        ModelAndView result = controller.createUser(form, error, null);
-        assertEquals("registerSuccess", result.getViewName());   
-    }
+//    @Test
+//    public void createUserSuccess() throws Exception {
+//        SignupForm form = new SignupForm();
+//        BindingResult error = new DirectFieldBindingResult(form, "signupForm");
+//        ModelAndView result = controller.createMember(form, error, null);
+//        assertEquals("registerSuccess", result.getViewName());   
+//    }
     
 }

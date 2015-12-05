@@ -11,7 +11,6 @@ import team9.tutoragency.controller.pojos.SignupForm;
 @Controller
 public class IndexController {
 
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("index");
@@ -54,9 +53,4 @@ public class IndexController {
         return model;
     }    
     
-    @RequestMapping(value = "/forgot")
-    public ModelAndView forgot() {
-    	ModelAndView model = new ModelAndView("forgottenpassword");
-        return model;
-    }
 }

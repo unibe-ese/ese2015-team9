@@ -19,9 +19,9 @@ import team9.tutoragency.model.dao.SubscriptionDao;
 import team9.tutoragency.model.dao.UniversityDao;
 
 /**
- * Service for all the "agency" tasks. Meaning everything concerning offers, and subscriptions.
- * @author brn
- *
+ * Implementation of {@code AgencyService}.
+ * @see {@linkplain AgencyService}.
+ * @author bruno
  */
 @Service
 public class AgencyServiceImpl implements AgencyService{
@@ -32,53 +32,27 @@ public class AgencyServiceImpl implements AgencyService{
 	@Autowired MemberDao memberDao;
 	@Autowired SubscriptionDao subscriptionDao;
 	
-	/**
-	 * Finds the offer with the given Id.
-	 * <p>
-	 * <b>Asserts that:<b>
-	 * <li>id is not null</li>
-	 * </p>
-	 * @return empty Optional if offer does not exist.
-	 */
 	@Override
 	@Transactional(readOnly=true)
-	public Optional<Offer> findOfferById(Long offerId) {
+	public Optional<Offer> findOffer(Long offerId) throws AssertionError{
 		if (offerId==null) throw new AssertionError("offer id is null!");
 		return Optional.ofNullable(offerDao.findOne(offerId));
 	}
 
-	/**
-	 * Deletes the offer with the given id.
-	 * <p>
-	 * <b>Asserts that:<b>
-	 * <li>id is not null</li>
-	 * <li>offer with given id exists</li>
-	 * </p>
-	 */
 	@Override
 	@Transactional
-	public void removeOffer(Long offerId) {
+	public void removeOffer(Long offerId) throws AssertionError{
 		if (offerId==null) throw new AssertionError("offer id is null!");
 		if (!offerDao.exists(offerId)) throw new AssertionError("Offer does not exist!");
 		
+		subscriptionDao.delete(subscriptionDao.findByOffer( offerDao.findOne(offerId)));
 		offerDao.delete(offerId);
 		
 	}
 
-	/**
-	 * Creates an Offer with the passed parameters. And saves it in the Database.
-	 * <p>
-	 * <b>Asserts that:<b>
-	 * <li>memberId is not null</li>
-	 * <li>member with given id exists</li>
-	 * <li>courseId is not null</li>
-	 * <li>course with given id exists</li>
-	 * <li>offer with member and course does not exist</li>
-	 * </p>
-	 */
 	@Override
 	@Transactional
-	public void createOffer(Long memberId, Long courseId, float grade) {
+	public void createOffer(Long memberId, Long courseId, float grade) throws AssertionError{
 		if (memberId==null) throw new AssertionError("memberId is NULL");
 		if (courseId==null) throw new AssertionError("courseId is NULL");
 		if (!memberDao.exists(memberId)) throw new AssertionError("Member does not exist!");
@@ -91,18 +65,8 @@ public class AgencyServiceImpl implements AgencyService{
 		offerDao.save(offer);
 	}
 
-	/**
-	 * Returns true if no offer with the given member and course exists.
-	 * <p>
-	 * <b>Asserts that:<b>
-	 * <li>memberId is not null</li>
-	 * <li>member with given id exists</li>
-	 * <li>courseId is not null</li>
-	 * <li>course with given id exists</li>
-	 * </p>
-	 */
 	@Transactional(readOnly=true)
-	public boolean isNewOffer(Long memberId, Long courseId){
+	public boolean isNewOffer(Long memberId, Long courseId)throws AssertionError{
 		if (memberId==null) throw new AssertionError("memberId is NULL");
 		if (courseId==null) throw new AssertionError("courseId is NULL");
 		if (!memberDao.exists(memberId)) throw new AssertionError("Member does not exist!");
@@ -123,7 +87,7 @@ public class AgencyServiceImpl implements AgencyService{
 	}
 
 	@Override
-	public void subscribeMemberToOffer(Long memberId, Long offerId) {
+	public void createSubscription(Long memberId, Long offerId) throws AssertionError{
 		if (memberId==null) throw new AssertionError("memberId is NULL");
 		if (offerId==null) throw new AssertionError("offerId is NULL");
 		if (!memberDao.exists(memberId)) throw new AssertionError("Member does not exist!");
@@ -139,13 +103,15 @@ public class AgencyServiceImpl implements AgencyService{
 	}
 
 	@Override
-	public void acceptSubscription(Long subscriptionId) {
+	public void acceptSubscription(Long subscriptionId) throws AssertionError{
 		if (subscriptionId==null) throw new AssertionError("subscription id is NULL");
 		
 		Subscription entity = subscriptionDao.findOne(subscriptionId);
-		if(entity != null){
-			entity.setAccepted(true);
-			subscriptionDao.save(entity);
-		}	
+		
+		if(entity == null) throw new AssertionError("subscription with id "+ subscriptionId +" does not exist!");
+			
+		entity.setAccepted(true);
+		subscriptionDao.save(entity);
+		
 	}
 }
