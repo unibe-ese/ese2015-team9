@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import team9.tutoragency.controller.exceptions.InvalidUserException;
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.AccountService;
 import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import team9.tutoragency.model.Member;
 
@@ -30,7 +30,7 @@ import team9.tutoragency.model.Member;
 public class SignUpController {
 
 	@Autowired
-	MemberService memberService;
+	AccountService memberService;
 
 	SignupFormValidator validator;
 	
@@ -75,7 +75,7 @@ public class SignUpController {
 		
 		if (!result.hasErrors()) {
 			try {
-				memberService.createMember(signupForm);
+				memberService.createAccount(signupForm);
 				model = new ModelAndView("registerSuccess");
 			} catch (InvalidUserException e) {
 				model = new ModelAndView("register", "signupForm", signupForm);
