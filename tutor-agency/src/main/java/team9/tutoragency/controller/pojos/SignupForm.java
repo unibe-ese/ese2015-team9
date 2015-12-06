@@ -17,89 +17,19 @@ import team9.tutoragency.model.Member;
  * @author curtys
  *
  */
-public class SignupForm implements Form {
+public class SignupForm extends BasicMemberForm{
 
-	private Long id;
-	@NotNull(message = "Please enter your first name.")
-	private String firstName;
-	@NotNull(message = "Please enter your last name.")
-	private String lastName;
-	@NotNull(message = "Please enter a username.")
-	private String username;
+	private boolean readAGB;
 	@NotNull(message = "Please enter a password.")
-	@Size(min = 6, max = 18, message = "Password needs to be 6-18 characters long")
+	@Size(min = 4, max = 10, message = "Password needs to be 4-10 characters long")
 	private String password;
 	@NotNull(message = "Please enter a matching password.")
 	private String passwordConfirm;
-	@NotNull
-	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*"
-            + "@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
-            message = "Must be valid email address")
-	private String email;
-
-	private boolean readAGB;
-
+	
 	public SignupForm() {
-		firstName = "Vorname";
-		lastName = "Nachname";
-		username = "Nickname";
-		email = "E-mail";
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPasswordConfirm() {
-		return passwordConfirm;
-	}
-
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
+		super();	
+		password = "";
+		passwordConfirm = "";
 	}
 
 	public boolean isReadAGB() {
@@ -110,60 +40,61 @@ public class SignupForm implements Form {
 		this.readAGB = readAGB;
 	}
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        hash = 23 * hash + Objects.hashCode(this.lastName);
-        hash = 23 * hash + Objects.hashCode(this.username);
-        hash = 23 * hash + Objects.hashCode(this.password);
-        hash = 23 * hash + Objects.hashCode(this.passwordConfirm);
-        hash = 23 * hash + Objects.hashCode(this.email);
-        hash = 23 * hash + (this.readAGB ? 1 : 0);
-        return hash;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final SignupForm other = (SignupForm) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.firstName, other.firstName)) {
-            return false;
-        }
-        if (!Objects.equals(this.lastName, other.lastName)) {
-            return false;
-        }
-        if (!Objects.equals(this.username, other.username)) {
-            return false;
-        }
-        if (!Objects.equals(this.password, other.password)) {
-            return false;
-        }
-        if (!Objects.equals(this.passwordConfirm, other.passwordConfirm)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (this.readAGB != other.readAGB) {
-            return false;
-        }
-        return true;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((passwordConfirm == null) ? 0 : passwordConfirm.hashCode());
+		result = prime * result + (readAGB ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SignupForm other = (SignupForm) obj;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (passwordConfirm == null) {
+			if (other.passwordConfirm != null)
+				return false;
+		} else if (!passwordConfirm.equals(other.passwordConfirm))
+			return false;
+		if (readAGB != other.readAGB)
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
-		return "SignupForm [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-				+ ", password=" + password + ", passwordConfirm=" + passwordConfirm + ", email=" + email + ", readAGB="
-				+ readAGB + "]";
+		return "SignupForm [readAGB=" + readAGB + ", password=" + password + ", passwordConfirm=" + passwordConfirm
+				+ "]";
 	}
+   
     
 }

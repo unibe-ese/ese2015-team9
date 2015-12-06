@@ -42,7 +42,7 @@ public class LoginControllerTest {
 
 		model = controller.getDeniedPage();
 		assertEquals("loginpage", model.getViewName());
-		assertEquals(LoginController.accessErrorMessage, model.getModel().get("message"));
+		assertEquals(LoginController.accessDeniedMessage, model.getModel().get("message"));
 
 	}
 }

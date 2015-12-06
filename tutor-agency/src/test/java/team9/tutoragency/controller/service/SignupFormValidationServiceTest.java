@@ -103,6 +103,10 @@ public class SignupFormValidationServiceTest {
     private SignupForm createForm() {
         SignupForm form = new SignupForm();
         form.setReadAGB(true);
+        form.setUsername("Username");
+        form.setLastName("lastName");
+        form.setFirstName("firstName");
+        form.setEmail("testMail@mail.com");
         form.setPassword("password");
         form.setPasswordConfirm("password");
         return form;

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import team9.tutoragency.controller.pojos.Form;
 import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;

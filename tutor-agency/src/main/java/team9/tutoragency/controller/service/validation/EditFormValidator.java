@@ -13,8 +13,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javassist.bytecode.AnnotationsAttribute;
+import team9.tutoragency.controller.pojos.BasicMemberForm;
 import team9.tutoragency.controller.pojos.EditForm;
-import team9.tutoragency.controller.pojos.Form;
 import team9.tutoragency.controller.service.AccountService;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.impl.AccountServiceImpl;
@@ -67,14 +67,14 @@ public class EditFormValidator implements Validator {
 		validCharacterPattern = Pattern.compile(namePattern);
 	}
 
-	private void checkEmailAlreadyInUse(Errors errors, Member member, EditForm form) {
+	private void checkEmailAlreadyInUse(Errors errors, Member member, BasicMemberForm form) {
 		List<Member> members = memberDao.findByEmail(form.getEmail());
 		if (!members.isEmpty() && !members.get(0).equals(member)) {
 			errors.rejectValue("email", "email.invalidName", "Email already in use");
 		}
 	}
 
-	private void checkUsernameAlreadyInUse(Errors errors, Member member, EditForm form) {
+	private void checkUsernameAlreadyInUse(Errors errors, Member member, BasicMemberForm form) {
 		List<Member> members = memberDao.findByUsername(form.getUsername());
 		if (!members.isEmpty() && !members.get(0).equals(member)) {
 			errors.rejectValue("username", "username.invalidName", "Username already in use");
