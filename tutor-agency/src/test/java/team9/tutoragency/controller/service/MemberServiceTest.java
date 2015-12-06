@@ -21,6 +21,8 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.controller.pojos.SignupForm;
+import team9.tutoragency.controller.service.impl.AccountServiceImpl;
+import team9.tutoragency.controller.service.impl.MemberServiceImpl;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.UniversityDao;
@@ -33,9 +35,8 @@ public class MemberServiceTest {
     @Mock
     private UniversityDao uniDao;
     @InjectMocks
-    private MemberService service;
-    @Captor
-    private ArgumentCaptor<Member> captor;
+    private MemberServiceImpl service;
+   
     private final Member activeMember = new Member("firstName", "lastName", "member@email.com", "username", "password");
     
     @Before
@@ -46,21 +47,13 @@ public class MemberServiceTest {
 		Mockito.when(authentication.getPrincipal()).thenReturn(activeMember);
 		Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);	
 		SecurityContextHolder.setContext(securityContext);
+		
         Mockito.when(memberDao.findOne(anyLong())).thenReturn(activeMember);
     }
 
-    /**
-     * Test of upgradeToTutor method, of class {@link MemberService}.
-     */
-    @Test
-    public void testUpgradeToTutor() {
-        activeMember.setIsTutor(true);
-        Member result = service.upgradeAuthenticatedMemberToTutor();
-        assertEquals(activeMember, result);
-    }
     
     /**
-     * Test of getAuthenticatedMember method, of class {@link MemberService}.
+     * Test of getAuthenticatedMember method, of class {@link AccountServiceImpl}.
      */
     @Test
     public void testGetAuthenticatedMember() {
@@ -72,59 +65,5 @@ public class MemberServiceTest {
         assertEquals(Optional.empty(), result);
     }
 
-    /**
-     * Test of saveEditChange method, of class {@link MemberService}.
-     */
-    @Test
-    public void testSaveEditChange() {
-        Mockito.when(memberDao.save(captor.capture())).thenReturn(any(Member.class));
-        
-        Member expMember = new Member("fName", "lName", "newemail@email.com", "uname", "password");
-        Member memberBefore = new Member("firstName", "lastName", "member@email.com", "username", "password");
-        
-        EditForm form = new EditForm();
-        form.setEmail(expMember.getEmail());
-        form.setFirstName(expMember.getFirstName());
-        form.setLastName(expMember.getLastName());
-        form.setUsername(expMember.getUsername());
-        
-        service.saveEditChange(memberBefore, form);
-        assertEquals(expMember, captor.getValue());
-        
-        expMember.setPassword(DigestUtils.md5Hex("newpassword"));
-        form.setPassword("newpassword");
-        service.saveEditChange(memberBefore, form);
-        assertEquals(expMember, captor.getValue());
-        
-        form.setFee("20.0");
-        service.saveEditChange(memberBefore, form);
-        assertEquals(expMember, captor.getValue());
-        
-        expMember.setIsTutor(true);
-        expMember.setFee(20.0);
-        memberBefore.setIsTutor(true);
-        service.saveEditChange(memberBefore, form);
-        assertEquals(expMember, captor.getValue());
-    }
-    
-    /**
-     * Test of create member method, of class {@link MemberService}.
-     */
-     @Test
-     public void testCreateMember() {
-    	 
-         Mockito.when(memberDao.save(captor.capture())).thenReturn(any(Member.class));
 
-         SignupForm form = new SignupForm();
-         form.setFirstName("firstName");
-         form.setLastName("lastName");
-         form.setEmail("member@email.com");
-         form.setUsername("username");
-         form.setPassword("password");
-         Member expectedMember = new Member("firstName", "lastName", "member@email.com", "username",
-                 DigestUtils.md5Hex("password"));
-         service.createMember(form);
-         assertTrue(expectedMember.equals(captor.getValue()));
-         
-     }
 }

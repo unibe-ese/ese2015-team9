@@ -40,7 +40,7 @@
 		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"
 		id="passwordEncoder" />
 	<bean id="customUserDetailsService"
-		class="team9.tutoragency.controller.service.CustomUserDetailsService" />
+		class="team9.tutoragency.controller.service.impl.CustomUserDetailsService" />
 
 
 </beans>

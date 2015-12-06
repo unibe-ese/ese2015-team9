@@ -16,9 +16,12 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.util.NestedServletException;
 
 import team9.tutoragency.controller.pojos.EditForm;
+import team9.tutoragency.controller.service.AccountService;
 import team9.tutoragency.controller.service.BasicDataService;
 import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.impl.AccountServiceImpl;
 import team9.tutoragency.controller.service.impl.BasicDataServiceImpl;
+import team9.tutoragency.controller.service.impl.MemberServiceImpl;
 import team9.tutoragency.controller.service.validation.EditFormValidator;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
@@ -49,11 +52,13 @@ public class AccountControllerUnitTest {
 
 	@Mock
 	private EditFormValidator validator;
-	@Mock
+
+	@Mock 
 	private MemberService memberService;
 	@Mock
 	private BasicDataService dataService;
-
+	@Mock
+	private AccountService accountService;
 	@InjectMocks
 	private AccountController controller = new AccountController();
 

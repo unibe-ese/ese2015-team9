@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.impl.AccountServiceImpl;
 import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import util.SignupFormValidatorMock;
 
