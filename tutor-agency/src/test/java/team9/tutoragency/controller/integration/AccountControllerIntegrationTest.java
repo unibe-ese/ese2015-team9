@@ -113,6 +113,7 @@ public class AccountControllerIntegrationTest {
 		form.setUsername("Student");
 
 		mockMvc.perform(post(URL + "/save").param("email", tutor1.getEmail()).param("oldPassword", "password")
+				.param("firstName", tutor1.getFirstName())
 				.param("lastName", tutor1.getLastName()).param("fee", "40").param("username", "tutor1"))
 				.andExpect(status().isOk()).andExpect(forwardedUrl("/pages/profile.jsp"));
 	}

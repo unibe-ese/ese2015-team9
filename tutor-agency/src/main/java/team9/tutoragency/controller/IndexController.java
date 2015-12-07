@@ -23,12 +23,6 @@ public class IndexController {
 		return model;
 	}
 
-	@RequestMapping(value = "/security-error", method = RequestMethod.GET)
-	public String securityError(RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("page_error", "You do have have permission to do that!");
-		return "redirect:/";
-	}
-
 	@RequestMapping(value = "/info")
     public ModelAndView info() {
     	ModelAndView model = new ModelAndView("info");

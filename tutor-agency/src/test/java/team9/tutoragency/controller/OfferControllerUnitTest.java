@@ -28,6 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import team9.tutoragency.controller.service.AgencyService;
 import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.impl.AccountServiceImpl;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.UniversityDao;
@@ -48,12 +49,11 @@ public class OfferControllerUnitTest {
 	
 	@InjectMocks OfferController controller = new OfferController();
 	
-	private MockMvc mockMvc;
+	
 	private Member member, tutor;
 	
 	@Before
 	public void setUp(){
-		mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 		member = new Member(1L, "Bob");
 	}
 	@Test

@@ -1,11 +1,15 @@
 package team9.tutoragency.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import team9.tutoragency.controller.service.AccountService;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.model.Member;
 
@@ -23,12 +27,16 @@ public class ProfileController {
 	MemberService memberService;
 	
 	@RequestMapping(value = "/profileId={id}", method = RequestMethod.GET)
-	public ModelAndView showOpenProfile(@PathVariable("id") Long id) {
+	public ModelAndView showPublicProfile(@PathVariable("id") Long id) {
 		ModelAndView model = new ModelAndView("publicProfile");
 		
-		Member member = memberService.findById(id);
+		Optional<Member> member = memberService.findById(id);
 		
-		model.addObject("member", member);
+		if(member.isPresent())
+			model.addObject("member", member);
+		else
+			model.setViewName("redirect:/");
+		
 		return model;
 	}
 }

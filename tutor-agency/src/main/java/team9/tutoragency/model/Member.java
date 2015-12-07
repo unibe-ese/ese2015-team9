@@ -25,7 +25,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import team9.tutoragency.controller.RegisterController;
+import team9.tutoragency.controller.SignUpController;
 
 /**
  * <p>
@@ -34,7 +34,7 @@ import team9.tutoragency.controller.RegisterController;
  * members but a tutor has a true {@link #isTutor} entry which can be attained
  * by "upgrading" the account on the profile page of the Tutor-Agency website.
  * In order to become a {@link Member} a user can register
- * {@link RegisterController} in the register view.
+ * {@link SignUpController} in the register view.
  * </p>
  * <p>
  * A {@link Member} has to supply

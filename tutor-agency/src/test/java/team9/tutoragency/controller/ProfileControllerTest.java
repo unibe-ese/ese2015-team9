@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import team9.tutoragency.controller.service.AccountService;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.model.Member;
 import static org.junit.Assert.*;
@@ -36,50 +37,21 @@ public class ProfileControllerTest {
 	public final static Member member = new Member();
 	@Before
 	public void setUp() {
-		when(memberService.findById(any(Long.class))).thenReturn(member, null);
+		when(memberService.findById(any(Long.class))).thenReturn(Optional.of(member), Optional.ofNullable((Member) null));
 	}
 	
-//	@Test
-//	public void showProfile(){
-////		Authentication authentication = Mockito.mock(Authentication.class);
-////        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
-////        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
-////        SecurityContextHolder.setContext(securityContext);
-////        Mockito.when(authentication.getPrincipal()).thenReturn(member);
-////        
-//        Mockito.when(memberService.getAuthenticatedMember()).thenReturn(Optional.of(member));
-//       
-//        ModelAndView model = controller.show();
-//        assertEquals(member, model.getModel().get("member"));
-//        assertEquals("profile", model.getViewName());      
-//	}
 	@Test
 	public void testShowOpenProfile(){
-		ModelAndView model = controller.showOpenProfile(1L);
+		ModelAndView model = controller.showPublicProfile(1L);
 		assertEquals("publicProfile", model.getViewName());
-		assertEquals(member, model.getModel().get("member"));
+		assertEquals(Optional.of(member), model.getModel().get("member"));
 		
-		//when memberService returns null
-		model = controller.showOpenProfile(1L);
+		//when accountService returns null
+		model = controller.showPublicProfile(1L);
 		assertEquals(null, model.getModel().get("member"));
+		assertEquals("redirect:/", model.getViewName());
 	}
-//	@Test
-//	public void testIsLoggedIn(){
-//		//Mock the SecurityContext and Authentication
-//		Authentication authentication = Mockito.mock(Authentication.class);
-//		when(authentication.getName()).thenReturn(USERNAME);
-//		SecurityContextHolder.getContext().setAuthentication(authentication);
-//			
-//		ProfileController controller = new ProfileController();
-//		Member member = mock(Member.class);
-//		when(member.getUsername()).thenReturn(USERNAME);
-//		assertTrue(controller.isLoggedIn(member));
-//		
-//		assertFalse(controller.isLoggedIn(null));
-//		
-//		when(member.getUsername()).thenReturn("notTheUsername");
-//		assertFalse(controller.isLoggedIn(member));
-//	}
+
 	
 	
 	

@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.impl.AccountServiceImpl;
 import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import util.SignupFormValidatorMock;
 
@@ -55,6 +55,9 @@ public class RegisterControllerIntegrationTest {
     @Test
     public void testCreateMember_formAccepted() throws Exception{ 	
     	mockMvc.perform(post("/create")
+    		.param("username", "Alice")
+    		.param("lastName", "A.")
+    		.param("firstName", "alice")
     		.param("email", "test_mail@mail.com")
     		.param("password", "password")
     		.param("passwordConfirm", "password")
@@ -66,12 +69,16 @@ public class RegisterControllerIntegrationTest {
     public void testCreateMember_formRejected() throws Exception{ 	
     	SignupForm expectedForm = new SignupForm();
     	expectedForm.setUsername("Bob");
+    	expectedForm.setLastName("B.");
+    	expectedForm.setFirstName("Bob");
     	expectedForm.setEmail("test_mail@mail.com");
     	expectedForm.setPassword("password");
     	expectedForm.setPasswordConfirm("password");
     	
     	mockMvc.perform(post("/create")
     			.param("username", "Bob")
+    			.param("lastName", "B.")
+    			.param("firstName", "Bob")
     			.param("email", "test_mail@mail.com")
         		.param("password", "password")
         		.param("passwordConfirm", "password")

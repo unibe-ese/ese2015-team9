@@ -109,9 +109,13 @@ public class SearchIntegrationTest {
 	
 	@Test
 	public void test_getSearchPage() throws Exception{
+		
+		SearchForm searchForm = new SearchForm();
+		searchForm.setUniversityNames(asList(uniBern.getName(), uniLuzern.getName()));
+		
 		mockMvc.perform(get(URL)).andExpect(status().isOk())
 				.andExpect(forwardedUrl("/pages/searchPage.jsp"))
-				.andExpect(model().attribute("form", new SearchForm()))
+				.andExpect(model().attribute("form", searchForm))
 				.andExpect(model().attribute("universities", asList(uniBern, uniLuzern)))
 				.andExpect(model().attribute("grades", Offer.possibleGrades()));
 	}

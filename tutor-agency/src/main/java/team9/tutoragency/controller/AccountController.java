@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import team9.tutoragency.controller.pojos.EditForm;
+import team9.tutoragency.controller.service.AccountService;
 import team9.tutoragency.controller.service.BasicDataService;
-import team9.tutoragency.controller.service.MemberService;
+import team9.tutoragency.controller.service.impl.AccountServiceImpl;
 import team9.tutoragency.controller.service.validation.EditFormValidator;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.University;
@@ -38,7 +39,9 @@ public class AccountController extends AutenthicatedAccessController{
 	EditFormValidator validator;
 	@Autowired
 	BasicDataService dataService;
-
+	@Autowired
+	AccountService accountService;
+	
 	/**
 	 * Asserts that the request token is authenticated (authenticated member is
 	 * present).
@@ -88,9 +91,9 @@ public class AccountController extends AutenthicatedAccessController{
 
 	/**
 	 * Handles saving an {@link EditForm} with the help of the
-	 * {@link MemberService} to the database. The {@link EditForm} is validated
+	 * {@link AccountServiceImpl} to the database. The {@link EditForm} is validated
 	 * by the {@link EditFormValidator}. If the validation passes the
-	 * {@link MemberService} saves the change persistently, if not the edit view
+	 * {@link AccountServiceImpl} saves the change persistently, if not the edit view
 	 * is again displayed containing any errors.
 	 * 
 	 * @param editForm
@@ -109,7 +112,7 @@ public class AccountController extends AutenthicatedAccessController{
 
 		if (!result.hasErrors()) {
 
-			memberService.saveEditChange(member, editForm);
+			accountService.updateAccount(member, editForm);
 			model = showProfile("You have successfully changed your profile information.");
 
 		} else {
@@ -126,17 +129,14 @@ public class AccountController extends AutenthicatedAccessController{
 	}
 
 	/**
-	 * Upgrades a tutor with the help of the {@link MemberService} if a user
-	 * clicks the "werde Tutor" button.
-	 * 
-	 * @param response
+	 * Upgrades a member to a tutor.
 	 * @return
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/becomeTutor", method = RequestMethod.POST)
 	public ModelAndView becomeTutor() {
 
-		memberService.upgradeAuthenticatedMemberToTutor();
+		accountService.upgradeMemberToTutor(getAuthenticatedMember().getId());
 
 		return showProfile("You can now create tutoring offers.");
 	}
