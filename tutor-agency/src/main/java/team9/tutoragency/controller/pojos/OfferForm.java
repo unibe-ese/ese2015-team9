@@ -1,7 +1,5 @@
 package team9.tutoragency.controller.pojos;
 
-import team9.tutoragency.model.Course;
-
 public class OfferForm {
 
 	private Long memberId;

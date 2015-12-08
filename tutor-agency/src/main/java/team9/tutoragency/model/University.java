@@ -3,9 +3,7 @@ package team9.tutoragency.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 

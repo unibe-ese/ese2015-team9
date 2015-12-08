@@ -1,12 +1,9 @@
 package team9.tutoragency.controller.service;
 
-import java.util.List;
 import java.util.Optional;
 
-import team9.tutoragency.model.Course;
-import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
-import team9.tutoragency.model.University;
+import team9.tutoragency.model.Subscription;
 
 /**
  * An implementation of this interface gives performs the "agency"-tasks.

@@ -4,14 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import team9.tutoragency.controller.service.AccountService;
 import team9.tutoragency.controller.service.MemberService;
-import team9.tutoragency.controller.service.impl.AccountServiceImpl;
 import team9.tutoragency.model.Member;
 
 /**

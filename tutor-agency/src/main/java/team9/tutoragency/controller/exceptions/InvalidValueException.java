@@ -2,7 +2,9 @@ package team9.tutoragency.controller.exceptions;
 
 public class InvalidValueException extends Exception {
 
-	 public InvalidValueException(String s) {
+	private static final long serialVersionUID = 1L;
+
+	public InvalidValueException(String s) {
 	        super(s);
 	    }
 }

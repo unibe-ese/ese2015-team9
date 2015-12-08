@@ -2,13 +2,10 @@
 package team9.tutoragency.controller.service;
 
 import java.util.Optional;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -17,11 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
-import team9.tutoragency.controller.pojos.EditForm;
-import team9.tutoragency.controller.pojos.SignupForm;
-import team9.tutoragency.controller.service.impl.AccountServiceImpl;
 import team9.tutoragency.controller.service.impl.MemberServiceImpl;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;

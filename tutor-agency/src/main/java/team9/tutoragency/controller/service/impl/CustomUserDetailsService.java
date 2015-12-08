@@ -19,6 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 	@Autowired
 	MemberDao memberDao;
 	
+	@Override
 	public UserDetails loadUserByUsername(String username)
 			   throws UsernameNotFoundException, DataAccessException, UsernameDuplicateException {
 			   

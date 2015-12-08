@@ -9,13 +9,9 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import team9.tutoragency.controller.service.impl.AgencyServiceImpl;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;

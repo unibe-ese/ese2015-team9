@@ -3,12 +3,6 @@ package team9.tutoragency.controller.pojos;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
-
-import team9.tutoragency.model.University;
-
 public class SearchForm{
 	
 	public static final int DEFAULT_MIN_FEE = 0;

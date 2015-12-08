@@ -1,6 +1,5 @@
 package team9.tutoragency.model.dao;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;

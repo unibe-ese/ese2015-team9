@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author curtys
  *
  */
-public class LoginControllerTest {
+public class LoginControllerUnitTest {
 
 	private MockMvc mockMvc;
 

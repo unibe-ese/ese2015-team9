@@ -12,7 +12,6 @@ import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
 import team9.tutoragency.model.Subscription;
-import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.OfferDao;
@@ -66,6 +65,7 @@ public class AgencyServiceImpl implements AgencyService{
 		offerDao.save(offer);
 	}
 
+	@Override
 	@Transactional(readOnly=true)
 	public boolean isNewOffer(Long memberId, Long courseId)throws AssertionError{
 		if (memberId==null) throw new AssertionError("memberId is NULL");

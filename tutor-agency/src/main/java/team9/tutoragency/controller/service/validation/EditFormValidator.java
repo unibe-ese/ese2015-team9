@@ -1,13 +1,12 @@
 package team9.tutoragency.controller.service.validation;
 
+import java.text.Normalizer.Form;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -15,9 +14,7 @@ import org.springframework.validation.Validator;
 import javassist.bytecode.AnnotationsAttribute;
 import team9.tutoragency.controller.pojos.BasicMemberForm;
 import team9.tutoragency.controller.pojos.EditForm;
-import team9.tutoragency.controller.service.AccountService;
 import team9.tutoragency.controller.service.MemberService;
-import team9.tutoragency.controller.service.impl.AccountServiceImpl;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 

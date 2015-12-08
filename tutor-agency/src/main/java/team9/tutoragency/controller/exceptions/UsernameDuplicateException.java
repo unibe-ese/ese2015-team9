@@ -2,7 +2,9 @@ package team9.tutoragency.controller.exceptions;
 
 public class UsernameDuplicateException extends RuntimeException {
 
-    public UsernameDuplicateException(String s) {
+	private static final long serialVersionUID = 1L;
+
+	public UsernameDuplicateException(String s) {
         super(s);
     }
 }

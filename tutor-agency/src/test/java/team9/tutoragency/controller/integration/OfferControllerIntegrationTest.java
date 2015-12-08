@@ -1,22 +1,17 @@
 package team9.tutoragency.controller.integration;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Commit;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.AfterTransaction;
-import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
-import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
@@ -31,11 +26,7 @@ import team9.tutoragency.model.dao.UniversityDao;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import static java.util.Arrays.asList;
 
 import org.springframework.security.test.context.support.WithUserDetails;
 
@@ -73,7 +64,7 @@ public class OfferControllerIntegrationTest {
 	private Course dbBern;
 	private University uniBern;
 
-	private static final String URL = "/auth/account"; // @RequestMapping value
+	private static final String URL = "/auth/offer/"; // @RequestMapping value
 
 	@Before
 	public void setUp() {
@@ -104,7 +95,7 @@ public class OfferControllerIntegrationTest {
 		assertEquals(0, offerDao.findByTutorAndCourse(eve, dbBern).size());
 		
 		//create offer
-		mockMvc.perform(post("/auth/offer/new/")
+		mockMvc.perform(post(URL + "new/")
 				.param("memberId", eve.getId().toString())
 				.param("courseId", dbBern.getId().toString())
 				.param("grade", "4.0"))
@@ -114,21 +105,21 @@ public class OfferControllerIntegrationTest {
 		Offer offer = offerDao.findByTutorAndCourse(eve, dbBern).get(0);
 		
 		//subscribe to offer
-		mockMvc.perform(get("/auth/offer/" + offer.getId() + "/subscribe"))
+		mockMvc.perform(get(URL + offer.getId() + "/subscribe"))
 			.andExpect(status().is3xxRedirection());
 		
 		assertEquals(1, subscriptionDao.findByMemberAndOffer(eve, offer).size());
 		Subscription subscription = subscriptionDao.findByMemberAndOffer(eve, offer).get(0);
 		
 		//accept offer
-		mockMvc.perform(get("/auth/offer/" + offer.getId() + "/accept/" + subscription.getId() + "/"))
+		mockMvc.perform(get(URL + offer.getId() + "/accept/" + subscription.getId() + "/"))
 				.andExpect(status().is3xxRedirection());
 		
 		subscription = subscriptionDao.findByMemberAndOffer(eve, offer).get(0);
 		assertEquals(true, subscription.isAccepted());
 		
 		//delete offer
-		mockMvc.perform(get("/auth/offer/" + offer.getId() + "/delete"));
+		mockMvc.perform(get(URL + offer.getId() + "/delete"));
 		assertEquals(0, offerDao.findByTutorAndCourse(eve, dbBern).size());	
 	}
 	

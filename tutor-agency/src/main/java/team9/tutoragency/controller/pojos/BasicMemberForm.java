@@ -2,7 +2,6 @@ package team9.tutoragency.controller.pojos;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import team9.tutoragency.model.Member;
 /**

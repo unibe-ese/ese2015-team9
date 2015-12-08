@@ -8,6 +8,7 @@ import team9.tutoragency.model.University;
 
 public interface UniversityDao extends CrudRepository<University,Long> {
 	
+	@Override
 	public List<University> findAll();
 	
 	public List<University> findByName(String name);

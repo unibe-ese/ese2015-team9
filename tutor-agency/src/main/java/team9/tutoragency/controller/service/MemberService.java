@@ -5,7 +5,7 @@ import java.util.Optional;
 import team9.tutoragency.model.Member;
 /**
  * An implementation provides methods to find an {@code Member} by {@code id}, and to load the {@code Member} that matches
- * the {@code SecurityContext}'s {@code Authentication}'s {@code Principal}.
+ * the {@code SecurityContext}'s {@code Authentication  Principal}.
  * @author bruno
  *
  */
