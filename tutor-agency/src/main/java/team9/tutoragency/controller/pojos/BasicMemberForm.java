@@ -129,9 +129,5 @@ public class BasicMemberForm {
 	public String toString() {
 		return "BasicMemberForm [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
 				+ username + ", email=" + email + "]";
-	}
-
-	
-
-	
+	}	
 }

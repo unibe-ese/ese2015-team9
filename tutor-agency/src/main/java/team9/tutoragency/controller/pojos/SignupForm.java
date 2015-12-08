@@ -92,7 +92,5 @@ public class SignupForm extends BasicMemberForm{
 	public String toString() {
 		return "SignupForm [readAGB=" + readAGB + ", password=" + password + ", passwordConfirm=" + passwordConfirm
 				+ "]";
-	}
-   
-    
+	} 
 }
