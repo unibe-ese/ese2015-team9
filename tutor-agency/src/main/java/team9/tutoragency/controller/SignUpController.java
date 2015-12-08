@@ -20,14 +20,14 @@ import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import team9.tutoragency.model.Member;
 
 /**
- * The {@link SignUpController} is responsible for all interactions when a
+ * The {@link SignupController} is responsible for all interactions when a
  * user wants to register as a {@link Member} of the Tutoring Agency.
  * 
  * @author laeri
  *
  */
 @Controller
-public class SignUpController {
+public class SignupController {
 
 	@Autowired
 	AccountService memberService;
@@ -67,8 +67,7 @@ public class SignUpController {
 	 *         again to edit changes
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public ModelAndView createMember(@Valid SignupForm signupForm, BindingResult result,
-			RedirectAttributes redirectAttributes) throws IOException {
+	public ModelAndView createMember(@Valid SignupForm signupForm, BindingResult result) throws IOException {
 		ModelAndView model;
 		
 		validator.validate(signupForm, result);
