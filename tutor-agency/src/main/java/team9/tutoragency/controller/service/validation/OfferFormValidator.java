@@ -23,6 +23,10 @@ public class OfferFormValidator implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
+		if(!supports(target.getClass()))
+			throw new AssertionError("The form isn't of type OfferForm.class!");
+		
+		
 		OfferForm form = (OfferForm) target;
 		
 		Long memberId = form.getMemberId();

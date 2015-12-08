@@ -80,6 +80,10 @@ public class EditFormValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
+		if(!supports(target.getClass()))
+			throw new AssertionError("The form isn't of type EditForm.class!");
+		
+		
 		Member member = memberService.getAuthenticatedMember().get();
 
 		EditForm form = (EditForm) target;
