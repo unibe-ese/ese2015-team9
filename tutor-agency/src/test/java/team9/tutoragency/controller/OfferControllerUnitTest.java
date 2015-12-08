@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -53,27 +54,37 @@ public class OfferControllerUnitTest {
 	
 	
 	private Member member, tutor;
+	private Offer offer;
 	
 	@Before
 	public void setUp(){
 		member = new Member(1L, "Bob");
+		offer = new Offer(1L, member, null);
+		when(memberService.getAuthenticatedMember()).thenReturn(Optional.of(member));
+		when(agencyService.findOffer(1L)).thenReturn(Optional.of(offer));
+		
 	}
+	
 	@Test
 	public void test_subscribe(){
-		when(memberService.getAuthenticatedMember()).thenReturn(Optional.of(member));
-		
 		String view = controller.subscribe(1L);
 		
 		verify(agencyService, times(1)).createSubscription(1L, 1L);
 		assertEquals("redirect:/auth/account", view);
 	}
 	
+	@Test
 	public void test_acceptSubscription(){
-		assertTrue(false);
+		String view = controller.acceptSubscription(1L, 1L);
+		verify(agencyService, times(1)).acceptSubscription(1L);
+		assertEquals("redirect:/auth/account#offers", view);
 	}
 	
-	public void test_delete(){
-		assertTrue(false);
+	@Test
+	public void test_delete() throws IOException{
+		String view = controller.deleteCourse(1L);
+		verify(agencyService, times(1)).removeOffer(1L);
+		assertEquals("redirect:/auth/account", view);
 	}
 	
 }

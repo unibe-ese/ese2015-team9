@@ -9,6 +9,11 @@ import team9.tutoragency.controller.pojos.EditForm;
 import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.model.Member;
 
+/**
+ * An implementation of this class provides methods to create or alter a {@code Member}.
+ * @author bruno
+ *
+ */
 public interface AccountService {
 
 	/**

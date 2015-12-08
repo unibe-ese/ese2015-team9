@@ -27,6 +27,11 @@ import static java.util.Arrays.asList;
 
 import org.springframework.security.test.context.support.WithUserDetails;
 
+/**
+ * This class provides Integration Tests, simulating a {@code Member} editing his account informations.
+ * @author bruno
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/config/springMVC.xml",
@@ -54,18 +59,6 @@ public class AccountControllerIntegrationTest {
 
 		tutor1 = memberDao.findOne(1L);
 	}
-
-	/*
-	 * To test the url-interception of spring security. The Member class should
-	 * extend org.springframework.security.core.userdetails.User. Then we could
-	 * inject a non authorized mock.
-	 */
-	// @WithMockUser(roles={})
-	// public void test_UrlInterception() throws Exception{
-	//
-	// mockMvc.perform(get(URL)).andExpect(status().isOk())
-	// .andExpect(forwardedUrl("/pages/loginPage.jsp"));
-	// }
 
 	@Test
 	@WithUserDetails("bob")

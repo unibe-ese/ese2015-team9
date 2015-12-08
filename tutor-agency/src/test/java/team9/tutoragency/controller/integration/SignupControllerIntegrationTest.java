@@ -32,8 +32,13 @@ import org.springframework.web.context.WebApplicationContext;
 import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.controller.service.impl.AccountServiceImpl;
 import team9.tutoragency.controller.service.validation.SignupFormValidator;
-import util.SignupFormValidatorMock;
 
+
+/**
+ * This class provides an Integration Test, simulating the signUp process.
+ * @author bruno
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {
@@ -41,7 +46,7 @@ import util.SignupFormValidatorMock;
 "file:src/test/resources/test_springData.xml" })
 @Transactional
 @Rollback
-public class RegisterControllerIntegrationTest {
+public class SignupControllerIntegrationTest {
    
     @Autowired private WebApplicationContext wac;
 	

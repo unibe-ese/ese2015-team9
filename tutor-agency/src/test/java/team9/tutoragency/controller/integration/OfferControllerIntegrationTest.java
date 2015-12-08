@@ -39,6 +39,12 @@ import static java.util.Arrays.asList;
 
 import org.springframework.security.test.context.support.WithUserDetails;
 
+/**
+ * This class provides a Integration Test, that simulates the life cycle of an {@code Offer}. 
+ * Including creating and accepting a {@code Subscription} for this offer.
+ * @author bruno
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/config/springMVC.xml",
