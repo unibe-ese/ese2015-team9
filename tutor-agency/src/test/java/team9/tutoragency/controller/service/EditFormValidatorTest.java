@@ -23,7 +23,7 @@ import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 
 /**
- * Tests of the class {@link EditFormValidator}.
+ * Unit tests for the class {@link EditFormValidator}.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class EditFormValidatorTest {

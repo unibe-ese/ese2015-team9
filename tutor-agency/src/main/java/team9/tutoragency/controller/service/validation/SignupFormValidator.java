@@ -52,22 +52,32 @@ public class SignupFormValidator implements Validator {
 	
 	@Override
 	public void validate(Object target, Errors errors) {
+		
+		if(!supports(target.getClass()))
+			throw new AssertionError("The form isn't of type SignupForm.class!");
+		
 		SignupForm form = (SignupForm) target;
-		matcher = validCharacterPattern.matcher(form.getUsername());
-		if (!matcher.matches()) {
-			errors.rejectValue("username", "username.invalidName", "Username needs to be 3-15 characters long");
+		
+		if(form.getUsername() != null){
+			matcher = validCharacterPattern.matcher(form.getUsername());
+			if (!matcher.matches()) {
+				errors.rejectValue("username", "username.invalidName", "Username needs to be 3-15 characters long");
+			}
+			checkUsernameAlreadyInUse(errors, form);
 		}
-
-		if (!form.getPassword().equals(form.getPasswordConfirm())) {
-			errors.rejectValue("passwordConfirm", "password.mismatch", "Passwords do not match");
+		
+		if(form.getPassword() != null && form.getPasswordConfirm() != null){
+			if (!form.getPassword().equals(form.getPasswordConfirm())) {
+				errors.rejectValue("passwordConfirm", "password.mismatch", "Passwords do not match");
+			}
 		}
 
 		if (!form.isReadAGB()) {
 			errors.rejectValue("readAGB", "readAGB.notRead", "Please read and confirm the Terms and Conditions");
 		}
-		checkUsernameAlreadyInUse(errors, form);
-
-		checkEmailAlreadyInUse(errors, form);
+		
+		if(form.getEmail() != null)
+			checkEmailAlreadyInUse(errors, form);
 
 	}
 

@@ -16,6 +16,7 @@ import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import team9.tutoragency.controller.pojos.SignupForm;
+import team9.tutoragency.controller.service.AccountService;
 import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import util.SignupFormValidatorMock;
 
@@ -39,70 +40,50 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static java.util.Arrays.asList;
 
+/**
+ * Unit tests for class {@link SignupController}.
+ * @author bruno
+ * @author curtys
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
-public class SignUpControllerTest {
-
-	private SignupFormValidator validator;
-    
+public class SignupControllerUnitTest {
+	@Mock
+	private SignupFormValidator validator;   
+	@Mock
+	private AccountService accountService;
 	@InjectMocks
-    private SignUpController controller;
-    
-    private MockMvc mockMvc;
-    @Before
-    public void setUp() {
-		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-
-    }
-
-    /**
-     * Test of register method, of class {@link SignUpController}.
-     */
-    @Test
-    public void testRegister() throws Exception {
-    	
-    	mockMvc.perform(get("/register")).andExpect(status().isOk())
-    		.andExpect(forwardedUrl("signupPage"))
-    		.andExpect(model().attribute("signupForm", new SignupForm()));
-    }
-    
-    @Test
-    public void testCreateMember_formRejected() throws Exception{
-    	SignupForm form = new SignupForm();
-    	form.setUsername("username");
-    	
-    	validator = new SignupFormValidatorMock(true);	
-    	controller.setValidator(validator);
-    	
-    	mockMvc.perform(post("/create").param("username", "username"))
-    			.andExpect(status().isOk())
-    			.andExpect(forwardedUrl("signupPage"))
-    			.andExpect(model().attribute("signupForm", form));
-    }
-   
+    private SignupController controller = new SignupController();    
     
     /**
-     * Test of createUser method, of class {@link SignUpController}. Tests the correctness of the
+     * Test of createUser method, of class {@link SignupController}. Tests the correctness of the
      * returned view, if validation is not successful.
      */
-//    @Test
-//    public void createUserErrors() throws Exception {
-//        SignupForm form = new SignupForm();
-//        BindingResult error = new DirectFieldBindingResult(form, "signupForm");
-//        error.reject("test error");
-//        ModelAndView result = controller.createMember(form, error, null);
-//        assertEquals("register", result.getViewName());
-//        
-//    }
+    @Test
+    public void test_createUserErrors() throws Exception {
+        SignupForm form = new SignupForm();
+        
+        BindingResult error = mock(BindingResult.class);
+        when(error.hasErrors()).thenReturn(true);
+        
+        ModelAndView result = controller.createMember(form, error);
+        assertEquals("signupPage", result.getViewName());
+        assertEquals(form, result.getModel().get("signupForm"));
+        
+    }
+    
     /**
-     * Test of createUser method, of class {@link SignUpController}. Tests the correctness of the
+     * Test of createUser method, of class {@link SignupController}. Tests the correctness of the
      * returned view, if validation is successful.
      */
-//    @Test
-//    public void createUserSuccess() throws Exception {
-//        SignupForm form = new SignupForm();
-//        BindingResult error = new DirectFieldBindingResult(form, "signupForm");
-//        ModelAndView result = controller.createMember(form, error, null);
-//        assertEquals("registerSuccess", result.getViewName());   
-//    }
+    @Test
+    public void test_createUserSuccess() throws Exception {
+        SignupForm form = new SignupForm();
+        BindingResult error = mock(BindingResult.class);
+        when(error.hasErrors()).thenReturn(false);
+    
+        ModelAndView result = controller.createMember(form, error);
+        assertEquals("registerSuccess", result.getViewName());   
+    }
     
 }

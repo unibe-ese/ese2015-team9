@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
  import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 /**
- *
+ *Unit tests for the class {@link IndexController}.
  * @author curtys
  */
 @RunWith(SpringJUnit4ClassRunner.class)

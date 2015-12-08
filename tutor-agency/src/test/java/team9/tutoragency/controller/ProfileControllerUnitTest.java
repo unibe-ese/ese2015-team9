@@ -26,22 +26,30 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 
 import static org.mockito.Mockito.any;
+
+/**
+ * Unit tests for {@code ProfileController}.
+ * {@link ProfileController}.
+ * @author curtys
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
-public class ProfileControllerTest {
+public class ProfileControllerUnitTest {
 	@Mock
 	MemberService memberService;
 	@InjectMocks
 	ProfileController controller;
 	
-//	public final static String USERNAME = "username";
 	public final static Member member = new Member();
+	
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		when(memberService.findById(any(Long.class))).thenReturn(Optional.of(member), Optional.ofNullable((Member) null));
 	}
 	
 	@Test
-	public void testShowOpenProfile(){
+	public void testShowPublicProfile(){
 		ModelAndView model = controller.showPublicProfile(1L);
 		assertEquals("publicProfile", model.getViewName());
 		assertEquals(Optional.of(member), model.getModel().get("member"));

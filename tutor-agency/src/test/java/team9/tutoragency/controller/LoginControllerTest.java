@@ -8,6 +8,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * Unit test for the class {@link LoginController}.
+ * @author curtys
+ *
+ */
 public class LoginControllerTest {
 
 	private MockMvc mockMvc;
@@ -43,6 +48,5 @@ public class LoginControllerTest {
 		model = controller.getDeniedPage();
 		assertEquals("loginpage", model.getViewName());
 		assertEquals(LoginController.accessDeniedMessage, model.getModel().get("message"));
-
 	}
 }

@@ -19,6 +19,12 @@ import team9.tutoragency.model.Course;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.Offer;
 
+/**
+ * Controller that handels request related to a specific offer. I.e creating a {@code Subscription} for this {@code Offer}, accept a {@code Subscription} or delete the {@code Offer}.
+ * @see {@link AgencyService}
+ * @author bruno
+ *
+ */
 @Controller
 @RequestMapping(value="/auth/offer/{offerId}")
 public class OfferController extends AutenthicatedAccessController{
@@ -27,7 +33,9 @@ public class OfferController extends AutenthicatedAccessController{
 	
 	@RequestMapping(value = "/subscribe", method = RequestMethod.GET)
 	public String subscribe(@PathVariable(value = "offerId") Long offerId) {
+		
 		agencyService.createSubscription(getAuthenticatedMember().getId(), offerId);
+		
 		return "redirect:/auth/account";
 	}
 	

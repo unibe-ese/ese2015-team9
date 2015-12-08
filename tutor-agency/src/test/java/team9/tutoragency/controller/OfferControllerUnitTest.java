@@ -30,16 +30,18 @@ import team9.tutoragency.controller.service.AgencyService;
 import team9.tutoragency.controller.service.MemberService;
 import team9.tutoragency.controller.service.impl.AccountServiceImpl;
 import team9.tutoragency.model.Member;
+import team9.tutoragency.model.Offer;
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.UniversityDao;
 
 import static org.mockito.Mockito.when;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
 import static java.util.Arrays.asList;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class OfferControllerUnitTest {
@@ -66,6 +68,12 @@ public class OfferControllerUnitTest {
 		assertEquals("redirect:/auth/account", view);
 	}
 	
+	public void test_acceptSubscription(){
+		assertTrue(false);
+	}
 	
+	public void test_delete(){
+		assertTrue(false);
+	}
 	
 }

@@ -27,6 +27,11 @@ import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.UniversityDao;
 
+/**
+ * Unit tests for the class {@link MemberServiceImpl}.
+ * @see {@linkplain MemberService}.
+ * @author curtys
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class MemberServiceTest {
     
@@ -53,7 +58,7 @@ public class MemberServiceTest {
 
     
     /**
-     * Test of getAuthenticatedMember method, of class {@link AccountServiceImpl}.
+     * Test of getAuthenticatedMember method, of class {@link MemberServiceImpl}.
      */
     @Test
     public void testGetAuthenticatedMember() {

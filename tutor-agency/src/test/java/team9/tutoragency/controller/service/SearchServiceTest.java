@@ -26,6 +26,12 @@ import team9.tutoragency.model.Offer;
 import team9.tutoragency.model.University;
 import team9.tutoragency.model.dao.CourseDao;
 
+/**
+ * Unit tests for the class {@link SearchService}.
+ * @author bruno
+ * @author curtys
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class SearchServiceTest {
 

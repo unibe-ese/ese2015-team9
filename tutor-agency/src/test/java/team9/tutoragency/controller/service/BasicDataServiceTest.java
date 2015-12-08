@@ -19,6 +19,13 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static java.util.Arrays.asList;
 
+/**
+ * Unit tests for the class {@link BasicDataServiceImpl}.
+ * @see {@link BasicDataService}.
+ * @author bruno
+ * @author curtys
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class BasicDataServiceTest {
 

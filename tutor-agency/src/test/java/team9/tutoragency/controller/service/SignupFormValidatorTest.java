@@ -17,12 +17,13 @@ import team9.tutoragency.controller.pojos.SignupForm;
 import team9.tutoragency.controller.service.validation.SignupFormValidator;
 import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
-
+import static java.util.Arrays.asList;
 /**
- * Tests the class {@link SignupFormValidator}
+ * Unit test for the class {@link SignupFormValidator}.
+ * @author curtys
  */
 @RunWith(MockitoJUnitRunner.class)
-public class SignupFormValidationServiceTest {
+public class SignupFormValidatorTest {
     
     @Mock
     private MemberDao memberDao;
@@ -32,10 +33,9 @@ public class SignupFormValidationServiceTest {
     @Before
     public void setUp() {
         Member member = new Member("firstName", "lastName", "member@email.com", "username", "password");
-        List<Member> members = new ArrayList<>();
-        members.add(member);
-        Mockito.when(memberDao.findByUsername("username")).thenReturn(members);
-        Mockito.when(memberDao.findByEmail("member@email.com")).thenReturn(members);
+        
+        Mockito.when(memberDao.findByUsername("username")).thenReturn(asList(member));
+        Mockito.when(memberDao.findByEmail("member@email.com")).thenReturn(asList(member));
     }
     
     @Test

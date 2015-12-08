@@ -65,6 +65,7 @@ public class RegisterControllerIntegrationTest {
     		.andExpect(forwardedUrl("/pages/registerSuccess.jsp"));
     }
     
+
     @Test
     public void testCreateMember_formRejected() throws Exception{ 	
     	SignupForm expectedForm = new SignupForm();

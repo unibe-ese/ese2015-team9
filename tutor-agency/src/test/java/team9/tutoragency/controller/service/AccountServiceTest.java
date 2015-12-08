@@ -28,6 +28,12 @@ import team9.tutoragency.model.Member;
 import team9.tutoragency.model.dao.MemberDao;
 import team9.tutoragency.model.dao.UniversityDao;
 
+/**
+ * Unit tests for the class {@code AccountServiceImpl}.
+ * @see {@link AccountService}, {@link AccountServiceImpl}.
+ * @author bruno
+ * @author curtys
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceTest {
 
