@@ -60,7 +60,7 @@ public class SearchController {
 		ModelAndView model = new ModelAndView("searchPage");
 		
 		SearchForm form = new SearchForm();
-		form.setUniversityNames(dataService.findAllUniversityNames());
+//		form.setUniversityNames(dataService.findAllUniversityNames());
 		
 		model.addObject("form", form);
 		return model;
