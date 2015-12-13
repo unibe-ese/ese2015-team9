@@ -30,12 +30,10 @@ public class SignupController {
 	@Autowired
 	AccountService memberService;
 
+	@Autowired
 	SignupFormValidator validator;
 	
-	@Autowired
-    public void setValidator(SignupFormValidator validator) {
-        this.validator = validator;
-    }
+	
 	
 	/**
 	 * Creates the model for the register view. A {@link SignupForm} will
