@@ -53,14 +53,10 @@ public class SearchServiceImpl implements SearchService {
 		if (form.getUniversityNames() == null || form.getUniversityNames().isEmpty())
 			return new ArrayList<Offer>();
 		
-		List<Course> courses = new ArrayList<Course>();
-		List<Member> members = new ArrayList<Member>();
-		List<University> universities = new ArrayList<University>();
-
-		universities = uniDao.findByNameIn(form.getUniversityNames());
-
-		courses = findCoursesByNameAndUniversities(form.getSearchText(), universities);
-		members = memberDao.findByFeeBetween(form.getMinFee(), form.getMaxFee());
+		List<University> universities = uniDao.findByNameIn(form.getUniversityNames());
+		List<Course> courses = findCoursesByNameAndUniversities(form.getSearchText(), universities);
+		List<Member>members = memberDao.findByFeeBetween(form.getMinFee(), form.getMaxFee());
+		
 		return findOffersByTutorsCoursesAndGrades(members, courses, form.getMinGrade());
 
 	}
